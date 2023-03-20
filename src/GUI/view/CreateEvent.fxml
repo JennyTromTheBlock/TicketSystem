@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.CreateEvent">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="95.0" prefHeight="430.0" prefWidth="431.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="72.0" prefWidth="254.0" text="Create Event" textAlignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="26.0" prefWidth="424.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="103.0" text="Event name" />
+                  <TextField prefHeight="26.0" prefWidth="334.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="82.0" prefHeight="103.0" prefWidth="431.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="103.0" text="Event Description" />
+                  <TextArea prefHeight="81.0" prefWidth="330.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="82.0" prefHeight="26.0" prefWidth="424.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="103.0" text="Event Location" />
+                  <TextField prefHeight="26.0" prefWidth="334.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="252.0" prefHeight="26.0" prefWidth="424.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="103.0" text="Event Date" />
+                  <DatePicker prefHeight="26.0" prefWidth="334.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="252.0" prefHeight="26.0" prefWidth="295.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="103.0" text="Max Tickets" />
+                  <TextField prefHeight="26.0" prefWidth="113.0">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="58.0" text="Price      " />
+                  <TextField layoutX="113.0" layoutY="10.0" prefHeight="26.0" prefWidth="140.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="69.0" prefWidth="431.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Create">
+                     <HBox.margin>
+                        <Insets left="50.0" right="50.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cancel">
+                     <HBox.margin>
+                        <Insets left="75.0" right="50.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children></VBox>
+   </children>
+</Pane>
