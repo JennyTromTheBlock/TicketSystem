@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.CreateEvent">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.CreateEventController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="95.0" prefHeight="430.0" prefWidth="431.0">
          <children>
@@ -17,16 +17,22 @@
             <HBox prefHeight="26.0" prefWidth="424.0">
                <children>
                   <Label prefHeight="26.0" prefWidth="103.0" text="Event name" />
-                  <TextField prefHeight="26.0" prefWidth="334.0" />
+                  <TextField fx:id="eventNameField" prefHeight="26.0" prefWidth="334.0" />
                </children>
                <VBox.margin>
-                  <Insets bottom="20.0" />
+                  <Insets bottom="5.0" />
                </VBox.margin>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label prefHeight="18.0" prefWidth="232.0" />
+                  <Label fx:id="inputFieldValidation" alignment="CENTER" prefHeight="18.0" prefWidth="455.0" />
+               </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="82.0" prefHeight="103.0" prefWidth="431.0">
                <children>
                   <Label prefHeight="26.0" prefWidth="103.0" text="Event Description" />
-                  <TextArea prefHeight="81.0" prefWidth="330.0" />
+                  <TextArea fx:id="descriptionField" prefHeight="81.0" prefWidth="330.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="20.0" />
@@ -35,43 +41,57 @@
             <HBox layoutX="10.0" layoutY="82.0" prefHeight="26.0" prefWidth="424.0">
                <children>
                   <Label prefHeight="26.0" prefWidth="103.0" text="Event Location" />
-                  <TextField prefHeight="26.0" prefWidth="334.0" />
+                  <TextField fx:id="locationField" prefHeight="26.0" prefWidth="334.0" />
                </children>
                <VBox.margin>
-                  <Insets bottom="20.0" />
+                  <Insets bottom="5.0" />
                </VBox.margin>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label prefHeight="18.0" prefWidth="215.0" />
+                  <Label fx:id="locationFieldValidation" alignment="CENTER" prefHeight="18.0" prefWidth="447.0" />
+               </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="252.0" prefHeight="26.0" prefWidth="424.0">
                <children>
                   <Label prefHeight="26.0" prefWidth="103.0" text="Event Date" />
-                  <DatePicker prefHeight="26.0" prefWidth="334.0" />
+                  <DatePicker fx:id="dateField" prefHeight="26.0" prefWidth="106.0" />
+                  <Label alignment="CENTER" prefHeight="26.0" prefWidth="88.0" text="      Time" />
+                  <TextField fx:id="timeField" prefHeight="26.0" prefWidth="139.0" />
                </children>
                <VBox.margin>
-                  <Insets bottom="20.0" />
+                  <Insets bottom="5.0" />
                </VBox.margin>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label prefHeight="18.0" prefWidth="104.0" />
+                  <Label fx:id="dateFieldValidation" alignment="CENTER" prefHeight="18.0" prefWidth="233.0" />
+               </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="252.0" prefHeight="26.0" prefWidth="295.0">
                <children>
                   <Label prefHeight="26.0" prefWidth="103.0" text="Max Tickets" />
-                  <TextField prefHeight="26.0" prefWidth="113.0">
+                  <TextField fx:id="maxTicketsField" prefHeight="26.0" prefWidth="113.0">
                      <HBox.margin>
                         <Insets right="30.0" />
                      </HBox.margin>
                   </TextField>
                   <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="58.0" text="Price      " />
-                  <TextField layoutX="113.0" layoutY="10.0" prefHeight="26.0" prefWidth="140.0" />
+                  <TextField fx:id="priceField" layoutX="113.0" layoutY="10.0" prefHeight="26.0" prefWidth="140.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="69.0" prefWidth="431.0">
                <children>
-                  <Button mnemonicParsing="false" text="Create">
+                  <Button mnemonicParsing="false" onAction="#handleCreateEvent" text="Create">
                      <HBox.margin>
-                        <Insets left="50.0" right="50.0" />
+                        <Insets left="70.0" right="50.0" />
                      </HBox.margin>
                   </Button>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cancel">
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel">
                      <HBox.margin>
-                        <Insets left="75.0" right="50.0" />
+                        <Insets left="100.0" right="50.0" />
                      </HBox.margin>
                   </Button>
                </children>

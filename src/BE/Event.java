@@ -16,6 +16,14 @@ public class Event {
 
     private int maxParticipant;
     private int price;
-
     //maybe also available tickets
+
+    public Event(String eventName, String description, String location, Date date, int maxParticipant, int price){
+        this.eventName = eventName;
+        this.description = description;
+        this.location = location;
+        this.date = date;
+        this.maxParticipant = maxParticipant;
+        this.price = price;
+    }
 }

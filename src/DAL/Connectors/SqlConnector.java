@@ -50,7 +50,6 @@ public class SqlConnector implements IConnector {
         String name = properties.getProperty("Name");
         String user = properties.getProperty("User");
         String password = properties.getProperty("Password");
-
         return new DatabaseConfig(server, name, user, password);
     }
 
