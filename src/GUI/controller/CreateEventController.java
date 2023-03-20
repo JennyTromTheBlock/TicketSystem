@@ -6,6 +6,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -13,17 +14,16 @@ import java.util.Date;
 
 public class CreateEventController {
 
-    public TextField priceField;
-    public TextField maxTicketsField;
-    public DatePicker dateField;
-    public TextField locationField;
+    public TextField priceField, maxTicketsField, locationField, eventNameField, timeField;
     public TextArea descriptionField;
-    public TextField eventNameField;
-    public Label inputFieldValidation;
-    public Label locationFieldValidation;
-    public Label dateFieldValidation;
-    public TextField timeField;
+    public DatePicker dateField;
+    public Label inputFieldValidation, locationFieldValidation, dateFieldValidation;
 
+    /**
+     * checks if all important fields are filled, and create an event object
+     * todo call create method in model
+     * @param actionEvent
+     */
     public void handleCreateEvent(ActionEvent actionEvent) {
         if(isInputFieldsFilled()){
             //gets all parameters for the event object
@@ -35,11 +35,15 @@ public class CreateEventController {
             int price = !priceField.getText().isEmpty()? Integer.parseInt(priceField.getText()) : 0;
 
             Event event = new Event(eventName, description, location, date, maxTickets, price);
+            //closes the window
+            handleCancel();
         }
     }
 
-    //todo should close the window and return to main screen
-    public void handleCancel(ActionEvent actionEvent) {
+    public void handleCancel() {
+        //closes the window
+        Stage stage = (Stage) eventNameField.getScene().getWindow();
+        stage.close();
     }
 
     /**
@@ -75,6 +79,7 @@ public class CreateEventController {
         isTimeLegit()){
             return true;
         }
+        //returns false if one of the inputs are incorrect
         return false;
     }
 
