@@ -19,6 +19,7 @@ public class MainView implements Initializable {
     public VBox sidebar;
     public Label allEvents;
     public Label yourEvents;
+    public Label createEvent;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

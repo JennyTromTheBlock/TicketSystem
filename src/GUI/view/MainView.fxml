@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="createEvent" prefHeight="790.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.MainView">
+<BorderPane fx:id="background" prefHeight="790.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.MainView">
    <top>
       <HBox fx:id="topBar" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER_LEFT">
          <children>
@@ -174,7 +174,7 @@
             <Pane prefHeight="63.0" prefWidth="250.0" VBox.vgrow="ALWAYS" />
             <HBox alignment="CENTER" layoutX="10.0" layoutY="540.0" prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="allEvents11" alignment="CENTER" prefHeight="50.0" prefWidth="170.0" text="Create event">
+                  <Label fx:id="createEvent" alignment="CENTER" prefHeight="50.0" prefWidth="170.0" text="Create event">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
