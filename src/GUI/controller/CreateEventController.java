@@ -1,7 +1,9 @@
 package GUI.controller;
 
 import BE.Event;
+import GUI.util.DateConverter;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -14,10 +16,14 @@ import java.util.Date;
 
 public class CreateEventController {
 
-    public TextField priceField, maxTicketsField, locationField, eventNameField, timeField;
-    public TextArea descriptionField;
-    public DatePicker dateField;
-    public Label inputFieldValidation, locationFieldValidation, dateFieldValidation;
+    @FXML
+    private TextField priceField, maxTicketsField, locationField, eventNameField, timeField;
+    @FXML
+    private TextArea descriptionField;
+    @FXML
+    private DatePicker dateField;
+    @FXML
+    private Label inputFieldValidation, locationFieldValidation, dateFieldValidation;
 
     /**
      * checks if all important fields are filled, and create an event object
@@ -26,18 +32,23 @@ public class CreateEventController {
      */
     public void handleCreateEvent(ActionEvent actionEvent) {
         if(isInputFieldsFilled()){
-            //gets all parameters for the event object
-            String eventName = eventNameField.getText();
-            String description = descriptionField.getText();
-            String location = locationField.getText();
-            Date date = dateConverter(dateField.getValue(), timeField.getText());
-            int maxTickets = !maxTicketsField.getText().isEmpty()? Integer.parseInt(maxTicketsField.getText()) : 0;
-            int price = !priceField.getText().isEmpty()? Integer.parseInt(priceField.getText()) : 0;
+            Event event = createEventFromFields();
 
-            Event event = new Event(eventName, description, location, date, maxTickets, price);
             //closes the window
             handleCancel();
         }
+    }
+
+    private Event createEventFromFields() {
+        //gets all parameters for the event object
+        String eventName = eventNameField.getText();
+        String description = descriptionField.getText();
+        String location = locationField.getText();
+        Date date = DateConverter.dateConverter(dateField.getValue(), timeField.getText());
+        int maxTickets = !maxTicketsField.getText().isEmpty()? Integer.parseInt(maxTicketsField.getText()) : 0;
+        int price = !priceField.getText().isEmpty()? Integer.parseInt(priceField.getText()) : 0;
+
+        return new Event(eventName, description, location, date, maxTickets, price);
     }
 
     public void handleCancel() {
@@ -47,40 +58,16 @@ public class CreateEventController {
     }
 
     /**
-     * takes the local date and time and combines them into one date
-     * @param date
-     * @param time
-     * @return
-     */
-    private Date dateConverter(LocalDate date, String time) {
-        //creates a calendar and sets the date
-        Date resultDate = java.sql.Date.valueOf(date);
-        Calendar timeOfDay = Calendar.getInstance();
-        timeOfDay.setTime(resultDate);
-        //splits the time string into hours and minutes
-        String hours = time.substring(0, 2);
-        String minutes = time.substring(Math.max(time.length() - 2, 0));
-        //sets the time of day in the calendar and converts it to a date and returns it
-        timeOfDay.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours));
-        timeOfDay.set(Calendar.MINUTE, Integer.parseInt(minutes));
-        resultDate = timeOfDay.getTime();
-        return resultDate;
-    }
-
-    /**
      * checks if all inputFields are filled correct.
      * @return
      */
     private boolean isInputFieldsFilled(){
         //checks if all important fields are filled.
-        if(isEventNameLegit()&&
-        isLocationLegit()&&
-        isDateLegit() &&
-        isTimeLegit()){
-            return true;
-        }
         //returns false if one of the inputs are incorrect
-        return false;
+        return isEventNameLegit() &&
+                isLocationLegit() &&
+                isDateLegit() &&
+                isTimeLegit();
     }
 
     //todo check if format of time is correct fx 19:00 or 1900 or 19.00 osv
