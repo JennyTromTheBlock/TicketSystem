@@ -36,4 +36,8 @@ public class MainController {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
+
+    public void handleUpdateEvent(ActionEvent actionEvent) {
+
+    }
 }
