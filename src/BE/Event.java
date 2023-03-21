@@ -4,15 +4,38 @@ import java.util.Date;
 import java.util.List;
 
 public class Event {
-
+    private int id;
     private String eventName;
     private String description;
     private String location;
-
-    //made it a list as i thought an event should be able to contain multiple events
+    private Date date;
+    private int maxParticipant;
+    private int price;
     private List<String> notes;
 
-    private Date date;
+    public Event(String eventName, String description, String location, Date date, int maxParticipant, int price){
+        setEventFields(eventName, description, location, date, maxParticipant, price);
+    }
+
+    public Event(int id, Event eventToCopy) {
+        this.id = id;
+        setEventFields(
+                eventToCopy.getEventName(),
+                eventToCopy.getDescription(),
+                eventToCopy.getLocation(),
+                eventToCopy.getDate(),
+                eventToCopy.getMaxParticipant(),
+                eventToCopy.getPrice());
+    }
+
+    private void setEventFields(String eventName, String description, String location, Date date, int maxParticipant, int price) {
+        this.eventName = eventName;
+        this.description = description;
+        this.location = location;
+        this.date = date;
+        this.maxParticipant = maxParticipant;
+        this.price = price;
+    }
 
     public String getEventName() {
         return eventName;
@@ -70,16 +93,7 @@ public class Event {
         this.price = price;
     }
 
-    private int maxParticipant;
-    private int price;
-    //maybe also available tickets
-
-    public Event(String eventName, String description, String location, Date date, int maxParticipant, int price){
-        this.eventName = eventName;
-        this.description = description;
-        this.location = location;
-        this.date = date;
-        this.maxParticipant = maxParticipant;
-        this.price = price;
+    public int getId() {
+        return id;
     }
 }

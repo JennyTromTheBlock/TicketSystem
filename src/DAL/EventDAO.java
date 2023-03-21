@@ -3,13 +3,8 @@ package DAL;
 import BE.Event;
 import DAL.Connectors.IConnector;
 import DAL.Connectors.SqlConnector;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 
-import javax.sql.StatementEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class EventDAO {
     IConnector connector;
@@ -25,16 +20,15 @@ public class EventDAO {
                 "VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = connector.getConnection();
-             PreparedStatement statement = conn.prepareStatement(sql)) {
+             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            /*
-            statement.setString(1, event.getName());
+            statement.setString(1, event.getEventName());
             statement.setString(2, event.getDescription());
             statement.setString(3, event.getLocation());
-            statement.setString(4, event.getDate().toString());
+            // Converting the util.Date class to sql.Date.
+            statement.setDate(4, new Date(event.getDate().getTime()));
             statement.setInt(5, event.getMaxParticipant());
             statement.setInt(6, event.getPrice());
-            */
 
             statement.executeUpdate();
 
@@ -42,7 +36,7 @@ public class EventDAO {
 
             if (resultSet.next()) {
                 int id = resultSet.getInt(1);
-                //newEvent = new Event(id, event.getName(), event.getDescription(), event.getLocation(), event.getDate(), event.getMaxParticipant(), event.getPrice());
+                newEvent = new Event(id, event);
             }
         }
         catch (SQLException e) {

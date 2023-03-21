@@ -1,11 +1,14 @@
 package DAL.Connectors;
 
+import BE.Event;
+import DAL.EventDAO;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.Date;
 import java.util.Properties;
 
 /**
