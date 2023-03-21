@@ -4,6 +4,7 @@ import BE.Event;
 import DAL.Connectors.IConnector;
 import DAL.Connectors.SqlConnector;
 
+import java.nio.file.Path;
 import java.sql.*;
 
 public class EventDAO {
@@ -47,5 +48,29 @@ public class EventDAO {
         }
 
         return newEvent;
+    }
+
+    public void updateEvent(Event event) throws Exception {
+        String sql = "UPDATE EVENT SET EventName=?, EventDescription=?, EventLocation=?, EventDate=?, MaxParticipant=?, Price=?;";
+
+        try (Connection connection = connector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+
+            // Bind parameters
+            statement.setString(1, event.getEventName());
+            statement.setString(2, event.getDescription());
+            statement.setString(3, event.getLocation());
+            statement.setDate(4, new Date(event.getDate().getTime()));
+            statement.setInt(5, event.getMaxParticipant());
+            statement.setInt(6, event.getPrice());
+
+            // Run the specified SQL statement
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Failed to edit the event", e);
+        }
+
     }
 }
