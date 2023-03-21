@@ -57,7 +57,7 @@ public class CreateEventController {
         Date resultDate = java.sql.Date.valueOf(date);
         Calendar timeOfDay = Calendar.getInstance();
         timeOfDay.setTime(resultDate);
-        //splits the time string into hours and seconds
+        //splits the time string into hours and minutes
         String hours = time.substring(0, 2);
         String minutes = time.substring(Math.max(time.length() - 2, 0));
         //sets the time of day in the calendar and converts it to a date and returns it
