@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class MainView implements Initializable {
+public class MainViewController implements Initializable {
     public ImageView searchButton;
     public HBox topBar;
     public TextField textField;
