@@ -12,10 +12,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/MainWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/MainView.fxml"));
         Parent root = loader.load();
-
         primaryStage.setScene(new Scene(root));
+        primaryStage.getScene().getStylesheets().add(getClass().getResource("/GUI/css/Style.css").toExternalForm());
         primaryStage.show();
 
     }

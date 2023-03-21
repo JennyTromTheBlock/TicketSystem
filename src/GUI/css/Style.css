@@ -1,0 +1,19 @@
+.white-background{
+    -fx-background-color: #fff;
+}
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+#topBar, #sidebar{
+    -fx-background-color: #fff;
+}
+
+#textField{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+#searchHBox, #yourEvents, #allEvents{
+    -fx-border-radius: 50;
+    -fx-border-color: #D7D7D7;
+}

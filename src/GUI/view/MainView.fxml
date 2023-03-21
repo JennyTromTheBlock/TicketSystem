@@ -1,14 +1,192 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="GUI.controller.MainView"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane fx:id="createEvent" prefHeight="790.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.MainView">
+   <top>
+      <HBox fx:id="topBar" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER_LEFT">
+         <children>
+            <Label alignment="CENTER" prefHeight="60.0" prefWidth="209.0" text="cool Logo">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Label>
+            <Separator maxHeight="-Infinity" orientation="VERTICAL" prefHeight="36.0" />
+            <Pane prefHeight="60.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+            <HBox fx:id="searchHBox" alignment="CENTER" maxHeight="-Infinity" prefHeight="35.0" prefWidth="290.0" spacing="5.0">
+               <children>
+                  <TextField fx:id="textField" prefHeight="26.0" prefWidth="239.0" promptText="search" />
+                  <ImageView fx:id="searchButton" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="235.0" spacing="5.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="129.0" text="User Name">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin></Label>
+                  <MenuButton mnemonicParsing="false" prefHeight="27.0" prefWidth="86.0" text="Settings">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                  </MenuButton>
+               </children>
+               <HBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox fx:id="sidebar" prefHeight="200.0" prefWidth="250.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="250.0" prefWidth="250.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="38.0" prefWidth="158.0" text="My events">
+                     <font>
+                        <Font name="Berlin Sans FB" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox prefHeight="50.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="215.0" text="cool title for event    20/03-2023">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Berlin Sans FB" size="16.0" />
+                           </font>
+                        </Label>
+                     </children></HBox>
+                  <HBox layoutX="10.0" layoutY="48.0" prefHeight="50.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="215.0" text="ev   title for event    23/05-2023">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Berlin Sans FB" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="99.0" prefHeight="50.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="245.0" text="cool title for event    09/08-2023">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Berlin Sans FB" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="149.0" prefHeight="50.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="yourEvents" alignment="CENTER" prefHeight="50.0" prefWidth="170.0" text="See more of your events">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Berlin Sans FB" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="10.0" layoutY="20.0" prefHeight="250.0" prefWidth="250.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="38.0" prefWidth="158.0" text="Upcoming events">
+                     <font>
+                        <Font name="Berlin Sans FB" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox prefHeight="50.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="215.0" text="cool title for event    20/03-2023">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Berlin Sans FB" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="48.0" prefHeight="50.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="215.0" text="ev   title for event    23/05-2023">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Berlin Sans FB" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="99.0" prefHeight="50.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="245.0" text="cool title for event    09/08-2023">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Berlin Sans FB" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="149.0" prefHeight="50.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="allEvents" alignment="CENTER" prefHeight="50.0" prefWidth="170.0" text="See all events ">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Berlin Sans FB" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Pane prefHeight="63.0" prefWidth="250.0" VBox.vgrow="ALWAYS" />
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="540.0" prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="allEvents11" alignment="CENTER" prefHeight="50.0" prefWidth="170.0" text="Create event">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="Berlin Sans FB" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </HBox>
+         </children></VBox>
+   </left>
+</BorderPane>
