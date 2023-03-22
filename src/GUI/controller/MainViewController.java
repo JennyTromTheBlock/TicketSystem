@@ -67,6 +67,7 @@ public class MainViewController implements Initializable {
         ObservableList<Event> list = FXCollections.observableList(s);
 
         TableView tableView = new TableView();
+        tableView.setPrefHeight(800);
 
         //create columns
         TableColumn<Event, String> column1 =
