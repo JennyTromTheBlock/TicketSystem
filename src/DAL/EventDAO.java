@@ -73,7 +73,7 @@ public class EventDAO implements IEventDAO {
                 int maxParticipant = rs.getInt("maxParticipant");
                 int price = rs.getInt("Price");
 
-                Event event = new Event(eventName, description, location, date, maxParticipant, price);
+                Event event = new Event(id, eventName, description, location, date, maxParticipant, price);
                 allEvents.add(event);
             }
         } catch (Exception e){
