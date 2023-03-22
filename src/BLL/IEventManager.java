@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface IEventManager {
 
-    List<Event> getAllEvents() throws Exception;
 
+    Event createEvent(Event event) throws Exception;
+
+    List<Event> getAllEvents() throws Exception;
 }

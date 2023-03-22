@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TicketSystem.iml" filepath="$PROJECT_DIR$/TicketSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/db_config/db_config.iml" filepath="$PROJECT_DIR$/db_config/db_config.iml" />
     </modules>
   </component>
 </project>

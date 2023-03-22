@@ -16,7 +16,14 @@ public class eventManager implements IEventManager {
     }
 
     @Override
+    public Event createEvent(Event event) throws Exception {
+        return databaseAccess.createEvent(event);
+    }
+
+    @Override
     public List<Event> getAllEvents() throws Exception {
         return databaseAccess.getAllEvents();
     }
+
+
 }
