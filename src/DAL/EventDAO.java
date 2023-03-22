@@ -57,12 +57,11 @@ public class EventDAO implements IEventDAO {
 
         ArrayList<Event> allEvents = new ArrayList<>();
 
-        String sql = "SELECT * FROM EVENT;";
-
         try (Connection connection = connector.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
-
+            Statement statement = connection.createStatement()) {
+            String sql = "SELECT * FROM EVENT;";
             ResultSet rs = statement.executeQuery(sql);
+
             while(rs.next()) {
                 int id = rs.getInt("ID");
                 String eventName = rs.getString("EventName");
@@ -80,7 +79,6 @@ public class EventDAO implements IEventDAO {
                 throw new Exception("Failed to retrieve all my events", e);
         }
         return allEvents;
-
     }
 
 

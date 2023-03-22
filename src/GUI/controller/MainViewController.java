@@ -1,6 +1,8 @@
 package GUI.controller;
 
 import BE.Event;
+import BLL.IEventManager;
+import BLL.eventManager;
 import GUI.models.EventModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,16 +35,21 @@ import java.util.ResourceBundle;
 public class MainViewController implements Initializable {
     public HBox topBar, searchHBox;
     public TextField textField;
-    public Label allEvents, createEvent, yourEvents;
+    public ObservableList<Object> allEvents;
+    public Label createEvent;
+    public Label yourEvents;
     public BorderPane background;
     public ImageView listViewImage, cardViewImage, calendarView,  searchButton;
     public VBox contentArea, myEventSideBar, upcomingEventSideBar, sidebar;
+
 
     private TableView tableView;
 
     private EventModel eventmodel;
 
-    TableColumn<Event, String> column1;
+    TableColumn<Event, String> column1, column2, column3, column4, column5;
+
+    private IEventManager eventManager;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -63,6 +70,13 @@ public class MainViewController implements Initializable {
 
         //adds the tableView to scene
         contentArea.getChildren().add(tableView);
+    }
+
+    public MainViewController() throws Exception {
+        eventManager = new eventManager();
+        allEvents = FXCollections.observableArrayList();
+        allEvents.addAll(eventManager.getAllEvents());
+        allEvents = FXCollections.observableArrayList();
     }
 
     private void testOfContentInTableView() {
@@ -98,8 +112,16 @@ public class MainViewController implements Initializable {
     }
 
     private void loadAllEvents() {
+
         tableView.setItems(eventmodel.getObservableEvent());
 
+        column1.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        column2.setCellValueFactory(new PropertyValueFactory<>("Event Name"));
+        column3.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        column4.setCellValueFactory(new PropertyValueFactory<>("Max Participant"));
+        column5.setCellValueFactory(new PropertyValueFactory<>("Price"));
+
+        System.out.println(eventmodel.getObservableEvent());
 
     }
 
@@ -113,22 +135,22 @@ public class MainViewController implements Initializable {
         column1.setCellValueFactory(
                 new PropertyValueFactory<>("eventName"));
 
-        TableColumn<Event, String> column2 =
+        column2 =
                 new TableColumn<>("location");
         column2.setCellValueFactory(
                 new PropertyValueFactory<>("location"));
 
-        TableColumn<Event, Integer> column3 =
+        column3 =
                 new TableColumn<>("Max participants");
         column3.setCellValueFactory(
                 new PropertyValueFactory<>("maxParticipant"));
 
-        TableColumn<Event, Integer> column4 =
+        column4 =
                 new TableColumn<>("Price");
         column4.setCellValueFactory(
                 new PropertyValueFactory<>("price"));
 
-        TableColumn<Event, Date> column5 =
+        column5 =
                 new TableColumn<>("date");
         column5.setCellValueFactory(
                 new PropertyValueFactory<>("date"));
