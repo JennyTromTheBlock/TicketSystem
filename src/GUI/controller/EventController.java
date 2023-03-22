@@ -3,12 +3,18 @@ package GUI.controller;
 import BE.Event;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -17,6 +23,8 @@ public class EventController implements Initializable {
     private Label labelEventName, labelEventDate, labelEventLocation, labelDescription, labelEventPrice, labelEventAttending, labelEventTickets;
     @FXML
     private ImageView imageEventDate, imageEventLocation, imageEventPrice, imageEventTicket;
+
+    private Event event;
 
 
     @Override
@@ -30,6 +38,7 @@ public class EventController implements Initializable {
     }
 
     public void setContent(Event event) {
+        this.event = event;
         labelEventName.setText(event.getEventName());
         labelDescription.setText(event.getDescription());
         labelEventDate.setText(String.valueOf(event.getDate()));
@@ -41,5 +50,26 @@ public class EventController implements Initializable {
     public void handleClose(ActionEvent actionEvent) {
         Stage stage = (Stage) labelEventName.getScene().getWindow();
         stage.close();
+    }
+
+    public void handleEditEvent(ActionEvent actionEvent) {
+        //Load the new stage & view
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateEvent.fxml"));
+        Parent root = null;
+
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stage = new Stage();
+        stage.setTitle("Edit event");
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
+
+        CreateEventController controller = loader.getController();
+        controller.setContent(event);
     }
 }

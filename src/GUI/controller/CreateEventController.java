@@ -11,6 +11,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class CreateEventController {
@@ -117,5 +119,16 @@ public class CreateEventController {
             inputFieldValidation.setText("");
         }
         return true;
+    }
+
+    public void setContent(Event event) {
+        eventNameField.setText(event.getEventName());
+        descriptionField.setText(event.getDescription());
+        locationField.setText(event.getLocation());
+        dateField.setValue(event.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        timeField.setText(""+event.getDate().getTime());
+        priceField.setText(""+event.getPrice());
+        maxTicketsField.setText(""+event.getMaxParticipant());
+
     }
 }

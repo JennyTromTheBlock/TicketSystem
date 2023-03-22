@@ -88,7 +88,7 @@ public class EventDAO implements IEventDAO {
 
 
     public void updateEvent(Event event) throws Exception {
-        String sql = "UPDATE EVENT SET EventName=?, EventDescription=?, EventLocation=?, EventDate=?, MaxParticipant=?, Price=?;";
+        String sql = "UPDATE EVENT SET EventName=?, EventDescription=?, EventLocation=?, EventDate=?, MaxParticipant=?, Price=? WHERE Id =?;";
 
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -101,6 +101,7 @@ public class EventDAO implements IEventDAO {
             statement.setDate(4, new Date(event.getDate().getTime()));
             statement.setInt(5, event.getMaxParticipant());
             statement.setInt(6, event.getPrice());
+            statement.setInt(7, event.getId());
 
             // Run the specified SQL statement
             statement.executeUpdate();
