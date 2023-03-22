@@ -65,14 +65,18 @@ public class MainViewController implements Initializable {
         //adds the tableView to scene
         contentArea.getChildren().add(tableView);
 
+        tableViewEventHandlers();
+    }
+
+    private void tableViewEventHandlers() {
         //Opens event info on Enter or double click
         tableView.setOnKeyPressed(keyEvent -> {
-            if(keyEvent.getCode().equals(KeyCode.ENTER)) {
+            if(keyEvent.getCode().equals(KeyCode.ENTER) && tableView.getSelectionModel().getSelectedItem() != null) {
                 handleViewEvent((Event) tableView.getSelectionModel().getSelectedItem());
             }
         });
         tableView.setOnMouseClicked(mouseEvent -> {
-            if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+            if(mouseEvent.getButton().equals(MouseButton.PRIMARY) && tableView.getSelectionModel().getSelectedItem() != null){
                 if(mouseEvent.getClickCount()==2) {
                     handleViewEvent((Event) tableView.getSelectionModel().getSelectedItem());
                 }
