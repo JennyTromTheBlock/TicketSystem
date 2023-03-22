@@ -42,6 +42,8 @@ public class MainViewController implements Initializable {
 
     private EventModel eventmodel;
 
+    TableColumn<Event, String> column1;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -57,6 +59,7 @@ public class MainViewController implements Initializable {
         createColumnBoard();
 
         testOfContentInTableView();
+        loadAllEvents();
 
         //adds the tableView to scene
         contentArea.getChildren().add(tableView);
@@ -94,12 +97,18 @@ public class MainViewController implements Initializable {
         cardViewImage.setImage(cardLogo);
     }
 
+    private void loadAllEvents() {
+        tableView.setItems(eventmodel.getObservableEvent());
+
+
+    }
+
     private void createColumnBoard() {
         tableView = new TableView();
         tableView.setPrefHeight(800);
 
         //create columns
-        TableColumn<Event, String> column1 =
+        column1 =
                 new TableColumn<>("Title");
         column1.setCellValueFactory(
                 new PropertyValueFactory<>("eventName"));
