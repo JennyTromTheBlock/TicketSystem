@@ -6,8 +6,10 @@ import DAL.Connectors.SqlConnector;
 
 import java.nio.file.Path;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class EventDAO {
+public class EventDAO implements IEventDAO {
     IConnector connector;
 
     public EventDAO() throws Exception {
@@ -26,8 +28,9 @@ public class EventDAO {
             statement.setString(1, event.getEventName());
             statement.setString(2, event.getDescription());
             statement.setString(3, event.getLocation());
-            // Converting the util.Date class to sql.Date.
-            statement.setDate(4, new Date(event.getDate().getTime()));
+            // Converting util.Date to sql.Timestamp used by the database
+            Timestamp timestamp = new Timestamp(event.getDate().getTime());
+            statement.setTimestamp(4, timestamp);
             statement.setInt(5, event.getMaxParticipant());
             statement.setInt(6, event.getPrice());
 
@@ -49,6 +52,40 @@ public class EventDAO {
 
         return newEvent;
     }
+
+
+    public List<Event> getAllEvents() throws Exception {
+
+        ArrayList<Event> allEvents = new ArrayList<>();
+
+        try (Connection mConnection = connector.getConnection();
+            Statement mStatement = mConnection.createStatement()) {
+
+            String sql = "SELECT * FROM EVENT;";
+            ResultSet rs = mStatement.executeQuery(sql);
+
+            while(rs.next()) {
+
+                int id = rs.getInt("ID");
+                String eventName = rs.getString("EventName");
+                String description = rs.getString("EventDescription");
+                String location = rs.getString("EventLocation");
+                Date date = rs.getDate("EventDate");
+                int maxParticipant = rs.getInt("maxParticipant");
+                int price = rs.getInt("Price");
+
+                Event event = new Event(eventName, description, location, date, maxParticipant, price);
+                allEvents.add(event);
+            }
+        } catch (Exception e){
+                e.printStackTrace();
+                throw new Exception("Failed to retrieve all events", e);
+        }
+        return allEvents;
+
+    }
+
+
 
     public void updateEvent(Event event) throws Exception {
         String sql = "UPDATE EVENT SET EventName=?, EventDescription=?, EventLocation=?, EventDate=?, MaxParticipant=?, Price=?;";

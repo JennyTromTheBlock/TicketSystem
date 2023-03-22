@@ -1,6 +1,7 @@
 package GUI.controller;
 
 import BE.Event;
+import GUI.models.EventModel;
 import GUI.util.DateConverter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,8 +11,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Date;
 
 public class CreateEventController {
@@ -25,21 +24,30 @@ public class CreateEventController {
     @FXML
     private Label inputFieldValidation, locationFieldValidation, dateFieldValidation;
 
+    public void setEventModel(EventModel eventModel) {
+        this.eventModel = eventModel;
+    }
+
+    private EventModel eventModel;
+
+
+
+
     /**
      * checks if all important fields are filled, and create an event object
      * todo call create method in model
      * @param actionEvent
      */
-    public void handleCreateEvent(ActionEvent actionEvent) {
+    public void handleCreateEvent(ActionEvent actionEvent) throws Exception {
         if(isInputFieldsFilled()){
-            Event event = createEventFromFields();
-
+            Event eventWithoutId = createEventFromFields();
+            eventModel.createEvent(eventWithoutId);
             //closes the window
             handleCancel();
         }
     }
 
-    private Event createEventFromFields() {
+    private Event createEventFromFields() throws Exception {
         //gets all parameters for the event object
         String eventName = eventNameField.getText();
         String description = descriptionField.getText();
