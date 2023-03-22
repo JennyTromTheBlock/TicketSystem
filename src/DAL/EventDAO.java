@@ -27,8 +27,9 @@ public class EventDAO implements IEventDAO {
             statement.setString(1, event.getEventName());
             statement.setString(2, event.getDescription());
             statement.setString(3, event.getLocation());
-            // Converting the util.Date class to sql.Date.
-            statement.setDate(4, new Date(event.getDate().getTime()));
+            // Converting util.Date to sql.Timestamp used by the database
+            Timestamp timestamp = new Timestamp(event.getDate().getTime());
+            statement.setTimestamp(4, timestamp);
             statement.setInt(5, event.getMaxParticipant());
             statement.setInt(6, event.getPrice());
 

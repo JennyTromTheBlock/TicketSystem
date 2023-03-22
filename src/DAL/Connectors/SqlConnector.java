@@ -2,6 +2,7 @@ package DAL.Connectors;
 
 import BE.Event;
 import DAL.EventDAO;
+import DAL.IEventDAO;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
