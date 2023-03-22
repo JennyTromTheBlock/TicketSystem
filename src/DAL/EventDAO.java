@@ -109,6 +109,5 @@ public class EventDAO implements IEventDAO {
             e.printStackTrace();
             throw new Exception("Failed to edit the event", e);
         }
-
     }
 }

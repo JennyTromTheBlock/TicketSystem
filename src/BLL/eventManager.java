@@ -25,5 +25,10 @@ public class eventManager implements IEventManager {
         return databaseAccess.getAllEvents();
     }
 
+    @Override
+    public void updateEvent(Event event) throws Exception {
+        databaseAccess.updateEvent(event);
+    }
+
 
 }
