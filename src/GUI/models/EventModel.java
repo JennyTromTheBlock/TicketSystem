@@ -3,8 +3,10 @@ package GUI.models;
 import BE.Event;
 import BLL.IEventManager;
 import BLL.eventManager;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventModel {
@@ -25,7 +27,9 @@ public class EventModel {
         return eventManager.createEvent(event);
     }
 
-    public List<Event> getAllEvents() throws Exception {
-        return eventManager.getAllEvents();
+    public ObservableList<Event> getAllEvents() throws Exception {
+
+        ObservableList<Event> list = FXCollections.observableList(eventManager.getAllEvents());
+        return list;
     }
 }

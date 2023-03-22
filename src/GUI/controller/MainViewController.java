@@ -54,47 +54,19 @@ public class MainViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        try {
-            eventmodel = new EventModel();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-
         //sets all image symbols
         createSymbolsForBtns();
         createColumnBoard();
 
-        testOfContentInTableView();
-        loadAllEvents();
+        try {
+            eventmodel = new EventModel();
+            loadAllEvents();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         //adds the tableView to scene
         contentArea.getChildren().add(tableView);
-    }
-
-    public MainViewController() throws Exception {
-        eventManager = new eventManager();
-        allEvents = FXCollections.observableArrayList();
-        allEvents.addAll(eventManager.getAllEvents());
-        allEvents = FXCollections.observableArrayList();
-    }
-
-    private void testOfContentInTableView() {
-        List<Event> s = new ArrayList<>();
-        ObservableList<Event> list = FXCollections.observableList(s);
-        //test
-        Date date = new Date();
-        Event event = new Event("fodboldewkopf fest", "kgowrpgeopwfe", "lige her lige nu", date, 50, 20 );
-        Event event1 = new Event("foefmwlpdbold fest", "kgowrpgeopwfe", "lige her lige nu", date, 50, 20 );
-        Event event2 = new Event("håndbold fest", "kgowrpgeopwfe", "lige her lige nu", date, 50, 20 );
-        Event event3 = new Event("fodbold fest", "kgowrpgeopwfe", "lige her lige nu", date, 50, 20 );
-        list.add(event);
-        list.add(event1);
-        list.add(event2);
-        list.add(event3);
-        System.out.println(list.size());
-        System.out.println(tableView.getColumns().size());
-        tableView.setItems(list);
     }
 
     private void createSymbolsForBtns() {
@@ -111,18 +83,10 @@ public class MainViewController implements Initializable {
         cardViewImage.setImage(cardLogo);
     }
 
-    private void loadAllEvents() {
+    private void loadAllEvents() throws Exception {
+        createColumnBoard();
 
-        tableView.setItems(eventmodel.getObservableEvent());
-
-        column1.setCellValueFactory(new PropertyValueFactory<>("Title"));
-        column2.setCellValueFactory(new PropertyValueFactory<>("Event Name"));
-        column3.setCellValueFactory(new PropertyValueFactory<>("Location"));
-        column4.setCellValueFactory(new PropertyValueFactory<>("Max Participant"));
-        column5.setCellValueFactory(new PropertyValueFactory<>("Price"));
-
-        System.out.println(eventmodel.getObservableEvent());
-
+        tableView.setItems(eventmodel.getAllEvents());
     }
 
     private void createColumnBoard() {
@@ -156,11 +120,7 @@ public class MainViewController implements Initializable {
                 new PropertyValueFactory<>("date"));
 
         //adds all columns to tableView
-        tableView.getColumns().add(column1);
-        tableView.getColumns().add(column2);
-        tableView.getColumns().add(column3);
-        tableView.getColumns().add(column4);
-        tableView.getColumns().add(column5);
+        tableView.getColumns().addAll(column1, column2, column3, column4, column5);
     }
 
     public void handleCreateEvent(MouseEvent mouseEvent) {
