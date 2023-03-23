@@ -1,6 +1,7 @@
 package GUI.controller;
 
 import BE.Event;
+import GUI.models.EventModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,9 +53,9 @@ public class EventController implements Initializable {
         stage.close();
     }
 
-    public void handleEditEvent(ActionEvent actionEvent) {
+    public void handleEditEvent(ActionEvent actionEvent) throws Exception {
         //Load the new stage & view
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateEvent.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/UpdateEventView.fxml"));
         Parent root = null;
 
         try {
@@ -69,7 +70,8 @@ public class EventController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
 
-        CreateEventController controller = loader.getController();
-        controller.setContent(event);
+        UpdateEventController controller = loader.getController();
+        controller.setEventModel(new EventModel());
+        controller.setEvent(event);
     }
 }

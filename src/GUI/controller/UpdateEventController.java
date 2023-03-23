@@ -10,7 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.converter.LocalDateStringConverter;
 
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
@@ -125,7 +127,8 @@ public class UpdateEventController {
         eventNameField.setText(event.getEventName());
         descriptionField.setText(event.getDescription());
         locationField.setText(event.getLocation());
-        dateField.setValue(event.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        //TODO Fix this conversion
+        //dateField.setValue(event.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         priceField.setText(""+event.getPrice());
         maxTicketsField.setText(""+event.getMaxParticipant());
         timeField.setText(DateConverter.getTimeFromDate(event.getDate()));
