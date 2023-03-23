@@ -126,9 +126,10 @@ public class UpdateEventController {
         descriptionField.setText(event.getDescription());
         locationField.setText(event.getLocation());
         dateField.setValue(event.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        timeField.setText(""+event.getDate().getTime());
         priceField.setText(""+event.getPrice());
         maxTicketsField.setText(""+event.getMaxParticipant());
+        timeField.setText(DateConverter.getTimeFromDate(event.getDate()));
+
 
     }
 

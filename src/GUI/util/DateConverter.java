@@ -25,4 +25,12 @@ public class DateConverter {
         resultDate = timeOfDay.getTime();
         return resultDate;
     }
+
+    public static String getTimeFromDate(Date date){
+        Date resultDate = date;
+        Calendar timeOfDay = Calendar.getInstance();
+        timeOfDay.setTime(resultDate);
+        //splits the time string into hours and minutes
+        return timeOfDay.HOUR + ":" + timeOfDay.MINUTE;
+    }
 }
