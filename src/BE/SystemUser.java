@@ -6,6 +6,11 @@ public class SystemUser {
     private String lastName;
     private String password;
 
+    public SystemUser(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
     public SystemUser(String email, String firstName, String lastName, String password) {
         this.email = email;
         this.firstName = firstName;
