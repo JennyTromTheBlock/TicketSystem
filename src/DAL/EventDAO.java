@@ -4,7 +4,6 @@ import BE.Event;
 import DAL.Connectors.IConnector;
 import DAL.Connectors.SqlConnector;
 
-import java.nio.file.Path;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,14 +84,11 @@ public class EventDAO implements IEventDAO {
 
     }
 
-
-
     public Event updateEvent(Event event) throws Exception {
         Event updatedEvent = null;
         String sql = "UPDATE EVENT SET EventName=?, EventDescription=?, EventLocation=?, EventDate=?, MaxParticipant=?, Price=? WHERE Id =?;";
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-
 
             // Bind parameters
             statement.setString(1, event.getEventName());
