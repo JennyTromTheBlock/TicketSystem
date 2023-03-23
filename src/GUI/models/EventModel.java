@@ -14,6 +14,8 @@ public class EventModel {
 
     public EventModel() throws Exception {
         eventManager = new eventManager();
+        allEvents = FXCollections.observableList(eventManager.getAllEvents());
+
     }
 
     public ObservableList<Event> getObservableEvent() {
@@ -21,13 +23,13 @@ public class EventModel {
     }
 
     public Event createEvent(Event event) throws Exception {
-        return eventManager.createEvent(event);
+        Event finalEvent = eventManager.createEvent(event);
+        allEvents.add(finalEvent);
+        return finalEvent;
     }
 
     public ObservableList<Event> getAllEvents() throws Exception {
-
-        ObservableList<Event> list = FXCollections.observableList(eventManager.getAllEvents());
-        return list;
+        return allEvents;
     }
 
     public Event updateEvent(Event eventToUpdate) throws Exception {
@@ -36,7 +38,6 @@ public class EventModel {
         if (updatedEvent != null) {
             //TODO Update allEvents list.
         }
-
         return updatedEvent;
     }
 }
