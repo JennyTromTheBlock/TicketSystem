@@ -7,6 +7,7 @@ import GUI.models.EventModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -36,24 +37,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class MainViewController implements Initializable {
+public class MainViewController extends BaseController implements Initializable {
     public HBox topBar, searchHBox;
     public TextField textField;
-    public ObservableList<Object> allEvents;
     public Label createEvent;
     public Label yourEvents;
     public BorderPane background;
     public ImageView listViewImage, cardViewImage, calendarView,  searchButton;
     public VBox contentArea, myEventSideBar, upcomingEventSideBar, sidebar;
-
-
     private TableView tableView;
-
-    private EventModel eventmodel;
-
     TableColumn<Event, String> column1, column2, column3, column4, column5;
-
-    private IEventManager eventManager;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -63,7 +56,6 @@ public class MainViewController implements Initializable {
         createColumnBoard();
 
         try {
-            eventmodel = new EventModel();
             loadAllEvents();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -108,7 +100,7 @@ public class MainViewController implements Initializable {
     private void loadAllEvents() throws Exception {
         createColumnBoard();
 
-        tableView.setItems(eventmodel.getAllEvents());
+        tableView.setItems(getModelsHandler().getEventModel().getObservableEvent());
     }
 
     private void createColumnBoard() {
@@ -160,9 +152,6 @@ public class MainViewController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
-
-        CreateEventController controller = loader.getController();
-        controller.setEventModel(eventmodel);
     }
 
     public void handleViewEvent(Event event) {

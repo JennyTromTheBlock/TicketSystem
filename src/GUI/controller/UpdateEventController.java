@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class UpdateEventController {
+public class UpdateEventController extends BaseController {
     @FXML
     private TextField priceField, maxTicketsField, locationField, eventNameField, timeField;
     @FXML
@@ -25,21 +25,15 @@ public class UpdateEventController {
     private DatePicker dateField;
     @FXML
     private Label inputFieldValidation, locationFieldValidation, dateFieldValidation;
-
-    private EventModel eventModel;
     //Keeps track of what specific event we're editing
     private int eventId;
-
-    public void setEventModel(EventModel eventModel) {
-        this.eventModel = eventModel;
-    }
 
     public void handleUpdateEvent(ActionEvent actionEvent) {
         if (isInputFieldsFilled()) {
             Event eventToUpdate = new Event(eventId, createEventFromFields());
 
             try {
-                Event updatedEvent = eventModel.updateEvent(eventToUpdate);
+                Event updatedEvent = getModelsHandler().getEventModel().updateEvent(eventToUpdate);
 
                 if (updatedEvent != null) {
                     handleCancel();
@@ -127,8 +121,7 @@ public class UpdateEventController {
         eventNameField.setText(event.getEventName());
         descriptionField.setText(event.getDescription());
         locationField.setText(event.getLocation());
-        //TODO Fix this conversion
-        //dateField.setValue(event.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        dateField.setValue(event.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         priceField.setText(""+event.getPrice());
         maxTicketsField.setText(""+event.getMaxParticipant());
         timeField.setText(DateConverter.getTimeFromDate(event.getDate()));

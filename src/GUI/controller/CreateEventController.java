@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class CreateEventController {
+public class CreateEventController extends BaseController {
 
     @FXML
     private TextField priceField, maxTicketsField, locationField, eventNameField, timeField;
@@ -26,15 +26,6 @@ public class CreateEventController {
     @FXML
     private Label inputFieldValidation, locationFieldValidation, dateFieldValidation;
 
-    public void setEventModel(EventModel eventModel) {
-        this.eventModel = eventModel;
-    }
-
-    private EventModel eventModel;
-
-
-
-
     /**
      * checks if all important fields are filled, and create an event object
      * todo call create method in model
@@ -43,8 +34,7 @@ public class CreateEventController {
     public void handleCreateEvent(ActionEvent actionEvent) throws Exception {
         if(isInputFieldsFilled()){
             Event eventWithoutId = createEventFromFields();
-            eventModel.createEvent(eventWithoutId);
-            //closes the window
+            getModelsHandler().getEventModel().createEvent(eventWithoutId);
             handleCancel();
         }
     }
