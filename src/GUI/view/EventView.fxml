@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.EventController">
+   <children>
+      <VBox layoutX="70.0" prefHeight="430.0" prefWidth="517.0">
+         <children>
+            <Label fx:id="labelEventName" prefHeight="100.0" prefWidth="657.0" text="Event name" wrapText="true">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <HBox>
+               <children>
+                  <Label fx:id="labelEventDate" text="Date &amp; time">
+                     <graphic>
+                        <ImageView fx:id="imageEventDate" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelEventLocation" text="Location">
+                     <graphic>
+                        <ImageView fx:id="imageEventLocation" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Label fx:id="labelDescription" prefHeight="100.0" prefWidth="517.0" text="Description">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+            <Label fx:id="labelEventPrice" text="Price">
+               <graphic>
+                  <ImageView fx:id="imageEventPrice" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <HBox>
+               <children>
+                  <Label fx:id="labelEventTickets" text="Max. tickets">
+                     <graphic>
+                        <ImageView fx:id="imageEventTicket" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="69.0" prefWidth="431.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#handleEditEvent" text="Edit">
+                     <HBox.margin>
+                        <Insets left="70.0" right="50.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClose" text="Close">
+                     <HBox.margin>
+                        <Insets left="100.0" right="50.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</Pane>

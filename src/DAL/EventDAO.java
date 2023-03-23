@@ -71,7 +71,6 @@ public class EventDAO implements IEventDAO {
                 Date date = rs.getTimestamp("EventDate");
                 int maxParticipant = rs.getInt("maxParticipant");
                 int price = rs.getInt("Price");
-                System.out.println(date);
 
                 Event event = new Event(id, eventName, description, location, date, maxParticipant, price);
                 allEvents.add(event);
@@ -81,5 +80,30 @@ public class EventDAO implements IEventDAO {
                 throw new Exception("Failed to retrieve all my events", e);
         }
         return allEvents;
+    }
+
+    public Event updateEvent(Event event) throws Exception {
+        Event updatedEvent = null;
+        String sql = "UPDATE EVENT SET EventName=?, EventDescription=?, EventLocation=?, EventDate=?, MaxParticipant=?, Price=? WHERE Id =?;";
+        try (Connection connection = connector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            // Bind parameters
+            statement.setString(1, event.getEventName());
+            statement.setString(2, event.getDescription());
+            statement.setString(3, event.getLocation());
+            statement.setDate(4, new Date(event.getDate().getTime()));
+            statement.setInt(5, event.getMaxParticipant());
+            statement.setInt(6, event.getPrice());
+            statement.setInt(7, event.getId());
+
+            // Run the specified SQL statement
+            statement.executeUpdate();
+            updatedEvent = event;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Failed to edit the event", e);
+        }
+        return updatedEvent;
     }
 }

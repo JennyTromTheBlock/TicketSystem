@@ -10,13 +10,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.converter.LocalDateStringConverter;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class CreateEventController {
-
+public class UpdateEventController {
     @FXML
     private TextField priceField, maxTicketsField, locationField, eventNameField, timeField;
     @FXML
@@ -26,30 +26,32 @@ public class CreateEventController {
     @FXML
     private Label inputFieldValidation, locationFieldValidation, dateFieldValidation;
 
+    private EventModel eventModel;
+    //Keeps track of what specific event we're editing
+    private int eventId;
+
     public void setEventModel(EventModel eventModel) {
         this.eventModel = eventModel;
     }
 
-    private EventModel eventModel;
+    public void handleUpdateEvent(ActionEvent actionEvent) {
+        if (isInputFieldsFilled()) {
+            Event eventToUpdate = new Event(eventId, createEventFromFields());
 
+            try {
+                Event updatedEvent = eventModel.updateEvent(eventToUpdate);
 
-
-
-    /**
-     * checks if all important fields are filled, and create an event object
-     * todo call create method in model
-     * @param actionEvent
-     */
-    public void handleCreateEvent(ActionEvent actionEvent) throws Exception {
-        if(isInputFieldsFilled()){
-            Event eventWithoutId = createEventFromFields();
-            eventModel.createEvent(eventWithoutId);
-            //closes the window
-            handleCancel();
+                if (updatedEvent != null) {
+                    handleCancel();
+                }
+            }
+            catch (Exception e) {
+                //TODO display the error for the system user
+            }
         }
     }
 
-    private Event createEventFromFields() throws Exception {
+    private Event createEventFromFields() {
         //gets all parameters for the event object
         String eventName = eventNameField.getText();
         String description = descriptionField.getText();
@@ -59,12 +61,6 @@ public class CreateEventController {
         int price = !priceField.getText().isEmpty()? Integer.parseInt(priceField.getText()) : 0;
 
         return new Event(eventName, description, location, date, maxTickets, price);
-    }
-
-    public void handleCancel() {
-        //closes the window
-        Stage stage = (Stage) eventNameField.getScene().getWindow();
-        stage.close();
     }
 
     /**
@@ -121,14 +117,28 @@ public class CreateEventController {
         return true;
     }
 
-    public void setContent(Event event) {
+    public void setEvent(Event event) {
+        this.eventId = event.getId();
+
+        setContent(event);
+    }
+
+    private void setContent(Event event) {
         eventNameField.setText(event.getEventName());
         descriptionField.setText(event.getDescription());
         locationField.setText(event.getLocation());
-        dateField.setValue(event.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        timeField.setText(""+event.getDate().getTime());
+        //TODO Fix this conversion
+        //dateField.setValue(event.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         priceField.setText(""+event.getPrice());
         maxTicketsField.setText(""+event.getMaxParticipant());
+        timeField.setText(DateConverter.getTimeFromDate(event.getDate()));
 
+
+    }
+
+    public void handleCancel() {
+        //closes the window
+        Stage stage = (Stage) eventNameField.getScene().getWindow();
+        stage.close();
     }
 }

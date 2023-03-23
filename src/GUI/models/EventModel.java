@@ -6,9 +6,6 @@ import BLL.eventManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class EventModel {
 
     private ObservableList<Event> allEvents;
@@ -31,5 +28,15 @@ public class EventModel {
 
         ObservableList<Event> list = FXCollections.observableList(eventManager.getAllEvents());
         return list;
+    }
+
+    public Event updateEvent(Event eventToUpdate) throws Exception {
+        Event updatedEvent = eventManager.updateEvent(eventToUpdate);
+
+        if (updatedEvent != null) {
+            //TODO Update allEvents list.
+        }
+
+        return updatedEvent;
     }
 }

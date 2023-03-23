@@ -6,6 +6,7 @@ import BLL.eventManager;
 import GUI.models.EventModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -17,6 +18,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -67,6 +71,24 @@ public class MainViewController implements Initializable {
 
         //adds the tableView to scene
         contentArea.getChildren().add(tableView);
+
+        tableViewEventHandlers();
+    }
+
+    private void tableViewEventHandlers() {
+        //Opens event info on Enter or double click
+        tableView.setOnKeyPressed(keyEvent -> {
+            if(keyEvent.getCode().equals(KeyCode.ENTER) && tableView.getSelectionModel().getSelectedItem() != null) {
+                handleViewEvent((Event) tableView.getSelectionModel().getSelectedItem());
+            }
+        });
+        tableView.setOnMouseClicked(mouseEvent -> {
+            if(mouseEvent.getButton().equals(MouseButton.PRIMARY) && tableView.getSelectionModel().getSelectedItem() != null){
+                if(mouseEvent.getClickCount()==2) {
+                    handleViewEvent((Event) tableView.getSelectionModel().getSelectedItem());
+                }
+            }
+        });
     }
 
     private void createSymbolsForBtns() {
@@ -141,5 +163,27 @@ public class MainViewController implements Initializable {
 
         CreateEventController controller = loader.getController();
         controller.setEventModel(eventmodel);
+    }
+
+    public void handleViewEvent(Event event) {
+
+        //Load the new stage & view
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/EventView.fxml"));
+        Parent root = null;
+
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stage = new Stage();
+        stage.setTitle("Event information");
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
+
+        EventController controller = loader.getController();
+        controller.setContent(event);
     }
 }
