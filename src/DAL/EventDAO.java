@@ -57,14 +57,12 @@ public class EventDAO implements IEventDAO {
 
         ArrayList<Event> allEvents = new ArrayList<>();
 
-        try (Connection mConnection = connector.getConnection();
-            Statement mStatement = mConnection.createStatement()) {
-
+        try (Connection connection = connector.getConnection();
+            Statement statement = connection.createStatement()) {
             String sql = "SELECT * FROM EVENT;";
-            ResultSet rs = mStatement.executeQuery(sql);
+            ResultSet rs = statement.executeQuery(sql);
 
             while(rs.next()) {
-
                 int id = rs.getInt("ID");
                 String eventName = rs.getString("EventName");
                 String description = rs.getString("EventDescription");
@@ -73,15 +71,14 @@ public class EventDAO implements IEventDAO {
                 int maxParticipant = rs.getInt("maxParticipant");
                 int price = rs.getInt("Price");
 
-                Event event = new Event(eventName, description, location, date, maxParticipant, price);
+                Event event = new Event(id, eventName, description, location, date, maxParticipant, price);
                 allEvents.add(event);
             }
         } catch (Exception e){
                 e.printStackTrace();
-                throw new Exception("Failed to retrieve all events", e);
+                throw new Exception("Failed to retrieve all my events", e);
         }
         return allEvents;
-
     }
 
     public Event updateEvent(Event event) throws Exception {

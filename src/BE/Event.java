@@ -17,6 +17,16 @@ public class Event {
         setEventFields(eventName, description, location, date, maxParticipant, price);
     }
 
+    public Event(int id, String eventName, String description, String location, Date date, int maxParticipant, int price){
+        this.id = id;
+        this.eventName = eventName;
+        this.description = description;
+        this.location = location;
+        this.date = date;
+        this.maxParticipant = maxParticipant;
+        this.price = price;
+    }
+
     public Event(int id, Event eventToCopy) {
         this.id = id;
         setEventFields(

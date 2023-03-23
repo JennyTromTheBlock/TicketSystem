@@ -160,7 +160,7 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="149.0" prefHeight="50.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="allEvents" alignment="CENTER" prefHeight="50.0" prefWidth="170.0" text="See all events ">
+                        <Label fx:id="allEvents1" alignment="CENTER" prefHeight="50.0" prefWidth="170.0" text="See all events ">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>

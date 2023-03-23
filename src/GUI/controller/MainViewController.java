@@ -1,6 +1,8 @@
 package GUI.controller;
 
 import BE.Event;
+import BLL.IEventManager;
+import BLL.eventManager;
 import GUI.models.EventModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,30 +39,35 @@ import java.util.ResourceBundle;
 public class MainViewController implements Initializable {
     public HBox topBar, searchHBox;
     public TextField textField;
-    public Label allEvents, createEvent, yourEvents;
+    public ObservableList<Object> allEvents;
+    public Label createEvent;
+    public Label yourEvents;
     public BorderPane background;
     public ImageView listViewImage, cardViewImage, calendarView,  searchButton;
     public VBox contentArea, myEventSideBar, upcomingEventSideBar, sidebar;
+
 
     private TableView tableView;
 
     private EventModel eventmodel;
 
+    TableColumn<Event, String> column1, column2, column3, column4, column5;
+
+    private IEventManager eventManager;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        try {
-            eventmodel = new EventModel();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
 
         //sets all image symbols
         createSymbolsForBtns();
         createColumnBoard();
 
-        testOfContentInTableView();
+        try {
+            eventmodel = new EventModel();
+            loadAllEvents();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         //adds the tableView to scene
         contentArea.getChildren().add(tableView);
@@ -84,24 +91,6 @@ public class MainViewController implements Initializable {
         });
     }
 
-    private void testOfContentInTableView() {
-        List<Event> s = new ArrayList<>();
-        ObservableList<Event> list = FXCollections.observableList(s);
-        //test
-        Date date = new Date();
-        Event event = new Event("fodboldewkopf fest", "kgowrpgeopwfe", "lige her lige nu", date, 50, 20 );
-        Event event1 = new Event("foefmwlpdbold fest", "kgowrpgeopwfe", "lige her lige nu", date, 50, 20 );
-        Event event2 = new Event("håndbold fest", "kgowrpgeopwfe", "lige her lige nu", date, 50, 20 );
-        Event event3 = new Event("fodbold fest", "kgowrpgeopwfe", "lige her lige nu", date, 50, 20 );
-        list.add(event);
-        list.add(event1);
-        list.add(event2);
-        list.add(event3);
-        System.out.println(list.size());
-        System.out.println(tableView.getColumns().size());
-        tableView.setItems(list);
-    }
-
     private void createSymbolsForBtns() {
         Image searchSymbol = new Image("searchSymbol.png");
         searchButton.setImage(searchSymbol);
@@ -116,42 +105,44 @@ public class MainViewController implements Initializable {
         cardViewImage.setImage(cardLogo);
     }
 
+    private void loadAllEvents() throws Exception {
+        createColumnBoard();
+
+        tableView.setItems(eventmodel.getAllEvents());
+    }
+
     private void createColumnBoard() {
         tableView = new TableView();
         tableView.setPrefHeight(800);
 
         //create columns
-        TableColumn<Event, String> column1 =
+        column1 =
                 new TableColumn<>("Title");
         column1.setCellValueFactory(
                 new PropertyValueFactory<>("eventName"));
 
-        TableColumn<Event, String> column2 =
+        column2 =
                 new TableColumn<>("location");
         column2.setCellValueFactory(
                 new PropertyValueFactory<>("location"));
 
-        TableColumn<Event, Integer> column3 =
+        column3 =
                 new TableColumn<>("Max participants");
         column3.setCellValueFactory(
                 new PropertyValueFactory<>("maxParticipant"));
 
-        TableColumn<Event, Integer> column4 =
+        column4 =
                 new TableColumn<>("Price");
         column4.setCellValueFactory(
                 new PropertyValueFactory<>("price"));
 
-        TableColumn<Event, Date> column5 =
+        column5 =
                 new TableColumn<>("date");
         column5.setCellValueFactory(
                 new PropertyValueFactory<>("date"));
 
         //adds all columns to tableView
-        tableView.getColumns().add(column1);
-        tableView.getColumns().add(column2);
-        tableView.getColumns().add(column3);
-        tableView.getColumns().add(column4);
-        tableView.getColumns().add(column5);
+        tableView.getColumns().addAll(column1, column2, column3, column4, column5);
     }
 
     public void handleCreateEvent(MouseEvent mouseEvent) {
