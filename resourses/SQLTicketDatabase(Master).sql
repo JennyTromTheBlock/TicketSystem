@@ -24,3 +24,11 @@ CREATE TABLE Event(
 	Price 				int				NULL
 )
 GO
+
+
+CREATE TABLE SystemUsers(
+    Email               nvarchar(100)   PRIMARY KEY,
+    FirstName           nvarchar(100)   NOT NULL,
+    LastName            nvarchar(100)   NOT NULL,
+    Password            nvarchar(100)   NOT NULL
+)
