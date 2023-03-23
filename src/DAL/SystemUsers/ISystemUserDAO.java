@@ -6,7 +6,9 @@ public interface ISystemUserDAO {
     /**
      * Validates if a given user exists.
      * @param user The user to validate.
-     * @return true if the user matches an entry. False otherwise.
+     * @return Returns the corresponding user if
+     * the Email and password are valid. Null if otherwise.
+     * @throws Exception
      */
-    boolean login(SystemUser user) throws Exception;
+    SystemUser SystemUserValidLogin(SystemUser user) throws Exception;
 }

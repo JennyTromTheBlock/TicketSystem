@@ -11,7 +11,7 @@ public class SystemUserManager implements ISystemUserManager {
     }
 
     @Override
-    public boolean authenticateSystemUser(SystemUser user) throws Exception {
-        return authenticateFacade.loginSystemUser(user);
+    public SystemUser authenticateSystemUser(SystemUser user) throws Exception {
+        return authenticateFacade.authenticateSystemUser(user);
     }
 }

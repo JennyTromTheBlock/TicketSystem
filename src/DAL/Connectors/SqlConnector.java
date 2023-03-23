@@ -2,6 +2,8 @@ package DAL.Connectors;
 
 import BE.Event;
 import BE.SystemUser;
+import BLL.SystemUsers.ISystemUserManager;
+import BLL.SystemUsers.SystemUserManager;
 import DAL.EventDAO;
 import DAL.IEventDAO;
 import DAL.SystemUsers.ISystemUserDAO;
