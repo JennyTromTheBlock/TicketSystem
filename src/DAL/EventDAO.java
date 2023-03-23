@@ -6,6 +6,7 @@ import DAL.Connectors.SqlConnector;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class EventDAO implements IEventDAO {
@@ -67,9 +68,10 @@ public class EventDAO implements IEventDAO {
                 String eventName = rs.getString("EventName");
                 String description = rs.getString("EventDescription");
                 String location = rs.getString("EventLocation");
-                Date date = rs.getDate("EventDate");
+                Date date = rs.getTimestamp("EventDate");
                 int maxParticipant = rs.getInt("maxParticipant");
                 int price = rs.getInt("Price");
+                System.out.println(date);
 
                 Event event = new Event(id, eventName, description, location, date, maxParticipant, price);
                 allEvents.add(event);
@@ -80,6 +82,4 @@ public class EventDAO implements IEventDAO {
         }
         return allEvents;
     }
-
-
 }
