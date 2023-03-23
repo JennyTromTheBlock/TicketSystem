@@ -175,7 +175,10 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </VBox>
-            <Pane prefHeight="63.0" prefWidth="250.0" VBox.vgrow="ALWAYS" />
+            <Pane prefHeight="63.0" prefWidth="250.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Button layoutX="99.0" layoutY="78.0" mnemonicParsing="false" onAction="#handleTicket" text="Ticket" />
+               </children></Pane>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="540.0" prefHeight="50.0" prefWidth="200.0">
                <children>
                   <Label fx:id="createEvent" alignment="CENTER" onMouseClicked="#handleCreateEvent" prefHeight="50.0" prefWidth="170.0" text="Create event">

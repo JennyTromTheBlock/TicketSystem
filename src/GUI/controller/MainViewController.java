@@ -2,11 +2,14 @@ package GUI.controller;
 
 import BE.Event;
 import BLL.IEventManager;
-import BLL.eventManager;
 import GUI.models.EventModel;
-import javafx.collections.FXCollections;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfDocument;
+import com.itextpdf.text.pdf.PdfWriter;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -19,7 +22,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -29,12 +31,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
+
 
 public class MainViewController implements Initializable {
     public HBox topBar, searchHBox;
@@ -185,5 +186,17 @@ public class MainViewController implements Initializable {
 
         EventController controller = loader.getController();
         controller.setContent(event);
+    }
+
+    public void handleTicket(ActionEvent actionEvent) throws IOException, DocumentException {
+
+        String src = "resourses/temp.pdf";
+
+        PdfWriter writer = new PdfWriter(src);
+        PdfDocument pdf = new PdfDocument(writer);
+        Document document = new Document(pdf);
+        document.add(new Paragraph("Hello World!"));
+        document.close();
+
     }
 }
