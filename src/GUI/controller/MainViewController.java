@@ -43,7 +43,7 @@ public class MainViewController implements Initializable {
     public Label createEvent;
     public Label yourEvents;
     public BorderPane background;
-    public ImageView listViewImage, cardViewImage, calendarView,  searchButton;
+    public ImageView listViewImage, cardViewImage, calendarView,  searchButton, imageLogo;
     public VBox contentArea, myEventSideBar, upcomingEventSideBar, sidebar;
 
 
@@ -103,6 +103,9 @@ public class MainViewController implements Initializable {
 
         Image cardLogo = new Image("CardList.png");
         cardViewImage.setImage(cardLogo);
+
+        Image logo = new Image("EASYDVEST.png");
+        imageLogo.setImage(logo);
     }
 
     private void loadAllEvents() throws Exception {
