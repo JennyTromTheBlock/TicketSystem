@@ -127,8 +127,7 @@ public class UpdateEventController {
         eventNameField.setText(event.getEventName());
         descriptionField.setText(event.getDescription());
         locationField.setText(event.getLocation());
-        //TODO Fix this conversion
-        //dateField.setValue(event.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        dateField.setValue(event.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         priceField.setText(""+event.getPrice());
         maxTicketsField.setText(""+event.getMaxParticipant());
         timeField.setText(DateConverter.getTimeFromDate(event.getDate()));
