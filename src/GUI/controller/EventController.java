@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EventController implements Initializable {
+public class EventController extends BaseController implements Initializable {
     @FXML
     private Label labelEventName, labelEventDate, labelEventLocation, labelDescription, labelEventPrice, labelEventAttending, labelEventTickets;
     @FXML
@@ -71,7 +71,6 @@ public class EventController implements Initializable {
         stage.show();
 
         UpdateEventController controller = loader.getController();
-        controller.setEventModel(new EventModel());
         controller.setEvent(event);
     }
 }
