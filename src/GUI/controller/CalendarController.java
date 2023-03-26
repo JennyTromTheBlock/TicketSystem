@@ -12,6 +12,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.*;
 
@@ -125,12 +126,16 @@ public class CalendarController extends BaseController implements Initializable 
                 break;
             }
             //todo find better date format
-            Text text = new Text(calendarActivities.get(k).getEventName().substring(0,8) + ", " + calendarActivities.get(k).getDate().getHours() + ":" + calendarActivities.get(k).getDate().getMinutes());
+            Text text = null;
+            if(calendarActivities.get(k).getEventName().length() < 8){
+                text= new Text(calendarActivities.get(k).getEventName() + ", " + calendarActivities.get(k).getDate().getHours() + ":" + calendarActivities.get(k).getDate().getMinutes());
 
+            }else {
+                text = new Text(calendarActivities.get(k).getEventName().substring(0, 8) + ", " + calendarActivities.get(k).getDate().getHours() + ":" + calendarActivities.get(k).getDate().getMinutes());
+            }
             calendarActivityBox.getChildren().add(text);
             text.setOnMouseClicked(mouseEvent -> {
-                //On Text clicked
-                System.out.println(text.getText());
+                //activated when event is clicked in the calendar.
             });
         }
         calendarActivityBox.setTranslateY((rectangleHeight / 2) * 0.20);
@@ -144,7 +149,7 @@ public class CalendarController extends BaseController implements Initializable 
         Map<Integer, List<Event>> calendarActivityMap = new HashMap<>();
 
         for (Event activity: calendarActivities) {
-            int activityDate = activity.getDate().getMonth();
+            int activityDate = activity.getDate().toInstant().atZone(ZoneId.systemDefault()).getDayOfMonth();
             if(!calendarActivityMap.containsKey(activityDate)){
                 calendarActivityMap.put(activityDate, List.of(activity));
             } else {
