@@ -168,4 +168,18 @@ public class MainViewController extends BaseController implements Initializable 
         EventController controller = loader.getController();
         controller.setContent(event);
     }
+
+    public void calendarViewBtn(MouseEvent mouseEvent) {
+        //Load the new stage & view
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CalendarView.fxml"));
+        Parent root = null;
+
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        contentArea.getChildren().remove(1);
+        contentArea.getChildren().add(1, root);
+    }
 }
