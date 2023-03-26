@@ -182,4 +182,22 @@ public class MainViewController extends BaseController implements Initializable 
         contentArea.getChildren().remove(1);
         contentArea.getChildren().add(1, root);
     }
+
+
+    public void listViewBtn(MouseEvent mouseEvent) {
+        //sets all image symbols
+        createSymbolsForBtns();
+        createColumnBoard();
+
+        try {
+            loadAllEvents();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        //adds the tableView to scene
+        contentArea.getChildren().remove(1);
+        contentArea.getChildren().add(1, tableView);
+        tableViewEventHandlers();
+    }
 }
