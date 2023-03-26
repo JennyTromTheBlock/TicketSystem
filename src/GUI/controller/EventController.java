@@ -30,10 +30,10 @@ public class EventController extends BaseController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Load in icons
-        imageEventDate.setImage(new Image("callender.png"));
-        imageEventLocation.setImage(new Image("location.png"));
-        imageEventPrice.setImage(new Image("price.png"));
-        imageEventTicket.setImage(new Image("ticket.png"));
+        imageEventDate.setImage(new Image("symbols/callender.png"));
+        imageEventLocation.setImage(new Image("symbols/location.png"));
+        imageEventPrice.setImage(new Image("symbols/price.png"));
+        imageEventTicket.setImage(new Image("symbols/ticket.png"));
 
     }
 

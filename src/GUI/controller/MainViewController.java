@@ -30,14 +30,11 @@ public class MainViewController extends BaseController implements Initializable 
     public HBox topBar, searchHBox;
     public TextField textField;
     public Label createEvent;
-    public Label yourEvents;
     public BorderPane background;
-    public ImageView listViewImage, cardViewImage, calendarView,  searchButton, imageLogo;
-    public VBox contentArea, myEventSideBar, upcomingEventSideBar, sidebar;
-    public Label titleOfSelectedEvent;
-    public Label dateOfSelectedEvent;
-    public Label locationOfSelectedEvent;
-    public Label createSpecialTicketBtn;
+    public ImageView listViewImage, calendarView,  searchButton, imageLogo;
+    public VBox contentArea, sidebar;
+    public Label locationOfSelectedEvent, createSpecialTicketBtn, dateOfSelectedEvent, titleOfSelectedEvent;
+
     private TableView tableView;
     TableColumn<Event, String> column1, column2, column3, column4, column5;
 
@@ -83,16 +80,16 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     private void createSymbolsForBtns() {
-        Image searchSymbol = new Image("searchSymbol.png");
+        Image searchSymbol = new Image("symbols/searchSymbol.png");
         searchButton.setImage(searchSymbol);
 
-        Image calendarImage = new Image("callender.png");
+        Image calendarImage = new Image("symbols/callender.png");
         calendarView.setImage(calendarImage);
 
-        Image listViewLogo = new Image("listView.png");
+        Image listViewLogo = new Image("symbols/listView.png");
         listViewImage.setImage(listViewLogo);
 
-        Image logo = new Image("EASYDVEST.png");
+        Image logo = new Image("symbols/EASYDVEST.png");
         imageLogo.setImage(logo);
     }
 
