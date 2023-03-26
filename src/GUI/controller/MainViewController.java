@@ -1,13 +1,6 @@
 package GUI.controller;
 
 import BE.Event;
-import BLL.IEventManager;
-import BLL.eventManager;
-import GUI.models.EventModel;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -20,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -32,9 +24,6 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainViewController extends BaseController implements Initializable {
@@ -45,6 +34,10 @@ public class MainViewController extends BaseController implements Initializable 
     public BorderPane background;
     public ImageView listViewImage, cardViewImage, calendarView,  searchButton, imageLogo;
     public VBox contentArea, myEventSideBar, upcomingEventSideBar, sidebar;
+    public Label titleOfSelectedEvent;
+    public Label dateOfSelectedEvent;
+    public Label locationOfSelectedEvent;
+    public Label createSpecialTicketBtn;
     private TableView tableView;
     TableColumn<Event, String> column1, column2, column3, column4, column5;
 
@@ -62,8 +55,7 @@ public class MainViewController extends BaseController implements Initializable 
         }
 
         //adds the tableView to scene
-        contentArea.getChildren().add(tableView);
-
+        contentArea.getChildren().add(1, tableView);
         tableViewEventHandlers();
     }
 
@@ -76,11 +68,18 @@ public class MainViewController extends BaseController implements Initializable 
         });
         tableView.setOnMouseClicked(mouseEvent -> {
             if(mouseEvent.getButton().equals(MouseButton.PRIMARY) && tableView.getSelectionModel().getSelectedItem() != null){
+                handleViewEventInMain((Event) tableView.getSelectionModel().getSelectedItem());
                 if(mouseEvent.getClickCount()==2) {
                     handleViewEvent((Event) tableView.getSelectionModel().getSelectedItem());
                 }
             }
         });
+    }
+
+    private void handleViewEventInMain(Event event) {
+        titleOfSelectedEvent.setText(event.getEventName());
+        dateOfSelectedEvent.setText(String.valueOf(event.getDate()));
+        locationOfSelectedEvent.setText(event.getLocation());
     }
 
     private void createSymbolsForBtns() {
@@ -93,16 +92,12 @@ public class MainViewController extends BaseController implements Initializable 
         Image listViewLogo = new Image("listView.png");
         listViewImage.setImage(listViewLogo);
 
-        Image cardLogo = new Image("CardList.png");
-        cardViewImage.setImage(cardLogo);
-
         Image logo = new Image("EASYDVEST.png");
         imageLogo.setImage(logo);
     }
 
     private void loadAllEvents() throws Exception {
         createColumnBoard();
-
         tableView.setItems(getModelsHandler().getEventModel().getObservableEvent());
     }
 
@@ -135,7 +130,6 @@ public class MainViewController extends BaseController implements Initializable 
                 new TableColumn<>("date");
         column5.setCellValueFactory(
                 new PropertyValueFactory<>("date"));
-
         //adds all columns to tableView
         tableView.getColumns().addAll(column1, column2, column3, column4, column5);
     }
@@ -158,7 +152,6 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     public void handleViewEvent(Event event) {
-
         //Load the new stage & view
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/EventView.fxml"));
         Parent root = null;
