@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane fx:id="background" prefHeight="790.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.MainViewController">
+<BorderPane fx:id="background" prefHeight="790.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.MainViewController">
    <top>
       <HBox fx:id="topBar" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER_LEFT">
          <children>
@@ -22,6 +16,16 @@
                </HBox.margin>
             </ImageView>
             <Separator maxHeight="-Infinity" orientation="VERTICAL" prefHeight="36.0" />
+            <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="139.0" text="Filter" />
+            <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="50.0" spacing="15.0">
+               <children>
+                  <ImageView fx:id="calendarView" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="listViewImage" fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </HBox>
             <Pane prefHeight="60.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
             <HBox fx:id="searchHBox" alignment="CENTER" maxHeight="-Infinity" prefHeight="35.0" prefWidth="290.0" spacing="5.0">
                <children>
@@ -44,89 +48,31 @@
          </children>
       </HBox>
    </top>
-   <left>
-      <VBox fx:id="sidebar" prefHeight="200.0" prefWidth="250.0" BorderPane.alignment="CENTER">
+   <center>
+      <VBox fx:id="contentArea" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="1065.0">
+               <children>
+                  <Pane prefHeight="83.0" prefWidth="10.0" HBox.hgrow="ALWAYS" />
+               </children></HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets left="15.0" right="15.0" top="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <right>
+      <VBox fx:id="sidebar" prefHeight="730.0" prefWidth="394.0" BorderPane.alignment="CENTER">
          <children>
             <Separator prefWidth="200.0">
                <VBox.margin>
                   <Insets bottom="65.0" />
                </VBox.margin></Separator>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="50.0" prefWidth="170.0" text="Home">
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Berlin Sans FB" size="16.0" />
-                     </font>
+            <Label fx:id="titleOfSelectedEvent" alignment="CENTER" prefHeight="50.0" prefWidth="422.0" text="Title">
+               <font>
+                  <Font name="Berlin Sans FB" size="16.0" />
+               </font>
                   </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="50.0" prefWidth="170.0" text="My events">
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Berlin Sans FB" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="50.0" prefWidth="170.0" text="Upcoming events">
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Berlin Sans FB" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="50.0" prefWidth="170.0" text="All events">
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Berlin Sans FB" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="50.0" prefWidth="170.0" text="Special tickets">
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Berlin Sans FB" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <VBox fx:id="vBoxAdmin">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="50.0" prefWidth="170.0" text="Users">
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font name="Berlin Sans FB" size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
             <Pane prefHeight="63.0" prefWidth="250.0" VBox.vgrow="ALWAYS" />
             <HBox alignment="CENTER" layoutX="10.0" layoutY="540.0" prefHeight="50.0" prefWidth="200.0">
                <children>
@@ -143,29 +89,11 @@
                   <Insets bottom="15.0" />
                </VBox.margin>
             </HBox>
+            <Label alignment="CENTER" layoutX="10.0" layoutY="78.0" prefHeight="50.0" prefWidth="422.0" text="Title">
+               <font>
+                  <Font name="Berlin Sans FB" size="16.0" />
+               </font>
+            </Label>
          </children></VBox>
-   </left>
-   <center>
-      <VBox fx:id="contentArea" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="1065.0">
-               <children>
-                  <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="139.0" text="Filter" />
-                  <Pane prefHeight="83.0" prefWidth="10.0" HBox.hgrow="ALWAYS" />
-                  <HBox alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="282.0" spacing="15.0">
-                     <children>
-                        <ImageView fx:id="calendarView" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="listViewImage" fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="cardViewImage" fitHeight="40.0" fitWidth="40.0" layoutX="85.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin></HBox>
-               </children></HBox>
-         </children>
-         <BorderPane.margin>
-            <Insets left="15.0" right="15.0" top="10.0" />
-         </BorderPane.margin>
-      </VBox>
-   </center>
+   </right>
 </BorderPane>
