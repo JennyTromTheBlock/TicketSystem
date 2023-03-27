@@ -1,14 +1,12 @@
 package GUI.controller;
 
 import BE.Event;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,23 +25,30 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainViewController extends BaseController implements Initializable {
-    public HBox topBar, searchHBox;
-    public TextField textField;
-    public Label createEvent;
-    public BorderPane background;
-    public ImageView listViewImage, calendarView,  searchButton, imageLogo;
-    public VBox contentArea, sidebar;
-    public Label locationOfSelectedEvent, createSpecialTicketBtn, dateOfSelectedEvent, titleOfSelectedEvent;
-
-    private TableView tableView;
-    TableColumn<Event, String> column1, column2, column3, column4, column5;
+    @FXML
+    private HBox topBar, hBoxSearch;
+    @FXML
+    private TextField txtSearch;
+    @FXML
+    private BorderPane background;
+    @FXML
+    private ImageView ivList, ivCalendar, ivSearchBtn, ivLogo;
+    @FXML
+    private VBox contentArea, sidebar;
+    @FXML
+    private TableView tvEvents;
+    @FXML
+    private TableColumn tcTitle, tcLocation, tcMaxParticipants, tcPrice, tcDate;
+    @FXML
+    private Label lblLocation, lblDate, lblTitle, lblPrice, lblTicketsLeft;
+    @FXML
+    private Button btnCreateEvent, btnSpecialTicket;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        //sets all image symbols
-        createSymbolsForBtns();
-        createColumnBoard();
+        loadImages();
+        loadTableColumns();
 
         try {
             loadAllEvents();
@@ -51,120 +56,74 @@ public class MainViewController extends BaseController implements Initializable 
             throw new RuntimeException(e);
         }
 
-        //adds the tableView to scene
-        contentArea.getChildren().add(1, tableView);
         tableViewEventHandlers();
     }
 
+    /**
+     * Adds event handlers to the TableView that checks for interaction with an event
+     */
     private void tableViewEventHandlers() {
-        //Opens event info on Enter or double click
-        tableView.setOnKeyPressed(keyEvent -> {
-            if(keyEvent.getCode().equals(KeyCode.ENTER) && tableView.getSelectionModel().getSelectedItem() != null) {
-                handleViewEvent((Event) tableView.getSelectionModel().getSelectedItem());
+        //Opens event info on Enter
+        tvEvents.setOnKeyPressed(keyEvent -> {
+            if(keyEvent.getCode().equals(KeyCode.ENTER) && tvEvents.getSelectionModel().getSelectedItem() != null) {
+                handleViewEvent((Event) tvEvents.getSelectionModel().getSelectedItem());
             }
         });
-        tableView.setOnMouseClicked(mouseEvent -> {
-            if(mouseEvent.getButton().equals(MouseButton.PRIMARY) && tableView.getSelectionModel().getSelectedItem() != null){
-                handleViewEventInMain((Event) tableView.getSelectionModel().getSelectedItem());
+
+        //Opens event info on double click
+        tvEvents.setOnMouseClicked(mouseEvent -> {
+            if(mouseEvent.getButton().equals(MouseButton.PRIMARY) && tvEvents.getSelectionModel().getSelectedItem() != null){
                 if(mouseEvent.getClickCount()==2) {
-                    handleViewEvent((Event) tableView.getSelectionModel().getSelectedItem());
+                    handleViewEvent((Event) tvEvents.getSelectionModel().getSelectedItem());
                 }
             }
         });
+
+        //Listens for changes in selected event (fx. when switching between events with Up/Down key)
+        tvEvents.getSelectionModel().selectedItemProperty().addListener((obs, o, n) ->
+                handleViewEventInMain((Event) tvEvents.getSelectionModel().getSelectedItem()));
     }
 
+    /**
+     * Shows preview of event information in the right sidebar
+     * @param event, the selected event
+     */
     public void handleViewEventInMain(Event event) {
-        titleOfSelectedEvent.setText(event.getEventName());
-        dateOfSelectedEvent.setText(String.valueOf(event.getDate()));
-        locationOfSelectedEvent.setText(event.getLocation());
+        lblTitle.setText(event.getEventName());
+        lblDate.setText(String.valueOf(event.getDate()));
+        lblLocation.setText(event.getLocation());
+        lblPrice.setText(event.getPrice() + " DKK");
+        lblTicketsLeft.setText(event.getMaxParticipant() + " tickets available"); //TODO subtract sold tickets from max part.
     }
 
-    private void createSymbolsForBtns() {
-        Image searchSymbol = new Image("symbols/searchSymbol.png");
-        searchButton.setImage(searchSymbol);
-
-        Image calendarImage = new Image("symbols/callender.png");
-        calendarView.setImage(calendarImage);
-
-        Image listViewLogo = new Image("symbols/listView.png");
-        listViewImage.setImage(listViewLogo);
-
-        Image logo = new Image("symbols/EASYDVEST.png");
-        imageLogo.setImage(logo);
+    private void loadImages() {
+        ivSearchBtn.setImage(new Image("symbols/searchSymbol.png"));
+        ivCalendar.setImage(new Image("symbols/callender.png"));
+        ivList.setImage(new Image("symbols/listView.png"));
+        ivLogo.setImage(new Image("symbols/EASYDVEST.png"));
     }
 
     private void loadAllEvents() throws Exception {
-        createColumnBoard();
-        tableView.setItems(getModelsHandler().getEventModel().getObservableEvent());
+        tvEvents.setItems(getModelsHandler().getEventModel().getObservableEvent());
     }
 
-    private void createColumnBoard() {
-        tableView = new TableView();
-        tableView.setPrefHeight(800);
-
-        //create columns
-        column1 =
-                new TableColumn<>("Title");
-        column1.setCellValueFactory(
-                new PropertyValueFactory<>("eventName"));
-
-        column2 =
-                new TableColumn<>("location");
-        column2.setCellValueFactory(
-                new PropertyValueFactory<>("location"));
-
-        column3 =
-                new TableColumn<>("Max participants");
-        column3.setCellValueFactory(
-                new PropertyValueFactory<>("maxParticipant"));
-
-        column4 =
-                new TableColumn<>("Price");
-        column4.setCellValueFactory(
-                new PropertyValueFactory<>("price"));
-
-        column5 =
-                new TableColumn<>("date");
-        column5.setCellValueFactory(
-                new PropertyValueFactory<>("date"));
-        //adds all columns to tableView
-        tableView.getColumns().addAll(column1, column2, column3, column4, column5);
+    /**
+     * Extracts the value from a given TableView row item, using the given property name.
+     */
+    private void loadTableColumns() {
+        tcTitle.setCellValueFactory(new PropertyValueFactory<>("eventName"));
+        tcLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
+        tcMaxParticipants.setCellValueFactory(new PropertyValueFactory<>("maxParticipant"));
+        tcPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        tcDate.setCellValueFactory(new PropertyValueFactory<>("date"));
     }
 
-    public void handleCreateEvent(MouseEvent mouseEvent) {
-        //Load the new stage & view
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateEvent.fxml"));
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        Stage stage = new Stage();
-        stage.setTitle("Add new event");
-        stage.setScene(new Scene(root));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.show();
+    public void handleCreateEvent() {
+        openStage("/GUI/View/CreateEvent.fxml");
     }
 
     public void handleViewEvent(Event event) {
-        //Load the new stage & view
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/EventView.fxml"));
-        Parent root = null;
-
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        Stage stage = new Stage();
-        stage.setTitle("Event information");
-        stage.setScene(new Scene(root));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.show();
-
+        FXMLLoader loader = openStage("/GUI/View/EventView.fxml");
         EventController controller = loader.getController();
         controller.setContent(event);
     }
@@ -189,8 +148,8 @@ public class MainViewController extends BaseController implements Initializable 
 
     public void listViewBtn(MouseEvent mouseEvent) {
         //sets all image symbols
-        createSymbolsForBtns();
-        createColumnBoard();
+        loadImages();
+        loadTableColumns();
 
         try {
             loadAllEvents();
@@ -200,7 +159,7 @@ public class MainViewController extends BaseController implements Initializable 
 
         //adds the tableView to scene
         contentArea.getChildren().remove(1);
-        contentArea.getChildren().add(1, tableView);
+        contentArea.getChildren().add(1, tvEvents);
         tableViewEventHandlers();
     }
 }

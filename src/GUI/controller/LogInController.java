@@ -35,7 +35,6 @@ public class LogInController implements Initializable {
             throw new RuntimeException(e);
         }
         Stage stage = new Stage();
-        stage.setTitle("Add new event");
         stage.setScene(new Scene(root));
         stage.getScene().getStylesheets().add(getClass().getResource("/GUI/css/Style.css").toExternalForm());
         stage.initModality(Modality.APPLICATION_MODAL);

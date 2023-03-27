@@ -3,13 +3,19 @@
     -fx-background-color: #fff;
 }
 
-#textField{
+#txtSearch{
     -fx-background-color: rgba(0,0,0,0);
 }
 
-#searchHBox, #yourEvents, #allEvents, #createEvent, #createSpecialTicketBtn{
+#hBoxSearch {
     -fx-border-radius: 50;
     -fx-border-color: #D7D7D7;
+}
+
+#btnCreateEvent, #btnSpecialTicket{
+    -fx-border-radius: 50;
+    -fx-border-color: #D7D7D7;
+    -fx-background-radius: 50;
 }
 
 #sidebar{
