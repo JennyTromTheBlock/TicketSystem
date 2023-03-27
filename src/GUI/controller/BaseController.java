@@ -15,6 +15,11 @@ public abstract class BaseController {
         return ModelsHandler.getInstance();
     }
 
+    /**
+     * Opens a new window
+     * @param fxmlPath, the path of the FXML to load
+     * @return FXMLLoader, in case a handle to the new controller is needed
+     */
     public FXMLLoader openStage(String fxmlPath) {
         //Load the new stage & view
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
