@@ -30,6 +30,8 @@ public class CalendarController extends BaseController implements Initializable 
     @FXML
     private FlowPane calendar;
 
+    private MainViewController mainViewController;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dateFocus = ZonedDateTime.now();
@@ -39,6 +41,10 @@ public class CalendarController extends BaseController implements Initializable 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void setMainViewController(MainViewController main){
+        this.mainViewController = main;
     }
 
     @FXML
@@ -116,6 +122,7 @@ public class CalendarController extends BaseController implements Initializable 
     private void createCalendarActivity(List<Event> calendarActivities, double rectangleHeight, double rectangleWidth, StackPane stackPane) {
         VBox calendarActivityBox = new VBox();
         for (int k = 0; k < calendarActivities.size(); k++) {
+            Event event = calendarActivities.get(k);
             if(k >= 2) {
                 Text moreActivities = new Text("...");
                 calendarActivityBox.getChildren().add(moreActivities);
@@ -135,7 +142,10 @@ public class CalendarController extends BaseController implements Initializable 
             }
             calendarActivityBox.getChildren().add(text);
             text.setOnMouseClicked(mouseEvent -> {
-                //activated when event is clicked in the calendar.
+                mainViewController.handleViewEventInMain(event);
+                if(mouseEvent.getClickCount()==2) {
+                    mainViewController.handleViewEvent(event);
+                }
             });
         }
         calendarActivityBox.setTranslateY((rectangleHeight / 2) * 0.20);

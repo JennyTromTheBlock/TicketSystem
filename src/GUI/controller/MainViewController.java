@@ -73,7 +73,7 @@ public class MainViewController extends BaseController implements Initializable 
         });
     }
 
-    private void handleViewEventInMain(Event event) {
+    public void handleViewEventInMain(Event event) {
         titleOfSelectedEvent.setText(event.getEventName());
         dateOfSelectedEvent.setText(String.valueOf(event.getDate()));
         locationOfSelectedEvent.setText(event.getLocation());
@@ -179,6 +179,9 @@ public class MainViewController extends BaseController implements Initializable 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        CalendarController controller = loader.getController();
+        controller.setMainViewController(this);
         contentArea.getChildren().remove(1);
         contentArea.getChildren().add(1, root);
     }
