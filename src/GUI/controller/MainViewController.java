@@ -115,11 +115,11 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     public void handleCreateEvent() {
-        openStage("/GUI/View/CreateEvent.fxml");
+        openStage("/GUI/View/CreateEvent.fxml", "");
     }
 
     public void handleViewEvent(Event event) {
-        FXMLLoader loader = openStage("/GUI/View/EventView.fxml");
+        FXMLLoader loader = openStage("/GUI/View/EventView.fxml", "");
         EventController controller = loader.getController();
         controller.setContent(event);
     }

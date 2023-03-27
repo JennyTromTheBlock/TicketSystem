@@ -13,24 +13,24 @@
    <children>
       <VBox layoutX="70.0" prefHeight="430.0" prefWidth="517.0">
          <children>
-            <Label fx:id="labelEventName" prefHeight="100.0" prefWidth="657.0" text="Event name" wrapText="true">
+            <Label fx:id="lblEventName" prefHeight="100.0" prefWidth="657.0" text="Event name" wrapText="true">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
             <HBox>
                <children>
-                  <Label fx:id="labelEventDate" text="Date &amp; time">
+                  <Label fx:id="lblEventDate" text="Date &amp; time">
                      <graphic>
-                        <ImageView fx:id="imageEventDate" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="ivDate" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelEventLocation" text="Location">
+                  <Label fx:id="lblEventLocation" text="Location">
                      <graphic>
-                        <ImageView fx:id="imageEventLocation" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="ivLocation" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                      <font>
                         <Font size="16.0" />
@@ -38,13 +38,13 @@
                   </Label>
                </children>
             </HBox>
-            <Label fx:id="labelDescription" prefHeight="100.0" prefWidth="517.0" text="Description">
+            <Label fx:id="lblDescription" prefHeight="100.0" prefWidth="517.0" text="Description">
                <font>
                   <Font size="16.0" />
                </font></Label>
-            <Label fx:id="labelEventPrice" text="Price">
+            <Label fx:id="lblEventPrice" text="Price">
                <graphic>
-                  <ImageView fx:id="imageEventPrice" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="ivPrice" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
                <font>
                   <Font size="16.0" />
@@ -52,9 +52,9 @@
             </Label>
             <HBox>
                <children>
-                  <Label fx:id="labelEventTickets" text="Max. tickets">
+                  <Label fx:id="lblEventTickets" text="Max. tickets">
                      <graphic>
-                        <ImageView fx:id="imageEventTicket" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="ivTicket" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                      <font>
                         <Font size="16.0" />

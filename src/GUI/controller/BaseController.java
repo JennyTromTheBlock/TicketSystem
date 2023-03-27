@@ -20,7 +20,7 @@ public abstract class BaseController {
      * @param fxmlPath, the path of the FXML to load
      * @return FXMLLoader, in case a handle to the new controller is needed
      */
-    public FXMLLoader openStage(String fxmlPath) {
+    public FXMLLoader openStage(String fxmlPath, String sceneTitle) {
         //Load the new stage & view
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Parent root = null;
@@ -31,6 +31,7 @@ public abstract class BaseController {
         }
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+        stage.setTitle(sceneTitle);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
