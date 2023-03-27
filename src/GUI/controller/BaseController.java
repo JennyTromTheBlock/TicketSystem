@@ -18,6 +18,7 @@ public abstract class BaseController {
     /**
      * Opens a new window
      * @param fxmlPath, the path of the FXML to load
+     * @param sceneTitle, the title for the scene
      * @return FXMLLoader, in case a handle to the new controller is needed
      */
     public FXMLLoader openStage(String fxmlPath, String sceneTitle) {
