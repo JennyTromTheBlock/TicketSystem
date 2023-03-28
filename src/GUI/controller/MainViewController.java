@@ -166,7 +166,7 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     public void calendarViewBtn(MouseEvent mouseEvent) {
-        // TODO Can't this be moved into a method in the BaseController?
+        // TODO Can't this be moved into a method in the BaseController?  -- nope, it must set the content in the an VBox in MainView.
         // TODO Seems very plausible for us to need to to this again
         //Load the new stage & view
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CalendarView.fxml"));
@@ -180,20 +180,20 @@ public class MainViewController extends BaseController implements Initializable 
 
         CalendarController controller = loader.getController();
         controller.setMainViewController(this);
+        setNodeInMainView(root);
+    }
+
+    private void setNodeInMainView(Parent root) {
         contentArea.getChildren().remove(1);
         contentArea.getChildren().add(1, root);
     }
 
-
     public void listViewBtn(MouseEvent mouseEvent) {
         loadImages();
         loadTableColumns();
-
         loadAllEvents();
-
         //adds the tableView to scene
-        contentArea.getChildren().remove(1);
-        contentArea.getChildren().add(1, tvEvents);
+        setNodeInMainView(tvEvents);
         tableViewEventHandlers();
     }
 }
