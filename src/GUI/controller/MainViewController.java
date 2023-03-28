@@ -1,6 +1,7 @@
 package GUI.controller;
 
 import BE.Event;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -128,12 +129,14 @@ public class MainViewController extends BaseController implements Initializable 
         lblTicketsLeft.setText(event.getMaxParticipant() + " tickets available"); //TODO subtract sold tickets from max part.
     }
 
+
     private void loadImages() {
         ivSearchBtn.setImage(new Image("symbols/searchSymbol.png"));
         ivCalendar.setImage(new Image("symbols/callender.png"));
         ivList.setImage(new Image("symbols/listView.png"));
         ivLogo.setImage(new Image("symbols/EASYDVEST.png"));
     }
+
 
     private void loadAllEvents() {
         try {
@@ -163,6 +166,10 @@ public class MainViewController extends BaseController implements Initializable 
         FXMLLoader loader = openStage("/GUI/View/EventView.fxml", "");
         EventController controller = loader.getController();
         controller.setContent(event);
+    }
+
+    public void handleCreateTicket() {
+        openStage("/GUI/view/CreateTicketView.fxml", "");
     }
 
     public void calendarViewBtn(MouseEvent mouseEvent) {
@@ -195,5 +202,9 @@ public class MainViewController extends BaseController implements Initializable 
         //adds the tableView to scene
         setNodeInMainView(tvEvents);
         tableViewEventHandlers();
+    }
+
+
+    public void handleCancleTicket(ActionEvent actionEvent) {
     }
 }
