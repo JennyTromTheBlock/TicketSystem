@@ -17,7 +17,6 @@ public class EventController extends BaseController implements Initializable {
     private Label lblEventName, lblEventDate, lblEventLocation, lblDescription, lblEventPrice, lblEventAttending, lblEventTickets;
     @FXML
     private ImageView ivDate, ivLocation, ivPrice, ivTicket;
-
     private Event event;
 
     @Override
@@ -47,7 +46,7 @@ public class EventController extends BaseController implements Initializable {
         stage.close();
     }
 
-    public void handleEditEvent() throws Exception {
+    public void handleEditEvent() {
         FXMLLoader loader = openStage("/GUI/View/UpdateEventView.fxml", "Edit event");
         UpdateEventController controller = loader.getController();
         controller.setEvent(event);
