@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class MainViewController extends BaseController implements Initializable {
@@ -32,9 +33,13 @@ public class MainViewController extends BaseController implements Initializable 
     @FXML
     private VBox contentArea, sidebar;
     @FXML
-    private TableView tvEvents;
+    private TableView<Event> tvEvents;
     @FXML
-    private TableColumn tcTitle, tcLocation, tcMaxParticipants, tcPrice, tcDate;
+    private TableColumn<Event, String> tcTitle, tcLocation;
+    @FXML
+    private TableColumn<Event, Integer> tcMaxParticipants, tcPrice;
+    @FXML
+    private TableColumn<Event, Date> tcDate;
     @FXML
     private Label lblLocation, lblDate, lblTitle, lblPrice, lblTicketsLeft;
     @FXML
@@ -46,11 +51,7 @@ public class MainViewController extends BaseController implements Initializable 
         loadImages();
         loadTableColumns();
 
-        try {
-            loadAllEvents();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        loadAllEvents();
 
         tableViewEventHandlers();
     }
@@ -59,30 +60,62 @@ public class MainViewController extends BaseController implements Initializable 
      * Adds event handlers to the TableView that checks for interaction with an event
      */
     private void tableViewEventHandlers() {
-        //Opens event info on Enter
-        tvEvents.setOnKeyPressed(keyEvent -> {
-            if(keyEvent.getCode().equals(KeyCode.ENTER) && tvEvents.getSelectionModel().getSelectedItem() != null) {
-                handleViewEvent((Event) tvEvents.getSelectionModel().getSelectedItem());
-            }
-        });
+        eventInfoOnEnter();
 
         //Opens event info on double click
+        int timesToClick = 2;
+        eventInfoOnClick(timesToClick);
+
+        selectedEventInfoInSidebar();
+    }
+
+    /**
+     * Listens for changes in selected event (fx. when switching between events with Up/Down key)
+     */
+    private void selectedEventInfoInSidebar() {
+        tvEvents.getSelectionModel().selectedItemProperty().addListener((obs, o, n) ->
+                handleViewEventInMain(tvEvents.getSelectionModel().getSelectedItem()));
+    }
+
+    /**
+     * Opens event info if the left mouse button is clicked X amount of times
+     * @param timesToClick The times the left mouse button should be clicked
+     */
+    private void eventInfoOnClick(int timesToClick) {
         tvEvents.setOnMouseClicked(mouseEvent -> {
-            if(mouseEvent.getButton().equals(MouseButton.PRIMARY) && tvEvents.getSelectionModel().getSelectedItem() != null){
-                if(mouseEvent.getClickCount()==2) {
-                    handleViewEvent((Event) tvEvents.getSelectionModel().getSelectedItem());
-                }
+
+            boolean isLeftMouseClick = mouseEvent.getButton().equals(MouseButton.PRIMARY);
+            boolean selectedItemExists = isSelectedItemInTableView(tvEvents);
+            boolean correctClickCount = mouseEvent.getClickCount() == timesToClick;
+
+            if(isLeftMouseClick && selectedItemExists && correctClickCount){
+                handleViewEvent(tvEvents.getSelectionModel().getSelectedItem());
             }
         });
+    }
 
-        //Listens for changes in selected event (fx. when switching between events with Up/Down key)
-        tvEvents.getSelectionModel().selectedItemProperty().addListener((obs, o, n) ->
-                handleViewEventInMain((Event) tvEvents.getSelectionModel().getSelectedItem()));
+    /**
+     * Opens event info if the Enter key is pressed
+     */
+    private void eventInfoOnEnter() {
+        tvEvents.setOnKeyPressed(keyEvent -> {
+
+            boolean keyEqualsEnter = keyEvent.getCode().equals(KeyCode.ENTER);
+            boolean selectedItemExists = isSelectedItemInTableView(tvEvents);
+
+            if(keyEqualsEnter && selectedItemExists) {
+                handleViewEvent(tvEvents.getSelectionModel().getSelectedItem());
+            }
+        });
+    }
+
+    private boolean isSelectedItemInTableView(TableView<?> tableView) {
+        return tableView.getSelectionModel().getSelectedItem() != null;
     }
 
     /**
      * Shows preview of event information in the right sidebar
-     * @param event, the selected event
+     * @param event to display
      */
     public void handleViewEventInMain(Event event) {
         lblTitle.setText(event.getEventName());
@@ -99,8 +132,13 @@ public class MainViewController extends BaseController implements Initializable 
         ivLogo.setImage(new Image("symbols/EASYDVEST.png"));
     }
 
-    private void loadAllEvents() throws Exception {
-        tvEvents.setItems(getModelsHandler().getEventModel().getObservableEvent());
+    private void loadAllEvents() {
+        try {
+            tvEvents.setItems(getModelsHandler().getEventModel().getObservableEvent());
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -125,9 +163,11 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     public void calendarViewBtn(MouseEvent mouseEvent) {
+        // TODO Can't this be moved into a method in the BaseController?
+        // TODO Seems very plausible for us to need to to this again
         //Load the new stage & view
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CalendarView.fxml"));
-        Parent root = null;
+        Parent root;
 
         try {
             root = loader.load();
@@ -143,15 +183,10 @@ public class MainViewController extends BaseController implements Initializable 
 
 
     public void listViewBtn(MouseEvent mouseEvent) {
-        //sets all image symbols
         loadImages();
         loadTableColumns();
 
-        try {
-            loadAllEvents();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        loadAllEvents();
 
         //adds the tableView to scene
         contentArea.getChildren().remove(1);
