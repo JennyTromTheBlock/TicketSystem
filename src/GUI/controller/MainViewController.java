@@ -74,7 +74,7 @@ public class MainViewController extends BaseController implements Initializable 
      */
     private void selectedEventInfoInSidebar() {
         tvEvents.getSelectionModel().selectedItemProperty().addListener((obs, o, n) -> {
-            if (n != null) {
+            if (isSelectedItemInTableView(tvEvents)) {
                 handleViewEventInMain(tvEvents.getSelectionModel().getSelectedItem());
             }
         });
