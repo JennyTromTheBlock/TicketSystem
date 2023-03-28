@@ -5,25 +5,47 @@ import javafx.scene.control.Label;
 
 import java.util.List;
 
-public class CalendarField{
+public class CalendarField extends BaseController{
     public Label header;
     public Label lblFirstEvent;
     public Label lblSecondEvent;
     public Label lblMoreEvents;
 
-    Event first;
-    Event second;
+    private MainViewController  mainController;
+
 
     public void setDate(String header){
         this.header.setText(header);
     }
 
     public void setEvent(List<Event> events){
-        for(int i = 0; events.size() > i; i++ ){
-            if(i == 0){
-                lblFirstEvent.setText(createEventString(events.get(i)));
+        try {
+            mainController = loadMainViewHandler().getController();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-            } else if (i == 1) lblSecondEvent.setText(createEventString(events.get(i)));
+        for(int i = 0; events.size() > i; i++ ){
+            Event event = events.get(i);
+            if(i == 0){
+
+                lblFirstEvent.setText(createEventString(event));
+                lblFirstEvent.setOnMouseClicked(mouseEvent -> {
+                    mainController.handleViewEventInMain(event);
+                    if(mouseEvent.getClickCount()==2) {
+                        mainController.handleViewEvent(event);
+                    }
+                });
+            } else if (i == 1) {
+
+                lblSecondEvent.setText(createEventString(events.get(i)));
+                lblSecondEvent.setOnMouseClicked(mouseEvent -> {
+                    mainController.handleViewEventInMain(event);
+                    if(mouseEvent.getClickCount()==2) {
+                        mainController.handleViewEvent(event);
+                    }
+                });
+            }
 
             else {
                 lblMoreEvents.setText("more events..");
@@ -41,6 +63,7 @@ public class CalendarField{
 
         return result;
     }
+
 
 
 }

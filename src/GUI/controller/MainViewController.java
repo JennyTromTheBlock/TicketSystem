@@ -179,7 +179,6 @@ public class MainViewController extends BaseController implements Initializable 
         }
 
         CalendarController controller = loader.getController();
-        controller.setMainViewController(this);
         setNodeInMainView(root);
     }
 
