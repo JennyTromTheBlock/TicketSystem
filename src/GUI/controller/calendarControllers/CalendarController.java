@@ -1,6 +1,8 @@
-package GUI.controller;
+package GUI.controller.calendarControllers;
 
 import BE.Event;
+import GUI.controller.BaseController;
+import GUI.controller.MainViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,10 +41,6 @@ public class CalendarController extends BaseController implements Initializable 
         }
     }
 
-    public void setMainViewController(MainViewController main){
-        this.mainViewController = main;
-    }
-
     @FXML
     void backOneMonth(ActionEvent event) throws Exception {
         dateFocus = dateFocus.minusMonths(1);
@@ -79,7 +77,7 @@ public class CalendarController extends BaseController implements Initializable 
     }
 
     private void createCalendarField(int j, int i, int dateOffset, int monthMaxDate, Map<Integer, List<Event>> calendarActivityMap) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CalendarField.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/calendarViews/CalendarField.fxml"));
         VBox calendarBox;
         try {
             calendarBox = loader.load();

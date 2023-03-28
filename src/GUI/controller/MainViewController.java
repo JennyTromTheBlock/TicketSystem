@@ -1,6 +1,8 @@
 package GUI.controller;
 
 import BE.Event;
+import GUI.controller.calendarControllers.CalendarController;
+import GUI.controller.eventControllers.EventController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -169,7 +171,7 @@ public class MainViewController extends BaseController implements Initializable 
         // TODO Can't this be moved into a method in the BaseController?  -- nope, it must set the content in the an VBox in MainView.
         // TODO Seems very plausible for us to need to to this again
         //Load the new stage & view
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CalendarView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/calendarViews/CalendarView.fxml"));
         Parent root;
 
         try {

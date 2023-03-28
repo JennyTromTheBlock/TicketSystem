@@ -1,6 +1,7 @@
-package GUI.controller;
+package GUI.controller.eventControllers;
 
 import BE.Event;
+import GUI.controller.BaseController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

@@ -1,17 +1,19 @@
-package GUI.controller;
+package GUI.controller.calendarControllers;
 
 import BE.Event;
+import GUI.controller.BaseController;
+import GUI.controller.MainViewController;
 import javafx.scene.control.Label;
 
 import java.util.List;
 
-public class CalendarField extends BaseController{
+public class CalendarField extends BaseController {
     public Label header;
     public Label lblFirstEvent;
     public Label lblSecondEvent;
     public Label lblMoreEvents;
 
-    private MainViewController  mainController;
+    private MainViewController mainController;
 
 
     public void setDate(String header){
@@ -63,7 +65,4 @@ public class CalendarField extends BaseController{
 
         return result;
     }
-
-
-
 }

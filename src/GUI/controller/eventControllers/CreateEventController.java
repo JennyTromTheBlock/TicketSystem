@@ -1,6 +1,7 @@
-package GUI.controller;
+package GUI.controller.eventControllers;
 
 import BE.Event;
+import GUI.controller.BaseController;
 import GUI.models.EventModel;
 import GUI.util.DateConverter;
 import javafx.event.ActionEvent;

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="525.0" prefWidth="878.0" style="-fx-background-color: #f2fafc;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.CalendarController">
+<AnchorPane prefHeight="525.0" prefWidth="878.0" style="-fx-background-color: #f2fafc;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.calendarControllers.CalendarController">
     <FlowPane fx:id="calendar" layoutX="63.0" layoutY="110.0" prefHeight="417.0" prefWidth="815.0" />
     <HBox alignment="CENTER" layoutX="229.0" layoutY="14.0" prefHeight="44.0" prefWidth="419.0" spacing="5.0">
         <children>

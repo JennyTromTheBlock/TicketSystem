@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" fillWidth="false" prefHeight="20.0" prefWidth="107.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.CalendarField">
+<VBox alignment="CENTER" fillWidth="false" prefHeight="20.0" prefWidth="107.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.calendarControllers.CalendarField">
    <children>
       <Label fx:id="header" alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="127.0" />
       <Label fx:id="lblFirstEvent" alignment="CENTER" prefHeight="17.0" prefWidth="90.0">
