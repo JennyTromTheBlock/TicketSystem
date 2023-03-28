@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="590.0" prefWidth="800.0" style="-fx-background-color: #f2fafc;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.CalendarController">
-    <FlowPane fx:id="calendar" layoutY="96.0" prefHeight="494.0" prefWidth="815.0" />
+    <FlowPane fx:id="calendar" layoutX="63.0" layoutY="110.0" prefHeight="494.0" prefWidth="815.0" />
     <HBox alignment="CENTER" layoutX="164.0" layoutY="8.0" prefHeight="44.0" prefWidth="419.0" spacing="5.0">
         <children>
             <Button mnemonicParsing="false" onAction="#backOneMonth" text="&lt;" />
@@ -22,16 +23,19 @@
             <Button mnemonicParsing="false" onAction="#forwardOneMonth" text="&gt;" />
         </children>
     </HBox>
-    <HBox alignment="CENTER" fillHeight="false" layoutX="15.0" layoutY="58.0" prefHeight="44.0" prefWidth="815.0" spacing="11.0" AnchorPane.bottomAnchor="488.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="58.39999999999998">
+    <HBox alignment="CENTER_LEFT" fillHeight="false" layoutX="15.0" layoutY="58.0" prefHeight="44.0" prefWidth="815.0" spacing="11.0" AnchorPane.bottomAnchor="488.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="58.39999999999998">
         <children>
-         <Label alignment="CENTER" prefHeight="18.0" prefWidth="100.0" text="Su" />
-         <Label alignment="CENTER" layoutX="356.0" layoutY="23.0" prefHeight="18.0" prefWidth="100.0" text="Mo" />
-         <Label alignment="CENTER" layoutX="450.0" layoutY="23.0" prefHeight="18.0" prefWidth="100.0" text="Tu" />
-         <Label alignment="CENTER" layoutX="544.0" layoutY="23.0" prefHeight="18.0" prefWidth="100.0" text="We" />
-         <Label alignment="CENTER" layoutX="639.0" layoutY="23.0" prefHeight="18.0" prefWidth="100.0" text="Th" />
-         <Label alignment="CENTER" layoutX="714.0" layoutY="23.0" prefHeight="18.0" prefWidth="100.0" text="Fr" />
-         <Label alignment="CENTER" layoutX="744.0" layoutY="23.0" prefHeight="18.0" prefWidth="100.0" text="Sa" />
+         <Label alignment="CENTER" prefHeight="18.0" prefWidth="100.0" text="          Su" />
+         <Label alignment="CENTER" layoutX="356.0" layoutY="23.0" prefHeight="18.0" prefWidth="100.0" text="      Mo" />
+         <Label alignment="CENTER" layoutX="450.0" layoutY="23.0" prefHeight="18.0" prefWidth="110.0" text="Tu" />
+         <Label alignment="CENTER" layoutX="544.0" layoutY="23.0" prefHeight="18.0" prefWidth="88.0" text="We" />
+         <Label alignment="CENTER" layoutX="639.0" layoutY="23.0" prefHeight="18.0" prefWidth="98.0" text="Th" />
+         <Label alignment="CENTER" layoutX="714.0" layoutY="23.0" prefHeight="18.0" prefWidth="90.0" text="   Fr" />
+         <Label alignment="CENTER" layoutX="744.0" layoutY="23.0" prefHeight="18.0" prefWidth="80.0" text="     Sa" />
         </children>
+      <padding>
+         <Insets left="50.0" />
+      </padding>
     </HBox>
 
 </AnchorPane>
