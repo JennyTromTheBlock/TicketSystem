@@ -73,8 +73,11 @@ public class MainViewController extends BaseController implements Initializable 
      * Listens for changes in selected event (fx. when switching between events with Up/Down key)
      */
     private void selectedEventInfoInSidebar() {
-        tvEvents.getSelectionModel().selectedItemProperty().addListener((obs, o, n) ->
-                handleViewEventInMain(tvEvents.getSelectionModel().getSelectedItem()));
+        tvEvents.getSelectionModel().selectedItemProperty().addListener((obs, o, n) -> {
+            if (n != null) {
+                handleViewEventInMain(tvEvents.getSelectionModel().getSelectedItem());
+            }
+        });
     }
 
     /**
