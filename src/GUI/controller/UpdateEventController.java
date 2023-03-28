@@ -69,8 +69,8 @@ public class UpdateEventController extends BaseController {
 
     //todo check if format of time is correct fx 19:00 or 1900 or 19.00 osv
     private boolean isTimeLegit() {
-        if (txtfTimeField.getText().isEmpty()){
-            lblDateFieldValidation.setText("you must set a start time");
+        if (txtfTimeField.getText().isEmpty()) {
+            lblDateFieldValidation.setText("You must set a start time");
             return false;
         } else {
             lblDateFieldValidation.setText("");
@@ -79,8 +79,8 @@ public class UpdateEventController extends BaseController {
     }
 
     private boolean isDateLegit() {
-        if (dateField.getEditor().getText().isEmpty()){
-            lblDateFieldValidation.setText("you must set a event date");
+        if (dateField.getEditor().getText().isEmpty()) {
+            lblDateFieldValidation.setText("You must set an event date");
             return false;
         } else {
             lblDateFieldValidation.setText("");
@@ -89,8 +89,8 @@ public class UpdateEventController extends BaseController {
     }
 
     private boolean isLocationLegit() {
-        if (txtfLocationField.getText().isEmpty()){
-            lblLocationFieldValidation.setText("you must set a location");
+        if (txtfLocationField.getText().isEmpty()) {
+            lblLocationFieldValidation.setText("You must set a location");
             return false;
         } else {
             lblLocationFieldValidation.setText("");
@@ -100,7 +100,7 @@ public class UpdateEventController extends BaseController {
 
     private boolean isEventNameLegit() {
         if (txtfEventNameField.getText().isEmpty()){
-            lblInputFieldValidation.setText("you must set a event name");
+            lblInputFieldValidation.setText("You must set an event name");
             return false;
         } else {
             lblInputFieldValidation.setText("");
