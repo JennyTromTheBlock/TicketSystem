@@ -3,8 +3,6 @@ package BLL;
 import BE.Event;
 import DAL.EventDAO;
 import DAL.IEventDAO;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -36,7 +34,7 @@ public class eventManager implements IEventManager {
         return databaseAccess.updateEvent(event);
     }
 
-
+    //todo should maybe be placed in model instead.
     public List<Event> getUpcomingEvents() throws Exception {
         Iterator<Event> iterator = getAllEvents().iterator();
         List<Event> upcomingEvents = new ArrayList<>();
