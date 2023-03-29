@@ -43,9 +43,6 @@ public class EventDAO implements IEventDAO {
                 newEvent = new Event(id, event);
             }
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
         catch (Exception e) {
             throw new Exception("Failed to create event", e);
         }
