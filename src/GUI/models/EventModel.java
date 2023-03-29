@@ -20,6 +20,7 @@ public class EventModel {
         allEvents = FXCollections.observableList(retrieveAllEvents());
     }
 
+    //should be used when getting list in controller
     public ObservableList<Event> getObservableEvents() {
         return allEvents;
     }
