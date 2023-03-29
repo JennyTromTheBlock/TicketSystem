@@ -69,7 +69,7 @@ public class EventController extends BaseController implements Initializable {
         stage.show();
 
         UpdateEventController controller = loader.getController();
-        controller.setEvent(event);
+        controller.setContent(event);
 
     }
 

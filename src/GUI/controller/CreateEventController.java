@@ -23,12 +23,6 @@ public class CreateEventController extends BaseController {
     @FXML
     private DatePicker dateField;
 
-
-    /**
-     * checks if all important fields are filled, and create an event object
-     * todo call create method in model
-     * @param actionEvent
-     */
     public void handleCreateEvent(ActionEvent actionEvent) throws Exception {
         if (isInputFieldsFilled()) {
             Event eventWithoutId = createEventFromFields();
@@ -37,14 +31,19 @@ public class CreateEventController extends BaseController {
         }
     }
 
-    private Event createEventFromFields() throws Exception {
+    private Event createEventFromFields() {
         //gets all parameters for the Event object
         String eventName = txtfEventName.getText();
+
         String description = txtaDescriptionField.getText();
+
         String location = txtfLocation.getText();
+
         Date date = DateConverter.dateConverter(dateField.getValue(), txtfTimeField.getText());
-        int maxTickets = !txtfMaxTickets.getText().isEmpty()? Integer.parseInt(txtfMaxTickets.getText()) : 0;
-        int price = !txtfPrice.getText().isEmpty()? Integer.parseInt(txtfPrice.getText()) : 0;
+
+        int maxTickets = !txtfMaxTickets.getText().isEmpty() ? Integer.parseInt(txtfMaxTickets.getText()) : 0;
+
+        int price = !txtfPrice.getText().isEmpty() ? Integer.parseInt(txtfPrice.getText()) : 0;
 
         return new Event(eventName, description, location, date, maxTickets, price);
     }
@@ -56,12 +55,10 @@ public class CreateEventController extends BaseController {
     }
 
     /**
-     * checks if all inputFields are filled correct.
-     * @return
+     * Checks if all the input Fields are filled with valid data
+     * @return true if all the input fields are valid, false otherwise
      */
     private boolean isInputFieldsFilled() {
-        //checks if all important fields are filled.
-        //returns false if one of the inputs are incorrect
         return isEventNameLegit() &&
                 isLocationLegit() &&
                 isDateLegit() &&
@@ -73,9 +70,9 @@ public class CreateEventController extends BaseController {
         if (txtfTimeField.getText().isEmpty()){
             lblDateFieldValidation.setText("you must set a start time");
             return false;
-        } else {
-            lblDateFieldValidation.setText("");
         }
+
+        lblDateFieldValidation.setText("");
         return true;
     }
 
@@ -83,9 +80,9 @@ public class CreateEventController extends BaseController {
         if (dateField.getEditor().getText().isEmpty()){
             lblDateFieldValidation.setText("you must set a event date");
             return false;
-        }else {
-            lblDateFieldValidation.setText("");
         }
+
+        lblDateFieldValidation.setText("");
         return true;
     }
 
@@ -93,9 +90,9 @@ public class CreateEventController extends BaseController {
         if (txtfLocation.getText().isEmpty()) {
             lblLocationFieldValidation.setText("you must set a location");
             return false;
-        }else {
-            lblLocationFieldValidation.setText("");
         }
+
+        lblLocationFieldValidation.setText("");
         return true;
     }
 
@@ -103,19 +100,9 @@ public class CreateEventController extends BaseController {
         if (txtfEventName.getText().isEmpty()) {
             lblInputFieldValidation.setText("you must set a event name");
             return false;
-        }else {
-            lblInputFieldValidation.setText("");
         }
-        return true;
-    }
 
-    public void setContent(Event event) {
-        txtfEventName.setText(event.getEventName());
-        txtaDescriptionField.setText(event.getDescription());
-        txtfLocation.setText(event.getLocation());
-        dateField.setValue(event.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        txtfTimeField.setText(""+event.getDate().getTime());
-        txtfPrice.setText(""+event.getPrice());
-        txtfMaxTickets.setText(""+event.getMaxParticipant());
+        lblInputFieldValidation.setText("");
+        return true;
     }
 }
