@@ -13,7 +13,6 @@ import java.io.IOException;
 public abstract class BaseController {
 
         public void displayError(Throwable throwable) {
-
             FXMLLoader loader = openStage("/GUI/View/ErrorDisplayView.fxml", "");
             ErrorDisplay controller = loader.getController();
             controller.setContent(throwable);

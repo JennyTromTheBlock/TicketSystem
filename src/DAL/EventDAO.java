@@ -57,7 +57,7 @@ public class EventDAO implements IEventDAO {
 
         try (Connection connection = connector.getConnection();
             Statement statement = connection.createStatement()) {
-            String sql = "SELECT * FROM EVET;";
+            String sql = "SELECT * FROM EVENT;";
             ResultSet rs = statement.executeQuery(sql);
 
             while(rs.next()) {
