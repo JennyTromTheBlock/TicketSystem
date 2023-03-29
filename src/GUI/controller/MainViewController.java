@@ -1,6 +1,7 @@
 package GUI.controller;
 
 import BE.Event;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,6 +23,13 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class MainViewController extends BaseController implements Initializable {
+    public Button btnEditEvent;
+    public Button btnViewInfo;
+    public Button btnSellTicket;
+    public ImageView imgViewEventDate;
+    public ImageView imgViewEventSelected;
+    public ImageView imgViewEventPrice;
+    public ImageView imgViewEventTickets;
     @FXML
     private HBox topBar, hBoxSearch;
     @FXML
@@ -97,6 +105,12 @@ public class MainViewController extends BaseController implements Initializable 
         });
     }
 
+    private void setEventInfoBtnsVisible() {
+        btnEditEvent.setVisible(true);
+        btnViewInfo.setVisible(true);
+        btnSellTicket.setVisible(true);
+    }
+
     /**
      * Opens event info if the Enter key is pressed
      */
@@ -121,11 +135,23 @@ public class MainViewController extends BaseController implements Initializable 
      * @param event to display
      */
     public void handleViewEventInMain(Event event) {
+        //sets all text fields
         lblTitle.setText(event.getEventName());
         lblDate.setText(String.valueOf(event.getDate()));
         lblLocation.setText(event.getLocation());
         lblPrice.setText(event.getPrice() + " DKK");
         lblTicketsLeft.setText(event.getMaxParticipant() + " tickets available"); //TODO subtract sold tickets from max part.
+
+        //sets buttons and symbols visible
+        setEventInfoBtnsVisible();
+        showSymbolsForEventInSidebar();
+    }
+
+    private void showSymbolsForEventInSidebar() {
+        imgViewEventDate.setImage(new Image("symbols/callender.png"));
+        imgViewEventPrice.setImage(new Image("symbols/price.png"));
+        imgViewEventSelected.setImage(new Image("symbols/location.png"));
+        imgViewEventTickets.setImage(new Image("symbols/ticket.png"));
     }
 
     private void loadImages() {
@@ -197,5 +223,25 @@ public class MainViewController extends BaseController implements Initializable 
         //adds the tableView to scene
         setNodeInMainView(tvEvents);
         tableViewEventHandlers();
+    }
+
+    public void handleSellTicket(ActionEvent actionEvent) {
+        //todo implement when we have tickets
+    }
+
+    public void handleViewInfo(ActionEvent actionEvent) {
+        if (isSelectedItemInTableView(tvEvents)) {
+            handleViewEvent(tvEvents.getSelectionModel().getSelectedItem());
+        }
+    }
+
+    public void handleEditEvent(ActionEvent actionEvent) {
+        if (isSelectedItemInTableView(tvEvents)) {
+            FXMLLoader loader= openStage("/GUI/view/UpdateEventView.fxml", "update Event");
+            UpdateEventController updateEventController = loader.getController();
+            updateEventController.setEvent(tvEvents.getSelectionModel().getSelectedItem());
+        }
+
+
     }
 }
