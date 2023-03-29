@@ -23,6 +23,10 @@ import java.util.ResourceBundle;
 
 public class MainViewController extends BaseController implements Initializable {
     @FXML
+    private MenuButton mbFilter;
+    @FXML
+    private CheckMenuItem cmiUpcoming;
+    @FXML
     private HBox topBar, hBoxSearch;
     @FXML
     private TextField txtSearch;
@@ -54,6 +58,8 @@ public class MainViewController extends BaseController implements Initializable 
         loadAllEvents();
 
         tableViewEventHandlers();
+
+        checkMenuListener();
     }
 
     /**
@@ -195,5 +201,23 @@ public class MainViewController extends BaseController implements Initializable 
         //adds the tableView to scene
         setNodeInMainView(tvEvents);
         tableViewEventHandlers();
+    }
+
+    private void checkMenuListener() {
+        cmiUpcoming.selectedProperty().addListener((obs, o, n) -> {
+            if(cmiUpcoming.isSelected()) {
+                showUpcomingOnly();
+            } else {
+                loadAllEvents();
+            }
+        });
+    }
+
+    public void showUpcomingOnly() {
+        try {
+            tvEvents.setItems(getModelsHandler().getEventModel().getUpcomingEvents());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

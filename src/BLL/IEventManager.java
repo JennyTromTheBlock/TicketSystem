@@ -12,4 +12,6 @@ public interface IEventManager {
     List<Event> getAllEvents() throws Exception;
 
     Event updateEvent(Event event) throws Exception;
+
+    List<Event> getUpcomingEvents() throws Exception;
 }
