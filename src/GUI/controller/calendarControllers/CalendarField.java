@@ -40,7 +40,7 @@ public class CalendarField extends BaseController {
                 });
             } else if (i == 1) {
 
-                lblSecondEvent.setText(createEventString(events.get(i)));
+                lblSecondEvent.setText(createEventString(event));
                 lblSecondEvent.setOnMouseClicked(mouseEvent -> {
                     mainController.handleViewEventInMain(event);
                     if(mouseEvent.getClickCount()==2) {
@@ -55,6 +55,7 @@ public class CalendarField extends BaseController {
             }
         }
     }
+
 
     private String createEventString(Event event){
         String result;
