@@ -6,8 +6,8 @@ import BLL.eventManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.time.Instant;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 public class EventModel {
 
@@ -63,10 +63,10 @@ public class EventModel {
     }
 
     public ObservableList<Event> getUpcomingEvents() throws Exception {
-        return FXCollections.observableList(eventManager.getUpcomingEvents());
+        return FXCollections.observableList(eventManager.getUpcomingEvents(allEvents));
     }
 
     public ObservableList<Event> getHistoricEvents() throws Exception {
-        return FXCollections.observableList(eventManager.getHistoricEvents());
+        return FXCollections.observableList(eventManager.getHistoricEvents(allEvents));
     }
 }

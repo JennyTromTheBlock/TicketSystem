@@ -35,8 +35,8 @@ public class eventManager implements IEventManager {
     }
 
     //todo should maybe be placed in model instead.
-    public List<Event> getUpcomingEvents() throws Exception {
-        Iterator<Event> iterator = getAllEvents().iterator();
+    public List<Event> getUpcomingEvents(List<Event> events) throws Exception {
+        Iterator<Event> iterator = events.iterator();
         List<Event> upcomingEvents = new ArrayList<>();
         while (iterator.hasNext()) {
             Event e = iterator.next();
@@ -47,8 +47,8 @@ public class eventManager implements IEventManager {
         return upcomingEvents;
     }
 
-    public List<Event> getHistoricEvents() throws Exception {
-        Iterator<Event> iterator = getAllEvents().iterator();
+    public List<Event> getHistoricEvents(List<Event> events) throws Exception {
+        Iterator<Event> iterator = events.iterator();
         List<Event> historicEvents = new ArrayList<>();
         while (iterator.hasNext()) {
             Event e = iterator.next();

@@ -13,7 +13,7 @@ public interface IEventManager {
 
     Event updateEvent(Event event) throws Exception;
 
-    List<Event> getUpcomingEvents() throws Exception;
+    List<Event> getUpcomingEvents(List<Event> events) throws Exception;
 
-    List<Event> getHistoricEvents() throws Exception;
+    List<Event> getHistoricEvents(List<Event> events) throws Exception;
 }
