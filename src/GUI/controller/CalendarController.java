@@ -1,7 +1,6 @@
 package GUI.controller;
 
 import BE.Event;
-import GUI.util.ErrorDisplay;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -75,7 +74,7 @@ public class CalendarController extends BaseController implements Initializable 
         try {
             calendarActivityMap = getCalendarActivitiesMonth(dateFocus);
         } catch (Exception e) {
-            ErrorDisplay.displayError(e);
+            displayError(e);
         }
 
         int monthMaxDate = dateFocus.getMonth().maxLength();

@@ -2,7 +2,6 @@ package GUI.controller;
 
 import BE.Event;
 import GUI.util.DateConverter;
-import GUI.util.ErrorDisplay;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -38,7 +37,7 @@ public class UpdateEventController extends BaseController {
                 }
             }
             catch (Exception e) {
-                ErrorDisplay.displayError(e);
+                displayError(e);
             }
         }
     }

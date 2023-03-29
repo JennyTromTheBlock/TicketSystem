@@ -57,7 +57,7 @@ public class EventDAO implements IEventDAO {
 
         try (Connection connection = connector.getConnection();
             Statement statement = connection.createStatement()) {
-            String sql = "SELECT * FROM EVENT;";
+            String sql = "SELECT * FROM EVET;";
             ResultSet rs = statement.executeQuery(sql);
 
             while(rs.next()) {
@@ -73,7 +73,6 @@ public class EventDAO implements IEventDAO {
                 allEvents.add(event);
             }
         } catch (Exception e){
-                e.printStackTrace();
                 throw new Exception("Failed to retrieve all my events", e);
         }
         return allEvents;
@@ -99,7 +98,6 @@ public class EventDAO implements IEventDAO {
             statement.executeUpdate();
             updatedEvent = event;
         } catch (SQLException e) {
-            e.printStackTrace();
             throw new Exception("Failed to edit the event", e);
         }
         return updatedEvent;

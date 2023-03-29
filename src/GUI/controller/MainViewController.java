@@ -1,7 +1,6 @@
 package GUI.controller;
 
 import BE.Event;
-import GUI.util.ErrorDisplay;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -141,7 +140,7 @@ public class MainViewController extends BaseController implements Initializable 
             tvEvents.setItems(getModelsHandler().getEventModel().getObservableEvent());
         }
         catch (Exception e) {
-            ErrorDisplay.displayError(e);
+            displayError(e);
             throw new RuntimeException(e);
         }
     }
@@ -178,7 +177,7 @@ public class MainViewController extends BaseController implements Initializable 
             root = loader.load();
             setNodeInMainView(root);
         } catch (IOException e) {
-            ErrorDisplay.displayError(e);
+            displayError(e);
         }
 
         CalendarController controller = loader.getController();

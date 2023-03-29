@@ -1,7 +1,6 @@
 package GUI.controller;
 
 import GUI.models.ModelsHandler;
-import GUI.util.ErrorDisplay;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,6 +11,14 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public abstract class BaseController {
+
+        public void displayError(Throwable throwable) {
+
+            FXMLLoader loader = openStage("/GUI/View/ErrorDisplayView.fxml", "");
+            ErrorDisplay controller = loader.getController();
+            controller.setContent(throwable);
+        }
+
     public ModelsHandler getModelsHandler() throws Exception {
         return ModelsHandler.getInstance();
     }
@@ -29,7 +36,7 @@ public abstract class BaseController {
         try {
             root = loader.load();
         } catch (IOException e) {
-            ErrorDisplay.displayError(e);
+            displayError(e);
         }
         Stage stage = new Stage();
         stage.setScene(new Scene(root));

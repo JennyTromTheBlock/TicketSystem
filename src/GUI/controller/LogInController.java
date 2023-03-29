@@ -1,6 +1,5 @@
 package GUI.controller;
 
-import GUI.util.ErrorDisplay;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,7 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LogInController implements Initializable {
+public class LogInController extends BaseController implements Initializable {
     public ImageView logoImg;
     public Label sideField;
 
@@ -33,7 +32,7 @@ public class LogInController implements Initializable {
         try {
             root = loader.load();
         } catch (IOException e) {
-            ErrorDisplay.displayError(e);
+            displayError(e);
         }
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
