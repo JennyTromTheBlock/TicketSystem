@@ -34,6 +34,8 @@ public class LogInController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        MainViewController controller = loader.getController();
+        controller.setAdminContent();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.getScene().getStylesheets().add(getClass().getResource("/GUI/css/Style.css").toExternalForm());

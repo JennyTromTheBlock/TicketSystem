@@ -238,4 +238,18 @@ public class MainViewController extends BaseController implements Initializable 
             throw new RuntimeException(e);
         }
     }
+
+    public void setAdminContent(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/AdminBarView.fxml"));
+        Parent root;
+
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        contentArea.getChildren().remove(3);
+        contentArea.getChildren().add(2, root);
+    }
 }
