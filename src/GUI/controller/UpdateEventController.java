@@ -1,8 +1,8 @@
 package GUI.controller;
 
 import BE.Event;
-import GUI.models.EventModel;
 import GUI.util.DateConverter;
+import GUI.util.ErrorDisplay;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -10,9 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.util.converter.LocalDateStringConverter;
 
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
@@ -40,7 +38,7 @@ public class UpdateEventController extends BaseController {
                 }
             }
             catch (Exception e) {
-                //TODO display the error for the system user
+                ErrorDisplay.displayError(e);
             }
         }
     }

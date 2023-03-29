@@ -1,5 +1,6 @@
 package GUI.controller;
 
+import GUI.util.ErrorDisplay;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,7 +33,7 @@ public class LogInController implements Initializable {
         try {
             root = loader.load();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            ErrorDisplay.displayError(e);
         }
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
