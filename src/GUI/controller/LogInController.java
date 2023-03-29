@@ -27,7 +27,7 @@ public class LogInController implements Initializable {
 
     public void logInBtn(ActionEvent actionEvent) {
         //Load the new stage & view
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/MainView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/AdminMain.fxml"));
         Parent root = null;
         try {
             root = loader.load();

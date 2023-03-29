@@ -1,4 +1,4 @@
-package GUI.controller;
+package GUI.controller.adminControllers;
 
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
@@ -23,5 +23,8 @@ public class AdminMain {
     }
 
     public void handleEditEvent(ActionEvent actionEvent) {
+    }
+
+    public void handleAssignUserToEvent(ActionEvent actionEvent) {
     }
 }
