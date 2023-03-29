@@ -25,7 +25,7 @@ public class MainViewController extends BaseController implements Initializable 
     @FXML
     private MenuButton mbFilter;
     @FXML
-    private CheckMenuItem cmiUpcoming;
+    private CheckMenuItem cmiUpcoming, cmiHistoric;
     @FXML
     private HBox topBar, hBoxSearch;
     @FXML
@@ -206,7 +206,17 @@ public class MainViewController extends BaseController implements Initializable 
     private void checkMenuListener() {
         cmiUpcoming.selectedProperty().addListener((obs, o, n) -> {
             if(cmiUpcoming.isSelected()) {
+                cmiHistoric.setSelected(false);
                 showUpcomingOnly();
+            } else {
+                loadAllEvents();
+            }
+        });
+
+        cmiHistoric.selectedProperty().addListener((obs, o, n) -> {
+            if(cmiHistoric.isSelected()) {
+                cmiUpcoming.setSelected(false);
+                showHistoricOnly();
             } else {
                 loadAllEvents();
             }
@@ -216,6 +226,14 @@ public class MainViewController extends BaseController implements Initializable 
     public void showUpcomingOnly() {
         try {
             tvEvents.setItems(getModelsHandler().getEventModel().getUpcomingEvents());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void showHistoricOnly() {
+        try {
+            tvEvents.setItems(getModelsHandler().getEventModel().getHistoricEvents());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

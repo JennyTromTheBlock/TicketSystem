@@ -29,7 +29,7 @@
             <MenuButton fx:id="mbFilter" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="139.0" text="Filter">
                <items>
                   <CheckMenuItem fx:id="cmiUpcoming" mnemonicParsing="false" text="Show upcoming events only" />
-                  <CheckMenuItem mnemonicParsing="false" text="Show historic events only" />
+                  <CheckMenuItem fx:id="cmiHistoric" mnemonicParsing="false" text="Show historic events only" />
                   <CheckMenuItem mnemonicParsing="false" text="Show my events only" />
                </items></MenuButton>
             <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="50.0" spacing="15.0">

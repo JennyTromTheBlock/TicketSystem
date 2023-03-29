@@ -64,4 +64,8 @@ public class EventModel {
     public ObservableList<Event> getUpcomingEvents() throws Exception {
         return FXCollections.observableList(eventManager.getUpcomingEvents());
     }
+
+    public ObservableList<Event> getHistoricEvents() throws Exception {
+        return FXCollections.observableList(eventManager.getHistoricEvents());
+    }
 }

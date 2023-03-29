@@ -48,4 +48,16 @@ public class eventManager implements IEventManager {
         }
         return upcomingEvents;
     }
+
+    public List<Event> getHistoricEvents() throws Exception {
+        Iterator<Event> iterator = getAllEvents().iterator();
+        List<Event> historicEvents = new ArrayList<>();
+        while (iterator.hasNext()) {
+            Event e = iterator.next();
+            if(e.getDate().before(Date.from(Instant.now()))) {
+                historicEvents.add(e);
+            }
+        }
+        return historicEvents;
+    }
 }
