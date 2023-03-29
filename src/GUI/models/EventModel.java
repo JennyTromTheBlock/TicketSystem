@@ -17,10 +17,11 @@ public class EventModel {
 
     public EventModel() throws Exception {
         eventManager = new eventManager();
-        allEvents = FXCollections.observableList(getAllEvents());
+        allEvents = FXCollections.observableList(retrieveAllEvents());
     }
 
-    public ObservableList<Event> getObservableEvent() {
+    //should be used when getting list in controller
+    public ObservableList<Event> getObservableEvents() {
         return allEvents;
     }
 
@@ -32,7 +33,7 @@ public class EventModel {
         return newEvent;
     }
 
-    public List<Event> getAllEvents() throws Exception {
+    private List<Event> retrieveAllEvents() throws Exception {
         return eventManager.getAllEvents();
     }
 

@@ -174,7 +174,7 @@ public class CalendarController extends BaseController implements Initializable 
     }
 
     private Map<Integer, List<Event>> getCalendarActivitiesMonth(ZonedDateTime dateFocus) throws Exception {
-        List<Event> calendarActivities = getModelsHandler().getEventModel().getAllEvents();
+        List<Event> calendarActivities = getModelsHandler().getEventModel().getObservableEvents();
 
         List<Event> result = new ArrayList<>();
 
