@@ -137,7 +137,7 @@ public class MainViewController extends BaseController implements Initializable 
 
     private void loadAllEvents() {
         try {
-            tvEvents.setItems(getModelsHandler().getEventModel().getObservableEvent());
+            tvEvents.setItems(getModelsHandler().getEventModel().getObservableEvents());
         }
         catch (Exception e) {
             throw new RuntimeException(e);
