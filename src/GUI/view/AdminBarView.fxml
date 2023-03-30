@@ -10,12 +10,12 @@
             <Font name="Berlin Sans FB" size="36.0" />
         </font>
     </Button>
-    <Button fx:id="btnSeeEvents" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSeeEvents" prefHeight="90.0" prefWidth="270.0" text="See Events">
+    <Button fx:id="btnSeeEvents" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSeeEvents" prefHeight="90.0" prefWidth="270.0" text="View Events">
         <font>
             <Font name="Berlin Sans FB" size="36.0" />
         </font>
     </Button>
-    <Button fx:id="btnSeeUsers" layoutX="311.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSeeUsers" prefHeight="90.0" prefWidth="270.0" text="See Users">
+    <Button fx:id="btnSeeUsers" layoutX="311.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSeeUsers" prefHeight="90.0" prefWidth="270.0" text="View Users">
         <font>
             <Font name="Berlin Sans FB" size="36.0" />
         </font>
