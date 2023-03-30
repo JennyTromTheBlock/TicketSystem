@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckMenuItem?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <BorderPane fx:id="background" prefHeight="800.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.MainViewController">
    <top>
@@ -168,9 +158,9 @@
                </padding>
             </HBox>
             <Pane prefHeight="63.0" prefWidth="250.0" VBox.vgrow="ALWAYS" />
-            <VBox alignment="CENTER" spacing="10.0">
+            <VBox fx:id="eventButtonContainer" alignment="CENTER" spacing="10.0" visible="false">
                <children>
-                  <Button fx:id="btnSellTicket" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSellTicket" prefHeight="71.0" prefWidth="232.0" text="Sell ticket" visible="false">
+                  <Button fx:id="btnSellTicket" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSellTicket" prefHeight="71.0" prefWidth="232.0" text="Sell ticket">
                      <font>
                         <Font name="Berlin Sans FB" size="36.0" />
                      </font>
@@ -180,8 +170,8 @@
                         <Insets bottom="15.0" />
                      </VBox.margin>
                      <children>
-                        <Button fx:id="btnViewInfo" mnemonicParsing="false" onAction="#handleViewInfo" text="View Info" visible="false" />
-                        <Button fx:id="btnEditEvent" mnemonicParsing="false" onAction="#handleEditEvent" text="Edit Event" visible="false" />
+                        <Button fx:id="btnViewInfo" mnemonicParsing="false" onAction="#handleViewInfo" text="View Info" />
+                        <Button fx:id="btnEditEvent" mnemonicParsing="false" onAction="#handleEditEvent" text="Edit Event" />
                      </children>
                   </HBox>
                </children>

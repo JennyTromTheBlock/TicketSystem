@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class MainViewController extends BaseController implements Initializable {
+    public VBox eventButtonContainer;
     @FXML
     private MenuButton mbFilter;
     @FXML
@@ -105,9 +106,7 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     private void setEventInfoBtnsVisible() {
-        btnEditEvent.setVisible(true);
-        btnViewInfo.setVisible(true);
-        btnSellTicket.setVisible(true);
+        eventButtonContainer.setVisible(true);
     }
 
     /**
@@ -279,8 +278,6 @@ public class MainViewController extends BaseController implements Initializable 
             UpdateEventController updateEventController = loader.getController();
             updateEventController.setContent(tvEvents.getSelectionModel().getSelectedItem());
         }
-
-
     }
 
     public void setAdminContent(){
@@ -292,8 +289,12 @@ public class MainViewController extends BaseController implements Initializable 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         contentArea.getChildren().remove(3);
         contentArea.getChildren().add(2, root);
+
+        eventButtonContainer.getChildren().remove(btnSellTicket);
+        Button btnAssignUser = new Button("Assign User");
+        btnAssignUser.setPrefSize(232, 71);
+        eventButtonContainer.getChildren().add(0, btnAssignUser);
     }
 }
