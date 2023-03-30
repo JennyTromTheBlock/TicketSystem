@@ -7,9 +7,11 @@ package GUI.models;
 public class ModelsHandler {
     private static ModelsHandler handler;
     private EventModel eventModel;
+    private SystemUserModel systemUserModel;
 
     private ModelsHandler() throws Exception {
         eventModel = new EventModel();
+        systemUserModel = new SystemUserModel();
     }
 
     public static ModelsHandler getInstance() throws Exception {
@@ -21,5 +23,9 @@ public class ModelsHandler {
 
     public EventModel getEventModel() {
         return eventModel;
+    }
+
+    public SystemUserModel getSystemUserModel() {
+        return systemUserModel;
     }
 }
