@@ -5,8 +5,10 @@ import BE.SystemUser;
 import DAL.Connectors.IConnector;
 import DAL.Connectors.SqlConnector;
 
-import javax.management.relation.RoleStatus;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,5 +75,32 @@ public class SystemUserDAO implements ISystemUserDAO {
         }
 
         return systemUsersRoles;
+    }
+
+    public SystemUser createSystemUser(SystemUser systemUser) throws Exception {
+        SystemUser user = null;
+        String sql = "INSERT INTO SystemUsers " +
+                "(Email, FirstName, LastName, Password)" +
+                "VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = connector.getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
+
+            statement.setString(1, systemUser.getEmail());
+            statement.setString(2, systemUser.getFirstName());
+            statement.setString(3, systemUser.getLastName());
+            statement.setString(4, systemUser.getPassword());
+            statement.executeUpdate();
+            user = systemUser;
+        }
+        catch (Exception e) {
+            throw new Exception("Failed to user", e);
+        }
+            return user;
+    }
+
+    public List<SystemUser> getAllSystemUsers(){
+
+        return null;
     }
 }

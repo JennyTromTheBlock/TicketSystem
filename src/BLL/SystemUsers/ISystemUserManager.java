@@ -10,4 +10,7 @@ public interface ISystemUserManager {
      * @throws Exception
      */
     SystemUser authenticateSystemUser(SystemUser user) throws Exception;
+
+
+    SystemUser createSystemUser(SystemUser systemUser) throws Exception;
 }

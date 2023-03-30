@@ -11,4 +11,6 @@ public interface ISystemUserDAO {
      * @throws Exception
      */
     SystemUser SystemUserValidLogin(SystemUser user) throws Exception;
+
+    SystemUser createSystemUser(SystemUser systemUser) throws Exception;
 }
