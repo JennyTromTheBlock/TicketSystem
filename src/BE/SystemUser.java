@@ -22,6 +22,7 @@ public class SystemUser {
         this.lastName = lastName;
         this.password = password;
         this.roles = new ArrayList<>();
+        roles.add(Role.EVENT_COORDINATOR);
     }
 
     public static boolean isEmailValid(String email) {
@@ -51,4 +52,15 @@ public class SystemUser {
     }
 
     public List<Role> getRoles() { return roles; }
+
+    @Override
+    public String toString() {
+        return "SystemUser{" +
+                "email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }

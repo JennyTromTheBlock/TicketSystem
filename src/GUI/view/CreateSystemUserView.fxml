@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.CreateUserController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.CreateSystemUserController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="95.0" prefHeight="320.0" prefWidth="431.0">
          <children>
@@ -64,7 +64,7 @@
             <HBox prefHeight="26.0" prefWidth="424.0">
                <children>
                   <Label prefHeight="26.0" prefWidth="103.0" text="Password" />
-                  <PasswordField prefHeight="26.0" prefWidth="331.0" />
+                  <PasswordField fx:id="pwfPassword" prefHeight="26.0" prefWidth="331.0" />
                </children>
             </HBox>
             <HBox>
