@@ -23,7 +23,7 @@
                 <HBox prefHeight="26.0" prefWidth="424.0">
                     <children>
                         <Label prefHeight="26.0" prefWidth="103.0" text="Event name" />
-                        <TextField fx:id="eventNameField" prefHeight="26.0" prefWidth="334.0" />
+                        <TextField fx:id="txtfEventNameField" prefHeight="26.0" prefWidth="334.0" />
                     </children>
                     <VBox.margin>
                         <Insets bottom="5.0" />
@@ -32,13 +32,13 @@
                 <HBox>
                     <children>
                         <Label prefHeight="18.0" prefWidth="232.0" />
-                        <Label fx:id="inputFieldValidation" alignment="CENTER" prefHeight="18.0" prefWidth="455.0" />
+                        <Label fx:id="lblInputFieldValidation" alignment="CENTER" prefHeight="18.0" prefWidth="455.0" />
                     </children>
                 </HBox>
                 <HBox layoutX="10.0" layoutY="82.0" prefHeight="103.0" prefWidth="431.0">
                     <children>
                         <Label prefHeight="26.0" prefWidth="103.0" text="Event Description" />
-                        <TextArea fx:id="descriptionField" prefHeight="81.0" prefWidth="330.0" />
+                        <TextArea fx:id="txtaDescriptionField" prefHeight="81.0" prefWidth="330.0" />
                     </children>
                     <VBox.margin>
                         <Insets bottom="20.0" />
@@ -47,7 +47,7 @@
                 <HBox layoutX="10.0" layoutY="82.0" prefHeight="26.0" prefWidth="424.0">
                     <children>
                         <Label prefHeight="26.0" prefWidth="103.0" text="Event Location" />
-                        <TextField fx:id="locationField" prefHeight="26.0" prefWidth="334.0" />
+                        <TextField fx:id="txtfLocationField" prefHeight="26.0" prefWidth="334.0" />
                     </children>
                     <VBox.margin>
                         <Insets bottom="5.0" />
@@ -56,7 +56,7 @@
                 <HBox>
                     <children>
                         <Label prefHeight="18.0" prefWidth="215.0" />
-                        <Label fx:id="locationFieldValidation" alignment="CENTER" prefHeight="18.0" prefWidth="447.0" />
+                        <Label fx:id="lblLocationFieldValidation" alignment="CENTER" prefHeight="18.0" prefWidth="447.0" />
                     </children>
                 </HBox>
                 <HBox layoutX="10.0" layoutY="252.0" prefHeight="26.0" prefWidth="424.0">
@@ -64,7 +64,7 @@
                         <Label prefHeight="26.0" prefWidth="103.0" text="Event Date" />
                         <DatePicker fx:id="dateField" prefHeight="26.0" prefWidth="106.0" />
                         <Label alignment="CENTER" prefHeight="26.0" prefWidth="88.0" text="      Time" />
-                        <TextField fx:id="timeField" prefHeight="26.0" prefWidth="139.0" />
+                        <TextField fx:id="txtfTimeField" prefHeight="26.0" prefWidth="139.0" />
                     </children>
                     <VBox.margin>
                         <Insets bottom="5.0" />
@@ -73,19 +73,19 @@
                 <HBox>
                     <children>
                         <Label prefHeight="18.0" prefWidth="104.0" />
-                        <Label fx:id="dateFieldValidation" alignment="CENTER" prefHeight="18.0" prefWidth="233.0" />
+                        <Label fx:id="lblDateFieldValidation" alignment="CENTER" prefHeight="18.0" prefWidth="233.0" />
                     </children>
                 </HBox>
                 <HBox layoutX="10.0" layoutY="252.0" prefHeight="26.0" prefWidth="295.0">
                     <children>
                         <Label prefHeight="26.0" prefWidth="103.0" text="Max Tickets" />
-                        <TextField fx:id="maxTicketsField" prefHeight="26.0" prefWidth="113.0">
+                        <TextField fx:id="txtfMaxTicketsField" prefHeight="26.0" prefWidth="113.0">
                             <HBox.margin>
                                 <Insets right="30.0" />
                             </HBox.margin>
                         </TextField>
                         <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="58.0" text="Price      " />
-                        <TextField fx:id="priceField" layoutX="113.0" layoutY="10.0" prefHeight="26.0" prefWidth="140.0" />
+                        <TextField fx:id="txtfPriceField" layoutX="113.0" layoutY="10.0" prefHeight="26.0" prefWidth="140.0" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="69.0" prefWidth="431.0">

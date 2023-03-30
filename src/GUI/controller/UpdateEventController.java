@@ -15,26 +15,24 @@ import java.util.Date;
 
 public class UpdateEventController extends BaseController {
     @FXML
-    private TextField priceField, maxTicketsField, locationField, eventNameField, timeField;
+    private Label lblInputFieldValidation, lblLocationFieldValidation, lblDateFieldValidation;
     @FXML
-    private TextArea descriptionField;
+    private TextField txtfPriceField, txtfMaxTicketsField, txtfLocationField, txtfEventNameField, txtfTimeField;
+    @FXML
+    private TextArea txtaDescriptionField;
     @FXML
     private DatePicker dateField;
-    @FXML
-    private Label inputFieldValidation, locationFieldValidation, dateFieldValidation;
-    //Keeps track of what specific event we're editing
-    private int eventId;
+
+    private Event eventToUpdate; //Keeps track of what specific event we're editing
 
     public void handleUpdateEvent(ActionEvent actionEvent) {
         if (isInputFieldsFilled()) {
-            Event eventToUpdate = new Event(eventId, createEventFromFields());
+            Event updatedEvent = new Event(eventToUpdate.getId(), createEventFromFields());
 
             try {
-                Event updatedEvent = getModelsHandler().getEventModel().updateEvent(eventToUpdate);
+                getModelsHandler().getEventModel().updateEvent(updatedEvent);
 
-                if (updatedEvent != null) {
-                    handleCancel();
-                }
+                handleCancel();
             }
             catch (Exception e) {
                 displayError(e);
@@ -44,23 +42,26 @@ public class UpdateEventController extends BaseController {
 
     private Event createEventFromFields() {
         //gets all parameters for the event object
-        String eventName = eventNameField.getText();
-        String description = descriptionField.getText();
-        String location = locationField.getText();
-        Date date = DateConverter.dateConverter(dateField.getValue(), timeField.getText());
-        int maxTickets = !maxTicketsField.getText().isEmpty()? Integer.parseInt(maxTicketsField.getText()) : 0;
-        int price = !priceField.getText().isEmpty()? Integer.parseInt(priceField.getText()) : 0;
+        String eventName = txtfEventNameField.getText();
+
+        String description = txtaDescriptionField.getText();
+
+        String location = txtfLocationField.getText();
+
+        Date date = DateConverter.dateConverter(dateField.getValue(), txtfTimeField.getText());
+
+        int maxTickets = !txtfMaxTicketsField.getText().isEmpty() ? Integer.parseInt(txtfMaxTicketsField.getText()) : 0;
+
+        int price = !txtfPriceField.getText().isEmpty() ? Integer.parseInt(txtfPriceField.getText()) : 0;
 
         return new Event(eventName, description, location, date, maxTickets, price);
     }
 
     /**
-     * checks if all inputFields are filled correct.
-     * @return
+     * Checks if all the input Fields are filled with valid data
+     * @return true if all the input fields are valid, false otherwise
      */
-    private boolean isInputFieldsFilled(){
-        //checks if all important fields are filled.
-        //returns false if one of the inputs are incorrect
+    private boolean isInputFieldsFilled() {
         return isEventNameLegit() &&
                 isLocationLegit() &&
                 isDateLegit() &&
@@ -69,66 +70,66 @@ public class UpdateEventController extends BaseController {
 
     //todo check if format of time is correct fx 19:00 or 1900 or 19.00 osv
     private boolean isTimeLegit() {
-        if (timeField.getText().isEmpty()){
-            dateFieldValidation.setText("you must set a start time");
+        if (txtfTimeField.getText().isEmpty()) {
+            lblDateFieldValidation.setText("You must set a start time");
             return false;
-        } else{
-            dateFieldValidation.setText("");
         }
+
+        lblDateFieldValidation.setText("");
         return true;
     }
 
     private boolean isDateLegit() {
-        if (dateField.getEditor().getText().isEmpty()){
-            dateFieldValidation.setText("you must set a event date");
+        if (dateField.getEditor().getText().isEmpty()) {
+            lblDateFieldValidation.setText("You must set an event date");
             return false;
-        }else{
-            dateFieldValidation.setText("");
         }
+
+        lblDateFieldValidation.setText("");
         return true;
     }
 
     private boolean isLocationLegit() {
-        if (locationField.getText().isEmpty()){
-            locationFieldValidation.setText("you must set a location");
+        if (txtfLocationField.getText().isEmpty()) {
+            lblLocationFieldValidation.setText("You must set a location");
             return false;
-        }else {
-            locationFieldValidation.setText("");
         }
+
+        lblLocationFieldValidation.setText("");
         return true;
     }
 
     private boolean isEventNameLegit() {
-        if (eventNameField.getText().isEmpty()){
-            inputFieldValidation.setText("you must set a event name");
+        if (txtfEventNameField.getText().isEmpty()){
+            lblInputFieldValidation.setText("You must set an event name");
             return false;
-        }else {
-            inputFieldValidation.setText("");
         }
+
+        lblInputFieldValidation.setText("");
         return true;
     }
 
-    public void setEvent(Event event) {
-        this.eventId = event.getId();
+    public void setContent(Event event) {
+        eventToUpdate = event;
 
-        setContent(event);
-    }
+        txtfEventNameField.setText(event.getEventName());
 
-    private void setContent(Event event) {
-        eventNameField.setText(event.getEventName());
-        descriptionField.setText(event.getDescription());
-        locationField.setText(event.getLocation());
+        txtaDescriptionField.setText(event.getDescription());
+
+        txtfLocationField.setText(event.getLocation());
+
         dateField.setValue(event.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        priceField.setText(""+event.getPrice());
-        maxTicketsField.setText(""+event.getMaxParticipant());
-        timeField.setText(DateConverter.getTimeFromDate(event.getDate()));
 
+        txtfPriceField.setText(""+event.getPrice());
 
+        txtfMaxTicketsField.setText(""+event.getMaxParticipant());
+
+        txtfTimeField.setText(DateConverter.getTimeFromDate(event.getDate()));
     }
 
     public void handleCancel() {
         //closes the window
-        Stage stage = (Stage) eventNameField.getScene().getWindow();
+        Stage stage = (Stage) txtfEventNameField.getScene().getWindow();
         stage.close();
     }
 }

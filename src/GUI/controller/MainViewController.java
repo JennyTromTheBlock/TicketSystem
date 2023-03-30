@@ -23,6 +23,10 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class MainViewController extends BaseController implements Initializable {
+    @FXML
+    private MenuButton mbFilter;
+    @FXML
+    private CheckMenuItem cmiUpcoming, cmiHistoric;
     public Button btnEditEvent;
     public Button btnViewInfo;
     public Button btnSellTicket;
@@ -62,6 +66,8 @@ public class MainViewController extends BaseController implements Initializable 
         loadAllEvents();
 
         tableViewEventHandlers();
+
+        checkMenuListener();
     }
 
     /**
@@ -163,7 +169,7 @@ public class MainViewController extends BaseController implements Initializable 
 
     private void loadAllEvents() {
         try {
-            tvEvents.setItems(getModelsHandler().getEventModel().getObservableEvent());
+            tvEvents.setItems(getModelsHandler().getEventModel().getObservableEvents());
         }
         catch (Exception e) {
             displayError(e);
@@ -224,6 +230,46 @@ public class MainViewController extends BaseController implements Initializable 
         tableViewEventHandlers();
     }
 
+    private void checkMenuListener() {
+        cmiUpcoming.selectedProperty().addListener((obs, o, n) -> {
+            if(cmiUpcoming.isSelected()) {
+                cmiHistoric.setSelected(false);
+                showUpcomingOnly();
+            } else {
+                loadAllEvents();
+            }
+        });
+
+        cmiHistoric.selectedProperty().addListener((obs, o, n) -> {
+            if(cmiHistoric.isSelected()) {
+                cmiUpcoming.setSelected(false);
+                showHistoricOnly();
+            } else {
+                loadAllEvents();
+            }
+        });
+    }
+
+    public void showUpcomingOnly() {
+        try {
+            tvEvents.setItems(getModelsHandler().getEventModel().getUpcomingEvents());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void showHistoricOnly() {
+        try {
+            tvEvents.setItems(getModelsHandler().getEventModel().getHistoricEvents());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void handleOpenCreateTicketView(ActionEvent actionEvent) {
+        openStage("/GUI/view/CreateTicketView.fxml", "");
+    }
+
     public void handleSellTicket(ActionEvent actionEvent) {
         //todo implement when we have tickets
     }
@@ -238,7 +284,7 @@ public class MainViewController extends BaseController implements Initializable 
         if (isSelectedItemInTableView(tvEvents)) {
             FXMLLoader loader= openStage("/GUI/view/UpdateEventView.fxml", "update Event");
             UpdateEventController updateEventController = loader.getController();
-            updateEventController.setEvent(tvEvents.getSelectionModel().getSelectedItem());
+            updateEventController.setContent(tvEvents.getSelectionModel().getSelectedItem());
         }
 
 
