@@ -24,3 +24,27 @@ CREATE TABLE Event(
 	Price 				int				NULL
 )
 GO
+
+CREATE TABLE Roles(
+    RoleName            nvarchar(100)   PRIMARY KEY
+)
+GO
+
+INSERT INTO Roles (RoleName) VALUES ('Administrator')
+GO
+INSERT INTO Roles (RoleName) VALUES ('Event Coordinator')
+GO
+
+CREATE TABLE SystemUsers(
+    Email               nvarchar(100)   PRIMARY KEY,
+    FirstName           nvarchar(100)   NOT NULL,
+    LastName            nvarchar(100)   NOT NULL,
+    Password            nvarchar(100)   NOT NULL
+)
+GO
+
+CREATE TABLE SystemUserRoles(
+    SystemUserEmail     nvarchar(100) FOREIGN KEY REFERENCES SystemUsers(Email),
+    RoleName            nvarchar(100) FOREIGN KEY REFERENCES Roles(RoleName),
+    PRIMARY KEY (SystemUserEmail, RoleName)
+)

@@ -23,10 +23,20 @@ public class CreateEventController extends BaseController {
     @FXML
     private DatePicker dateField;
 
-    public void handleCreateEvent(ActionEvent actionEvent) throws Exception {
-        if (isInputFieldsFilled()) {
-            Event eventWithoutId = createEventFromFields();
-            getModelsHandler().getEventModel().createEvent(eventWithoutId);
+    /**
+     * checks if all important fields are filled, and create an event object
+     * todo call create method in model
+     * @param actionEvent
+     */
+    public void handleCreateEvent(ActionEvent actionEvent) {
+        if(isInputFieldsFilled()){
+            Event eventWithoutId = createEventFromFields();;
+            try {
+                getModelsHandler().getEventModel().createEvent(eventWithoutId);
+            }
+            catch (Exception e) {
+                displayError(e);
+            }
             handleCancel();
         }
     }
