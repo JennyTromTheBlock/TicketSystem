@@ -16,7 +16,6 @@ public class ModelsHandler {
         if (handler == null) {
             handler = new ModelsHandler();
         }
-
         return handler;
     }
 

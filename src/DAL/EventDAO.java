@@ -25,17 +25,9 @@ public class EventDAO implements IEventDAO {
         try (Connection conn = connector.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            statement.setString(1, event.getEventName());
-            statement.setString(2, event.getDescription());
-            statement.setString(3, event.getLocation());
-            // Converting util.Date to sql.Timestamp used by the database
-            Timestamp timestamp = new Timestamp(event.getDate().getTime());
-            statement.setTimestamp(4, timestamp);
-            statement.setInt(5, event.getMaxParticipant());
-            statement.setInt(6, event.getPrice());
+            bindEventInfo(event, statement);
 
             statement.executeUpdate();
-
             ResultSet resultSet = statement.getGeneratedKeys();
 
             if (resultSet.next()) {
@@ -45,8 +37,6 @@ public class EventDAO implements IEventDAO {
         }
         catch (SQLException e) {
             e.printStackTrace();
-        }
-        catch (Exception e) {
             throw new Exception("Failed to create event", e);
         }
 
@@ -85,26 +75,31 @@ public class EventDAO implements IEventDAO {
     public Event updateEvent(Event event) throws Exception {
         Event updatedEvent = null;
         String sql = "UPDATE EVENT SET EventName=?, EventDescription=?, EventLocation=?, EventDate=?, MaxParticipant=?, Price=? WHERE Id =?;";
+
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            // Bind parameters
-            statement.setString(1, event.getEventName());
-            statement.setString(2, event.getDescription());
-            statement.setString(3, event.getLocation());
-            Timestamp timestamp = new Timestamp(event.getDate().getTime());
-            statement.setTimestamp(4, timestamp);
-            statement.setInt(5, event.getMaxParticipant());
-            statement.setInt(6, event.getPrice());
+            bindEventInfo(event, statement);
             statement.setInt(7, event.getId());
 
-            // Run the specified SQL statement
             statement.executeUpdate();
+
             updatedEvent = event;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new Exception("Failed to edit the event", e);
         }
+
         return updatedEvent;
+    }
+
+    private void bindEventInfo(Event event, PreparedStatement statement) throws SQLException {
+        statement.setString(1, event.getEventName());
+        statement.setString(2, event.getDescription());
+        statement.setString(3, event.getLocation());
+        Timestamp timestamp = new Timestamp(event.getDate().getTime());
+        statement.setTimestamp(4, timestamp);
+        statement.setInt(5, event.getMaxParticipant());
+        statement.setInt(6, event.getPrice());
     }
 }
