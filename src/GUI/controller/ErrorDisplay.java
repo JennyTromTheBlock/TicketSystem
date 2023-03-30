@@ -16,7 +16,7 @@ public class ErrorDisplay extends BaseController {
         stage.close();
     }
 
-    public void handleOpenGoogle(ActionEvent actionEvent) {
+    public void handleOpenBing(ActionEvent actionEvent) {
         String url = "https://www.bing.com/";
         try {
             java.awt.Desktop.getDesktop().browse( java.net.URI.create(url));

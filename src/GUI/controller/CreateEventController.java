@@ -30,15 +30,20 @@ public class CreateEventController extends BaseController {
      * todo call create method in model
      * @param actionEvent
      */
-    public void handleCreateEvent(ActionEvent actionEvent) throws Exception {
+    public void handleCreateEvent(ActionEvent actionEvent) {
         if(isInputFieldsFilled()){
-            Event eventWithoutId = createEventFromFields();
-            getModelsHandler().getEventModel().createEvent(eventWithoutId);
+            Event eventWithoutId = createEventFromFields();;
+            try {
+                getModelsHandler().getEventModel().createEvent(eventWithoutId);
+            }
+            catch (Exception e) {
+                displayError(e);
+            }
             handleCancel();
         }
     }
 
-    private Event createEventFromFields() throws Exception {
+    private Event createEventFromFields() {
         //gets all parameters for the event object
         String eventName = eventNameField.getText();
         String description = descriptionField.getText();

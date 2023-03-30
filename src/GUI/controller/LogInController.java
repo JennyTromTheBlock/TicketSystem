@@ -32,7 +32,7 @@ public class LogInController extends BaseController implements Initializable {
         try {
             root = loader.load();
         } catch (IOException e) {
-            displayError(e);
+            displayError(new Exception("Failed to load the main view", e));
         }
         Stage stage = new Stage();
         stage.setScene(new Scene(root));

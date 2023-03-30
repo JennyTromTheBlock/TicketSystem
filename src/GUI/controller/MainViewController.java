@@ -167,7 +167,6 @@ public class MainViewController extends BaseController implements Initializable 
         }
         catch (Exception e) {
             displayError(e);
-            throw new RuntimeException(e);
         }
     }
 

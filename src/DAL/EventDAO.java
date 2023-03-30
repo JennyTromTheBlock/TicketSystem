@@ -73,7 +73,7 @@ public class EventDAO implements IEventDAO {
                 allEvents.add(event);
             }
         } catch (Exception e){
-                throw new Exception("Failed to retrieve all my events", e);
+                throw new Exception("Failed to retrieve all events", e);
         }
         return allEvents;
     }
