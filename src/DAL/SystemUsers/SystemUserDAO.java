@@ -2,19 +2,22 @@ package DAL.SystemUsers;
 
 import BE.Role;
 import BE.SystemUser;
-import DAL.Connectors.IConnector;
+import DAL.Connectors.AbstractConnector;
 import DAL.Connectors.SqlConnector;
 
-import javax.management.relation.RoleStatus;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SystemUserDAO implements ISystemUserDAO {
-    private IConnector connector;
+    private AbstractConnector connector;
 
     public SystemUserDAO() throws Exception {
         connector = new SqlConnector();
+    }
+
+    public SystemUserDAO(AbstractConnector connector) {
+        this.connector = connector;
     }
 
     @Override
