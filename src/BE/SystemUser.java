@@ -1,14 +1,19 @@
 package BE;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SystemUser {
     private String email;
     private String firstName;
     private String lastName;
     private String password;
+    private List<Role> roles;
 
     public SystemUser(String email, String password) {
         this.email = email;
         this.password = password;
+        this.roles = new ArrayList<>();
     }
 
     public SystemUser(String email, String firstName, String lastName, String password) {
@@ -16,6 +21,7 @@ public class SystemUser {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
+        this.roles = new ArrayList<>();
     }
 
     public static boolean isEmailValid(String email) {
@@ -43,4 +49,6 @@ public class SystemUser {
     public String getPassword() {
         return password;
     }
+
+    public List<Role> getRoles() { return roles; }
 }
