@@ -168,10 +168,6 @@ public class MainViewController extends BaseController implements Initializable 
         controller.setContent(event);
     }
 
-    public void handleCreateTicket() {
-        openStage("/GUI/view/CreateTicketView.fxml", "");
-    }
-
     public void calendarViewBtn(MouseEvent mouseEvent) {
         // TODO Can't this be moved into a method in the BaseController?  -- nope, it must set the content in the an VBox in MainView.
         // TODO Seems very plausible for us to need to to this again
@@ -205,6 +201,9 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
 
-    public void handleCancleTicket(ActionEvent actionEvent) {
+
+
+    public void handleOpenCreateTicketView(ActionEvent actionEvent) {
+        openStage("/GUI/view/CreateTicketView.fxml", "");
     }
 }
