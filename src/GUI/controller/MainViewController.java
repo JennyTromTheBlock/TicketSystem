@@ -27,13 +27,6 @@ public class MainViewController extends BaseController implements Initializable 
     private MenuButton mbFilter;
     @FXML
     private CheckMenuItem cmiUpcoming, cmiHistoric;
-    public Button btnEditEvent;
-    public Button btnViewInfo;
-    public Button btnSellTicket;
-    public ImageView imgViewEventDate;
-    public ImageView imgViewEventSelected;
-    public ImageView imgViewEventPrice;
-    public ImageView imgViewEventTickets;
     @FXML
     private HBox topBar, hBoxSearch;
     @FXML
@@ -41,7 +34,7 @@ public class MainViewController extends BaseController implements Initializable 
     @FXML
     private BorderPane background;
     @FXML
-    private ImageView ivList, ivCalendar, ivSearchBtn, ivLogo;
+    private ImageView ivList, ivCalendar, ivSearchBtn, ivLogo, ivEventDate, ivEventSelected, ivEventPrice, ivEventTickets;
     @FXML
     private VBox contentArea, sidebar;
     @FXML
@@ -55,7 +48,7 @@ public class MainViewController extends BaseController implements Initializable 
     @FXML
     private Label lblLocation, lblDate, lblTitle, lblPrice, lblTicketsLeft;
     @FXML
-    private Button btnCreateEvent, btnSpecialTicket;
+    private Button btnCreateEvent, btnSpecialTicket, btnEditEvent, btnViewInfo, btnSellTicket;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -154,10 +147,10 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     private void showSymbolsForEventInSidebar() {
-        imgViewEventDate.setImage(new Image("symbols/callender.png"));
-        imgViewEventPrice.setImage(new Image("symbols/price.png"));
-        imgViewEventSelected.setImage(new Image("symbols/location.png"));
-        imgViewEventTickets.setImage(new Image("symbols/ticket.png"));
+        ivEventDate.setImage(new Image("symbols/callender.png"));
+        ivEventPrice.setImage(new Image("symbols/price.png"));
+        ivEventSelected.setImage(new Image("symbols/location.png"));
+        ivEventTickets.setImage(new Image("symbols/ticket.png"));
     }
 
     private void loadImages() {
