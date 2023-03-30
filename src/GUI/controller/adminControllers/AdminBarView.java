@@ -7,6 +7,7 @@ public class AdminBarView {
     }
 
     public void handleSeeEvents(ActionEvent actionEvent) {
+
     }
 
     public void handleSeeUsers(ActionEvent actionEvent) {
