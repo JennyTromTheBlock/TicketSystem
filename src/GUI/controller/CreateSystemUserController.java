@@ -1,17 +1,13 @@
 package GUI.controller;
 
-import BE.Event;
 import BE.SystemUser;
 import GUI.models.ModelsHandler;
-import GUI.util.DateConverter;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
