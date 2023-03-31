@@ -119,4 +119,21 @@ public class SystemUserDAO implements ISystemUserDAO {
         }
         return allUsers;
     }
+
+    @Override
+    public SystemUser deleteSystemUser(SystemUser systemUser) throws Exception {
+        String sql = "DELETE FROM SystemUsers WHERE Email = ?;";
+        try (Connection connection = connector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            // Bind parameters
+            statement.setString(1, systemUser.getEmail());
+
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Failed to delete User", e);
+        }
+        return systemUser;//todo set systemUser null if it does not exist in db.
+    }
 }

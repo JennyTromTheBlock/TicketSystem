@@ -79,7 +79,6 @@ public class EventDAO implements IEventDAO {
 
             bindEventInfo(event, statement);
             statement.setInt(7, event.getId());
-
             statement.executeUpdate();
 
             updatedEvent = event;

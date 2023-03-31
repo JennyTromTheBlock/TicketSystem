@@ -58,4 +58,5 @@ public class eventManager implements IEventManager {
         }
         return historicEvents;
     }
+
 }
