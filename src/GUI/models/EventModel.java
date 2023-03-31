@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.List;
+import java.util.Optional;
 
 public class EventModel {
 
@@ -16,10 +17,11 @@ public class EventModel {
 
     public EventModel() throws Exception {
         eventManager = new eventManager();
-        allEvents = FXCollections.observableList(getAllEvents());
+        allEvents = FXCollections.observableList(retrieveAllEvents());
     }
 
-    public ObservableList<Event> getObservableEvent() {
+    //should be used when getting list in controller
+    public ObservableList<Event> getObservableEvents() {
         return allEvents;
     }
 
@@ -31,17 +33,40 @@ public class EventModel {
         return newEvent;
     }
 
-    public List<Event> getAllEvents() throws Exception {
+    private List<Event> retrieveAllEvents() throws Exception {
         return eventManager.getAllEvents();
     }
 
-    public Event updateEvent(Event eventToUpdate) throws Exception {
+    public void updateEvent(Event eventToUpdate) throws Exception {
         Event updatedEvent = eventManager.updateEvent(eventToUpdate);
 
         if (updatedEvent != null) {
-            allEvents.clear();
-            allEvents.addAll(eventManager.getAllEvents());
+            int oldEventIndex = indexOfEventId(updatedEvent.getId());
+
+            allEvents.set(oldEventIndex, updatedEvent);
         }
-        return updatedEvent;
+    }
+
+    /**
+     * Gets the index of an event, with a given ID.
+     * @param eventId the ID of the event to find.
+     * @return The index of the given event, or -1 if none were found.
+     */
+    private int indexOfEventId(int eventId) {
+        Optional<Event> optionalEvent = allEvents.stream().filter(event -> event.getId() == eventId).findFirst();
+
+        if (optionalEvent.isPresent()) {
+            return allEvents.indexOf(optionalEvent.get());
+        }
+
+        return -1;
+    }
+
+    public ObservableList<Event> getUpcomingEvents() throws Exception {
+        return FXCollections.observableList(eventManager.getUpcomingEvents(allEvents));
+    }
+
+    public ObservableList<Event> getHistoricEvents() throws Exception {
+        return FXCollections.observableList(eventManager.getHistoricEvents(allEvents));
     }
 }

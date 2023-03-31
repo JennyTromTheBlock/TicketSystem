@@ -12,6 +12,13 @@ import java.io.IOException;
 
 public abstract class BaseController {
 
+    public void displayError(Throwable throwable) {
+        FXMLLoader loader = openStage("/GUI/View/ErrorDisplayView.fxml", "");
+        ErrorDisplay controller = loader.getController();
+        controller.setContent(throwable);
+    }
+
+
     public MainViewController getMainController() {
         return mainController;
     }
@@ -46,7 +53,7 @@ public abstract class BaseController {
         try {
             root = loader.load();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            displayError(e);
         }
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
@@ -57,5 +64,4 @@ public abstract class BaseController {
 
         return loader;
     }
-
 }

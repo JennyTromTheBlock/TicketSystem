@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LogInController extends BaseController implements Initializable{
+public class LogInController extends BaseController implements Initializable {
     public ImageView logoImg;
     public Label sideField;
 
@@ -21,7 +21,7 @@ public class LogInController extends BaseController implements Initializable{
     }
 
     public void logInBtn(ActionEvent actionEvent) throws Exception {
-       loadMainViewHandler().getController();
+        loadMainViewHandler().getController();
         Stage s = (Stage) sideField.getScene().getWindow();
         s.close();
     }

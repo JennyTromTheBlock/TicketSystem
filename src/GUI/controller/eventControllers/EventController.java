@@ -50,6 +50,7 @@ public class EventController extends BaseController implements Initializable {
     public void handleEditEvent() {
         FXMLLoader loader = openStage("/GUI/View/UpdateEventView.fxml", "Edit event");
         UpdateEventController controller = loader.getController();
-        controller.setEvent(event);
+        controller.setContent(event);
+
     }
 }

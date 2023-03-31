@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.Separator?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="background" prefHeight="800.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.MainViewController">
+<BorderPane fx:id="background" prefHeight="800.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.MainViewController">
    <top>
       <HBox fx:id="topBar" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER_LEFT">
          <children>
@@ -25,7 +26,12 @@
                </HBox.margin>
             </ImageView>
             <Separator maxHeight="-Infinity" orientation="VERTICAL" prefHeight="36.0" />
-            <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="139.0" text="Filter" />
+            <MenuButton fx:id="mbFilter" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="139.0" text="Filter">
+               <items>
+                  <CheckMenuItem fx:id="cmiUpcoming" mnemonicParsing="false" text="Show upcoming events only" />
+                  <CheckMenuItem fx:id="cmiHistoric" mnemonicParsing="false" text="Show historic events only" />
+                  <CheckMenuItem mnemonicParsing="false" text="Show my events only" />
+               </items></MenuButton>
             <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="50.0" spacing="15.0">
                <children>
                   <ImageView fx:id="ivCalendar" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#calendarViewBtn" pickOnBounds="true" preserveRatio="true" />
@@ -81,7 +87,7 @@
                         <Font name="Berlin Sans FB" size="36.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnSpecialTicket" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="90.0" prefWidth="270.0" text="Special ticket">
+                  <Button fx:id="btnSpecialTicket" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleOpenCreateTicketView" prefHeight="90.0" prefWidth="270.0" text="Special ticket">
                      <font>
                         <Font name="Berlin Sans FB" size="36.0" />
                      </font>
@@ -104,49 +110,78 @@
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin></Separator>
-            <Label fx:id="lblTitle" alignment="CENTER" prefHeight="50.0" prefWidth="422.0" text="Title">
+            <Label fx:id="lblTitle" alignment="CENTER" prefHeight="113.0" prefWidth="394.0">
                <font>
-                  <Font name="Berlin Sans FB" size="18.0" />
+                  <Font name="Berlin Sans FB" size="20.0" />
                </font>
                   </Label>
-            <Label fx:id="lblDate" alignment="CENTER" prefHeight="62.0" prefWidth="394.0" text="date" wrapText="true">
-               <font>
-                  <Font name="Berlin Sans FB" size="16.0" />
-               </font>
+            <HBox spacing="20.0">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" />
                </VBox.margin>
-            </Label>
-            <Label fx:id="lblLocation" alignment="CENTER" layoutX="30.0" layoutY="229.0" prefHeight="62.0" prefWidth="394.0" text="location" wrapText="true">
-               <font>
-                  <Font name="Berlin Sans FB" size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblPrice" alignment="CENTER" layoutX="10.0" layoutY="342.0" prefHeight="62.0" prefWidth="394.0" text="Price" wrapText="true">
-               <font>
-                  <Font name="Berlin Sans FB" size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblTicketsLeft" alignment="CENTER" prefHeight="62.0" prefWidth="428.0" text="Free Tickets" wrapText="true">
-               <font>
-                  <Font name="Berlin Sans FB" size="16.0" />
-               </font>
-            </Label>
-            <Pane prefHeight="63.0" prefWidth="250.0" VBox.vgrow="ALWAYS" />
-            <VBox alignment="CENTER">
                <children>
-                  <Label fx:id="createSpecialTicketBtn1" alignment="CENTER" onMouseClicked="#handleCreateEvent" prefHeight="90.0" prefWidth="268.0" text="Sell Ticket">
+                  <ImageView fx:id="ivEventDate" fitHeight="43.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="lblDate" prefHeight="62.0" prefWidth="394.0" wrapText="true">
                      <font>
-                        <Font name="Berlin Sans FB" size="35.0" />
+                        <Font name="Berlin Sans FB" size="16.0" />
                      </font>
                   </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="43.0" prefWidth="381.0" spacing="20.0">
+               <children>
+                  <ImageView fx:id="ivEventSelected" fitHeight="43.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="lblLocation" prefHeight="62.0" prefWidth="318.0" text="       Select Event For More Info          " wrapText="true">
+                     <font>
+                        <Font name="Berlin Sans FB" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox spacing="20.0">
+               <children>
+                  <ImageView fx:id="ivEventPrice" fitHeight="43.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="lblPrice" prefHeight="62.0" prefWidth="394.0" wrapText="true">
+                     <font>
+                        <Font name="Berlin Sans FB" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+            </HBox>
+            <HBox spacing="20.0">
+               <children>
+                  <ImageView fx:id="ivEventTickets" fitHeight="43.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="lblTicketsLeft" prefHeight="62.0" prefWidth="428.0" wrapText="true">
+                     <font>
+                        <Font name="Berlin Sans FB" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+            </HBox>
+            <Pane prefHeight="63.0" prefWidth="250.0" VBox.vgrow="ALWAYS" />
+            <VBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Button fx:id="btnSellTicket" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSellTicket" prefHeight="71.0" prefWidth="232.0" text="Sell ticket" visible="false">
+                     <font>
+                        <Font name="Berlin Sans FB" size="36.0" />
+                     </font>
+                  </Button>
                   <HBox alignment="CENTER" prefHeight="65.0" prefWidth="394.0" spacing="40.0">
                      <VBox.margin>
                         <Insets bottom="15.0" />
                      </VBox.margin>
                      <children>
-                        <Button mnemonicParsing="false" text="View Info" />
-                        <Button mnemonicParsing="false" text="Edit Event" />
+                        <Button fx:id="btnViewInfo" mnemonicParsing="false" onAction="#handleViewInfo" text="View Info" visible="false" />
+                        <Button fx:id="btnEditEvent" mnemonicParsing="false" onAction="#handleEditEvent" text="Edit Event" visible="false" />
                      </children>
                   </HBox>
                </children>
