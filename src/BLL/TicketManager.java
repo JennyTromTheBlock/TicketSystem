@@ -2,13 +2,14 @@ package BLL;
 
 import BE.Ticket;
 import DAL.ITicketDAO;
+import DAL.TicketDAO;
 
 public class TicketManager implements ITicketManager {
 
     private final ITicketDAO databaseAccess;
 
-    public TicketManager(ITicketDAO databaseAccess) {
-        this.databaseAccess = databaseAccess;
+    public TicketManager() throws Exception {
+        this.databaseAccess = new TicketDAO();
     }
 
     @Override

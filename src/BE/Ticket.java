@@ -22,6 +22,11 @@ public class Ticket {
         this.eventDate = eventDate;
     }
 
+    public Ticket(String customerName, String customerEmail) {
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
+    }
+
     public int getId() {
         return id;
     }
