@@ -24,3 +24,7 @@
     -fx-border-width: 2;
 }
 
+#lblInputFieldValidation, #lblLocationFieldValidation, #lblDateFieldValidation, #lblFirstNameValidation, #lblLastNameValidation, #lblEmailValidation, #lblPasswordValidation {
+    -fx-text-fill: red;
+}
+

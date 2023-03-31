@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CreateSystemUserController extends BaseController {
     @FXML
@@ -21,13 +23,15 @@ public class CreateSystemUserController extends BaseController {
     public PasswordField pwfPassword;
 
     public void handleCreateUser() {
-        SystemUser user = createSystemUserFromFields();
-        try {
-            ModelsHandler.getInstance().getSystemUserModel().createSystemUser(user);
-        } catch (Exception e) {
-            displayError(e);
+        if(isInputFieldsFilled()) {
+            SystemUser user = createSystemUserFromFields();
+            try {
+                ModelsHandler.getInstance().getSystemUserModel().createSystemUser(user);
+            } catch (Exception e) {
+                displayError(e);
+            }
+            handleCancel();
         }
-        handleCancel();
     }
 
     private SystemUser createSystemUserFromFields() {
@@ -37,6 +41,57 @@ public class CreateSystemUserController extends BaseController {
         String password = pwfPassword.getText();
 
         return new SystemUser(email, firstName, lastName, password);
+    }
+
+    /**
+     * Checks if all the input Fields are filled with valid data
+     * @return true if all the input fields are valid, false otherwise
+     */
+    private boolean isInputFieldsFilled() {
+        return isFirstNameLegit() &&
+                isLastNameLegit() &&
+                isEmailLegit() &&
+                isPasswordLegit();
+    }
+
+    private boolean isFirstNameLegit() {
+        if (txtfFirstName.getText().isEmpty()) {
+            lblFirstNameValidation.setText("You must enter your first name");
+            return false;
+        }
+        lblFirstNameValidation.setText("");
+        return true;
+    }
+
+    private boolean isLastNameLegit() {
+        if (txtfLastName.getText().isEmpty()) {
+            lblLastNameValidation.setText("You must enter your last name");
+            return false;
+        }
+        lblLastNameValidation.setText("");
+        return true;
+    }
+
+    private boolean isEmailLegit() {
+        String email = txtfEmail.getText();
+        Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+        Matcher mat = pattern.matcher(email);
+
+        if(mat.matches() && !txtfEmail.getText().isEmpty()){
+            lblEmailValidation.setText("");
+            return true;
+        }
+        lblEmailValidation.setText("You must enter a valid email address");
+        return false;
+    }
+
+    private boolean isPasswordLegit() {
+        if (pwfPassword.getText().isEmpty()) {
+            lblPasswordValidation.setText("You must enter a password");
+            return false;
+        }
+        lblPasswordValidation.setText("");
+        return true;
     }
 
     public void handleCancel() {
