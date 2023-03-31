@@ -21,7 +21,8 @@ public class LogInController extends BaseController implements Initializable {
     }
 
     public void logInBtn(ActionEvent actionEvent) throws Exception {
-        loadMainViewHandler().getController();
+        loadMainViewHandler().getController().setAdminContent();
+        //TODO: Remove .setAdminContent for EventCoordinator view (and move this check to MainViewController?)
         Stage s = (Stage) sideField.getScene().getWindow();
         s.close();
     }
