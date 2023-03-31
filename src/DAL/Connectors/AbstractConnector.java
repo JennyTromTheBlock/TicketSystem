@@ -1,6 +1,7 @@
 package DAL.Connectors;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,17 +21,19 @@ import java.util.Properties;
  */
 public abstract class AbstractConnector {
     private final String CONFIG;
+    private final String errorMessage;
     private SQLServerDataSource dataSource;
 
-    public AbstractConnector(String configPath) throws Exception {
+    public AbstractConnector(String configPath, String errorMessage) throws Exception {
         this.CONFIG = configPath;
+        this.errorMessage = errorMessage;
 
         try {
             connect(getConfig());
         }
         catch (IOException e) {
             e.printStackTrace();
-            throw new Exception("Failed to connect to the server", e);
+            throw new Exception(errorMessage, e);
         }
     }
 
@@ -54,9 +57,13 @@ public abstract class AbstractConnector {
         return new DatabaseConfig(server, name, user, password);
     }
 
-    public SQLServerDataSource getDataSource() {
-        return this.dataSource;
+    public Connection getConnection() throws Exception {
+        try {
+            return dataSource.getConnection();
+        }
+        catch (SQLServerException e) {
+            e.printStackTrace();
+            throw new Exception(errorMessage, e);
+        }
     }
-
-    abstract public Connection getConnection() throws Exception;
 }
