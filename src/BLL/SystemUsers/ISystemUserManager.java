@@ -2,6 +2,8 @@ package BLL.SystemUsers;
 
 import BE.SystemUser;
 
+import java.util.List;
+
 public interface ISystemUserManager {
     /**
      * Tries to authenticate a system user.
@@ -13,4 +15,9 @@ public interface ISystemUserManager {
 
 
     SystemUser createSystemUser(SystemUser systemUser) throws Exception;
+
+
+    SystemUser deleteSystemUser(SystemUser systemUser) throws Exception;
+
+    List<SystemUser> getAllSystemUsers() throws Exception;
 }

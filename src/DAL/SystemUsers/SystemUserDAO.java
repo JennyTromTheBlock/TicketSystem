@@ -5,10 +5,7 @@ import BE.SystemUser;
 import DAL.Connectors.IConnector;
 import DAL.Connectors.SqlConnector;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,8 +96,44 @@ public class SystemUserDAO implements ISystemUserDAO {
             return user;
     }
 
-    public List<SystemUser> getAllSystemUsers(){
+    public List<SystemUser> getAllSystemUsers() throws Exception {
 
-        return null;
+        ArrayList<SystemUser> allUsers = new ArrayList<>();
+
+        try (Connection connection = connector.getConnection();
+             Statement statement = connection.createStatement()) {
+            String sql = "SELECT * FROM SystemUsers;";
+            ResultSet rs = statement.executeQuery(sql);
+
+            while(rs.next()) {
+                String email = rs.getString("Email");
+                String firstName = rs.getString("FirstName");
+                String lastName = rs.getString("LastName");
+                String password = rs.getString("Password");
+
+                SystemUser systemUser = new SystemUser(email, firstName, lastName, password);
+                allUsers.add(systemUser);
+            }
+        } catch (Exception e){
+            throw new Exception("Failed to retrieve all Users", e);
+        }
+        return allUsers;
+    }
+
+    @Override
+    public SystemUser deleteSystemUser(SystemUser systemUser) throws Exception {
+        String sql = "DELETE FROM SystemUsers WHERE Email = ?;";
+        try (Connection connection = connector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            // Bind parameters
+            statement.setString(1, systemUser.getEmail());
+
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Failed to delete User", e);
+        }
+        return systemUser;//todo set systemUser null if it does not exist in db.
     }
 }

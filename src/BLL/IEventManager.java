@@ -16,4 +16,5 @@ public interface IEventManager {
     List<Event> getUpcomingEvents(List<Event> events) throws Exception;
 
     List<Event> getHistoricEvents(List<Event> events) throws Exception;
+
 }

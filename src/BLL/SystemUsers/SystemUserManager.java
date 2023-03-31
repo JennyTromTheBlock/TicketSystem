@@ -4,6 +4,8 @@ import BE.SystemUser;
 import BLL.DALFacades.AuthenticationFacade;
 import DAL.SystemUsers.SystemUserDAO;
 
+import java.util.List;
+
 public class SystemUserManager implements ISystemUserManager {
 
 
@@ -25,5 +27,15 @@ public class SystemUserManager implements ISystemUserManager {
     @Override
     public SystemUser createSystemUser(SystemUser systemUser) throws Exception {
         return systemUserDAO.createSystemUser(systemUser);
+    }
+
+    @Override
+    public SystemUser deleteSystemUser(SystemUser systemUser) throws Exception {
+        return systemUserDAO.deleteSystemUser(systemUser);
+    }
+
+    @Override
+    public List<SystemUser> getAllSystemUsers() throws Exception {
+        return systemUserDAO.getAllSystemUsers();
     }
 }
