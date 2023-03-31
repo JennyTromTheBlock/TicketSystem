@@ -2,6 +2,8 @@ package DAL.SystemUsers;
 
 import BE.SystemUser;
 
+import java.util.List;
+
 public interface ISystemUserDAO {
     /**
      * Validates if a given user exists.
@@ -13,4 +15,6 @@ public interface ISystemUserDAO {
     SystemUser SystemUserValidLogin(SystemUser user) throws Exception;
 
     SystemUser createSystemUser(SystemUser systemUser) throws Exception;
+
+    List<SystemUser> getAllSystemUsers() throws Exception;
 }
