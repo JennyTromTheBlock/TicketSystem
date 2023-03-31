@@ -1,20 +1,26 @@
-.white-background{
-    -fx-background-color: #fff;
-}
-.transparent{
-    -fx-background-color: rgba(0,0,0,0);
-}
 
-#topBar, #sidebar{
+#topBar, #sideField{
     -fx-background-color: #fff;
 }
 
-#textField{
+#txtSearch{
     -fx-background-color: rgba(0,0,0,0);
 }
 
-#searchHBox, #yourEvents, #allEvents, #createEvent{
+#hBoxSearch {
     -fx-border-radius: 50;
     -fx-border-color: #D7D7D7;
+}
+
+#btnCreateEvent, #btnSpecialTicket{
+    -fx-border-radius: 50;
+    -fx-border-color: #D7D7D7;
+    -fx-background-radius: 50;
+}
+
+#sidebar{
+    -fx-border-radius: 20;
+    -fx-border-color: #D7D7D7;
+    -fx-border-width: 2;
 }
 

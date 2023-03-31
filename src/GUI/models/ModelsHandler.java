@@ -8,7 +8,7 @@ public class ModelsHandler {
     private static ModelsHandler handler;
     private EventModel eventModel;
 
-    public ModelsHandler() throws Exception {
+    private ModelsHandler() throws Exception {
         eventModel = new EventModel();
     }
 
@@ -16,7 +16,6 @@ public class ModelsHandler {
         if (handler == null) {
             handler = new ModelsHandler();
         }
-
         return handler;
     }
 

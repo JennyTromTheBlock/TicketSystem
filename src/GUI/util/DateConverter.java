@@ -27,10 +27,10 @@ public class DateConverter {
     }
 
     public static String getTimeFromDate(Date date){
-        Date resultDate = date;
+
         Calendar timeOfDay = Calendar.getInstance();
-        timeOfDay.setTime(resultDate);
+        timeOfDay.setTime(date);
         //splits the time string into hours and minutes
-        return timeOfDay.HOUR + ":" + timeOfDay.MINUTE;
+        return timeOfDay.getTime().getHours() + ":" + timeOfDay.getTime().getMinutes();
     }
 }
