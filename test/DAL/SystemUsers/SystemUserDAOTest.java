@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SystemUserDAOTest {
 
-    @DisplayName("Login")
+    @DisplayName("DAL System User Valid Login")
     @Test
     void systemUserValidLogin() {
         try {
