@@ -1,6 +1,9 @@
 package GUI.controller;
 
 import BE.Event;
+import GUI.controller.calendarControllers.CalendarController;
+import GUI.controller.eventControllers.EventController;
+import GUI.controller.eventControllers.UpdateEventController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -180,11 +183,11 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     public void handleCreateEvent() {
-        openStage("/GUI/View/CreateEvent.fxml", "");
+        openStage("/GUI/view/eventViews/CreateEvent.fxml", "");
     }
 
     public void handleViewEvent(Event event) {
-        FXMLLoader loader = openStage("/GUI/View/EventView.fxml", "");
+        FXMLLoader loader = openStage("/GUI/view/eventViews/EventView.fxml", "");
         EventController controller = loader.getController();
         controller.setContent(event);
     }
@@ -193,7 +196,7 @@ public class MainViewController extends BaseController implements Initializable 
         // TODO Can't this be moved into a method in the BaseController?  -- nope, it must set the content in the an VBox in MainView.
         // TODO Seems very plausible for us to need to to this again
         //Load the new stage & view
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CalendarView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/calendarViews/CalendarView.fxml"));
         Parent root;
 
         try {
@@ -202,10 +205,6 @@ public class MainViewController extends BaseController implements Initializable 
         } catch (IOException e) {
             displayError(e);
         }
-
-        CalendarController controller = loader.getController();
-        controller.setMainViewController(this);
-
     }
 
     private void setNodeInMainView(Parent root) {
@@ -274,7 +273,7 @@ public class MainViewController extends BaseController implements Initializable 
 
     public void handleEditEvent(ActionEvent actionEvent) {
         if (isSelectedItemInTableView(tvEvents)) {
-            FXMLLoader loader= openStage("/GUI/view/UpdateEventView.fxml", "update Event");
+            FXMLLoader loader= openStage("/GUI/view/eventViews/UpdateEventView.fxml", "update Event");
             UpdateEventController updateEventController = loader.getController();
             updateEventController.setContent(tvEvents.getSelectionModel().getSelectedItem());
         }

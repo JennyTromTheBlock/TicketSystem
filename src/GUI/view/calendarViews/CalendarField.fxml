@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" fillWidth="false" prefHeight="20.0" prefWidth="107.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.calendarControllers.CalendarField">
+   <children>
+      <Label fx:id="header" alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="127.0" />
+      <Label fx:id="lblFirstEvent" alignment="CENTER" prefHeight="17.0" prefWidth="90.0">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+      <Label fx:id="lblSecondEvent" alignment="CENTER" layoutX="10.0" layoutY="32.0" prefHeight="17.0" prefWidth="91.0">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+      <Label fx:id="lblMoreEvents" layoutX="10.0" layoutY="51.0" prefHeight="18.0" prefWidth="136.0">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+   </children>
+</VBox>
