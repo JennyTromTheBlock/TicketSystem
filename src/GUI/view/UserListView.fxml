@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="GUI.controller.UserListView"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<TableView fx:id="tvUsers" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.UserListView">
+  <columns>
+    <TableColumn fx:id="tcFirstName" prefWidth="150.39999693632126" text="First Name" />
+    <TableColumn fx:id="tcLastName" minWidth="0.0" prefWidth="211.19996643066406" text="Last Name" />
+      <TableColumn fx:id="tcEmail" minWidth="0.0" prefWidth="238.4000244140625" text="Email" />
+  </columns>
+</TableView>

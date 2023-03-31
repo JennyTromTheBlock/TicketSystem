@@ -13,5 +13,6 @@ public class AdminBarView extends BaseController {
     }
 
     public void handleSeeUsers(ActionEvent actionEvent) {
+
     }
 }
