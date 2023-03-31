@@ -20,7 +20,7 @@ public class TicketDAO implements ITicketDAO {
         Ticket newTicket = null;
 
         String sql = "INSERT INTO Tickets " +
-                "(CustomerEmail, CustomerName)" + "VALUES (?, ?)";
+                "(EventID, CustomerEmail, CustomerName)" + "VALUES (?, ?, ?)";
 
         try (Connection conn = connector.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -28,14 +28,13 @@ public class TicketDAO implements ITicketDAO {
 
             String customerEmail = ticket.getCustomerEmail();
             String customerName = ticket.getCustomerName();
-            String eventName = ticket.getEventName();
-            int price = ticket.getPrice();
-            String eventLocation = ticket.getEventLocation();
-            Date eventDate = ticket.getEventDate();
+            int eventId = ticket.getEvent().getId();
+
 
             //todo ticket be should contain event id so it can be set in db
-            statement.setString(1, customerEmail);
-            statement.setString(2, customerName);
+            statement.setInt(1, eventId);
+            statement.setString(2, customerEmail);
+            statement.setString(3, customerName);
 
 
             statement.executeUpdate();
@@ -44,7 +43,7 @@ public class TicketDAO implements ITicketDAO {
 
             if (resultSet.next()) {
                 int id = resultSet.getInt(1);
-                newTicket = new Ticket(id, customerName, customerEmail, eventName, price, eventLocation, eventDate);
+                newTicket = new Ticket(id, customerName, customerEmail, ticket.getEvent());
             }
         }
         catch (SQLException e) {

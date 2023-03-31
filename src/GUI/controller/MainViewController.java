@@ -260,16 +260,22 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     public void handleOpenCreateTicketView(ActionEvent actionEvent) {
-        openStage("/GUI/view/CreateTicketView.fxml", "");
+
     }
 
-    public void handleSellTicket(ActionEvent actionEvent) {
-        //todo implement when we have tickets
-    }
 
     public void handleViewInfo(ActionEvent actionEvent) {
         if (isSelectedItemInTableView(tvEvents)) {
             handleViewEvent(tvEvents.getSelectionModel().getSelectedItem());
+        }
+    }
+
+    public void handleSellTicket(ActionEvent actionEvent) {
+        if (isSelectedItemInTableView(tvEvents)) {
+            FXMLLoader loader = openStage("/GUI/view/CreateTicketView.fxml", "update Ticket");
+            CreateTicketController controller = loader.getController();
+            controller.setContent(tvEvents.getSelectionModel().getSelectedItem());
+            System.out.println(tvEvents.getSelectionModel().getSelectedItem().getEventName());
         }
     }
 
@@ -279,7 +285,6 @@ public class MainViewController extends BaseController implements Initializable 
             UpdateEventController updateEventController = loader.getController();
             updateEventController.setContent(tvEvents.getSelectionModel().getSelectedItem());
         }
-
 
     }
 }

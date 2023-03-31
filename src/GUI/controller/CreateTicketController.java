@@ -18,31 +18,33 @@ public class CreateTicketController extends BaseController {
     @FXML
     private Label lblTicketAmount, lblPriceTotal, lblPriceAmount, lblTicketEventName, lblTicketEventDate, lblTcketEventLocation, lblTicketPrice;
 
+    private Event selectedEvent;
+
     public CreateTicketController() {
     }
 
 
     public void handleCreateTicket2() throws Exception {
         Ticket newTicket = createTicketFromFields();
-        getModelsHandler().getTicketModel().createTicket(newTicket);
-        getModelsHandler().getEventModel()
+        Ticket ticket = getModelsHandler().getTicketModel().createTicket(newTicket);
 
     }
 
     private Ticket createTicketFromFields() {
 
-
+        int eventId = selectedEvent.getId();
         String customerName = txtfCustomerName.getText();
         String customerEmail = txtfCustomerEmail.getText();
         System.out.println(customerEmail);
         System.out.println(customerName);
 
-        return new Ticket(customerName, customerEmail);
+        return new Ticket(customerName, customerEmail, selectedEvent);
     }
-    public void setContent(Event event){
-
+    public void setContent(Event event) {
+       selectedEvent = event;
 
     }
+
     public void handleCancleTicket(ActionEvent actionEvent) {
     }
 }
