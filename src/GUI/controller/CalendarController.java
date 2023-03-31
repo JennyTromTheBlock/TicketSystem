@@ -36,11 +36,8 @@ public class CalendarController extends BaseController implements Initializable 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dateFocus = ZonedDateTime.now();
         today = ZonedDateTime.now();
-        try {
+
             drawCalendar();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public void setMainViewController(MainViewController main){
@@ -48,21 +45,21 @@ public class CalendarController extends BaseController implements Initializable 
     }
 
     @FXML
-    void backOneMonth(ActionEvent event) throws Exception {
+    void backOneMonth(ActionEvent event)  {
         dateFocus = dateFocus.minusMonths(1);
         calendar.getChildren().clear();
-        drawCalendar();
+            drawCalendar();
     }
 
     @FXML
-    void forwardOneMonth(ActionEvent event) throws Exception {
+    void forwardOneMonth(ActionEvent event){
         dateFocus = dateFocus.plusMonths(1);
         calendar.getChildren().clear();
         drawCalendar();
     }
 
     //todo create better calendar drawing.. does not resize and are ugly
-    private void drawCalendar() throws Exception {
+    private void drawCalendar() {
         year.setText(String.valueOf(dateFocus.getYear()));
         month.setText(String.valueOf(dateFocus.getMonth()));
 
@@ -73,7 +70,12 @@ public class CalendarController extends BaseController implements Initializable 
         double spacingV = calendar.getVgap();
 
         //List of activities for a given month
-        Map<Integer, List<Event>> calendarActivityMap = getCalendarActivitiesMonth(dateFocus);
+        Map<Integer, List<Event>> calendarActivityMap = null;
+        try {
+            calendarActivityMap = getCalendarActivitiesMonth(dateFocus);
+        } catch (Exception e) {
+            displayError(e);
+        }
 
         int monthMaxDate = dateFocus.getMonth().maxLength();
         //Check for leap year

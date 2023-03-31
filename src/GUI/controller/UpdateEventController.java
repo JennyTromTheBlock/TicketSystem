@@ -35,8 +35,7 @@ public class UpdateEventController extends BaseController {
                 handleCancel();
             }
             catch (Exception e) {
-                //TODO display the error for the system user
-                throw new RuntimeException(e);
+                displayError(e);
             }
         }
     }

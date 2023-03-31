@@ -35,8 +35,7 @@ public class EventDAO implements IEventDAO {
                 newEvent = new Event(id, event);
             }
         }
-        catch (SQLException e) {
-            e.printStackTrace();
+        catch (Exception e) {
             throw new Exception("Failed to create event", e);
         }
 
@@ -66,8 +65,7 @@ public class EventDAO implements IEventDAO {
                 allEvents.add(event);
             }
         } catch (Exception e){
-                e.printStackTrace();
-                throw new Exception("Failed to retrieve all my events", e);
+                throw new Exception("Failed to retrieve all events", e);
         }
         return allEvents;
     }
@@ -86,10 +84,8 @@ public class EventDAO implements IEventDAO {
 
             updatedEvent = event;
         } catch (SQLException e) {
-            e.printStackTrace();
             throw new Exception("Failed to edit the event", e);
         }
-
         return updatedEvent;
     }
 
