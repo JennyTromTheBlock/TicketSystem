@@ -12,6 +12,6 @@ public class AuthenticationFacade {
     }
 
     public SystemUser authenticateSystemUser(SystemUser user) throws Exception {
-        return systemUserDAO.SystemUserValidLogin(user);
+        return systemUserDAO.systemUserValidLogin(user);
     }
 }

@@ -21,7 +21,7 @@ public class SystemUserDAO implements ISystemUserDAO {
     }
 
     @Override
-    public SystemUser SystemUserValidLogin(SystemUser user) throws Exception {
+    public SystemUser systemUserValidLogin(SystemUser user) throws Exception {
         SystemUser systemUser = null;
 
         String sql = "SELECT * FROM SystemUsers WHERE Email = ? AND Password = ?";

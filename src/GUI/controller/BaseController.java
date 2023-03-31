@@ -1,6 +1,7 @@
 package GUI.controller;
 
 import GUI.models.ModelsHandler;
+import GUI.util.ViewPaths;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,12 +12,11 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public abstract class BaseController {
-
-        public void displayError(Throwable throwable) {
-            FXMLLoader loader = openStage("/GUI/View/ErrorDisplayView.fxml", "");
-            ErrorDisplay controller = loader.getController();
-            controller.setContent(throwable);
-        }
+    public void displayError(Throwable throwable) {
+        FXMLLoader loader = openStage(ViewPaths.ERROR_DISPLAYER, "");
+        ErrorDisplay controller = loader.getController();
+        controller.setContent(throwable);
+    }
 
     public ModelsHandler getModelsHandler() throws Exception {
         return ModelsHandler.getInstance();
@@ -24,7 +24,8 @@ public abstract class BaseController {
 
     /**
      * Opens a new window
-     * @param fxmlPath, the path of the FXML to load
+     *
+     * @param fxmlPath,   the path of the FXML to load
      * @param sceneTitle, the title for the scene
      * @return FXMLLoader, in case a handle to the new controller is needed
      */
@@ -35,7 +36,7 @@ public abstract class BaseController {
         try {
             root = loader.load();
         } catch (IOException e) {
-            displayError(e);
+            displayError(new Exception("Failed to open window", e));
         }
         Stage stage = new Stage();
         stage.setScene(new Scene(root));

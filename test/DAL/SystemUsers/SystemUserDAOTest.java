@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class SystemUserDAOTest {
 
     @DisplayName("DAL System User Valid Login")
@@ -18,7 +16,7 @@ class SystemUserDAOTest {
             ISystemUserDAO systemUserDAO = new SystemUserDAO(new TestSqlConnector());
             SystemUser systemUser1 = new SystemUser("patand01@easv365.dk", "1234");
 
-            SystemUser loginUser = systemUserDAO.SystemUserValidLogin(systemUser1);
+            SystemUser loginUser = systemUserDAO.systemUserValidLogin(systemUser1);
 
             boolean isLoginUserEmailCorrect = loginUser.getEmail().equals(systemUser1.getEmail());
             boolean isLoginUserFirstName = loginUser.getFirstName().equals("Patrick Darling");

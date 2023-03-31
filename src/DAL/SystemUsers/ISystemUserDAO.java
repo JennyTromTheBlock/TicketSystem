@@ -10,5 +10,5 @@ public interface ISystemUserDAO {
      * the Email and password are valid. Null if otherwise.
      * @throws Exception
      */
-    SystemUser SystemUserValidLogin(SystemUser user) throws Exception;
+    SystemUser systemUserValidLogin(SystemUser user) throws Exception;
 }
