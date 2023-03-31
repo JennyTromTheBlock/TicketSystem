@@ -42,6 +42,7 @@ public abstract class BaseController {
         stage.setTitle(sceneTitle);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
+        stage.getScene().getStylesheets().add(getClass().getResource("/GUI/css/Style.css").toExternalForm());
         stage.show();
 
         return loader;
