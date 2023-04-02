@@ -67,6 +67,7 @@ public class MainViewController extends BaseController implements Initializable 
 
     }
 
+
     /**
      * Adds event handlers to the TableView that checks for interaction with an event
      */
@@ -162,7 +163,7 @@ public class MainViewController extends BaseController implements Initializable 
         ivLogo.setImage(new Image("symbols/EASYDVEST.png"));
     }
 
-    private void loadAllEvents() {
+    public void loadAllEvents() {
         try {
             tvEvents.setItems(getModelsHandler().getEventModel().getObservableEvents());
         }
@@ -174,7 +175,7 @@ public class MainViewController extends BaseController implements Initializable 
     /**
      * Extracts the value from a given TableView row item, using the given property name.
      */
-    private void loadTableColumns() {
+    public void loadTableColumns() {
         tcTitle.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         tcLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
         tcMaxParticipants.setCellValueFactory(new PropertyValueFactory<>("maxParticipant"));
@@ -212,7 +213,7 @@ public class MainViewController extends BaseController implements Initializable 
         contentArea.getChildren().add(1, root);
     }
 
-    public void listViewBtn(MouseEvent mouseEvent) {
+    public void listViewBtn() {
         loadImages();
         loadTableColumns();
         loadAllEvents();

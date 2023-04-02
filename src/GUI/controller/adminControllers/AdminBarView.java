@@ -10,8 +10,8 @@ public class AdminBarView extends BaseController {
         openStage("/GUI/view/CreateSystemUserView.fxml", "");
     }
 
-    public void handleSeeEvents(ActionEvent actionEvent) {
-
+    public void handleSeeEvents(ActionEvent actionEvent) throws Exception {
+        loadMainViewHandler().getController().listViewBtn();
     }
 
     public void handleSeeUsers(ActionEvent actionEvent) {
