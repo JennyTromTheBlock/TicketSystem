@@ -1,6 +1,7 @@
-package GUI.controller;
+package GUI.controller.adminControllers;
 
 import BE.SystemUser;
+import GUI.controller.BaseController;
 import GUI.models.ModelsHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

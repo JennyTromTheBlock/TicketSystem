@@ -1,7 +1,6 @@
 package GUI.controller;
 
 import BE.Event;
-import GUI.controller.calendarControllers.CalendarController;
 import GUI.controller.eventControllers.EventController;
 import GUI.controller.eventControllers.UpdateEventController;
 import javafx.event.ActionEvent;
@@ -65,6 +64,7 @@ public class MainViewController extends BaseController implements Initializable 
         tableViewEventHandlers();
 
         checkMenuListener();
+
     }
 
     /**
@@ -207,7 +207,7 @@ public class MainViewController extends BaseController implements Initializable 
         }
     }
 
-    private void setNodeInMainView(Parent root) {
+    public void setNodeInMainView(Parent root) {
         contentArea.getChildren().remove(1);
         contentArea.getChildren().add(1, root);
     }

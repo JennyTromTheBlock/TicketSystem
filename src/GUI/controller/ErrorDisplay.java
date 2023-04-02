@@ -26,6 +26,11 @@ public class ErrorDisplay extends BaseController {
     }
 
     public void setContent(Throwable throwable) {
-        lblErrorDisplay.setText( "Error:  " + throwable.getCause().getLocalizedMessage());
+        String text = "Error:  ";
+        if(throwable.equals(null)){
+            text += throwable.getCause().getLocalizedMessage();
+            text += throwable;
+        }
+        lblErrorDisplay.setText(text);
     }
 }
