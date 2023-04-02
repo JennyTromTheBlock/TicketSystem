@@ -1,14 +1,15 @@
 package DAL;
 
 import BE.Ticket;
-import DAL.Connectors.IConnector;
+import DAL.Connectors.AbstractConnector;
 import DAL.Connectors.SqlConnector;
 
 import java.sql.*;
 
 public class TicketDAO implements ITicketDAO {
 
-    IConnector connector;
+
+    AbstractConnector connector;
 
 
     public TicketDAO() throws Exception {
