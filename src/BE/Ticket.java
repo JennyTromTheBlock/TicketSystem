@@ -1,7 +1,5 @@
 package BE;
 
-import java.util.Date;
-
 public class Ticket {
 
     private int id;
@@ -56,7 +54,5 @@ public class Ticket {
     public void setCustomerEmail(String customerEmail) {
         this.customerEmail = customerEmail;
     }
-
-
 
 }

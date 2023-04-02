@@ -5,7 +5,6 @@ import DAL.Connectors.IConnector;
 import DAL.Connectors.SqlConnector;
 
 import java.sql.*;
-import java.util.Date;
 
 public class TicketDAO implements ITicketDAO {
 
@@ -16,7 +15,6 @@ public class TicketDAO implements ITicketDAO {
         connector = new SqlConnector();
     }
     public Ticket createTicket(Ticket ticket) throws Exception {
-
         Ticket newTicket = null;
 
         String sql = "INSERT INTO Tickets " +
@@ -25,17 +23,13 @@ public class TicketDAO implements ITicketDAO {
         try (Connection conn = connector.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-
             String customerEmail = ticket.getCustomerEmail();
             String customerName = ticket.getCustomerName();
             int eventId = ticket.getEvent().getId();
 
-
-            //todo ticket be should contain event id so it can be set in db
             statement.setInt(1, eventId);
             statement.setString(2, customerEmail);
             statement.setString(3, customerName);
-
 
             statement.executeUpdate();
 
