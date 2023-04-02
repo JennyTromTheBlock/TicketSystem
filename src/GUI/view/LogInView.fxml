@@ -23,13 +23,13 @@
                   <Insets bottom="50.0" top="20.0" />
                </VBox.margin>
                <children>
-                  <TextField prefHeight="26.0" prefWidth="172.0" promptText="Username">
+                  <TextField prefHeight="26.0" prefWidth="172.0" promptText="Username" text="steeck@easv365.dk">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin></TextField>
                </children>
             </VBox>
-            <TextField promptText="Password">
+            <TextField promptText="Password" text="kode">
                <VBox.margin>
                   <Insets bottom="50.0" />
                </VBox.margin>
