@@ -2,15 +2,15 @@ USE [master]
 GO
 
 
-IF DB_ID('EventSystemDB') IS NOT NULL  
+IF DB_ID('EventSystemTestDB') IS NOT NULL
 BEGIN
-	DROP DATABASE EventSystemDB	
+	DROP DATABASE EventSystemTestDB
 END
 
-CREATE DATABASE EventSystemDB
+CREATE DATABASE EventSystemTestDB
 GO
 
-USE EventSystemDB
+USE EventSystemTestDB
 GO
 
 
@@ -43,8 +43,20 @@ CREATE TABLE SystemUsers(
 )
 GO
 
+INSERT INTO SystemUsers (Email, FirstName, LastName, Password) VALUES (
+    'patand01@easv365.dk',
+    'Patrick Darling',
+    'Andersen',
+    '1234'
+
+)
+GO
+
 CREATE TABLE SystemUserRoles(
     SystemUserEmail     nvarchar(100) FOREIGN KEY REFERENCES SystemUsers(Email),
     RoleName            nvarchar(100) FOREIGN KEY REFERENCES Roles(RoleName),
     PRIMARY KEY (SystemUserEmail, RoleName)
 )
+GO
+
+INSERT INTO SystemUserRoles (SystemUserEmail, RoleName) VALUES ('patand01@easv365.dk', 'Administrator')

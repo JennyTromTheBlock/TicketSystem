@@ -1,6 +1,7 @@
-package GUI.controller;
+package GUI.controller.eventControllers;
 
 import BE.Event;
+import GUI.controller.BaseController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -47,7 +48,7 @@ public class EventController extends BaseController implements Initializable {
     }
 
     public void handleEditEvent() {
-        FXMLLoader loader = openStage("/GUI/View/UpdateEventView.fxml", "Edit event");
+        FXMLLoader loader = openStage("/GUI/view/eventViews/UpdateEventView.fxml", "Edit event");
         UpdateEventController controller = loader.getController();
         controller.setContent(event);
 
