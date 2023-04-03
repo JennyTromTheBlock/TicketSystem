@@ -20,7 +20,7 @@ public class SystemUserDAO implements ISystemUserDAO {
     }
 
     @Override
-    public SystemUser systemUserValidLogin(SystemUser user) throws Exception {
+    public SystemUser SystemUserValidLogin(SystemUser user) throws Exception {
         SystemUser systemUser = null;
 
         String sql = "SELECT * FROM SystemUsers WHERE Email = ? AND Password = ?";
@@ -140,5 +140,10 @@ public class SystemUserDAO implements ISystemUserDAO {
             throw new Exception("Failed to delete User", e);
         }
         return systemUser;//todo set systemUser null if it does not exist in db.
+    }
+
+    @Override
+    public SystemUser systemUserValidLogin(SystemUser user) throws Exception {
+        return null;
     }
 }

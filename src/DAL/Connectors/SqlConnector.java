@@ -27,12 +27,10 @@ import java.util.Properties;
  * User=insert username
  * Password=insert password
  */
-public class SqlConnector implements IConnector {
-    private static final String CONFIG = "db_config/sql_config";
-    private SQLServerDataSource dataSource;
 
     public class SqlConnector extends AbstractConnector {
-        public SqlConnector() throws Exception {
+
+    public SqlConnector() throws Exception {
             super("db_config/sql_config", "Failed to connect the the server");
         }
     }
