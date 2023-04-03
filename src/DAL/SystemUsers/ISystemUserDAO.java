@@ -20,4 +20,5 @@ public interface ISystemUserDAO {
 
     SystemUser deleteSystemUser(SystemUser systemUser) throws Exception;
 
+    SystemUser systemUserValidLogin(SystemUser user) throws Exception;
 }

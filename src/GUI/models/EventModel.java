@@ -2,7 +2,7 @@ package GUI.models;
 
 import BE.Event;
 import BLL.IEventManager;
-import BLL.eventManager;
+import BLL.EventManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -16,7 +16,7 @@ public class EventModel {
     private IEventManager eventManager;
 
     public EventModel() throws Exception {
-        eventManager = new eventManager();
+        eventManager = new EventManager();
         allEvents = FXCollections.observableList(retrieveAllEvents());
     }
 

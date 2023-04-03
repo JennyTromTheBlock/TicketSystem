@@ -2,21 +2,25 @@ package DAL.SystemUsers;
 
 import BE.Role;
 import BE.SystemUser;
-import DAL.Connectors.IConnector;
+import DAL.Connectors.AbstractConnector;
 import DAL.Connectors.SqlConnector;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SystemUserDAO implements ISystemUserDAO {
-    private IConnector connector;
+    private AbstractConnector connector;
 
     public SystemUserDAO() throws Exception {
         connector = new SqlConnector();
     }
 
+    public SystemUserDAO(AbstractConnector connector) {
+        this.connector = connector;
+    }
+
     @Override
-    public SystemUser SystemUserValidLogin(SystemUser user) throws Exception {
+    public SystemUser systemUserValidLogin(SystemUser user) throws Exception {
         SystemUser systemUser = null;
 
         String sql = "SELECT * FROM SystemUsers WHERE Email = ? AND Password = ?";
