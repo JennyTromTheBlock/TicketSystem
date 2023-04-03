@@ -4,7 +4,6 @@ import BE.Role;
 import BE.SystemUser;
 import DAL.Connectors.IConnector;
 import DAL.Connectors.SqlConnector;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,8 +100,10 @@ public class SystemUserDAO implements ISystemUserDAO {
         ArrayList<SystemUser> allUsers = new ArrayList<>();
 
         try (Connection connection = connector.getConnection();
-             Statement statement = connection.createStatement()) {
+
+            Statement statement = connection.createStatement()) {
             String sql = "SELECT * FROM SystemUsers;";
+
             ResultSet rs = statement.executeQuery(sql);
 
             while(rs.next()) {

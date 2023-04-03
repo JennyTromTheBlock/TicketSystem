@@ -3,12 +3,9 @@ package BLL.SystemUsers;
 import BE.SystemUser;
 import BLL.DALFacades.AuthenticationFacade;
 import DAL.SystemUsers.SystemUserDAO;
-
 import java.util.List;
 
 public class SystemUserManager implements ISystemUserManager {
-
-
 
     private AuthenticationFacade authenticateFacade;
     private SystemUserDAO systemUserDAO;
@@ -16,7 +13,6 @@ public class SystemUserManager implements ISystemUserManager {
     public SystemUserManager() throws Exception {
         authenticateFacade = new AuthenticationFacade();
         systemUserDAO = new SystemUserDAO();
-
     }
 
     @Override

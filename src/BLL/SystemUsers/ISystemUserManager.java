@@ -1,10 +1,10 @@
 package BLL.SystemUsers;
 
 import BE.SystemUser;
-
 import java.util.List;
 
 public interface ISystemUserManager {
+
     /**
      * Tries to authenticate a system user.
      * @param user The user to authenticate.
@@ -13,9 +13,7 @@ public interface ISystemUserManager {
      */
     SystemUser authenticateSystemUser(SystemUser user) throws Exception;
 
-
     SystemUser createSystemUser(SystemUser systemUser) throws Exception;
-
 
     SystemUser deleteSystemUser(SystemUser systemUser) throws Exception;
 
