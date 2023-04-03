@@ -10,12 +10,12 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class eventManager implements IEventManager {
+public class EventManager implements IEventManager {
 
     private final IEventDAO databaseAccess;
 
 
-    public eventManager() throws Exception {
+    public EventManager() throws Exception {
         databaseAccess = new EventDAO();
     }
 

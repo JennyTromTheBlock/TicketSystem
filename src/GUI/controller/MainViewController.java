@@ -1,6 +1,7 @@
 package GUI.controller;
 
 import BE.Event;
+import GUI.controller.calendarControllers.CalendarController;
 import GUI.controller.eventControllers.EventController;
 import GUI.controller.eventControllers.UpdateEventController;
 import javafx.event.ActionEvent;
@@ -25,7 +26,8 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class MainViewController extends BaseController implements Initializable {
-    public VBox eventButtonContainer;
+    @FXML
+    private VBox eventButtonContainer;
     @FXML
     private MenuButton mbFilter;
     @FXML
@@ -64,9 +66,7 @@ public class MainViewController extends BaseController implements Initializable 
         tableViewEventHandlers();
 
         checkMenuListener();
-
     }
-
 
     /**
      * Adds event handlers to the TableView that checks for interaction with an event
@@ -110,6 +110,9 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     private void setEventInfoBtnsVisible() {
+        btnEditEvent.setVisible(true);
+        btnViewInfo.setVisible(true);
+        btnSellTicket.setVisible(true);
         eventButtonContainer.setVisible(true);
     }
 
@@ -163,7 +166,7 @@ public class MainViewController extends BaseController implements Initializable 
         ivLogo.setImage(new Image("symbols/EASYDVEST.png"));
     }
 
-    public void loadAllEvents() {
+    private void loadAllEvents() {
         try {
             tvEvents.setItems(getModelsHandler().getEventModel().getObservableEvents());
         }
@@ -175,7 +178,7 @@ public class MainViewController extends BaseController implements Initializable 
     /**
      * Extracts the value from a given TableView row item, using the given property name.
      */
-    public void loadTableColumns() {
+    private void loadTableColumns() {
         tcTitle.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         tcLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
         tcMaxParticipants.setCellValueFactory(new PropertyValueFactory<>("maxParticipant"));
@@ -208,12 +211,12 @@ public class MainViewController extends BaseController implements Initializable 
         }
     }
 
-    public void setNodeInMainView(Parent root) {
+    private void setNodeInMainView(Parent root) {
         contentArea.getChildren().remove(1);
         contentArea.getChildren().add(1, root);
     }
 
-    public void listViewBtn() {
+    public void listViewBtn(MouseEvent mouseEvent) {
         loadImages();
         loadTableColumns();
         loadAllEvents();
@@ -261,14 +264,20 @@ public class MainViewController extends BaseController implements Initializable 
     public void handleOpenCreateTicketView(ActionEvent actionEvent) {
         openStage("/GUI/view/CreateTicketView.fxml", "");
     }
-
-    public void handleSellTicket(ActionEvent actionEvent) {
-        //todo implement when we have tickets
-    }
+    
 
     public void handleViewInfo(ActionEvent actionEvent) {
         if (isSelectedItemInTableView(tvEvents)) {
             handleViewEvent(tvEvents.getSelectionModel().getSelectedItem());
+        }
+    }
+
+    public void handleSellTicket(ActionEvent actionEvent) {
+        if (isSelectedItemInTableView(tvEvents)) {
+            FXMLLoader loader = openStage("/GUI/view/CreateTicketView.fxml", "update Ticket");
+            CreateTicketController controller = loader.getController();
+            controller.setContent(tvEvents.getSelectionModel().getSelectedItem());
+            System.out.println(tvEvents.getSelectionModel().getSelectedItem().getEventName());
         }
     }
 

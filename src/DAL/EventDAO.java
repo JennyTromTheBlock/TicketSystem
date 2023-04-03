@@ -1,7 +1,7 @@
 package DAL;
 
 import BE.Event;
-import DAL.Connectors.IConnector;
+import DAL.Connectors.AbstractConnector;
 import DAL.Connectors.SqlConnector;
 
 import java.sql.*;
@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 public class EventDAO implements IEventDAO {
-    IConnector connector;
+    AbstractConnector connector;
 
     public EventDAO() throws Exception {
         connector = new SqlConnector();
