@@ -27,7 +27,9 @@ public class ModelsHandler {
         return eventModel;
     }
 
-    public SystemUserModel getSystemUserModel() { return systemUserModel; }
+    public SystemUserModel getSystemUserModel() {
+        return systemUserModel;
+    }
 
     public TicketModel getTicketModel() {
         return ticketModel;

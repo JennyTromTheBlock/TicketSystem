@@ -211,12 +211,12 @@ public class MainViewController extends BaseController implements Initializable 
         }
     }
 
-    private void setNodeInMainView(Parent root) {
+    public void setNodeInMainView(Parent root) {
         contentArea.getChildren().remove(1);
         contentArea.getChildren().add(1, root);
     }
 
-    public void listViewBtn(MouseEvent mouseEvent) {
+    public void listViewBtn() {
         loadImages();
         loadTableColumns();
         loadAllEvents();
