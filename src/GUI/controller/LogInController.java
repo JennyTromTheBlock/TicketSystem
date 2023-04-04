@@ -2,10 +2,8 @@ package GUI.controller;
 
 import BE.Role;
 import GUI.util.SymbolPaths;
-import GUI.util.ViewPaths;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -54,14 +52,11 @@ public class LogInController extends BaseController implements Initializable {
 
 
         if (isLoggedIn) {
-
-            FXMLLoader f  = openStage(ViewPaths.MAIN_VIEW, "");
-            setMainController(f.getController());
-            close();
-
             try {
+                loadMainViewHandler();
+                close();
                 if (getModelsHandler().getSystemUserModel().getLoggedInSystemUser().getValue().getRoles().contains(Role.ADMINISTRATOR)){
-                    getMainController().setAdminContent();
+                    loadMainViewHandler().getController().setAdminContent();
                 }
             } catch (Exception e) {
                 displayError(e);

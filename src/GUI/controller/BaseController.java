@@ -1,6 +1,7 @@
 package GUI.controller;
 
 import GUI.models.ModelsHandler;
+import GUI.util.MainControllerHandler;
 import GUI.util.ViewPaths;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

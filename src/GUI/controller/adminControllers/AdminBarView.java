@@ -11,7 +11,7 @@ public class AdminBarView extends BaseController {
     }
 
     public void handleSeeEvents(ActionEvent actionEvent) throws Exception {
-        loadMainViewHandler().getController().listViewBtn();
+        loadMainViewHandler().getController().loadListView(getModelsHandler().getEventModel().getObservableEvents());
     }
 
     public void handleSeeUsers(ActionEvent actionEvent) {

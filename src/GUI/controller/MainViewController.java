@@ -2,18 +2,17 @@ package GUI.controller;
 
 import BE.Event;
 import GUI.controller.eventControllers.EventController;
+import GUI.controller.eventControllers.EventListController;
 import GUI.controller.eventControllers.UpdateEventController;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -56,56 +55,11 @@ public class MainViewController extends BaseController implements Initializable 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         loadImages();
-        loadTableColumns();
 
-        loadAllEvents();
-
-        tableViewEventHandlers();
+        listViewBtn();//sets the listView With All Events In
 
         checkMenuListener();
-    }
-
-    /**
-     * Adds event handlers to the TableView that checks for interaction with an event
-     */
-    private void tableViewEventHandlers() {
-        eventInfoOnEnter();
-
-        //Opens event info on double click
-        int timesToClick = 2;
-        eventInfoOnClick(timesToClick);
-
-        selectedEventInfoInSidebar();
-    }
-
-    /**
-     * Listens for changes in selected event (fx. when switching between events with Up/Down key)
-     */
-    private void selectedEventInfoInSidebar() {
-        tvEvents.getSelectionModel().selectedItemProperty().addListener((obs, o, n) -> {
-            if (isSelectedItemInTableView(tvEvents)) {
-                handleViewEventInMain(tvEvents.getSelectionModel().getSelectedItem());
-            }
-        });
-    }
-
-    /**
-     * Opens event info if the left mouse button is clicked X amount of times
-     * @param timesToClick The times the left mouse button should be clicked
-     */
-    private void eventInfoOnClick(int timesToClick) {
-        tvEvents.setOnMouseClicked(mouseEvent -> {
-
-            boolean isLeftMouseClick = mouseEvent.getButton().equals(MouseButton.PRIMARY);
-            boolean selectedItemExists = isSelectedItemInTableView(tvEvents);
-            boolean correctClickCount = mouseEvent.getClickCount() == timesToClick;
-
-            if(isLeftMouseClick && selectedItemExists && correctClickCount){
-                handleViewEvent(tvEvents.getSelectionModel().getSelectedItem());
-            }
-        });
     }
 
     private void setEventInfoBtnsVisible() {
@@ -113,21 +67,6 @@ public class MainViewController extends BaseController implements Initializable 
         btnViewInfo.setVisible(true);
         btnSellTicket.setVisible(true);
         eventButtonContainer.setVisible(true);
-    }
-
-    /**
-     * Opens event info if the Enter key is pressed
-     */
-    private void eventInfoOnEnter() {
-        tvEvents.setOnKeyPressed(keyEvent -> {
-
-            boolean keyEqualsEnter = keyEvent.getCode().equals(KeyCode.ENTER);
-            boolean selectedItemExists = isSelectedItemInTableView(tvEvents);
-
-            if(keyEqualsEnter && selectedItemExists) {
-                handleViewEvent(tvEvents.getSelectionModel().getSelectedItem());
-            }
-        });
     }
 
     private boolean isSelectedItemInTableView(TableView<?> tableView) {
@@ -165,26 +104,6 @@ public class MainViewController extends BaseController implements Initializable 
         ivLogo.setImage(new Image("symbols/EASYDVEST.png"));
     }
 
-    private void loadAllEvents() {
-        try {
-            tvEvents.setItems(getModelsHandler().getEventModel().getObservableEvents());
-        }
-        catch (Exception e) {
-            displayError(e);
-        }
-    }
-
-    /**
-     * Extracts the value from a given TableView row item, using the given property name.
-     */
-    private void loadTableColumns() {
-        tcTitle.setCellValueFactory(new PropertyValueFactory<>("eventName"));
-        tcLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
-        tcMaxParticipants.setCellValueFactory(new PropertyValueFactory<>("maxParticipant"));
-        tcPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-        tcDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-    }
-
     public void handleCreateEvent() {
         openStage("/GUI/view/eventViews/CreateEvent.fxml", "");
     }
@@ -196,12 +115,9 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     public void calendarViewBtn(MouseEvent mouseEvent) {
-        // TODO Can't this be moved into a method in the BaseController?  -- nope, it must set the content in the an VBox in MainView.
-        // TODO Seems very plausible for us to need to to this again
         //Load the new stage & view
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/calendarViews/CalendarView.fxml"));
         Parent root;
-
         try {
             root = loader.load();
             setNodeInMainView(root);
@@ -216,12 +132,28 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     public void listViewBtn() {
-        loadImages();
-        loadTableColumns();
-        loadAllEvents();
-        //adds the tableView to scene
-        setNodeInMainView(tvEvents);
-        tableViewEventHandlers();
+        try {
+            loadListView(getModelsHandler().getEventModel().getObservableEvents());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public FXMLLoader loadListView(ObservableList<Event> listOfEvents){
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/EventListView.fxml"));
+        Parent root;
+
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        contentArea.getChildren().remove(1);
+        contentArea.getChildren().add(1, root);
+        EventListController e = loader.getController();
+        e.loadEvents(listOfEvents);
+        return loader;
     }
 
     private void checkMenuListener() {
@@ -230,7 +162,7 @@ public class MainViewController extends BaseController implements Initializable 
                 cmiHistoric.setSelected(false);
                 showUpcomingOnly();
             } else {
-                loadAllEvents();
+                listViewBtn();//sets the listView With All Events In
             }
         });
 
@@ -239,14 +171,14 @@ public class MainViewController extends BaseController implements Initializable 
                 cmiUpcoming.setSelected(false);
                 showHistoricOnly();
             } else {
-                loadAllEvents();
+                listViewBtn();//sets the listView With All Events In
             }
         });
     }
 
     public void showUpcomingOnly() {
         try {
-            tvEvents.setItems(getModelsHandler().getEventModel().getUpcomingEvents());
+            loadListView(getModelsHandler().getEventModel().getUpcomingEvents());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -254,7 +186,7 @@ public class MainViewController extends BaseController implements Initializable 
 
     public void showHistoricOnly() {
         try {
-            tvEvents.setItems(getModelsHandler().getEventModel().getHistoricEvents());
+            loadListView(getModelsHandler().getEventModel().getHistoricEvents());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -276,7 +208,6 @@ public class MainViewController extends BaseController implements Initializable 
             FXMLLoader loader = openStage("/GUI/view/CreateTicketView.fxml", "update Ticket");
             CreateTicketController controller = loader.getController();
             controller.setContent(tvEvents.getSelectionModel().getSelectedItem());
-            System.out.println(tvEvents.getSelectionModel().getSelectedItem().getEventName());
         }
     }
 
