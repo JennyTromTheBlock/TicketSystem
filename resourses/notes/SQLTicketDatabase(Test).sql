@@ -60,3 +60,8 @@ CREATE TABLE SystemUserRoles(
 GO
 
 INSERT INTO SystemUserRoles (SystemUserEmail, RoleName) VALUES ('patand01@easv365.dk', 'Administrator')
+GO
+
+CREATE TABLE SpecialTicketTypes (
+    Type                nvarchar(100)   PRIMARY KEY
+)

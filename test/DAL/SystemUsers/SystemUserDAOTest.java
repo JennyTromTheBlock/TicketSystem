@@ -22,7 +22,7 @@ class SystemUserDAOTest {
             boolean isLoginUserFirstName = loginUser.getFirstName().equals("Patrick Darling");
             boolean isLoginUserLastName = loginUser.getLastName().equals("Andersen");
             boolean isLoginUserPasswordCorrect = loginUser.getPassword().equals("1234");
-            boolean isLoginUserRoles = loginUser.getRoles().get(0).getRole().equals(Role.ADMINISTRATOR.getRole());
+            boolean isLoginUserRoles = loginUser.getRoles().contains(Role.ADMINISTRATOR);
 
             Assertions.assertTrue(
                     isLoginUserEmailCorrect &&
