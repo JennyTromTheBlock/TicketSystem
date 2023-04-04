@@ -4,10 +4,7 @@ import GUI.util.SymbolPaths;
 import GUI.util.ViewPaths;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -45,12 +42,13 @@ public class LogInController extends BaseController implements Initializable {
         String password = pwfPassword.getText();
         boolean isLoggedIn = false;
 
+
         try {
             isLoggedIn = getModelsHandler().getSystemUserModel().login(email, password);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        catch (Exception e) {
-            displayError(e);
-        }
+
 
         if (isLoggedIn) {
             openStage(ViewPaths.MAIN_VIEW, "");

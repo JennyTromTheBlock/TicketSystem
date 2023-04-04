@@ -3,7 +3,6 @@ package GUI.models;
 import BE.SystemUser;
 import BLL.SystemUsers.ISystemUserManager;
 import BLL.SystemUsers.SystemUserManager;
-import DAL.SystemUsers.ISystemUserDAO;
 import GUI.BLLFacades.SystemUserLoginFacade;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableObjectValue;
@@ -23,8 +22,9 @@ public class SystemUserModel {
     public SystemUserModel() throws Exception {
         loggedInSystemUser = new SimpleObjectProperty<>(null);
         systemUserLoginFacade = new SystemUserLoginFacade();
-        allSystemUsers =  FXCollections.observableList(retrieveAllUsers());
         systemUserManager = new SystemUserManager();
+        allSystemUsers =  FXCollections.observableList(retrieveAllUsers());
+
     }
 
     public boolean login(String email, String password) throws Exception {
