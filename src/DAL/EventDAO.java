@@ -138,7 +138,7 @@ public class EventDAO implements IEventDAO {
         //todo list the in db before getting them.
 
         ArrayList<Note> allNotesFromEvent = new ArrayList<>();
-        String sql = "SELECT * FROM Notes WHERE EventID = ? ORDER BY Time DESC;";
+        String sql = "SELECT * FROM Notes WHERE EventID = ? ORDER BY Time ASC;";
 
         try (Connection connection = connector.getConnection();
              PreparedStatement s = connection.prepareStatement(sql)) {
@@ -155,7 +155,7 @@ public class EventDAO implements IEventDAO {
                 SystemUserDAO sys = new SystemUserDAO();
 
                 Note note = new Note(sys.getSystemUserById(sender), event, message, timestamp, id);
-                System.out.println(note.getMessage());
+                allNotesFromEvent.add(note);
             }
         } catch (Exception e){
             throw new Exception("Failed to retrieve Notes", e);

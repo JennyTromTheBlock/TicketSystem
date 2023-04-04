@@ -75,7 +75,7 @@ public class EventModel {
        return eventManager.createNote(note);
     }
 
-    public List<Note> getAllNotesFromEvent(Event event) throws Exception {
-        return eventManager.getNotesFromEvent(event);
+    public ObservableList<Note> getAllNotesFromEvent(Event event) throws Exception {
+        return FXCollections.observableList(eventManager.getNotesFromEvent(event));
     }
 }

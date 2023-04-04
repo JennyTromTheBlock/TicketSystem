@@ -4,14 +4,18 @@ import BE.Event;
 import BE.Note;
 import BE.SystemUser;
 import GUI.controller.BaseController;
+import GUI.controller.MessageController;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -20,6 +24,7 @@ import java.util.ResourceBundle;
 
 public class EventController extends BaseController implements Initializable {
     public TextArea textfMessageInput;
+    public VBox vBoxDialogPane;
     @FXML
     private Label lblEventName, lblEventDate, lblEventLocation, lblDescription, lblEventPrice, lblEventAttending, lblEventTickets;
     @FXML
@@ -49,8 +54,17 @@ public class EventController extends BaseController implements Initializable {
         lblEventPrice.setText(event.getPrice() + " DKK");
         lblEventTickets.setText("? / " + event.getMaxParticipant());
 
+
         try {
-            getModelsHandler().getEventModel().getAllNotesFromEvent(event);
+            ObservableList<Note> notes = getModelsHandler().getEventModel().getAllNotesFromEvent(event);
+            for (Note note: notes){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/eventViews/MessageView.fxml"));
+                Parent root;
+                root = loader.load();
+                MessageController controller = loader.getController();
+                controller.setText(note);
+                vBoxDialogPane.getChildren().add(root);
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

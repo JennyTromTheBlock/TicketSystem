@@ -75,7 +75,10 @@
             </HBox>
          </children>
       </VBox>
-      <ScrollPane layoutX="82.0" layoutY="404.0" prefHeight="165.0" prefWidth="493.0" />
+      <ScrollPane layoutX="82.0" layoutY="404.0" prefHeight="165.0" prefWidth="493.0">
+         <content>
+            <VBox fx:id="vBoxDialogPane" prefHeight="163.0" prefWidth="478.0" />
+         </content></ScrollPane>
       <TextArea fx:id="textfMessageInput" layoutX="82.0" layoutY="579.0" prefHeight="60.0" prefWidth="421.0" />
       <Button layoutX="503.0" layoutY="579.0" mnemonicParsing="false" onAction="#handleSendMessage" prefHeight="60.0" prefWidth="72.0" text="Send" />
    </children>
