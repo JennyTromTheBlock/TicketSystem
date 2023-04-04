@@ -12,6 +12,7 @@ public class AdminBarView extends BaseController {
 
     public void handleSeeEvents(ActionEvent actionEvent) throws Exception {
         loadMainViewHandler().getController().loadListView(getModelsHandler().getEventModel().getObservableEvents());
+        loadMainViewHandler().getController().setNodeInRightBorder("/GUI/view/eventViews/EventInfoInMainView.fxml");
     }
 
     public void handleSeeUsers(ActionEvent actionEvent) {
@@ -21,9 +22,11 @@ public class AdminBarView extends BaseController {
         try {
             root = loader.load();
             loadMainViewHandler().getController().setNodeInMainView(root);
+            loadMainViewHandler().getController().setNodeInRightBorder("/GUI/view/UserInfoView.fxml");
         } catch (Exception e) {
             displayError(e);
         }
+
 
     }
 }

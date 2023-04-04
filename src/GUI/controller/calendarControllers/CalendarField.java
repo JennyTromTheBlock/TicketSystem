@@ -2,7 +2,9 @@ package GUI.controller.calendarControllers;
 
 import BE.Event;
 import GUI.controller.BaseController;
+import GUI.controller.EventInfoInMainView;
 import GUI.controller.MainViewController;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 
 import java.util.List;
@@ -33,7 +35,10 @@ public class CalendarField extends BaseController {
 
                 lblFirstEvent.setText(createEventString(event));
                 lblFirstEvent.setOnMouseClicked(mouseEvent -> {
-                    mainController.handleViewEventInMain(event);
+                    String path = "/GUI/view/eventViews/EventInfoInMainView.fxml";
+                    FXMLLoader loader =mainController.setNodeInRightBorder(path);
+                    EventInfoInMainView controller = loader.getController();
+                    controller.setEvent(event);
                     if(mouseEvent.getClickCount()==2) {
                         mainController.handleViewEvent(event);
                     }
@@ -42,7 +47,10 @@ public class CalendarField extends BaseController {
 
                 lblSecondEvent.setText(createEventString(event));
                 lblSecondEvent.setOnMouseClicked(mouseEvent -> {
-                    mainController.handleViewEventInMain(event);
+                    String path = "/GUI/view/eventViews/EventInfoInMainView.fxml";
+                    FXMLLoader loader =mainController.setNodeInRightBorder(path);
+                    EventInfoInMainView controller = loader.getController();
+                    controller.setEvent(event);
                     if(mouseEvent.getClickCount()==2) {
                         mainController.handleViewEvent(event);
                     }

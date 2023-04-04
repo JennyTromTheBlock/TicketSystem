@@ -2,8 +2,10 @@ package GUI.controller.eventControllers;
 
 import BE.Event;
 import GUI.controller.BaseController;
+import GUI.controller.EventInfoInMainView;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -82,7 +84,14 @@ public class EventListController extends BaseController implements Initializable
     private void selectedEventInfoInSidebar() {
         tvEvent.getSelectionModel().selectedItemProperty().addListener((obs, o, n) -> {
             if (isSelectedItemInTableView(tvEvent)) {
-                viewSelectedInMain();
+                FXMLLoader loader;
+                try {
+                    loader = loadMainViewHandler().getController().setNodeInRightBorder("/GUI/view/eventViews/EventInfoInMainView.fxml");
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                EventInfoInMainView controller = loader.getController();
+                controller.setEvent(tvEvent.getSelectionModel().getSelectedItem());
             }
         });
     }
