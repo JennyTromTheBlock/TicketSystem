@@ -74,14 +74,8 @@ public class MainViewController extends BaseController implements Initializable 
 
     public void calendarViewBtn(MouseEvent mouseEvent) {
         //Load the new stage & view
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/calendarViews/CalendarView.fxml"));
-        Parent root;
-        try {
-            root = loader.load();
-            setNodeInMainView(root);
-        } catch (IOException e) {
-            displayError(e);
-        }
+        Parent root = loadFXMLFile("/GUI/view/calendarViews/CalendarView.fxml");
+        setNodeInMainView(root);
     }
 
     public void setNodeInMainView(Parent root) {
@@ -106,8 +100,7 @@ public class MainViewController extends BaseController implements Initializable 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        contentArea.getChildren().remove(1);
-        contentArea.getChildren().add(1, root);
+        setNodeInMainView(root);
         EventListController e = loader.getController();
         e.loadEvents(listOfEvents);
         return loader;
@@ -150,14 +143,7 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     public void setAdminContent(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/adminView/AdminBarView.fxml"));
-        Parent root;
-
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Parent root = loadFXMLFile("/GUI/view/adminView/AdminBarView.fxml");
         contentArea.getChildren().remove(3);
         contentArea.getChildren().add(2, root);
     }
@@ -172,5 +158,16 @@ public class MainViewController extends BaseController implements Initializable 
         }
         background.setRight(root);
         return loader;
+    }
+
+    private Parent loadFXMLFile(String path){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+        Parent root;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return root;
     }
 }
