@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -60,7 +59,6 @@ public abstract class BaseController {
         stage.setScene(new Scene(root));
         stage.setTitle(sceneTitle);
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
         stage.getScene().getStylesheets().add(getClass().getResource("/GUI/css/Style.css").toExternalForm());
         stage.show();
 
