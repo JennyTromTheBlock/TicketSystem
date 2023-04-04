@@ -4,12 +4,14 @@ import BE.Event;
 import GUI.controller.eventControllers.EventController;
 import GUI.controller.eventControllers.EventListController;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -19,7 +21,6 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class MainViewController extends BaseController implements Initializable {
@@ -36,21 +37,11 @@ public class MainViewController extends BaseController implements Initializable 
     @FXML
     private BorderPane background;
     @FXML
-    private ImageView ivList, ivCalendar, ivSearchBtn, ivLogo, ivEventDate, ivEventSelected, ivEventPrice, ivEventTickets;
+    private ImageView ivList, ivCalendar, ivSearchBtn, ivLogo;
     @FXML
-    private VBox contentArea, sidebar;
+    private VBox contentArea;
     @FXML
-    private TableView<Event> tvEvents;
-    @FXML
-    private TableColumn<Event, String> tcTitle, tcLocation;
-    @FXML
-    private TableColumn<Event, Integer> tcMaxParticipants, tcPrice;
-    @FXML
-    private TableColumn<Event, Date> tcDate;
-    @FXML
-    private Label lblLocation, lblDate, lblTitle, lblPrice, lblTicketsLeft;
-    @FXML
-    private Button btnCreateEvent, btnSpecialTicket, btnEditEvent, btnViewInfo, btnSellTicket;
+    private Button btnCreateEvent, btnSpecialTicket;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -158,11 +149,6 @@ public class MainViewController extends BaseController implements Initializable 
         }
     }
 
-    public void handleOpenCreateTicketView(ActionEvent actionEvent) {
-        openStage("/GUI/view/ticketsViews/CreateTicketView.fxml", "");
-    }
-
-
     public void setAdminContent(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/adminView/AdminBarView.fxml"));
         Parent root;
@@ -179,7 +165,6 @@ public class MainViewController extends BaseController implements Initializable 
     public FXMLLoader setNodeInRightBorder(String path){
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
         Parent root;
-
         try {
             root = loader.load();
         } catch (IOException e) {

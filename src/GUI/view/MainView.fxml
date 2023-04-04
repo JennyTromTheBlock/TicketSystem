@@ -77,7 +77,7 @@
                         <Font name="Berlin Sans FB" size="36.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnSpecialTicket" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleOpenCreateTicketView" prefHeight="90.0" prefWidth="270.0" text="Special ticket">
+                  <Button fx:id="btnSpecialTicket" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="90.0" prefWidth="270.0" text="Special ticket">
                      <font>
                         <Font name="Berlin Sans FB" size="36.0" />
                      </font>
