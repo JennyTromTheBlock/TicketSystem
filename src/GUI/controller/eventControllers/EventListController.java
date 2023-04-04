@@ -2,7 +2,6 @@ package GUI.controller.eventControllers;
 
 import BE.Event;
 import GUI.controller.BaseController;
-import GUI.controller.EventInfoInMainView;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,11 +71,14 @@ public class EventListController extends BaseController implements Initializable
     }
     private void viewSelectedInMain(){
         try {
-            loadMainViewHandler().getController().handleViewEventInMain(tvEvent.getSelectionModel().getSelectedItem());
+            FXMLLoader loader =loadMainViewHandler().getController().setNodeInRightBorder("/GUI/view/eventViews/EventInfoInMainView.fxml");
+            EventInfoInMainView controller = loader.getController();
+            controller.setEvent(tvEvent.getSelectionModel().getSelectedItem());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
 
     /**
      * Listens for changes in selected event (fx. when switching between events with Up/Down key)

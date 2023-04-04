@@ -2,7 +2,7 @@ package GUI.controller.calendarControllers;
 
 import BE.Event;
 import GUI.controller.BaseController;
-import GUI.controller.EventInfoInMainView;
+import GUI.controller.eventControllers.EventInfoInMainView;
 import GUI.controller.MainViewController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;

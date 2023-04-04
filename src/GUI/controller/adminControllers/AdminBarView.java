@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 
 public class AdminBarView extends BaseController {
     public void handleCreateUser(ActionEvent actionEvent) {
-        openStage("/GUI/view/CreateSystemUserView.fxml", "");
+        openStage("/GUI/view/adminView/CreateSystemUserView.fxml", "");
     }
 
     public void handleSeeEvents(ActionEvent actionEvent) throws Exception {

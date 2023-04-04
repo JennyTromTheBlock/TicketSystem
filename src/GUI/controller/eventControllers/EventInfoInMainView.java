@@ -1,10 +1,16 @@
-package GUI.controller;
+package GUI.controller.eventControllers;
 
 import BE.Event;
+import GUI.controller.BaseController;
+import GUI.controller.CreateTicketController;
+import GUI.controller.eventControllers.EventController;
+import GUI.controller.eventControllers.UpdateEventController;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -12,7 +18,7 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EventInfoInMainView implements Initializable {
+public class EventInfoInMainView extends BaseController implements Initializable {
     public Label lblTitle;
     public ImageView ivEventDate;
     public Label lblDate;
@@ -27,6 +33,8 @@ public class EventInfoInMainView implements Initializable {
     public Button btnViewInfo;
     public Button btnEditEvent;
 
+    private Event event;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -39,6 +47,7 @@ public class EventInfoInMainView implements Initializable {
         lblLocation.setText(event.getLocation());
         lblPrice.setText(event.getPrice() + " DKK");
         lblTicketsLeft.setText(event.getMaxParticipant() + " tickets available"); //TODO subtract sold tickets from max part.
+        this.event = event;
 
         //sets buttons and symbols visible
         setEventInfoBtnsVisible();
@@ -59,17 +68,29 @@ public class EventInfoInMainView implements Initializable {
         eventButtonContainer.setVisible(true);
     }
 
-
-
     public void handleViewInfo(ActionEvent actionEvent) {
+        FXMLLoader loader = openStage("/GUI/view/eventViews/EventView.fxml", "");
+        EventController controller = loader.getController();
+        controller.setContent(event);
     }
 
     public void handleEditEvent(ActionEvent actionEvent) {
+        FXMLLoader loader= openStage("/GUI/view/eventViews/UpdateEventView.fxml", "update Event");
+        UpdateEventController updateEventController = loader.getController();
+        updateEventController.setContent(event);
     }
 
     public void handleSellTicket(ActionEvent actionEvent) {
+            FXMLLoader loader = openStage("/GUI/view/ticketsViews/CreateTicketView.fxml", "update Ticket");
+            CreateTicketController controller = loader.getController();
+            controller.setContent(event);
 
     }
+
+    private boolean isSelectedItemInTableView(TableView<?> tableView) {
+        return tableView.getSelectionModel().getSelectedItem() != null;
+    }
+
 }
 
 
