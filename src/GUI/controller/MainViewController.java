@@ -4,6 +4,7 @@ import BE.Event;
 import GUI.controller.eventControllers.EventController;
 import GUI.controller.eventControllers.EventListController;
 import GUI.controller.eventControllers.UpdateEventController;
+import GUI.view.UserInfoController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -234,5 +235,23 @@ public class MainViewController extends BaseController implements Initializable 
         Button btnAssignUser = new Button("Assign User");
         btnAssignUser.setPrefSize(232, 71);
         eventButtonContainer.getChildren().add(0, btnAssignUser);
+
+        String path = "/GUI/View/UserInfoView.fxml";
+        setNodeInRightBorder(path);
+    }
+
+    public FXMLLoader setNodeInRightBorder(String path){
+
+        FXMLLoader loader1 = new FXMLLoader(getClass().getResource(path));
+        Parent root1;
+
+        try {
+            root1 = loader1.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        UserInfoController controller = loader1.getController();
+        background.setRight(root1);
+        return loader1;
     }
 }

@@ -50,4 +50,9 @@ public class SystemUserModel {
     public ObservableList<SystemUser> getAllUsers() {
         return allSystemUsers;
     }
+
+    public void deleteSystemUser(SystemUser user) throws Exception {
+        systemUserManager.deleteSystemUser(user);
+        allSystemUsers.remove(user);
+    }
 }
