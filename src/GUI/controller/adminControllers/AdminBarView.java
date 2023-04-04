@@ -16,13 +16,13 @@ public class AdminBarView extends BaseController {
     }
 
     public void handleSeeUsers(ActionEvent actionEvent) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/UserListView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/adminView/UserListView.fxml"));
         Parent root;
 
         try {
             root = loader.load();
             loadMainViewHandler().getController().setNodeInMainView(root);
-            loadMainViewHandler().getController().setNodeInRightBorder("/GUI/view/UserInfoView.fxml");
+            loadMainViewHandler().getController().setNodeInRightBorder("/GUI/view/adminView/UserInfoView.fxml");
         } catch (Exception e) {
             displayError(e);
         }

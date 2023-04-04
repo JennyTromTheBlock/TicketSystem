@@ -1,4 +1,4 @@
-package GUI.view;
+package GUI.controller.adminControllers;
 
 import BE.SystemUser;
 import GUI.controller.BaseController;

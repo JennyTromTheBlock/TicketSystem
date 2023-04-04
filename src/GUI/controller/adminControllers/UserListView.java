@@ -2,7 +2,6 @@ package GUI.controller.adminControllers;
 
 import BE.SystemUser;
 import GUI.controller.BaseController;
-import GUI.view.UserInfoController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -48,7 +47,7 @@ public class UserListView extends BaseController implements Initializable {
             if (isSelectedItemInTableView(tvUsers)) {
                 FXMLLoader loader;
                 try {
-                    loader = loadMainViewHandler().getController().setNodeInRightBorder("/GUI/View/UserInfoView.fxml");
+                    loader = loadMainViewHandler().getController().setNodeInRightBorder("/GUI/View/adminView/UserInfoView.fxml");
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
