@@ -1,6 +1,7 @@
 package BLL;
 
 import BE.Event;
+import BE.Note;
 import DAL.EventDAO;
 import DAL.IEventDAO;
 
@@ -57,6 +58,16 @@ public class EventManager implements IEventManager {
             }
         }
         return historicEvents;
+    }
+
+    @Override
+    public Note createNote(Note note) throws Exception {
+        return databaseAccess.createNote(note);
+    }
+
+    @Override
+    public List<Note> getNotesFromEvent(Event event) throws Exception {
+        return databaseAccess.getAllNotesFromEvent(event);
     }
 
 }

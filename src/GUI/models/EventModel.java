@@ -1,8 +1,9 @@
 package GUI.models;
 
 import BE.Event;
-import BLL.IEventManager;
+import BE.Note;
 import BLL.EventManager;
+import BLL.IEventManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -68,5 +69,13 @@ public class EventModel {
 
     public ObservableList<Event> getHistoricEvents() throws Exception {
         return FXCollections.observableList(eventManager.getHistoricEvents(allEvents));
+    }
+
+    public Note createNote(Note note) throws Exception {
+       return eventManager.createNote(note);
+    }
+
+    public List<Note> getAllNotesFromEvent(Event event) throws Exception {
+        return eventManager.getNotesFromEvent(event);
     }
 }

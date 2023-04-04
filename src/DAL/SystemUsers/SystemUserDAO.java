@@ -142,4 +142,28 @@ public class SystemUserDAO implements ISystemUserDAO {
         }
         return systemUser;//todo set systemUser null if it does not exist in db.
     }
+
+    @Override
+    public SystemUser getSystemUserById(String id) throws Exception {
+        ArrayList<SystemUser> allUsers = new ArrayList<>();
+        String sql = "SELECT * FROM SystemUsers WHERE Email = ?;";
+
+        try (Connection connection = connector.getConnection();
+             PreparedStatement s = connection.prepareStatement(sql)) {
+            s.setString(1, id);
+            ResultSet rs = s.executeQuery();
+            while(rs.next()) {
+                String email = rs.getString("Email");
+                String firstName = rs.getString("FirstName");
+                String lastName = rs.getString("LastName");
+                String password = rs.getString("Password");
+
+                SystemUser systemUser = new SystemUser(email, firstName, lastName, password);
+                return systemUser;
+            }
+        } catch (Exception e){
+            throw new Exception("Failed to retrieve all Users", e);
+        }
+        return null;
+    }
 }
