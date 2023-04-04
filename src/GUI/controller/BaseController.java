@@ -17,7 +17,6 @@ public abstract class BaseController {
         controller.setContent(throwable);
     }
 
-
     public MainViewController getMainController() {
         return mainController;
     }
@@ -35,9 +34,6 @@ public abstract class BaseController {
     public MainControllerHandler loadMainViewHandler() throws Exception {
         return MainControllerHandler.getInstance();
     }
-
-
-
 
     /**
      * Opens a new window

@@ -1,7 +1,6 @@
 package GUI.controller;
 
 import BE.Event;
-import GUI.controller.calendarControllers.CalendarController;
 import GUI.controller.eventControllers.EventController;
 import GUI.controller.eventControllers.UpdateEventController;
 import javafx.event.ActionEvent;
