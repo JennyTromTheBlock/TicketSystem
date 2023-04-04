@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.ResourceBundle;
@@ -58,16 +59,21 @@ public class EventController extends BaseController implements Initializable {
         try {
             ObservableList<Note> notes = getModelsHandler().getEventModel().getAllNotesFromEvent(event);
             for (Note note: notes){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/eventViews/MessageView.fxml"));
-                Parent root;
-                root = loader.load();
-                MessageController controller = loader.getController();
-                controller.setText(note);
-                vBoxDialogPane.getChildren().add(root);
+                addToList(note);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void addToList(Note note) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/eventViews/MessageView.fxml"));
+        Parent root;
+        root = loader.load();
+        MessageController controller = loader.getController();
+        controller.setText(note);
+        vBoxDialogPane.getChildren().add(root);
+
     }
 
     public void handleClose() {
@@ -89,6 +95,7 @@ public class EventController extends BaseController implements Initializable {
             SystemUser user = getModelsHandler().getSystemUserModel().getLoggedInSystemUser().getValue();
             note = new Note(user, event, textfMessageInput.getText(), new Timestamp(System.currentTimeMillis()));
             getModelsHandler().getEventModel().createNote(note);
+            addToList(note);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
