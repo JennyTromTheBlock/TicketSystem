@@ -48,3 +48,8 @@ CREATE TABLE SystemUserRoles(
     RoleName            nvarchar(100) FOREIGN KEY REFERENCES Roles(RoleName),
     PRIMARY KEY (SystemUserEmail, RoleName)
 )
+GO
+
+CREATE TABLE SpecialTicketTypes (
+    Type                nvarchar(100)   PRIMARY KEY
+)
