@@ -8,6 +8,8 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SpecialTicketTypeSQL implements ISpecialTicketTypeDAO {
     private AbstractConnector connector;
@@ -37,5 +39,28 @@ public class SpecialTicketTypeSQL implements ISpecialTicketTypeDAO {
         }
 
         return type;
+    }
+
+    @Override
+    public List<SpecialTicketType> getSpecialTicketTypes() throws Exception {
+        List<SpecialTicketType> types = new ArrayList<>();
+
+        String sql = "SELECT * FROM SpecialTicketTypes";
+
+        try (Connection conn = connector.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql)) {
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                types.add(new SpecialTicketType(resultSet.getString(1)));
+            }
+        }
+        catch (SQLServerException e) {
+            e.printStackTrace();
+            throw new Exception("Failed to retrieve special ticket types", e);
+        }
+
+        return types;
     }
 }
