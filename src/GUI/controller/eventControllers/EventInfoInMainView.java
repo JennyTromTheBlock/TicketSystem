@@ -3,8 +3,6 @@ package GUI.controller.eventControllers;
 import BE.Event;
 import GUI.controller.BaseController;
 import GUI.controller.CreateTicketController;
-import GUI.controller.eventControllers.EventController;
-import GUI.controller.eventControllers.UpdateEventController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -84,13 +82,11 @@ public class EventInfoInMainView extends BaseController implements Initializable
             FXMLLoader loader = openStage("/GUI/view/ticketsViews/CreateTicketView.fxml", "update Ticket");
             CreateTicketController controller = loader.getController();
             controller.setContent(event);
-
     }
 
     private boolean isSelectedItemInTableView(TableView<?> tableView) {
         return tableView.getSelectionModel().getSelectedItem() != null;
     }
-
 }
 
 

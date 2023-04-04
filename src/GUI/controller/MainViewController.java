@@ -51,8 +51,7 @@ public class MainViewController extends BaseController implements Initializable 
 
         checkMenuListener();
 
-        String path = "/GUI/view/eventViews/EventInfoInMainView.fxml";
-        setNodeInRightBorder(path);
+        setNodeInRightBorder("/GUI/view/eventViews/EventInfoInMainView.fxml");
     }
 
     private void loadImages() {
@@ -94,7 +93,6 @@ public class MainViewController extends BaseController implements Initializable 
     public FXMLLoader loadListView(ObservableList<Event> listOfEvents){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/eventViews/EventListView.fxml"));
         Parent root;
-
         try {
             root = loader.load();
         } catch (IOException e) {
