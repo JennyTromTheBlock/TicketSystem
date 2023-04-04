@@ -140,7 +140,6 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     public FXMLLoader loadListView(ObservableList<Event> listOfEvents){
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/EventListView.fxml"));
         Parent root;
 
