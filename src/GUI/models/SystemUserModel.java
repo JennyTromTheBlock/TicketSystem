@@ -52,7 +52,10 @@ public class SystemUserModel {
     }
 
     public void deleteSystemUser(SystemUser user) throws Exception {
-        systemUserManager.deleteSystemUser(user);
-        allSystemUsers.remove(user);
+        SystemUser deletedSystemUser = systemUserManager.deleteSystemUser(user);
+
+        if (deletedSystemUser != null) {
+            allSystemUsers.remove(deletedSystemUser);
+        }
     }
 }

@@ -95,9 +95,10 @@ public class SystemUserDAO implements ISystemUserDAO {
             user = systemUser;
         }
         catch (Exception e) {
-            throw new Exception("Failed to user", e);
+            throw new Exception("Failed create system user", e);
         }
-            return user;
+
+        return user;
     }
 
     public List<SystemUser> getAllSystemUsers() throws Exception {
@@ -129,17 +130,20 @@ public class SystemUserDAO implements ISystemUserDAO {
     @Override
     public SystemUser deleteSystemUser(SystemUser systemUser) throws Exception {
         String sql = "DELETE FROM SystemUsers WHERE Email = ?;";
+
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            // Bind parameters
+
             statement.setString(1, systemUser.getEmail());
 
-            statement.executeUpdate();
+            int changes = statement.executeUpdate();
 
+            if (changes > 0) return systemUser;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new Exception("Failed to delete User", e);
         }
-        return systemUser;//todo set systemUser null if it does not exist in db.
+
+        return null;
     }
 }
