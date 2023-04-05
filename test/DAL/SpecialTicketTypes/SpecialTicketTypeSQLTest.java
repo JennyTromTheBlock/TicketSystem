@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 class SpecialTicketTypeSQLTest {
@@ -15,7 +16,11 @@ class SpecialTicketTypeSQLTest {
     void createSpecialTicketType() {
         try {
             ISpecialTicketTypeDAO specialTicketTypeDAO = new SpecialTicketTypeSQL(new TestSqlConnector());
-            SpecialTicketType type = new SpecialTicketType(UUID.randomUUID().toString());
+
+            Random random = new Random();
+            String randomName = UUID.randomUUID().toString();
+            int randomPrice = random.nextInt(100);
+            SpecialTicketType type = new SpecialTicketType(randomName, randomPrice);
 
             SpecialTicketType newType = specialTicketTypeDAO.createSpecialTicketType(type);
 
@@ -34,7 +39,7 @@ class SpecialTicketTypeSQLTest {
 
             List<SpecialTicketType> types = specialTicketTypeDAO.getSpecialTicketTypes();
 
-            Assertions.assertNotNull(types);
+            Assertions.assertFalse(types.isEmpty());
         }
         catch (Exception e) {
             Assertions.fail("An exception was thrown", e);

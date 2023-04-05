@@ -51,5 +51,6 @@ CREATE TABLE SystemUserRoles(
 GO
 
 CREATE TABLE SpecialTicketTypes (
-    Type                nvarchar(100)   PRIMARY KEY
+    Type               nvarchar(100)   PRIMARY KEY,
+    Price               int             NOT NULL
 )

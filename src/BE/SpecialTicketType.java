@@ -1,11 +1,14 @@
 package BE;
 
 public class SpecialTicketType {
-    private String type;
+    private String typeName;
+    private int price;
 
-    public SpecialTicketType(String type) {
-        this.type = type;
+    public SpecialTicketType(String type, int price) {
+        this.typeName = type;
     }
 
-    public String getType() { return type; }
+    public String getTypeName() { return typeName; }
+
+    public int getPrice() { return price; }
 }

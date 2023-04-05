@@ -63,5 +63,6 @@ INSERT INTO SystemUserRoles (SystemUserEmail, RoleName) VALUES ('patand01@easv36
 GO
 
 CREATE TABLE SpecialTicketTypes (
-    Type                nvarchar(100)   PRIMARY KEY
+    Type                nvarchar(100)   PRIMARY KEY,
+    Price               int             NOT NULL
 )

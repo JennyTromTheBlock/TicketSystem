@@ -24,12 +24,13 @@ public class SpecialTicketTypeSQL implements ISpecialTicketTypeDAO {
 
     @Override
     public SpecialTicketType createSpecialTicketType(SpecialTicketType type) throws Exception {
-        String sql = "INSERT INTO SpecialTicketTypes (Type) VALUES (?)";
+        String sql = "INSERT INTO SpecialTicketTypes (Type, Price) VALUES (?, ?)";
 
         try (Connection conn = connector.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
 
-            statement.setString(1, type.getType());
+            statement.setString(1, type.getTypeName());
+            statement.setInt(2, type.getPrice());
 
             statement.executeUpdate();
         }
@@ -53,7 +54,11 @@ public class SpecialTicketTypeSQL implements ISpecialTicketTypeDAO {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                types.add(new SpecialTicketType(resultSet.getString(1)));
+                String typeName = resultSet.getString(1);
+                int price = resultSet.getInt(2);
+                SpecialTicketType specialTicketType = new SpecialTicketType(typeName, price);
+
+                types.add(specialTicketType);
             }
         }
         catch (SQLServerException e) {
