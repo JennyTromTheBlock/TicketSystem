@@ -64,9 +64,16 @@ public class EventListController extends BaseController implements Initializable
             boolean selectedItemExists = isSelectedItemInTableView(tvEvent);
 
             if(keyEqualsEnter && selectedItemExists) {
-                getMainController().handleViewEvent(tvEvent.getSelectionModel().getSelectedItem());
+                viewSelectedInMain();
             }
         });
+    }
+    private void viewSelectedInMain(){
+        try {
+            loadMainViewHandler().getController().handleViewEventInMain(tvEvent.getSelectionModel().getSelectedItem());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -75,11 +82,7 @@ public class EventListController extends BaseController implements Initializable
     private void selectedEventInfoInSidebar() {
         tvEvent.getSelectionModel().selectedItemProperty().addListener((obs, o, n) -> {
             if (isSelectedItemInTableView(tvEvent)) {
-                try {
-                    loadMainViewHandler().getController().handleViewEventInMain(tvEvent.getSelectionModel().getSelectedItem());
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+                viewSelectedInMain();
             }
         });
     }
@@ -93,14 +96,17 @@ public class EventListController extends BaseController implements Initializable
      * @param timesToClick The times the left mouse button should be clicked
      */
     private void eventInfoOnClick(int timesToClick) {
-
         tvEvent.setOnMouseClicked(mouseEvent -> {
             boolean isLeftMouseClick = mouseEvent.getButton().equals(MouseButton.PRIMARY);
             boolean selectedItemExists = isSelectedItemInTableView(tvEvent);
             boolean correctClickCount = mouseEvent.getClickCount() == timesToClick;
 
             if(isLeftMouseClick && selectedItemExists && correctClickCount){
-                getMainController().handleViewEvent(tvEvent.getSelectionModel().getSelectedItem());
+                try {
+                    loadMainViewHandler().getController().handleViewEvent(tvEvent.getSelectionModel().getSelectedItem());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }

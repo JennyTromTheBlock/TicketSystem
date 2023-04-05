@@ -88,8 +88,6 @@ public class CalendarController extends BaseController implements Initializable 
 
         CalendarField controller = loader.getController();
 
-        controller.setMainController(mainViewController);
-
         if(calculatedDate > dateOffset){
             int currentDate = calculatedDate - dateOffset;
             if(currentDate <= monthMaxDate){

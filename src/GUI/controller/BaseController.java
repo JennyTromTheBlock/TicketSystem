@@ -18,16 +18,6 @@ public abstract class BaseController {
         controller.setContent(throwable);
     }
 
-    public MainViewController getMainController() {
-        return mainController;
-    }
-
-    public void setMainController(MainViewController mainController) {
-        this.mainController = mainController;
-    }
-
-    private static MainViewController mainController;
-
     public ModelsHandler getModelsHandler() throws Exception {
         return ModelsHandler.getInstance();
     }
