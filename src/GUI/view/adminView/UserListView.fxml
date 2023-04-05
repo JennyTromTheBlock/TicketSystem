@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.*?>
 
-<TableView fx:id="tvUsers" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.adminControllers.UserListView">
+<TableView fx:id="tvUsers" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.adminControllers.UserListViewController">
   <columns>
     <TableColumn fx:id="tcFirstName" prefWidth="150.39999693632126" text="First Name" />
     <TableColumn fx:id="tcLastName" minWidth="0.0" prefWidth="211.19996643066406" text="Last Name" />

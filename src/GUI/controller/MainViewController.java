@@ -3,14 +3,15 @@ package GUI.controller;
 import BE.Event;
 import GUI.controller.eventControllers.EventController;
 import GUI.controller.eventControllers.EventListController;
-import GUI.controller.eventControllers.UpdateEventController;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -20,7 +21,6 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class MainViewController extends BaseController implements Initializable {
@@ -37,21 +37,11 @@ public class MainViewController extends BaseController implements Initializable 
     @FXML
     private BorderPane background;
     @FXML
-    private ImageView ivList, ivCalendar, ivSearchBtn, ivLogo, ivEventDate, ivEventSelected, ivEventPrice, ivEventTickets;
+    private ImageView ivList, ivCalendar, ivSearchBtn, ivLogo;
     @FXML
-    private VBox contentArea, sidebar;
+    private VBox contentArea;
     @FXML
-    private TableView<Event> tvEvents;
-    @FXML
-    private TableColumn<Event, String> tcTitle, tcLocation;
-    @FXML
-    private TableColumn<Event, Integer> tcMaxParticipants, tcPrice;
-    @FXML
-    private TableColumn<Event, Date> tcDate;
-    @FXML
-    private Label lblLocation, lblDate, lblTitle, lblPrice, lblTicketsLeft;
-    @FXML
-    private Button btnCreateEvent, btnSpecialTicket, btnEditEvent, btnViewInfo, btnSellTicket;
+    private Button btnCreateEvent, btnSpecialTicket;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -60,41 +50,8 @@ public class MainViewController extends BaseController implements Initializable 
         listViewBtn();//sets the listView With All Events In
 
         checkMenuListener();
-    }
 
-    private void setEventInfoBtnsVisible() {
-        btnEditEvent.setVisible(true);
-        btnViewInfo.setVisible(true);
-        btnSellTicket.setVisible(true);
-        eventButtonContainer.setVisible(true);
-    }
-
-    private boolean isSelectedItemInTableView(TableView<?> tableView) {
-        return tableView.getSelectionModel().getSelectedItem() != null;
-    }
-
-    /**
-     * Shows preview of event information in the right sidebar
-     * @param event to display
-     */
-    public void handleViewEventInMain(Event event) {
-        //sets all text fields
-        lblTitle.setText(event.getEventName());
-        lblDate.setText(String.valueOf(event.getDate()));
-        lblLocation.setText(event.getLocation());
-        lblPrice.setText(event.getPrice() + " DKK");
-        lblTicketsLeft.setText(event.getMaxParticipant() + " tickets available"); //TODO subtract sold tickets from max part.
-
-        //sets buttons and symbols visible
-        setEventInfoBtnsVisible();
-        showSymbolsForEventInSidebar();
-    }
-
-    private void showSymbolsForEventInSidebar() {
-        ivEventDate.setImage(new Image("symbols/callender.png"));
-        ivEventPrice.setImage(new Image("symbols/price.png"));
-        ivEventSelected.setImage(new Image("symbols/location.png"));
-        ivEventTickets.setImage(new Image("symbols/ticket.png"));
+        setNodeInRightBorder("/GUI/view/eventViews/EventInfoInMainView.fxml");
     }
 
     private void loadImages() {
@@ -116,14 +73,8 @@ public class MainViewController extends BaseController implements Initializable 
 
     public void calendarViewBtn(MouseEvent mouseEvent) {
         //Load the new stage & view
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/calendarViews/CalendarView.fxml"));
-        Parent root;
-        try {
-            root = loader.load();
-            setNodeInMainView(root);
-        } catch (IOException e) {
-            displayError(e);
-        }
+        Parent root = loadFXMLFile("/GUI/view/calendarViews/CalendarView.fxml");
+        setNodeInMainView(root);
     }
 
     public void setNodeInMainView(Parent root) {
@@ -140,16 +91,14 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     public FXMLLoader loadListView(ObservableList<Event> listOfEvents){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/EventListView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/eventViews/EventListView.fxml"));
         Parent root;
-
         try {
             root = loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        contentArea.getChildren().remove(1);
-        contentArea.getChildren().add(1, root);
+        setNodeInMainView(root);
         EventListController e = loader.getController();
         e.loadEvents(listOfEvents);
         return loader;
@@ -191,48 +140,32 @@ public class MainViewController extends BaseController implements Initializable 
         }
     }
 
-    public void handleOpenCreateTicketView(ActionEvent actionEvent) {
-        openStage("/GUI/view/CreateTicketView.fxml", "");
-    }
-    
-
-    public void handleViewInfo(ActionEvent actionEvent) {
-        if (isSelectedItemInTableView(tvEvents)) {
-            handleViewEvent(tvEvents.getSelectionModel().getSelectedItem());
-        }
-    }
-
-    public void handleSellTicket(ActionEvent actionEvent) {
-        if (isSelectedItemInTableView(tvEvents)) {
-            FXMLLoader loader = openStage("/GUI/view/CreateTicketView.fxml", "update Ticket");
-            CreateTicketController controller = loader.getController();
-            controller.setContent(tvEvents.getSelectionModel().getSelectedItem());
-        }
-    }
-
-    public void handleEditEvent(ActionEvent actionEvent) {
-        if (isSelectedItemInTableView(tvEvents)) {
-            FXMLLoader loader= openStage("/GUI/view/eventViews/UpdateEventView.fxml", "update Event");
-            UpdateEventController updateEventController = loader.getController();
-            updateEventController.setContent(tvEvents.getSelectionModel().getSelectedItem());
-        }
-    }
-
     public void setAdminContent(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/AdminBarView.fxml"));
-        Parent root;
+        Parent root = loadFXMLFile("/GUI/view/adminView/AdminBarView.fxml");
+        contentArea.getChildren().remove(3);
+        contentArea.getChildren().add(2, root);
+    }
 
+    public FXMLLoader setNodeInRightBorder(String path){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+        Parent root;
         try {
             root = loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        contentArea.getChildren().remove(3);
-        contentArea.getChildren().add(2, root);
+        background.setRight(root);
+        return loader;
+    }
 
-        eventButtonContainer.getChildren().remove(btnSellTicket);
-        Button btnAssignUser = new Button("Assign User");
-        btnAssignUser.setPrefSize(232, 71);
-        eventButtonContainer.getChildren().add(0, btnAssignUser);
+    private Parent loadFXMLFile(String path){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+        Parent root;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return root;
     }
 }

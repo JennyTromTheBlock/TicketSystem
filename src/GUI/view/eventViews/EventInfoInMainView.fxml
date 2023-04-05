@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="600.0" prefWidth="394.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.eventControllers.EventInfoInMainView">
+    <children>
+        <Separator prefWidth="200.0" visible="false">
+            <VBox.margin>
+                <Insets bottom="20.0" />
+            </VBox.margin></Separator>
+        <Label fx:id="lblTitle" alignment="CENTER" prefHeight="113.0" prefWidth="394.0">
+            <font>
+                <Font name="Berlin Sans FB" size="20.0" />
+            </font>
+        </Label>
+        <HBox spacing="20.0">
+            <VBox.margin>
+                <Insets left="20.0" right="20.0" />
+            </VBox.margin>
+            <children>
+                <ImageView fx:id="ivEventDate" fitHeight="43.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
+                <Label fx:id="lblDate" prefHeight="62.0" prefWidth="394.0" wrapText="true">
+                    <font>
+                        <Font name="Berlin Sans FB" size="16.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+        <HBox prefHeight="43.0" prefWidth="381.0" spacing="20.0">
+            <children>
+                <ImageView fx:id="ivEventSelected" fitHeight="43.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
+                <Label fx:id="lblLocation" prefHeight="62.0" prefWidth="318.0" text="     Select Event For More Info          " wrapText="true">
+                    <font>
+                        <Font name="Berlin Sans FB" size="16.0" />
+                    </font>
+                </Label>
+            </children>
+            <VBox.margin>
+                <Insets left="20.0" right="20.0" />
+            </VBox.margin>
+        </HBox>
+        <HBox spacing="20.0">
+            <children>
+                <ImageView fx:id="ivEventPrice" fitHeight="43.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
+                <Label fx:id="lblPrice" prefHeight="62.0" prefWidth="394.0" wrapText="true">
+                    <font>
+                        <Font name="Berlin Sans FB" size="16.0" />
+                    </font>
+                </Label>
+            </children>
+            <padding>
+                <Insets left="20.0" right="20.0" />
+            </padding>
+        </HBox>
+        <HBox spacing="20.0">
+            <children>
+                <ImageView fx:id="ivEventTickets" fitHeight="43.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
+                <Label fx:id="lblTicketsLeft" prefHeight="62.0" prefWidth="428.0" wrapText="true">
+                    <font>
+                        <Font name="Berlin Sans FB" size="16.0" />
+                    </font>
+                </Label>
+            </children>
+            <padding>
+                <Insets left="20.0" right="20.0" />
+            </padding>
+        </HBox>
+        <Pane prefHeight="63.0" prefWidth="250.0" VBox.vgrow="ALWAYS" />
+        <VBox fx:id="eventButtonContainer" alignment="CENTER" spacing="10.0" visible="false">
+            <children>
+                <Button fx:id="btnSellTicket" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSellTicket" prefHeight="71.0" prefWidth="232.0" text="Sell ticket">
+                    <font>
+                        <Font name="Berlin Sans FB" size="36.0" />
+                    </font>
+                </Button>
+                <HBox alignment="CENTER" prefHeight="65.0" prefWidth="394.0" spacing="40.0">
+                    <VBox.margin>
+                        <Insets bottom="15.0" />
+                    </VBox.margin>
+                    <children>
+                        <Button fx:id="btnViewInfo" mnemonicParsing="false" onAction="#handleViewInfo" text="View Info" />
+                        <Button fx:id="btnEditEvent" mnemonicParsing="false" onAction="#handleEditEvent" text="Edit Event" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</VBox>

@@ -4,6 +4,7 @@ import BE.Event;
 import GUI.controller.BaseController;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -70,11 +71,14 @@ public class EventListController extends BaseController implements Initializable
     }
     private void viewSelectedInMain(){
         try {
-            loadMainViewHandler().getController().handleViewEventInMain(tvEvent.getSelectionModel().getSelectedItem());
+            FXMLLoader loader =loadMainViewHandler().getController().setNodeInRightBorder("/GUI/view/eventViews/EventInfoInMainView.fxml");
+            EventInfoInMainView controller = loader.getController();
+            controller.setEvent(tvEvent.getSelectionModel().getSelectedItem());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
 
     /**
      * Listens for changes in selected event (fx. when switching between events with Up/Down key)
@@ -82,7 +86,14 @@ public class EventListController extends BaseController implements Initializable
     private void selectedEventInfoInSidebar() {
         tvEvent.getSelectionModel().selectedItemProperty().addListener((obs, o, n) -> {
             if (isSelectedItemInTableView(tvEvent)) {
-                viewSelectedInMain();
+                FXMLLoader loader;
+                try {
+                    loader = loadMainViewHandler().getController().setNodeInRightBorder("/GUI/view/eventViews/EventInfoInMainView.fxml");
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                EventInfoInMainView controller = loader.getController();
+                controller.setEvent(tvEvent.getSelectionModel().getSelectedItem());
             }
         });
     }
