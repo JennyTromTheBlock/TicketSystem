@@ -43,7 +43,7 @@ public class SpecialTicketTypeSQL implements ISpecialTicketTypeDAO {
     }
 
     @Override
-    public List<SpecialTicketType> getSpecialTicketTypes() throws Exception {
+    public List<SpecialTicketType> getAllSpecialTicketTypes() throws Exception {
         List<SpecialTicketType> types = new ArrayList<>();
 
         String sql = "SELECT * FROM SpecialTicketTypes";
@@ -65,7 +65,7 @@ public class SpecialTicketTypeSQL implements ISpecialTicketTypeDAO {
             e.printStackTrace();
             throw new Exception("Failed to retrieve special ticket types", e);
         }
-
         return types;
     }
+    
 }

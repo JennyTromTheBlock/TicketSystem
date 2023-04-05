@@ -37,7 +37,7 @@ class SpecialTicketTypeSQLTest {
         try {
             ISpecialTicketTypeDAO specialTicketTypeDAO = new SpecialTicketTypeSQL(new TestSqlConnector());
 
-            List<SpecialTicketType> types = specialTicketTypeDAO.getSpecialTicketTypes();
+            List<SpecialTicketType> types = specialTicketTypeDAO.getAllSpecialTicketTypes();
 
             Assertions.assertFalse(types.isEmpty());
         }

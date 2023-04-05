@@ -18,6 +18,6 @@ public class SpecialTicketsFacade {
     }
 
     public List<SpecialTicketType> availableSpecialTickets() throws Exception {
-        return specialTicketTypeDAO.getSpecialTicketTypes();
+        return specialTicketTypeDAO.getAllSpecialTicketTypes();
     }
 }

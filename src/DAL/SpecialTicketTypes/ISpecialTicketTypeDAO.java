@@ -7,5 +7,5 @@ import java.util.List;
 public interface ISpecialTicketTypeDAO {
     SpecialTicketType createSpecialTicketType(SpecialTicketType type) throws Exception;
 
-    List<SpecialTicketType> getSpecialTicketTypes() throws Exception;
+    List<SpecialTicketType> getAllSpecialTicketTypes() throws Exception;
 }
