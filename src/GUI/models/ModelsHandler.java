@@ -9,11 +9,13 @@ public class ModelsHandler {
     private EventModel eventModel;
     private SystemUserModel systemUserModel;
     private TicketModel ticketModel;
+    private SpecialTicketModel specialTicketModel;
 
     private ModelsHandler() throws Exception {
         eventModel = new EventModel();
         ticketModel = new TicketModel();
         systemUserModel = new SystemUserModel();
+        specialTicketModel = new SpecialTicketModel();
     }
 
     public static ModelsHandler getInstance() throws Exception {
@@ -34,4 +36,6 @@ public class ModelsHandler {
     public TicketModel getTicketModel() {
         return ticketModel;
     }
+
+    public SpecialTicketModel getSpecialTicketModel() { return specialTicketModel; }
 }
