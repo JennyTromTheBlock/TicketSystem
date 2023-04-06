@@ -51,4 +51,15 @@ public abstract class BaseController {
 
         return loader;
     }
+
+    public Parent loadFXMLFile(String path){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+        Parent root;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return root;
+    }
 }

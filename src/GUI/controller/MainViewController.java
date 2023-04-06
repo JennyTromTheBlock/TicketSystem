@@ -25,8 +25,6 @@ import java.util.ResourceBundle;
 
 public class MainViewController extends BaseController implements Initializable {
     @FXML
-    private VBox eventButtonContainer;
-    @FXML
     private MenuButton mbFilter;
     @FXML
     private CheckMenuItem cmiUpcoming, cmiHistoric;
@@ -39,7 +37,7 @@ public class MainViewController extends BaseController implements Initializable 
     @FXML
     private ImageView ivList, ivCalendar, ivSearchBtn, ivLogo;
     @FXML
-    private VBox contentArea;
+    private VBox contentArea, eventButtonContainer;
     @FXML
     private Button btnCreateEvent, btnSpecialTicket;
 
@@ -156,16 +154,5 @@ public class MainViewController extends BaseController implements Initializable 
         }
         background.setRight(root);
         return loader;
-    }
-
-    private Parent loadFXMLFile(String path){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
-        Parent root;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return root;
     }
 }
