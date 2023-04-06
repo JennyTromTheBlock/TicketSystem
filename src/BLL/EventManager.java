@@ -1,8 +1,11 @@
 package BLL;
 
 import BE.Event;
+import BE.SystemUser;
 import DAL.EventDAO;
 import DAL.IEventDAO;
+import DAL.IUsersOnEventsDAO;
+import DAL.UsersAssignedToEventDAO;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -14,9 +17,11 @@ public class EventManager implements IEventManager {
 
     private final IEventDAO databaseAccess;
 
+    private final IUsersOnEventsDAO assignUserDAO;
 
     public EventManager() throws Exception {
         databaseAccess = new EventDAO();
+        assignUserDAO = new UsersAssignedToEventDAO();
     }
 
     @Override
@@ -57,6 +62,15 @@ public class EventManager implements IEventManager {
             }
         }
         return historicEvents;
+    }
+
+    public void assignUserToEvent(SystemUser user, Event event) throws Exception {
+        assignUserDAO.assignUserToEvent(user, event);
+    }
+
+    @Override
+    public List<SystemUser> usersAssignedToEvent(Event event) throws Exception {
+        return assignUserDAO.getUsersAssignedToEvent(event);
     }
 
 }

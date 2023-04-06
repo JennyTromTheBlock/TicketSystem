@@ -1,6 +1,7 @@
 package BLL;
 
 import BE.Event;
+import BE.SystemUser;
 
 import java.util.List;
 
@@ -17,4 +18,7 @@ public interface IEventManager {
 
     List<Event> getHistoricEvents(List<Event> events) throws Exception;
 
+    void assignUserToEvent(SystemUser user, Event event) throws Exception;
+
+    List<SystemUser> usersAssignedToEvent(Event event) throws Exception;
 }

@@ -1,6 +1,7 @@
 package GUI.models;
 
 import BE.Event;
+import BE.SystemUser;
 import BLL.IEventManager;
 import BLL.EventManager;
 import javafx.collections.FXCollections;
@@ -25,11 +26,12 @@ public class EventModel {
         return allEvents;
     }
 
-    public Event createEvent(Event event) throws Exception {
+    public Event createEvent(Event event, SystemUser user) throws Exception {
         Event newEvent =  eventManager.createEvent(event);
 
         allEvents.add(newEvent);
 
+        eventManager.assignUserToEvent(user, newEvent);//assign user to the created event
         return newEvent;
     }
 
@@ -68,5 +70,13 @@ public class EventModel {
 
     public ObservableList<Event> getHistoricEvents() throws Exception {
         return FXCollections.observableList(eventManager.getHistoricEvents(allEvents));
+    }
+    public void assignUserToEvent(SystemUser user, Event event) throws Exception {
+        eventManager.assignUserToEvent(user, event);
+    }
+
+    public ObservableList<SystemUser> usersAssignedToEvent(Event event) throws Exception {
+        ObservableList<SystemUser> users = FXCollections.observableList(eventManager.usersAssignedToEvent(event));
+        return users;
     }
 }

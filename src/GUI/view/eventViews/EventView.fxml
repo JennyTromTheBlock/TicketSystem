@@ -1,82 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.eventControllers.EventController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.eventControllers.EventController">
    <children>
-      <VBox layoutX="70.0" prefHeight="430.0" prefWidth="517.0">
-         <children>
-            <Label fx:id="lblEventName" prefHeight="100.0" prefWidth="657.0" text="Event name" wrapText="true">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
-            <HBox>
+      <ScrollPane prefHeight="664.0" prefWidth="657.0">
+         <content>
+            <VBox alignment="TOP_CENTER" prefHeight="1138.0" prefWidth="656.0">
                <children>
-                  <Label fx:id="lblEventDate" text="Date &amp; time">
-                     <graphic>
-                        <ImageView fx:id="ivDate" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lblEventLocation" text="Location">
-                     <graphic>
-                        <ImageView fx:id="ivLocation" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
+                  <VBox>
+                     <children>
+                        <Label fx:id="lblEventName" alignment="CENTER" prefHeight="100.0" prefWidth="590.0" text="Event name" wrapText="true">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblEventDate" prefHeight="50.0" prefWidth="686.0" text="Date &amp; time">
+                           <graphic>
+                              <ImageView fx:id="ivDate" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="40.0" right="40.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="lblDescription" alignment="CENTER" prefHeight="46.0" prefWidth="796.0" text="Description">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="40.0" right="40.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="lblEventPrice" prefHeight="50.0" prefWidth="727.0" text="Price">
+                           <graphic>
+                              <ImageView fx:id="ivPrice" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="40.0" right="40.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox>
+                           <children>
+                              <Label fx:id="lblEventLocation" prefHeight="50.0" prefWidth="161.0" text="Location">
+                                 <graphic>
+                                    <ImageView fx:id="ivLocation" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="40.0" right="40.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label fx:id="lblEventTickets" text="Max. tickets">
+                                 <graphic>
+                                    <ImageView fx:id="ivTicket" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="40.0" right="40.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="400.0" prefWidth="656.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <HBox>
+                           <children>
+                              <Label alignment="TOP_LEFT" text="Users Assigned To Event">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin></Label>
+                           </children>
+                        </HBox>
+                        <ListView fx:id="listviewUsersOnEvent" prefHeight="122.0" prefWidth="529.0">
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </VBox.margin></ListView>
+                        <Button mnemonicParsing="false" onAction="#handleAddUsersBtn" prefHeight="26.0" prefWidth="81.0" text="Add User" />
+                        <ListView fx:id="listviewAllUsers" prefHeight="0.0" prefWidth="400.0" />
+                        <Button mnemonicParsing="false" onAction="#handleDoneAssigningUsers" text="Done" visible="false" />
+                        <HBox alignment="CENTER" prefHeight="69.0" prefWidth="431.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#handleEditEvent" text="Edit">
+                                 <HBox.margin>
+                                    <Insets left="70.0" right="50.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClose" text="Close">
+                                 <HBox.margin>
+                                    <Insets left="100.0" right="50.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
-            </HBox>
-            <Label fx:id="lblDescription" prefHeight="100.0" prefWidth="517.0" text="Description">
-               <font>
-                  <Font size="16.0" />
-               </font></Label>
-            <Label fx:id="lblEventPrice" text="Price">
-               <graphic>
-                  <ImageView fx:id="ivPrice" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic>
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <HBox>
-               <children>
-                  <Label fx:id="lblEventTickets" text="Max. tickets">
-                     <graphic>
-                        <ImageView fx:id="ivTicket" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="69.0" prefWidth="431.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#handleEditEvent" text="Edit">
-                     <HBox.margin>
-                        <Insets left="70.0" right="50.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClose" text="Close">
-                     <HBox.margin>
-                        <Insets left="100.0" right="50.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
+            </VBox>
+         </content>
+      </ScrollPane>
    </children>
 </Pane>
