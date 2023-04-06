@@ -10,7 +10,7 @@
    <children>
       <ScrollPane prefHeight="664.0" prefWidth="657.0">
          <content>
-            <VBox alignment="TOP_CENTER" prefHeight="1138.0" prefWidth="656.0">
+            <VBox alignment="TOP_CENTER" prefWidth="656.0">
                <children>
                   <VBox>
                      <children>

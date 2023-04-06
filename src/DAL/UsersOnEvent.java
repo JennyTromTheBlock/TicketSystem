@@ -56,6 +56,4 @@ public class UsersOnEvent implements IUsersOnEventsDAO{
         }
         return allUsersAssignedToEvent;
     }
-
-    
 }
