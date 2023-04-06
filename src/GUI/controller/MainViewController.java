@@ -97,8 +97,8 @@ public class MainViewController extends BaseController implements Initializable 
             throw new RuntimeException(e);
         }
         setNodeInMainView(root);
-        EventListController e = loader.getController();
-        e.loadEvents(listOfEvents);
+        EventListController controller = loader.getController();
+        controller.loadEvents(listOfEvents);
         return loader;
     }
 
