@@ -10,7 +10,7 @@
    <children>
       <ScrollPane prefHeight="664.0" prefWidth="657.0">
          <content>
-            <VBox alignment="TOP_CENTER" prefHeight="963.0" prefWidth="656.0">
+            <VBox alignment="TOP_CENTER" prefHeight="1200.0" prefWidth="656.0">
                <children>
                   <VBox>
                      <children>
@@ -81,7 +81,7 @@
                         </HBox>
                         <Accordion VBox.vgrow="ALWAYS">
                           <panes>
-                            <TitledPane animated="false" prefHeight="548.0" prefWidth="656.0" text="Users Assigned To Event">
+                            <TitledPane animated="false" prefWidth="656.0" text="Users Assigned To Event">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="654.0">
                                        <children>
@@ -103,7 +103,7 @@
                                                 </ListView>
                                                 <Button mnemonicParsing="false" onAction="#handleAddUsersBtn" prefHeight="26.0" prefWidth="81.0" text="Add User" />
                                                 <ListView fx:id="listviewAllUsers" prefHeight="0.0" prefWidth="400.0" />
-                                                <Button mnemonicParsing="false" onAction="#handleDoneAssigningUsers" text="Done" visible="false" />
+                                                <Button fx:id="btnDoneAssigningUsers" mnemonicParsing="false" onAction="#handleDoneAssigningUsers" text="Done" visible="false" />
                                              </children>
                                           </VBox>
                                        </children>

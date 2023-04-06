@@ -25,6 +25,7 @@ public class EventController extends BaseController implements Initializable {
 
     public ListView<String> listviewUsersOnEvent;
     public ListView<String> listviewAllUsers;
+    public Button btnDoneAssigningUsers;
     @FXML
     private Label lblEventName, lblEventDate, lblEventLocation, lblDescription, lblEventPrice, lblEventAttending, lblEventTickets;
     @FXML
@@ -78,11 +79,14 @@ public class EventController extends BaseController implements Initializable {
     }
 
     public void handleDoneAssigningUsers(ActionEvent actionEvent) {
+        listviewAllUsers.getItems().clear();
         listviewAllUsers.setPrefHeight(0);
+        btnDoneAssigningUsers.setVisible(false);
     }
 
     public void handleAddUsersBtn(ActionEvent actionEvent) {
         try {
+            btnDoneAssigningUsers.setVisible(true);
             //todo should not include the coordinators already assigned to event
             listviewAllUsers.setPrefHeight(150);
             listviewAllUsers.getItems().clear();
