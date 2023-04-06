@@ -81,11 +81,11 @@
                         </HBox>
                         <Accordion VBox.vgrow="ALWAYS">
                           <panes>
-                            <TitledPane animated="false" text="untitled 1">
+                            <TitledPane animated="false" prefHeight="548.0" prefWidth="656.0" text="Users Assigned To Event">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <VBox prefHeight="400.0" prefWidth="656.0">
+                                          <VBox layoutY="-74.0" prefHeight="400.0" prefWidth="656.0">
                                              <children>
                                                 <HBox>
                                                    <children>
