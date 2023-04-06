@@ -4,6 +4,7 @@ import BE.Event;
 import BE.Note;
 import DAL.Connectors.AbstractConnector;
 import DAL.Connectors.SqlConnector;
+import DAL.SystemUsers.ISystemUserDAO;
 import DAL.SystemUsers.SystemUserDAO;
 
 import java.sql.*;
@@ -134,9 +135,6 @@ public class EventDAO implements IEventDAO {
     @Override
     public List<Note> getAllNotesFromEvent(Event event) throws Exception {
 
-        //todo retrive all notes from event;
-        //todo list the in db before getting them.
-
         ArrayList<Note> allNotesFromEvent = new ArrayList<>();
         String sql = "SELECT * FROM Notes WHERE EventID = ? ORDER BY Time ASC;";
 
@@ -152,8 +150,7 @@ public class EventDAO implements IEventDAO {
                 Timestamp timestamp = rs.getTimestamp("Time");
                 int id = rs.getInt("ID");
 
-                SystemUserDAO sys = new SystemUserDAO();
-
+                ISystemUserDAO sys = new SystemUserDAO();//todo maybe this should be retrieved in another way in bll..
                 Note note = new Note(sys.getSystemUserById(sender), event, message, timestamp, id);
                 allNotesFromEvent.add(note);
             }
@@ -163,6 +160,5 @@ public class EventDAO implements IEventDAO {
         return allNotesFromEvent;
 
     }
-
-
+    
 }
