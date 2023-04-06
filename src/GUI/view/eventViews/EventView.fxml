@@ -10,7 +10,7 @@
    <children>
       <ScrollPane prefHeight="664.0" prefWidth="657.0">
          <content>
-            <VBox alignment="TOP_CENTER" prefWidth="656.0">
+            <VBox alignment="TOP_CENTER" prefHeight="963.0" prefWidth="656.0">
                <children>
                   <VBox>
                      <children>
@@ -81,39 +81,62 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox prefHeight="400.0" prefWidth="656.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <HBox>
-                           <children>
-                              <Label alignment="TOP_LEFT" text="Users Assigned To Event">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin></Label>
-                           </children>
-                        </HBox>
-                        <ListView fx:id="listviewUsersOnEvent" prefHeight="122.0" prefWidth="529.0">
-                           <VBox.margin>
-                              <Insets left="20.0" right="20.0" />
-                           </VBox.margin></ListView>
-                        <Button mnemonicParsing="false" onAction="#handleAddUsersBtn" prefHeight="26.0" prefWidth="81.0" text="Add User" />
-                        <ListView fx:id="listviewAllUsers" prefHeight="0.0" prefWidth="400.0" />
-                        <Button mnemonicParsing="false" onAction="#handleDoneAssigningUsers" text="Done" visible="false" />
-                        <HBox alignment="CENTER" prefHeight="69.0" prefWidth="431.0">
-                           <children>
-                              <Button mnemonicParsing="false" onAction="#handleEditEvent" text="Edit">
-                                 <HBox.margin>
-                                    <Insets left="70.0" right="50.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClose" text="Close">
-                                 <HBox.margin>
-                                    <Insets left="100.0" right="50.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
+                  <Accordion VBox.vgrow="ALWAYS">
+                    <panes>
+                      <TitledPane animated="false" text="untitled 1">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="400.0" prefWidth="656.0">
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <Label alignment="TOP_LEFT" text="Users Assigned To Event">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <ListView fx:id="listviewUsersOnEvent" prefHeight="122.0" prefWidth="529.0">
+                                             <VBox.margin>
+                                                <Insets left="20.0" right="20.0" />
+                                             </VBox.margin>
+                                          </ListView>
+                                          <Button mnemonicParsing="false" onAction="#handleAddUsersBtn" prefHeight="26.0" prefWidth="81.0" text="Add User" />
+                                          <ListView fx:id="listviewAllUsers" prefHeight="0.0" prefWidth="400.0" />
+                                          <Button mnemonicParsing="false" onAction="#handleDoneAssigningUsers" text="Done" visible="false" />
+                                          <HBox alignment="CENTER" prefHeight="69.0" prefWidth="431.0">
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#handleEditEvent" text="Edit">
+                                                   <HBox.margin>
+                                                      <Insets left="70.0" right="50.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                                <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClose" text="Close">
+                                                   <HBox.margin>
+                                                      <Insets left="100.0" right="50.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children></AnchorPane>
+                        </content>
+                      </TitledPane>
+                      <TitledPane animated="false" text="untitled 2">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                      </TitledPane>
+                      <TitledPane animated="false" text="untitled 3">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                      </TitledPane>
+                    </panes>
+                  </Accordion>
                </children>
             </VBox>
          </content>
