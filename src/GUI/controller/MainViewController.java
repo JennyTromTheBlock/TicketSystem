@@ -141,7 +141,7 @@ public class MainViewController extends BaseController implements Initializable 
     public void setAdminContent(){
         Parent root = loadFXMLFile("/GUI/view/adminView/AdminBarView.fxml");
         contentArea.getChildren().remove(3);
-        contentArea.getChildren().add(2, root);
+        contentArea.getChildren().add(3, root);
     }
 
     public FXMLLoader setNodeInRightBorder(String path){

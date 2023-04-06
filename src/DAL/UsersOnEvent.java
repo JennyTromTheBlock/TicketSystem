@@ -11,10 +11,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersAssignedToEventDAO implements IUsersOnEventsDAO{
+public class UsersOnEvent implements IUsersOnEventsDAO{
 
     AbstractConnector connector;
-    public UsersAssignedToEventDAO() throws Exception {
+    public UsersOnEvent() throws Exception {
         connector = new SqlConnector();
     }
     @Override
@@ -57,4 +57,5 @@ public class UsersAssignedToEventDAO implements IUsersOnEventsDAO{
         return allUsersAssignedToEvent;
     }
 
+    
 }

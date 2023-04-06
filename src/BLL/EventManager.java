@@ -5,7 +5,7 @@ import BE.SystemUser;
 import DAL.EventDAO;
 import DAL.IEventDAO;
 import DAL.IUsersOnEventsDAO;
-import DAL.UsersAssignedToEventDAO;
+import DAL.UsersOnEvent;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class EventManager implements IEventManager {
 
     public EventManager() throws Exception {
         databaseAccess = new EventDAO();
-        assignUserDAO = new UsersAssignedToEventDAO();
+        assignUserDAO = new UsersOnEvent();
     }
 
     @Override
