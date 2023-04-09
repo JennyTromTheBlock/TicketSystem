@@ -51,7 +51,6 @@ public class CreateTicketController extends BaseController {
         lblAvailableTickets.setText(selectedEvent.getMaxParticipant() + " Tickets");
         lblTcketEventLocation.setText(selectedEvent.getLocation());
         lblTicketEventDate.setText(selectedEvent.getDate().toString());
-
     }
 
     public void handleCancleTicket(ActionEvent actionEvent) {

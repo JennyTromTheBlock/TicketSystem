@@ -33,6 +33,12 @@ public class SystemUser {
     }
 
 
+    public SystemUser(String email, String firstName, String lastName) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public static boolean isEmailValid(String email) {
         //TODO implement this method.
         return true;

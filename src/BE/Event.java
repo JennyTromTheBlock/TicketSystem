@@ -1,5 +1,6 @@
 package BE;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +12,6 @@ public class Event {
     private Date date;
     private int maxParticipant;
     private int price;
-    private List<String> notes;
 
     public Event(String eventName, String description, String location, Date date, int maxParticipant, int price){
         setEventFields(eventName, description, location, date, maxParticipant, price);
@@ -19,12 +19,13 @@ public class Event {
 
     public Event(int id, String eventName, String description, String location, Date date, int maxParticipant, int price){
         this.id = id;
-        this.eventName = eventName;
-        this.description = description;
-        this.location = location;
-        this.date = date;
-        this.maxParticipant = maxParticipant;
-        this.price = price;
+        setEventFields(
+                eventName,
+                description,
+                location,
+                date,
+                maxParticipant,
+                price);
     }
 
     public Event(int id, Event eventToCopy) {
@@ -69,14 +70,6 @@ public class Event {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public List<String> getNotes() {
-        return notes;
-    }
-
-    public void setNotes(List<String> notes) {
-        this.notes = notes;
     }
 
     public Date getDate() {
