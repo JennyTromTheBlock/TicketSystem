@@ -12,5 +12,8 @@
     <orderEntry type="library" name="microsoft.sqlserver.mssql.jdbc" level="project" />
     <orderEntry type="library" name="junit.jupiter" level="project" />
     <orderEntry type="library" name="itextpdf" level="project" />
+    <orderEntry type="library" name="itextpdf.barcodes" level="project" />
+    <orderEntry type="library" name="itextpdf.layout" level="project" />
+    <orderEntry type="library" name="itextpdf.kernel" level="project" />
   </component>
 </module>

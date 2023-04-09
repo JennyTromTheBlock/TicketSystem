@@ -2,6 +2,8 @@ package GUI.controller;
 
 import BE.Event;
 import BE.Ticket;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import javafx.event.ActionEvent;
@@ -15,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 
 
 public class CreateTicketController extends BaseController {
@@ -38,35 +41,43 @@ public class CreateTicketController extends BaseController {
 
     public void generatePDF() throws BadElementException, IOException {
 
-        Image img = new Image("symbol/barcodes.png");
-
         //created PDF document instance
         Document doc = new Document();
 
         try {
-//generate a PDF at the specified location
+            //generate a PDF at the specified location
             PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(FILE));
             System.out.println("PDF created.");
 
-//opens the PDF
-            doc.open();
-//adds paragraph to the PDF file
-            doc.add(new Paragraph("Event Name"));
-            doc.add(new Paragraph("Event Date"));
-            doc.add(new Paragraph("Event Description"));
-            doc.add(new Paragraph("Event Location"));
-            doc.add(new Paragraph("Event Price"));
-            doc.add(img);
 
-//close the PDF file
+            // Creating an ImageData object
+            //ImageData data = ImageDataFactory.create(imgBarcode);
+            //Image img = new Image(data);
+
+            //opens the PDF
+            doc.open();
+
+            //adds paragraph to the PDF file
+            doc.add(new Paragraph("Name: " + txtfCustomerName.getText()));
+            doc.add(new Paragraph("Email: " + txtfCustomerEmail.getText()));
+            doc.add(new Paragraph(lblTicketEventName.getText()));
+            doc.add(new Paragraph(lblTicketEventName.getText()));
+            doc.add(new Paragraph("Event Description"));
+            doc.add(new Paragraph(lblTcketEventLocation.getText()));
+            doc.add(new Paragraph(lblTicketPrice.getText()));
+            //doc.add((Element) img);
+            //close the PDF file
             doc.close();
-//closes the writer
+
+            //closes the writer
             writer.close();
+
         } catch (DocumentException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
     }
 
     public void handleCreateTicket() throws Exception {
