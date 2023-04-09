@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class Note {
 
+    private int id;
+
     private SystemUser sender;
 
     private Event event;
@@ -12,15 +14,13 @@ public class Note {
 
     private Date sendTime;
 
-    private int messageId;
-
     //for loading message
-    public Note(SystemUser sender, Event event, String message, Date sendTime, int messageId) {
+    public Note(int id, SystemUser sender, Event event, String message, Date sendTime) {
+        this.id = id;
         this.sender = sender;
         this.event = event;
         this.message = message;
         this.sendTime = sendTime;
-        this.messageId = messageId;
     }
     //for creating new message
     public Note(SystemUser sender, Event event, String message, Date sendTime) {
@@ -30,43 +30,27 @@ public class Note {
         this.sendTime = sendTime;
     }
 
-    public SystemUser getSender() {
-        return sender;
+    public Note(int id, Note note) {
+        this(id, note.getSender(), note.getEvent(), note.getMessage(), note.getSendTime());
     }
 
-    public void setSender(SystemUser sender) {
-        this.sender = sender;
+    public SystemUser getSender() {
+        return sender;
     }
 
     public Event getEvent() {
         return event;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
-    }
-
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public Date getSendTime() {
         return sendTime;
     }
 
-    public void setSendTime(Date sendTime) {
-        this.sendTime = sendTime;
-    }
-
-    public int getMessageId() {
-        return messageId;
-    }
-
-    public void setMessageId(int messageId) {
-        this.messageId = messageId;
+    public int getId() {
+        return id;
     }
 }
