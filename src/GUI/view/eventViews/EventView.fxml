@@ -10,7 +10,7 @@
    <children>
       <ScrollPane prefHeight="664.0" prefWidth="657.0">
          <content>
-            <VBox alignment="TOP_CENTER" prefHeight="1200.0" prefWidth="656.0">
+            <VBox alignment="TOP_CENTER" prefHeight="1100.0" prefWidth="656.0">
                <children>
                   <VBox>
                      <children>
@@ -116,7 +116,10 @@
                                        <children>
                                           <VBox prefHeight="247.0" prefWidth="642.0" spacing="15.0">
                                              <children>
-                                                <ScrollPane prefHeight="154.0" prefWidth="642.0" />
+                                                <ScrollPane prefHeight="154.0" prefWidth="642.0">
+                                                   <content>
+                                                      <VBox fx:id="vBoxDialogPane" prefHeight="200.0" prefWidth="627.0" />
+                                                   </content></ScrollPane>
                                                 <TextArea fx:id="textfMessageInput" prefHeight="111.0" prefWidth="642.0" />
                                                 <Button mnemonicParsing="false" onAction="#handleSendMessage" prefHeight="60.0" prefWidth="72.0" text="Send" />
                                              </children></VBox>
