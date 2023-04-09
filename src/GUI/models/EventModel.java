@@ -79,4 +79,8 @@ public class EventModel {
         ObservableList<SystemUser> users = FXCollections.observableList(eventManager.usersAssignedToEvent(event));
         return users;
     }
+
+    public ObservableList<Event> getMyEvents() throws Exception {
+        return FXCollections.observableList(eventManager.getMyEvents(ModelsHandler.getInstance().getSystemUserModel().getLoggedInSystemUser().getValue()));
+    }
 }

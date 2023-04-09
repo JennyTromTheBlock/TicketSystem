@@ -6,6 +6,7 @@ import DAL.EventDAO;
 import DAL.IEventDAO;
 import DAL.IUsersOnEventsDAO;
 import DAL.UsersOnEvent;
+import GUI.controller.adminControllers.UserInfoController;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -71,6 +72,10 @@ public class EventManager implements IEventManager {
     @Override
     public List<SystemUser> usersAssignedToEvent(Event event) throws Exception {
         return assignUserDAO.getUsersAssignedToEvent(event);
+    }
+
+    public List<Event> getMyEvents(SystemUser selectedUser) throws Exception {
+        return assignUserDAO.getEventsAssignedToUser(selectedUser);
     }
 
 }

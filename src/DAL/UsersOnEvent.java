@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class UsersOnEvent implements IUsersOnEventsDAO{
@@ -55,5 +56,33 @@ public class UsersOnEvent implements IUsersOnEventsDAO{
             throw new Exception("Failed to retrieve all events", e);
         }
         return allUsersAssignedToEvent;
+    }
+
+    @Override
+    public List<Event> getEventsAssignedToUser(SystemUser loggedInUser) throws Exception {
+        String sql = "SELECT * FROM  UsersAssignedToEvent INNER JOIN Event ON Event.ID=UsersAssignedToEvent.EventID WHERE UserID = ?;";
+
+        ArrayList<Event> allEventsAssignedToUser = new ArrayList<>();
+        try (Connection connection = connector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, loggedInUser.getEmail());
+            ResultSet rs = statement.executeQuery();
+
+            while(rs.next()) {
+                int id = rs.getInt("ID");
+                String eventName = rs.getString("EventName");
+                String description = rs.getString("EventDescription");
+                String location = rs.getString("EventLocation");
+                Date date = rs.getTimestamp("EventDate");
+                int maxParticipant = rs.getInt("maxParticipant");
+                int price = rs.getInt("Price");
+
+                Event event = new Event(id, eventName, description, location, date, maxParticipant, price);
+                allEventsAssignedToUser.add(event);
+            }
+        } catch (Exception e){
+            throw new Exception("Failed to retrieve all events", e);
+        }
+        return allEventsAssignedToUser;
     }
 }

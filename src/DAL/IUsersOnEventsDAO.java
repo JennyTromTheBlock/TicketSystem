@@ -11,5 +11,6 @@ public interface IUsersOnEventsDAO {
 
     List<SystemUser> getUsersAssignedToEvent(Event event) throws Exception;
 
+    List<Event> getEventsAssignedToUser(SystemUser user) throws Exception;
 
 }
