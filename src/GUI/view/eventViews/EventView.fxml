@@ -87,21 +87,15 @@
                                        <children>
                                           <VBox layoutX="-1.0" layoutY="6.0" prefWidth="656.0">
                                              <children>
-                                                <HBox>
-                                                   <children>
-                                                      <Label alignment="TOP_LEFT" text="Users Assigned To Event">
-                                                         <HBox.margin>
-                                                            <Insets />
-                                                         </HBox.margin>
-                                                      </Label>
-                                                   </children>
-                                                </HBox>
                                                    <ListView fx:id="listviewUsersOnEvent" prefHeight="95.0" prefWidth="616.0">
                                                    <VBox.margin>
                                                       <Insets left="20.0" right="20.0" />
                                                    </VBox.margin>
                                                 </ListView>
-                                                <Button mnemonicParsing="false" onAction="#handleAddUsersBtn" prefHeight="26.0" prefWidth="81.0" text="Add User" />
+                                                <Button mnemonicParsing="false" onAction="#handleAddUsersBtn" prefHeight="26.0" prefWidth="81.0" text="Add User">
+                                                   <VBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </VBox.margin></Button>
                                                 <ListView fx:id="listviewAllUsers" prefHeight="0.0" prefWidth="400.0" />
                                                 <Button fx:id="btnDoneAssigningUsers" mnemonicParsing="false" onAction="#handleDoneAssigningUsers" text="Done" visible="false" />
                                              </children>
@@ -110,7 +104,7 @@
                                     </AnchorPane>
                               </content>
                             </TitledPane>
-                            <TitledPane animated="false" text="untitled 2">
+                            <TitledPane animated="false" text="Notes on Event">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="270.0" prefWidth="654.0">
                                        <children>

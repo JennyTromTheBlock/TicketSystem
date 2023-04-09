@@ -51,6 +51,8 @@ public class EventController extends BaseController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         loadImages();
 
+
+
     }
 
     private void loadImages() {
@@ -70,6 +72,15 @@ public class EventController extends BaseController implements Initializable {
         lblEventTickets.setText("? / " + event.getMaxParticipant());
 
         getEventNotes();
+
+        try {
+            assignedUsers = getModelsHandler().getEventModel().usersAssignedToEvent(event);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        for (SystemUser user: assignedUsers) {
+            listviewUsersOnEvent.getItems().add(user.getFirstName() + " " + user.getLastName() + " " + user.getEmail());
+        }
     }
 
     private void getEventNotes() {
@@ -97,16 +108,6 @@ public class EventController extends BaseController implements Initializable {
         catch (Exception e) {
             e.printStackTrace();
             displayError(e);
-        }
-
-
-        try {
-            assignedUsers = getModelsHandler().getEventModel().usersAssignedToEvent(event);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        for (SystemUser user: assignedUsers) {
-            listviewUsersOnEvent.getItems().add(user.getFirstName() + " " + user.getLastName() + " " + user.getEmail());
         }
     }
 
