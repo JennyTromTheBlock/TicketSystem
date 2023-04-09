@@ -7,7 +7,13 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
+
 public class GeneratePDF {
+
+private static String FILE = "resources/temp.pdf";
+
+
+
 
 
 
@@ -16,12 +22,12 @@ public class GeneratePDF {
         Document doc = new Document();
         try {
 //generate a PDF at the specified location
-            PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream("C:\\Users\\Anubhav\\Desktop\\Java PDF\\Motivation.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(FILE));
             System.out.println("PDF created.");
 //opens the PDF
             doc.open();
 //adds paragraph to the PDF file
-            doc.add(new Paragraph("If you're offered a seat on a rocket ship, don't ask what seat! Just get on."));
+            doc.add(new Paragraph("her er min helt egen paragraph"));
 //close the PDF file
             doc.close();
 //closes the writer
@@ -32,4 +38,6 @@ public class GeneratePDF {
             e.printStackTrace();
         }
     }
+
+
 }
