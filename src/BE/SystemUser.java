@@ -24,13 +24,6 @@ public class SystemUser {
         this.roles = new ArrayList<>();
         roles.add(Role.EVENT_COORDINATOR);
     }
-    public SystemUser(String email, String firstName, String lastName) {
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.roles = new ArrayList<>();
-        roles.add(Role.EVENT_COORDINATOR);
-    }
 
 
     public SystemUser(String email, String firstName, String lastName) {

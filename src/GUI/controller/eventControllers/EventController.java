@@ -1,29 +1,27 @@
 package GUI.controller.eventControllers;
 
 import BE.Event;
-import BE.SystemUser;
 import BE.Note;
 import BE.SystemUser;
 import GUI.controller.BaseController;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import GUI.controller.MessageController;
 import GUI.util.SymbolPaths;
 import GUI.util.ViewPaths;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -37,10 +35,10 @@ public class EventController extends BaseController implements Initializable {
     public ListView<String> listviewUsersOnEvent;
     public ListView<String> listviewAllUsers;
     public Button btnDoneAssigningUsers;
+    public VBox vBoxDialogPane;
+
     @FXML
     private TextArea textfMessageInput;
-    @FXML
-    private VBox vBoxDialogPane;
     @FXML
     private Label lblEventName, lblEventDate, lblEventLocation, lblDescription, lblEventPrice, lblEventAttending, lblEventTickets;
     @FXML
@@ -95,6 +93,7 @@ public class EventController extends BaseController implements Initializable {
             MessageController controller = loader.getController();
             controller.setText(note);
             vBoxDialogPane.getChildren().add(root);
+            System.out.println("kf");
         }
         catch (Exception e) {
             e.printStackTrace();
