@@ -19,7 +19,7 @@ public class TicketDAO implements ITicketDAO {
         Ticket newTicket = null;
 
         String sql = "INSERT INTO Tickets " +
-                "(EventID, CustomerEmail, CustomerName)" + "VALUES (?, ?, ?)";
+                "(EventID, Email, Name)" + "VALUES (?, ?, ?)";
 
         try (Connection conn = connector.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {

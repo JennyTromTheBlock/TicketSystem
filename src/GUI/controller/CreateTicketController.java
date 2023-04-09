@@ -2,12 +2,19 @@ package GUI.controller;
 
 import BE.Event;
 import BE.Ticket;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 
 public class CreateTicketController extends BaseController {
@@ -21,11 +28,49 @@ public class CreateTicketController extends BaseController {
 
     private Event selectedEvent;
 
+    private static String FILE = "resourses/PDFs/temp.pdf";
+    private static String imgBarcode = "resourses/symbols/barcodes.png";
+
+
     public CreateTicketController() {
+
     }
 
+    public void generatePDF() throws BadElementException, IOException {
+
+        Image img = new Image("symbol/barcodes.png");
+
+        //created PDF document instance
+        Document doc = new Document();
+
+        try {
+//generate a PDF at the specified location
+            PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(FILE));
+            System.out.println("PDF created.");
+
+//opens the PDF
+            doc.open();
+//adds paragraph to the PDF file
+            doc.add(new Paragraph("Event Name"));
+            doc.add(new Paragraph("Event Date"));
+            doc.add(new Paragraph("Event Description"));
+            doc.add(new Paragraph("Event Location"));
+            doc.add(new Paragraph("Event Price"));
+            doc.add(img);
+
+//close the PDF file
+            doc.close();
+//closes the writer
+            writer.close();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void handleCreateTicket() throws Exception {
+        generatePDF();
         Ticket newTicket = createTicketFromFields();
         Ticket ticket = getModelsHandler().getTicketModel().createTicket(newTicket);
     }
@@ -38,6 +83,7 @@ public class CreateTicketController extends BaseController {
 
         return new Ticket(customerName, customerEmail, selectedEvent);
     }
+
     public void setContent(Event event) {
        selectedEvent = event;
 
