@@ -22,7 +22,7 @@ public class EventNoteDAO implements IEventNoteDAO {
         Note newNote = null;
 
         String sql = "INSERT INTO Notes " +
-                "(SenderID, EventID, Message, Time)" +
+                "(SenderEmail, EventID, Message, Time)" +
                 "VALUES (?, ?, ?, ?)";
 
         try (Connection conn = connector.getConnection();
@@ -31,7 +31,7 @@ public class EventNoteDAO implements IEventNoteDAO {
             statement.setString(1, note.getSender().getEmail());
             statement.setInt(2, note.getEvent().getId());
             statement.setString(3, note.getMessage());
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            Timestamp timestamp = new Timestamp(note.getSendTime().getTime());
             statement.setTimestamp(4, timestamp);
 
             statement.executeUpdate();
@@ -45,6 +45,7 @@ public class EventNoteDAO implements IEventNoteDAO {
             }
         }
         catch (SQLException e) {
+            e.printStackTrace();
             throw new Exception("Failed to create note", e);
         }
 
@@ -56,11 +57,11 @@ public class EventNoteDAO implements IEventNoteDAO {
 
         List<Note> allNotesFromEvent = new ArrayList<>();
 
-        String sql = "SELECT Notes.ID AS 'Note ID', Notes.[Message] AS 'NoteMessage', Notes.[Time] AS 'NoteSendTime'," +
-                "SystemUsers.Email AS 'SystemUserEmail', SystemUsers.FirstName, SystemUsers.LastName" +
-                "FROM Notes" +
-                "INNER JOIN SystemUsers ON Notes.SenderID = SystemUsers.Email" +
-                "WHERE Notes.EventID = ?" +
+        String sql = "SELECT Notes.ID AS 'Note ID', Notes.[Message] AS 'NoteMessage', Notes.[Time] AS 'NoteSendTime', " +
+                "SystemUsers.Email AS 'SystemUserEmail', SystemUsers.FirstName, SystemUsers.LastName " +
+                "FROM Notes " +
+                "INNER JOIN SystemUsers ON Notes.SenderEmail = SystemUsers.Email " +
+                "WHERE Notes.EventID = ? " +
                 "ORDER BY Notes.Time ASC;";
 
         try (Connection connection = connector.getConnection();
@@ -85,6 +86,7 @@ public class EventNoteDAO implements IEventNoteDAO {
                 allNotesFromEvent.add(note);
             }
         } catch (Exception e){
+            e.printStackTrace();
             throw new Exception("Failed to retrieve Notes", e);
         }
 

@@ -4,6 +4,7 @@ import BE.Event;
 import BE.Note;
 import BLL.EventManager;
 import BLL.IEventManager;
+import GUI.BLLFacades.EventFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -14,9 +15,11 @@ public class EventModel {
 
     private ObservableList<Event> allEvents;
 
+    private EventFacade eventFacade;
     private IEventManager eventManager;
 
     public EventModel() throws Exception {
+        eventFacade = new EventFacade();
         eventManager = new EventManager();
         allEvents = FXCollections.observableList(retrieveAllEvents());
     }
@@ -71,11 +74,11 @@ public class EventModel {
         return FXCollections.observableList(eventManager.getHistoricEvents(allEvents));
     }
 
-    public Note createNote(Note note) throws Exception {
-       return eventManager.createNote(note);
+    public Note addNoteToEvent(Note note) throws Exception {
+        return eventFacade.addNoteToEvent(note);
     }
 
-    public ObservableList<Note> getAllNotesFromEvent(Event event) throws Exception {
-        return FXCollections.observableList(eventManager.getNotesFromEvent(event));
+    public List<Note> addAllNotesToEvent(Event event) throws Exception {
+        return eventFacade.retrieveAllNotesOfEvent(event);
     }
 }

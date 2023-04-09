@@ -18,8 +18,8 @@ public interface IEventManager {
 
     List<Event> getHistoricEvents(List<Event> events) throws Exception;
 
-    Note createNote(Note note) throws Exception;
+    Note addNoteToEvent(Note note) throws Exception;
 
-    List<Note> getNotesFromEvent(Event event) throws Exception;
+    List<Note> retrieveAllNotesOfEvent(Event event) throws Exception;
 
 }

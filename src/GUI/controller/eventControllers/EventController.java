@@ -5,7 +5,8 @@ import BE.Note;
 import BE.SystemUser;
 import GUI.controller.BaseController;
 import GUI.controller.MessageController;
-import javafx.collections.ObservableList;
+import GUI.util.SymbolPaths;
+import GUI.util.ViewPaths;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,14 +19,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class EventController extends BaseController implements Initializable {
-    public TextArea textfMessageInput;
-    public VBox vBoxDialogPane;
+    @FXML
+    private TextArea textfMessageInput;
+    @FXML
+    private VBox vBoxDialogPane;
     @FXML
     private Label lblEventName, lblEventDate, lblEventLocation, lblDescription, lblEventPrice, lblEventAttending, lblEventTickets;
     @FXML
@@ -34,16 +37,14 @@ public class EventController extends BaseController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         loadImages();
-        //test
     }
 
     private void loadImages() {
-        ivDate.setImage(new Image("symbols/callender.png"));
-        ivLocation.setImage(new Image("symbols/location.png"));
-        ivPrice.setImage(new Image("symbols/price.png"));
-        ivTicket.setImage(new Image("symbols/ticket.png"));
+        ivDate.setImage(new Image(SymbolPaths.CALENDAR));
+        ivLocation.setImage(new Image(SymbolPaths.LOCATION));
+        ivPrice.setImage(new Image(SymbolPaths.PRICE));
+        ivTicket.setImage(new Image(SymbolPaths.TICKET));
     }
 
     public void setContent(Event event) {
@@ -55,24 +56,35 @@ public class EventController extends BaseController implements Initializable {
         lblEventPrice.setText(event.getPrice() + " DKK");
         lblEventTickets.setText("? / " + event.getMaxParticipant());
 
+        getEventNotes();
+    }
 
+    private void getEventNotes() {
         try {
-            ObservableList<Note> notes = getModelsHandler().getEventModel().getAllNotesFromEvent(event);
-            for (Note note: notes){
-                addToList(note);
+            List<Note> eventNotes = getModelsHandler().getEventModel().addAllNotesToEvent(event);
+
+            for (Note note : eventNotes) {
+                addNoteToList(note);
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        }
+        catch (Exception e) {
+            displayError(e);
         }
     }
 
-    private void addToList(Note note) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/eventViews/MessageView.fxml"));
-        Parent root;
-        root = loader.load();
-        MessageController controller = loader.getController();
-        controller.setText(note);
-        vBoxDialogPane.getChildren().add(root);
+    private void addNoteToList(Note note) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(ViewPaths.MESSAGE_VIEW));
+            Parent root;
+            root = loader.load();
+            MessageController controller = loader.getController();
+            controller.setText(note);
+            vBoxDialogPane.getChildren().add(root);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            displayError(e);
+        }
 
     }
 
@@ -82,22 +94,24 @@ public class EventController extends BaseController implements Initializable {
     }
 
     public void handleEditEvent() {
-        FXMLLoader loader = openStage("/GUI/view/eventViews/UpdateEventView.fxml", "Edit event");
+        FXMLLoader loader = openStage(ViewPaths.UPDATE_EVENT_VIEW, "Edit event");
         UpdateEventController controller = loader.getController();
         controller.setContent(event);
-
     }
 
 
     public void handleSendMessage(ActionEvent actionEvent) {
-        Note note = null;
         try {
             SystemUser user = getModelsHandler().getSystemUserModel().getLoggedInSystemUser().getValue();
-            note = new Note(user, event, textfMessageInput.getText(), new Timestamp(System.currentTimeMillis()));
-            getModelsHandler().getEventModel().createNote(note);
-            addToList(note);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+
+            Note note = new Note(user, event, textfMessageInput.getText(), new Timestamp(System.currentTimeMillis()));
+
+            getModelsHandler().getEventModel().addNoteToEvent(note);
+
+            addNoteToList(note);
+        }
+        catch (Exception e) {
+            displayError(e);
         }
 
     }
