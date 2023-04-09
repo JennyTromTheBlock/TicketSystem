@@ -1,6 +1,8 @@
 package BLL;
 
 import BE.Event;
+import BE.Note;
+import BLL.DALFacades.EventFacade;
 import DAL.EventDAO;
 import DAL.IEventDAO;
 
@@ -12,10 +14,12 @@ import java.util.List;
 
 public class EventManager implements IEventManager {
 
+    private EventFacade eventFacade;
     private final IEventDAO databaseAccess;
 
 
     public EventManager() throws Exception {
+        eventFacade = new EventFacade();
         databaseAccess = new EventDAO();
     }
 
@@ -59,4 +63,13 @@ public class EventManager implements IEventManager {
         return historicEvents;
     }
 
+    @Override
+    public Note addNoteToEvent(Note note) throws Exception {
+        return eventFacade.addNoteToEvent(note);
+    }
+
+    @Override
+    public List<Note> retrieveAllNotesOfEvent(Event event) throws Exception {
+        return eventFacade.retrieveAllNotesOfEvent(event);
+    }
 }

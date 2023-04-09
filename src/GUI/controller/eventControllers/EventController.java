@@ -1,19 +1,34 @@
 package GUI.controller.eventControllers;
 
 import BE.Event;
+import BE.Note;
+import BE.SystemUser;
 import GUI.controller.BaseController;
+import GUI.controller.MessageController;
+import GUI.util.SymbolPaths;
+import GUI.util.ViewPaths;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.Timestamp;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class EventController extends BaseController implements Initializable {
+    @FXML
+    private TextArea textfMessageInput;
+    @FXML
+    private VBox vBoxDialogPane;
     @FXML
     private Label lblEventName, lblEventDate, lblEventLocation, lblDescription, lblEventPrice, lblEventAttending, lblEventTickets;
     @FXML
@@ -26,10 +41,10 @@ public class EventController extends BaseController implements Initializable {
     }
 
     private void loadImages() {
-        ivDate.setImage(new Image("symbols/callender.png"));
-        ivLocation.setImage(new Image("symbols/location.png"));
-        ivPrice.setImage(new Image("symbols/price.png"));
-        ivTicket.setImage(new Image("symbols/ticket.png"));
+        ivDate.setImage(new Image(SymbolPaths.CALENDAR));
+        ivLocation.setImage(new Image(SymbolPaths.LOCATION));
+        ivPrice.setImage(new Image(SymbolPaths.PRICE));
+        ivTicket.setImage(new Image(SymbolPaths.TICKET));
     }
 
     public void setContent(Event event) {
@@ -40,6 +55,37 @@ public class EventController extends BaseController implements Initializable {
         lblEventLocation.setText(event.getLocation());
         lblEventPrice.setText(event.getPrice() + " DKK");
         lblEventTickets.setText("? / " + event.getMaxParticipant());
+
+        getEventNotes();
+    }
+
+    private void getEventNotes() {
+        try {
+            List<Note> eventNotes = getModelsHandler().getEventModel().addAllNotesToEvent(event);
+
+            for (Note note : eventNotes) {
+                addNoteToList(note);
+            }
+        }
+        catch (Exception e) {
+            displayError(e);
+        }
+    }
+
+    private void addNoteToList(Note note) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(ViewPaths.MESSAGE_VIEW));
+            Parent root;
+            root = loader.load();
+            MessageController controller = loader.getController();
+            controller.setText(note);
+            vBoxDialogPane.getChildren().add(root);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            displayError(e);
+        }
+
     }
 
     public void handleClose() {
@@ -48,9 +94,25 @@ public class EventController extends BaseController implements Initializable {
     }
 
     public void handleEditEvent() {
-        FXMLLoader loader = openStage("/GUI/view/eventViews/UpdateEventView.fxml", "Edit event");
+        FXMLLoader loader = openStage(ViewPaths.UPDATE_EVENT_VIEW, "Edit event");
         UpdateEventController controller = loader.getController();
         controller.setContent(event);
+    }
+
+
+    public void handleSendMessage(ActionEvent actionEvent) {
+        try {
+            SystemUser user = getModelsHandler().getSystemUserModel().getLoggedInSystemUser().getValue();
+
+            Note note = new Note(user, event, textfMessageInput.getText(), new Timestamp(System.currentTimeMillis()));
+
+            getModelsHandler().getEventModel().addNoteToEvent(note);
+
+            addNoteToList(note);
+        }
+        catch (Exception e) {
+            displayError(e);
+        }
 
     }
 }

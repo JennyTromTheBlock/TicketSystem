@@ -1,12 +1,14 @@
 package DAL;
 
 import BE.Event;
+import BE.Note;
 import DAL.Connectors.AbstractConnector;
 import DAL.Connectors.SqlConnector;
+import DAL.SystemUsers.ISystemUserDAO;
+import DAL.SystemUsers.SystemUserDAO;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class EventDAO implements IEventDAO {
@@ -57,7 +59,7 @@ public class EventDAO implements IEventDAO {
                 String eventName = rs.getString("EventName");
                 String description = rs.getString("EventDescription");
                 String location = rs.getString("EventLocation");
-                Date date = rs.getTimestamp("EventDate");
+                Timestamp date = rs.getTimestamp("EventDate");
                 int maxParticipant = rs.getInt("maxParticipant");
                 int price = rs.getInt("Price");
 
@@ -87,6 +89,7 @@ public class EventDAO implements IEventDAO {
         }
         return updatedEvent;
     }
+
 
     private void bindEventInfo(Event event, PreparedStatement statement) throws SQLException {
         statement.setString(1, event.getEventName());
