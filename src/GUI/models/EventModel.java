@@ -5,7 +5,6 @@ import BE.SystemUser;
 import BLL.IEventManager;
 import BE.Note;
 import BLL.EventManager;
-import BLL.IEventManager;
 import GUI.BLLFacades.EventFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,7 +35,7 @@ public class EventModel {
 
         allEvents.add(newEvent);
 
-        eventManager.assignUserToEvent(user, newEvent);//assign user to the created event
+        eventFacade.assignUserToEvent(user, newEvent);//assign user to the created event
         return newEvent;
     }
 
@@ -85,11 +84,10 @@ public class EventModel {
         return eventFacade.retrieveAllNotesOfEvent(event);
     }
     public void assignUserToEvent(SystemUser user, Event event) throws Exception {
-        eventManager.assignUserToEvent(user, event);
+        eventFacade.assignUserToEvent(user, event);
     }
 
-    public ObservableList<SystemUser> usersAssignedToEvent(Event event) throws Exception {
-        ObservableList<SystemUser> users = FXCollections.observableList(eventManager.usersAssignedToEvent(event));
-        return users;
+    public List<SystemUser> getUsersAssignedToEvent(Event event) throws Exception {
+        return FXCollections.observableList(eventManager.getUsersAssignedToEvent(event));
     }
 }

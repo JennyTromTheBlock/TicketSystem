@@ -2,6 +2,7 @@ package GUI.BLLFacades;
 
 import BE.Event;
 import BE.Note;
+import BE.SystemUser;
 import BLL.EventManager;
 import BLL.IEventManager;
 
@@ -12,6 +13,14 @@ public class EventFacade {
 
     public EventFacade() throws Exception {
         eventManager = new EventManager();
+    }
+
+    public void assignUserToEvent(SystemUser user, Event event) throws Exception {
+        eventManager.assignUserToEvent(user, event);
+    }
+
+    public List<SystemUser> getUsersAssignedToEvent(Event event) throws Exception {
+        return eventManager.getUsersAssignedToEvent(event);
     }
 
     public Note addNoteToEvent(Note note) throws Exception {

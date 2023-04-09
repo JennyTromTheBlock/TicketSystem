@@ -21,7 +21,7 @@ public interface IEventManager {
 
     void assignUserToEvent(SystemUser user, Event event) throws Exception;
 
-    List<SystemUser> usersAssignedToEvent(Event event) throws Exception;
+    List<SystemUser> getUsersAssignedToEvent(Event event) throws Exception;
     Note addNoteToEvent(Note note) throws Exception;
 
     List<Note> retrieveAllNotesOfEvent(Event event) throws Exception;

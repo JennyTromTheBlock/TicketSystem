@@ -45,14 +45,9 @@ public class EventController extends BaseController implements Initializable {
     private ImageView ivDate, ivLocation, ivPrice, ivTicket;
     private Event event;
 
-    private ObservableList<SystemUser> assignedUsers = null;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadImages();
-
-
-
     }
 
     private void loadImages() {
@@ -73,13 +68,19 @@ public class EventController extends BaseController implements Initializable {
 
         getEventNotes();
 
+        getUsersAssignedToEvent();
+    }
+
+    private void getUsersAssignedToEvent() {
         try {
-            assignedUsers = getModelsHandler().getEventModel().usersAssignedToEvent(event);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            List<SystemUser> usersAssignedToEvent = getModelsHandler().getEventModel().getUsersAssignedToEvent(event);
+
+            for (SystemUser user: usersAssignedToEvent) {
+                listviewUsersOnEvent.getItems().add(convertSystemUserToListViewItem(user));
+            }
         }
-        for (SystemUser user: assignedUsers) {
-            listviewUsersOnEvent.getItems().add(user.getFirstName() + " " + user.getLastName() + " " + user.getEmail());
+        catch (Exception e) {
+            displayError(e);
         }
     }
 
@@ -152,34 +153,39 @@ public class EventController extends BaseController implements Initializable {
             listviewAllUsers.setPrefHeight(150);
             listviewAllUsers.getItems().clear();
 
-            ObservableList<SystemUser> users =  getModelsHandler().getSystemUserModel().getAllUsers();
+            List<SystemUser> users =  getModelsHandler().getSystemUserModel().getAllUsers();
 
-            for (SystemUser user:users) {
-                    listviewAllUsers.getItems().add(user.getFirstName() + " " + user.getLastName() + " " + user.getEmail());
+            for (SystemUser user : users) {
+                listviewAllUsers.getItems().add(convertSystemUserToListViewItem(user));
             }
 
             addListenerForListAllUsers(users);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        }
+        catch (Exception e) {
+            displayError(e);
         }
     }
 
-    private void addListenerForListAllUsers(ObservableList<SystemUser> users) {
-        listviewAllUsers.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event1) {
-                if(event1.getClickCount() == 2) {
-                    SystemUser user = users.get(listviewAllUsers.getSelectionModel().getSelectedIndex());
-                    try {
-                        getModelsHandler().getEventModel().assignUserToEvent(user, event);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                    listviewAllUsers.getItems().remove(listviewAllUsers.getSelectionModel().getSelectedIndex());
-                    listviewUsersOnEvent.getItems().add(listviewAllUsers.getSelectionModel().getSelectedItem());
-                }
-            }
+    private void addListenerForListAllUsers(List<SystemUser> users) {
+        listviewAllUsers.setOnMouseClicked(event1 -> {
+            if (event1.getClickCount() == 2) {
+                int selectedUserIndex = listviewAllUsers.getSelectionModel().getSelectedIndex();
 
+                SystemUser user = users.get(selectedUserIndex);
+
+                try {
+                    getModelsHandler().getEventModel().assignUserToEvent(user, event);
+                } catch (Exception e) {
+                    displayError(e);
+                }
+
+                listviewAllUsers.getItems().remove(selectedUserIndex);
+                listviewUsersOnEvent.getItems().add(convertSystemUserToListViewItem(user));
+            }
         });
+    }
+
+    private String convertSystemUserToListViewItem(SystemUser user) {
+        return user.getFirstName() + " " + user.getLastName() + " " + user.getEmail();
     }
 }

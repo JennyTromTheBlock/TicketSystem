@@ -1,4 +1,4 @@
-package DAL;
+package DAL.UsersOnEvents;
 
 import BE.Event;
 import BE.SystemUser;
