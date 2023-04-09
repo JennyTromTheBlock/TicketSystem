@@ -93,7 +93,6 @@ public class EventController extends BaseController implements Initializable {
             MessageController controller = loader.getController();
             controller.setText(note);
             vBoxDialogPane.getChildren().add(root);
-            System.out.println("kf");
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -151,8 +150,8 @@ public class EventController extends BaseController implements Initializable {
             //todo should not include the coordinators already assigned to event
             listviewAllUsers.setPrefHeight(150);
             listviewAllUsers.getItems().clear();
+
             ObservableList<SystemUser> users =  getModelsHandler().getSystemUserModel().getAllUsers();
-            users.stream().findFirst();
 
             for (SystemUser user:users) {
                     listviewAllUsers.getItems().add(user.getFirstName() + " " + user.getLastName() + " " + user.getEmail());

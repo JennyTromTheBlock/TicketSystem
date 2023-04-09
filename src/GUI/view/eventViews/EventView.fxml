@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.eventControllers.EventController">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.eventControllers.EventController">
    <children>
-      <ScrollPane prefHeight="664.0" prefWidth="657.0">
+      <ScrollPane layoutX="0.800000011920929" layoutY="0.800000011920929" prefHeight="664.0" prefWidth="657.0" vbarPolicy="ALWAYS">
          <content>
-            <VBox alignment="TOP_CENTER" prefHeight="1100.0" prefWidth="656.0">
+            <VBox alignment="TOP_CENTER" prefWidth="656.0">
                <children>
                   <VBox>
                      <children>
@@ -32,7 +32,7 @@
                         </Label>
                         <Label fx:id="lblDescription" alignment="CENTER" prefHeight="46.0" prefWidth="796.0" text="Description">
                            <font>
-                              <Font size="16.0" />
+                                 <Font size="16.0" />
                            </font>
                            <VBox.margin>
                               <Insets left="40.0" right="40.0" />
@@ -96,7 +96,7 @@
                                                       </Label>
                                                    </children>
                                                 </HBox>
-                                                <ListView fx:id="listviewUsersOnEvent" prefHeight="95.0" prefWidth="616.0">
+                                                   <ListView fx:id="listviewUsersOnEvent" prefHeight="95.0" prefWidth="616.0">
                                                    <VBox.margin>
                                                       <Insets left="20.0" right="20.0" />
                                                    </VBox.margin>
@@ -119,11 +119,14 @@
                                                 <ScrollPane prefHeight="154.0" prefWidth="642.0">
                                                    <content>
                                                       <VBox fx:id="vBoxDialogPane" prefHeight="200.0" prefWidth="627.0" />
-                                                   </content></ScrollPane>
+                                                   </content>
+                                                </ScrollPane>
                                                 <TextArea fx:id="textfMessageInput" prefHeight="111.0" prefWidth="642.0" />
                                                 <Button mnemonicParsing="false" onAction="#handleSendMessage" prefHeight="60.0" prefWidth="72.0" text="Send" />
-                                             </children></VBox>
-                                       </children></AnchorPane>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
                               </content>
                             </TitledPane>
                             <TitledPane animated="false" text="untitled 3">
@@ -145,7 +148,7 @@
                                     <Insets left="100.0" right="50.0" />
                                  </HBox.margin>
                               </Button>
-                           </children>
+                                 </children>
                         </HBox>
                      </children>
                   </VBox>
@@ -154,4 +157,4 @@
          </content>
       </ScrollPane>
    </children>
-</Pane>
+</AnchorPane>
