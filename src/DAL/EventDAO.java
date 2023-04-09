@@ -90,6 +90,24 @@ public class EventDAO implements IEventDAO {
         return updatedEvent;
     }
 
+    @Override
+    public Event deleteEvent(Event event) throws Exception {
+        Event deletedEvent = null;
+        String sql = "DELETE FROM EVENT WHERE Id =?;";
+
+        try (Connection connection = connector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, event.getId());
+            statement.executeUpdate();
+
+            deletedEvent = event;
+        } catch (SQLException e) {
+            throw new Exception("Failed to delete the event", e);
+        }
+        return deletedEvent;
+    }
+
 
     private void bindEventInfo(Event event, PreparedStatement statement) throws SQLException {
         statement.setString(1, event.getEventName());

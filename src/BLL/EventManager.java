@@ -38,6 +38,11 @@ public class EventManager implements IEventManager {
         return databaseAccess.updateEvent(event);
     }
 
+    @Override
+    public Event deleteEvent(Event event) throws Exception {
+        return databaseAccess.deleteEvent(event);
+    }
+
     //todo should maybe be placed in model instead.
     public List<Event> getUpcomingEvents(List<Event> events) throws Exception {
         Iterator<Event> iterator = events.iterator();

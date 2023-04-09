@@ -51,6 +51,15 @@ public class EventModel {
         }
     }
 
+    public Event deleteEvent(Event eventToDelete) throws Exception {
+        Event deletedEvent = eventManager.deleteEvent(eventToDelete);
+
+        if (deletedEvent != null) {
+            allEvents.remove(eventToDelete);
+        }
+        return deletedEvent;
+    }
+
     /**
      * Gets the index of an event, with a given ID.
      * @param eventId the ID of the event to find.
