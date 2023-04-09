@@ -6,8 +6,10 @@ import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Document;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,7 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
+import java.net.MalformedURLException;
 
 
 
@@ -32,53 +34,19 @@ public class CreateTicketController extends BaseController {
     private Event selectedEvent;
 
     private static String FILE = "resourses/PDFs/temp.pdf";
-    private static String imgBarcode = "resourses/symbols/barcodes.png";
+
+
+    private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
+    private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.RED);
+    private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD);
+    private static Font smallNormal = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL);
 
 
     public CreateTicketController() {
 
-    }
-
-    public void generatePDF() throws BadElementException, IOException {
-
-        //created PDF document instance
-        Document doc = new Document();
-
-        try {
-            //generate a PDF at the specified location
-            PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(FILE));
-            System.out.println("PDF created.");
-
-
-            // Creating an ImageData object
-            //ImageData data = ImageDataFactory.create(imgBarcode);
-            //Image img = new Image(data);
-
-            //opens the PDF
-            doc.open();
-
-            //adds paragraph to the PDF file
-            doc.add(new Paragraph("Name: " + txtfCustomerName.getText()));
-            doc.add(new Paragraph("Email: " + txtfCustomerEmail.getText()));
-            doc.add(new Paragraph(lblTicketEventName.getText()));
-            doc.add(new Paragraph(lblTicketEventName.getText()));
-            doc.add(new Paragraph("Event Description"));
-            doc.add(new Paragraph(lblTcketEventLocation.getText()));
-            doc.add(new Paragraph(lblTicketPrice.getText()));
-            //doc.add((Element) img);
-            //close the PDF file
-            doc.close();
-
-            //closes the writer
-            writer.close();
-
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
     }
+
 
     public void handleCreateTicket() throws Exception {
         generatePDF();
@@ -115,4 +83,60 @@ public class CreateTicketController extends BaseController {
        Stage s = (Stage) lblTicketEventDate.getScene().getWindow();
        s.close();
     }
+
+    public void generatePDF() throws FileNotFoundException, DocumentException, MalformedURLException {
+
+        Image barcode = new Image("symbols/barcodes.png");
+        //created PDF document instance
+        Document doc = new Document();
+
+        //generate a PDF at the specified location
+        PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(FILE));
+        System.out.println("PDF created.");
+        //opens the PDF
+        doc.open();
+
+        Paragraph titleParagraph = new Paragraph("Ticket " + lblTicketEventName.getText(), catFont);
+        titleParagraph.setAlignment(Element.ALIGN_CENTER);
+
+        doc.add(titleParagraph);
+        doc.add(Chunk.NEWLINE);
+        doc.add(new Paragraph("Name: " + txtfCustomerName.getText()));
+        doc.add(new Paragraph("Email: " + txtfCustomerEmail.getText()));
+        doc.add(Chunk.NEWLINE);
+        doc.add(new Paragraph(lblTicketEventName.getText()));
+        doc.add(new Paragraph(lblTcketEventLocation.getText()));
+        doc.add(new Paragraph(lblTicketEventDate.getText()));
+        doc.add(new Paragraph("Event Description"));
+        doc.add(new Paragraph(lblTicketPrice.getText()));
+
+        String imFile = "symbols/barcodes.png";
+        ImageData data = ImageDataFactory.create(imFile);
+
+        // Creating an Image object
+        Image image = new Image(String.valueOf(data));
+
+        // Adding image to the document
+        doc.add((Element) image);
+
+        //addContent(doc);
+
+        //close the PDF file
+        doc.close();
+        //closes the writer
+        writer.close();
+
+            // Creating an ImageData object
+            //ImageData data = ImageDataFactory.create(imgBarcode);
+            //Image img = new Image(data);
+            //doc.add((Element) img);
+    }
+
+
+    /*
+    private void addContent(Document doc) {
+
+    }
+    */
+
 }
