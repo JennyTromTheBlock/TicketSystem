@@ -1,5 +1,6 @@
 package GUI.controller.adminControllers;
 
+import BE.Event;
 import BE.SystemUser;
 import GUI.controller.BaseController;
 import javafx.event.ActionEvent;
@@ -7,12 +8,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class UserInfoController extends BaseController implements Initializable {
 
+    public ListView listviewAssignedEvents;
     @FXML
     private Label lblName;
     @FXML
@@ -41,6 +44,16 @@ public class UserInfoController extends BaseController implements Initializable 
         lblEmail.setText(user.getEmail());
         setBtnDeleteUserVisible(true);
         selectedUser = user;
+
+        try {
+            for (Event event: getModelsHandler().getEventModel().getEventsAssignedToUser(user)) {
+                listviewAssignedEvents.setVisible(true);
+                listviewAssignedEvents.getItems().add(event.getEventName());
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void setBtnDeleteUserVisible(Boolean b) {

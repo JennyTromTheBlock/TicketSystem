@@ -130,4 +130,9 @@ public class EventModel {
         shownEvents.clear();
         shownEvents.addAll(searchResults);
     }
+
+    public ObservableList<Event> getEventsAssignedToUser(SystemUser user) throws Exception {
+        ObservableList<Event> events = FXCollections.observableList(eventFacade.getMyEvents(user));
+       return events;
+    }
 }

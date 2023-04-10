@@ -23,6 +23,7 @@
             <Font size="25.0" />
          </font>
       </Label>
+      <ListView fx:id="listviewAssignedEvents" prefHeight="200.0" prefWidth="200.0" />
       <Pane prefHeight="163.0" prefWidth="354.0" VBox.vgrow="ALWAYS" />
       <HBox alignment="CENTER" prefHeight="106.0" prefWidth="354.0">
          <children>
