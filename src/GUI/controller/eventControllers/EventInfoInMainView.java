@@ -4,6 +4,7 @@ import BE.Event;
 import BE.Role;
 import GUI.controller.BaseController;
 import GUI.controller.CreateTicketController;
+import GUI.util.ConfirmDelete;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -51,7 +52,6 @@ public class EventInfoInMainView extends BaseController implements Initializable
         //sets buttons and symbols visible
         setEventInfoBtnsVisible();
         showSymbolsForEventInSidebar();
-        System.out.println("hey");
 
         setDeleteBtn(event);
         }
@@ -59,7 +59,6 @@ public class EventInfoInMainView extends BaseController implements Initializable
     private void setDeleteBtn(Event event) {
             try {
                 if (getModelsHandler().getSystemUserModel().getLoggedInSystemUser().getValue().getRoles().contains(Role.ADMINISTRATOR)) {
-                    System.out.println("it work");
                     eventButtonContainer.getChildren().remove(0);
 
                     Button deleteEvent = new Button("deleteEvent");
@@ -71,17 +70,20 @@ public class EventInfoInMainView extends BaseController implements Initializable
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-
-
-
     }
 
     private void handleDeleteBtn(Button deleteEvent, Event event) {
         deleteEvent.setOnAction(event1 -> {
             try {
                 //todo should warn if there are any tickets on event
-                getModelsHandler().getTicketModel().deleteEventFrom(event);
-                getModelsHandler().getEventModel().safeDeleteEvent(event);
+                String header = "Are you sure you want to delete this event?";
+                String content = event.getEventName();
+                boolean deleteEventConfirmation = ConfirmDelete.confirm(header, content);
+
+                if(deleteEventConfirmation) {
+                    getModelsHandler().getTicketModel().deleteEventFrom(event);
+                    getModelsHandler().getEventModel().safeDeleteEvent(event);
+                }
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
