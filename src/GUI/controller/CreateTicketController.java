@@ -31,17 +31,12 @@ public class CreateTicketController extends BaseController {
     private static String FILE = "resourses/PDFs/temp.pdf";
 
 
-    private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
-    private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.RED);
-    private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD);
-    private static Font smallNormal = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL);
+    private static final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
 
 
     public CreateTicketController() {
 
-
     }
-
 
     public void handleCreateTicket() throws Exception {
         generatePDF();
@@ -81,7 +76,7 @@ public class CreateTicketController extends BaseController {
 
     public void generatePDF() throws IOException, DocumentException {
 
-        Image barcode = new Image("symbols/barcodes.png");
+
         //created PDF document instance
         Document doc = new Document();
 
@@ -109,7 +104,11 @@ public class CreateTicketController extends BaseController {
         com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance("resourses/symbols/barcodes.png");
 
         // Adding image to the document
+<<<<<<< HEAD
         doc.add( image);
+=======
+        doc.add(image);
+>>>>>>> 4ea1da716fd9c144cf44f4df748367b258dac95f
 
         //addContent(doc);
 
