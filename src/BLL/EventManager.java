@@ -97,4 +97,8 @@ public class EventManager implements IEventManager {
     public List<Note> retrieveAllNotesOfEvent(Event event) throws Exception {
         return eventFacade.retrieveAllNotesOfEvent(event);
     }
+    public List<Event> getMyEvents(SystemUser selectedUser) throws Exception {
+        return eventFacade.getMyEvents(selectedUser);
+    }
+
 }

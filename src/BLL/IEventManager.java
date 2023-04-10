@@ -31,4 +31,5 @@ public interface IEventManager {
     List<Note> retrieveAllNotesOfEvent(Event event) throws Exception;
     Event deleteAllNotesOnEvent(Event event) throws Exception;
 
+    List<Event> getMyEvents(SystemUser user) throws Exception;
 }

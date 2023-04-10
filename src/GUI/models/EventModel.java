@@ -100,6 +100,10 @@ public class EventModel {
         return FXCollections.observableList(eventManager.getUsersAssignedToEvent(event));
     }
 
+    public ObservableList<Event> getMyEvents() throws Exception {
+        return FXCollections.observableList(eventFacade.getMyEvents(ModelsHandler.getInstance().getSystemUserModel().getLoggedInSystemUser().getValue()));
+    }
+
     public Event removeUsersAssignedToEvent(Event event) throws Exception {
         eventManager.removeAllUsersFromEvent(event);
         return null;

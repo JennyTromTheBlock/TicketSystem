@@ -39,6 +39,10 @@ public class EventFacade {
         return eventNoteDAO.getAllNotesFromEvent(event);
     }
 
+    public List<Event> getMyEvents(SystemUser selectedUser) throws Exception {
+        return usersOnEventsDAO.getEventsAssignedToUser(selectedUser);
+    }
+
     public Event removeAllUsersAssignedToEvent(Event event) throws Exception {
         return usersOnEventsDAO.deleteEvent(event);
     }

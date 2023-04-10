@@ -30,4 +30,8 @@ public class EventFacade {
     public List<Note> retrieveAllNotesOfEvent(Event event) throws Exception {
         return eventManager.retrieveAllNotesOfEvent(event);
     }
+
+    public List<Event> getMyEvents(SystemUser selectedUser) throws Exception {
+        return eventManager.getMyEvents(selectedUser);
+    }
 }
