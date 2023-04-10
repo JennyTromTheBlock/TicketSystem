@@ -32,4 +32,6 @@ public interface IEventManager {
     Event deleteAllNotesOnEvent(Event event) throws Exception;
 
     List<Event> getMyEvents(SystemUser user) throws Exception;
+
+    List<Event> search(List<Event> searchBase, String query);
 }

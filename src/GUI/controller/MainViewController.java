@@ -5,6 +5,7 @@ import GUI.controller.eventControllers.EventController;
 import GUI.controller.eventControllers.EventListController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +16,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -51,6 +53,8 @@ public class MainViewController extends BaseController implements Initializable 
         checkMenuListener();
 
         setNodeInRightBorder("/GUI/view/eventViews/EventInfoInMainView.fxml");
+
+        searchListener();
     }
 
     private void loadImages() {
@@ -175,5 +179,26 @@ public class MainViewController extends BaseController implements Initializable 
 
     public void handleSpecialTicket(ActionEvent actionEvent) {
         openStage("/GUI/view/specialTicketViews/SpecialTicketView.fxml", "");
+    }
+
+    public void handleSearch(MouseEvent mouseEvent) {
+        try {
+            getModelsHandler().getEventModel().search(txtSearch.getText());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void searchListener() {
+        txtSearch.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                try {
+                        getModelsHandler().getEventModel().search(txtSearch.getText());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 }

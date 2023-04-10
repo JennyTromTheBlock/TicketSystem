@@ -1,20 +1,23 @@
 package GUI.models;
 
 import BE.Event;
-import BE.SystemUser;
-import BLL.IEventManager;
 import BE.Note;
+import BE.SystemUser;
 import BLL.EventManager;
+import BLL.IEventManager;
 import GUI.BLLFacades.EventFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class EventModel {
 
-    private ObservableList<Event> allEvents;
+    private List<Event> allEvents;
+
+    private ObservableList<Event> shownEvents;
 
     private EventFacade eventFacade;
     private IEventManager eventManager;
@@ -22,25 +25,28 @@ public class EventModel {
     public EventModel() throws Exception {
         eventFacade = new EventFacade();
         eventManager = new EventManager();
-        allEvents = FXCollections.observableList(retrieveAllEvents());
+        allEvents  = retrieveAllEvents();
+        shownEvents = FXCollections.observableList(new ArrayList<>());
+        shownEvents.addAll(allEvents);
     }
 
     //should be used when getting list in controller
     public ObservableList<Event> getObservableEvents() {
-        return allEvents;
+        return shownEvents;
     }
 
     public Event createEvent(Event event, SystemUser user) throws Exception {
         Event newEvent =  eventManager.createEvent(event);
 
-        allEvents.add(newEvent);
+        shownEvents.add(newEvent);
 
         eventFacade.assignUserToEvent(user, newEvent);//assign user to the created event
         return newEvent;
     }
 
-    private List<Event> retrieveAllEvents() throws Exception {
-        return eventManager.getAllEvents();
+    public List<Event> retrieveAllEvents() throws Exception {
+        allEvents =eventManager.getAllEvents();
+        return allEvents;
     }
 
     public void updateEvent(Event eventToUpdate) throws Exception {
@@ -49,7 +55,7 @@ public class EventModel {
         if (updatedEvent != null) {
             int oldEventIndex = indexOfEventId(updatedEvent.getId());
 
-            allEvents.set(oldEventIndex, updatedEvent);
+            shownEvents.set(oldEventIndex, updatedEvent);
         }
     }
 
@@ -57,7 +63,7 @@ public class EventModel {
         Event deletedEvent = eventManager.deleteEvent(eventToDelete);
 
         if (deletedEvent != null) {
-            allEvents.remove(eventToDelete);
+            shownEvents.remove(eventToDelete);
         }
         return deletedEvent;
     }
@@ -68,21 +74,21 @@ public class EventModel {
      * @return The index of the given event, or -1 if none were found.
      */
     private int indexOfEventId(int eventId) {
-        Optional<Event> optionalEvent = allEvents.stream().filter(event -> event.getId() == eventId).findFirst();
+        Optional<Event> optionalEvent = shownEvents.stream().filter(event -> event.getId() == eventId).findFirst();
 
         if (optionalEvent.isPresent()) {
-            return allEvents.indexOf(optionalEvent.get());
+            return shownEvents.indexOf(optionalEvent.get());
         }
 
         return -1;
     }
 
     public ObservableList<Event> getUpcomingEvents() throws Exception {
-        return FXCollections.observableList(eventManager.getUpcomingEvents(allEvents));
+        return FXCollections.observableList(eventManager.getUpcomingEvents(shownEvents));
     }
 
     public ObservableList<Event> getHistoricEvents() throws Exception {
-        return FXCollections.observableList(eventManager.getHistoricEvents(allEvents));
+        return FXCollections.observableList(eventManager.getHistoricEvents(shownEvents));
     }
 
     public Note addNoteToEvent(Note note) throws Exception {
@@ -117,5 +123,11 @@ public class EventModel {
         removeNotesFromEvent(event);
         removeUsersAssignedToEvent(event);
         return deleteEvent(event);
+    }
+
+    public void search(String query) throws Exception {
+        List<Event> searchResults = eventManager.search(allEvents, query);
+        shownEvents.clear();
+        shownEvents.addAll(searchResults);
     }
 }
