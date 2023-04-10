@@ -2,6 +2,7 @@ package BLL.Util;
 
 import java.io.FileOutputStream;
 
+import BE.SpecialTicketType;
 import BE.Ticket;
 import GUI.util.ResourcePaths;
 import com.itextpdf.text.*;
@@ -14,7 +15,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class PDFGenerator {
     private static final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
 
-    private Image generateQRCode(Ticket ticket, int width, int height) throws Exception {
+    private Image generateTicketQRCode(Ticket ticket, int width, int height) throws Exception {
         BarcodeQRCode barcodeQRCode = new BarcodeQRCode(Integer.toString(ticket.getId()), width, height, null);
 
         try {
@@ -22,7 +23,19 @@ public class PDFGenerator {
         }
         catch (BadElementException e) {
             e.printStackTrace();
-            throw new Exception("Failed to generate QR-Code", e);
+            throw new Exception("Failed to generate ticket QR-Code", e);
+        }
+    }
+
+    private Image generateSpecialTicketQRCode(SpecialTicketType specialTicketType, int width, int height) throws Exception {
+        BarcodeQRCode barcodeQRCode = new BarcodeQRCode((specialTicketType.getTypeName()), width, height, null);
+
+        try {
+            return barcodeQRCode.getImage();
+        }
+        catch (BadElementException e) {
+            e.printStackTrace();
+            throw new Exception("Failed to generate special ticket QR-Code", e);
         }
     }
 
@@ -69,11 +82,11 @@ public class PDFGenerator {
             doc.add(generateBarCode(ticket, writer.getDirectContent()));
 
             // Adding qr code to the document
-            doc.add(generateQRCode(ticket, 100, 100));
+            doc.add(generateTicketQRCode(ticket, 100, 100));
         }
         catch (DocumentException e) {
             e.printStackTrace();
-            throw new Exception("Failed to create PDF", e);
+            throw new Exception("Failed to create ticket PDF", e);
         }
         finally {
             if (doc != null) doc.close();
@@ -83,4 +96,51 @@ public class PDFGenerator {
 
         return doc;
     }
+
+
+    public Document generateSpecialTicketForEvent(SpecialTicketType specialTicketType) throws Exception {
+        final String pdfFileName = specialTicketType.getTypeName() + "-.pdf";
+        final String pdfPath = ResourcePaths.PDF_FOLDER + pdfFileName;
+
+        Document doc = null;
+        PdfWriter writer = null;
+
+        try {
+            //created PDF document instance
+            doc = new Document();
+
+            //generate a PDF at the specified location
+            writer = PdfWriter.getInstance(doc, new FileOutputStream(pdfPath));
+
+            //opens the PDF
+            doc.open();
+
+            Paragraph titleParagraph = new Paragraph("Special Ticket " + specialTicketType.getTypeName(), catFont);
+            titleParagraph.setAlignment(Element.ALIGN_CENTER);
+
+            doc.add(titleParagraph);
+            doc.add(Chunk.NEWLINE);
+            doc.add(new Paragraph("Type: " + specialTicketType.getTypeName()));
+            doc.add(new Paragraph("Price: " + specialTicketType.getPrice()));
+
+            // Adding bar code to the document
+            //doc.add(generateBarCode(specialTicketType, writer.getDirectContent()));
+
+            // Adding qr code to the document
+            doc.add(generateSpecialTicketQRCode((specialTicketType), 100, 100));
+        }
+        catch (DocumentException e) {
+            e.printStackTrace();
+            throw new Exception("Failed to create special ticket PDF", e);
+        }
+        finally {
+            if (doc != null) doc.close();
+
+            if (writer != null) writer.close();
+        }
+
+        return doc;
+    }
+
+
 }
