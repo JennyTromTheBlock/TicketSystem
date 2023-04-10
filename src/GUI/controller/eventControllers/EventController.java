@@ -2,11 +2,13 @@ package GUI.controller.eventControllers;
 
 import BE.Event;
 import BE.Note;
+import BE.SpecialTicketType;
 import BE.SystemUser;
 import GUI.controller.BaseController;
 import GUI.controller.MessageController;
 import GUI.util.SymbolPaths;
 import GUI.util.ViewPaths;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -68,14 +70,52 @@ public class EventController extends BaseController implements Initializable {
         getEventNotes();
         getUsersAssignedToEvent();
         getAllSpecialTicketTypes();
+        loadSelectedSpecialTickets();
+    }
+
+    private void selectedSpecialTicketHandler() {
+
+        listviewSelectedSpecialTickets.setOnMouseClicked(event1 -> {
+            if (event1.getClickCount() == 2) {
+                int selectedUserIndex = listviewSelectedSpecialTickets.getSelectionModel().getSelectedIndex();
+                //todo should remove special ticket from event and list
+            }
+        });
+
+    }
+
+    private void loadSelectedSpecialTickets() {
+        //todo should load all selected tickets from model.
+       // listviewSelectedSpecialTickets.setItems(getModelsHandler().getSpecialTicketModel()
+        selectedSpecialTicketHandler();
     }
 
     private void getAllSpecialTicketTypes() {
         try {
-            listviewAllSpecialTickets.setItems(getModelsHandler().getSpecialTicketModel().getSpecialTicketTypes());
+            ObservableList<SpecialTicketType> specialTickets = getModelsHandler().getSpecialTicketModel().getSpecialTicketTypes();
+            for (SpecialTicketType tickets: specialTickets) {
+                listviewAllSpecialTickets.getItems().add(tickets.getTypeName());
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        allSpecialTicketsHandler();
+    }
+
+    private void allSpecialTicketsHandler() {
+        listviewAllSpecialTickets.setOnMouseClicked(event1 -> {
+            if (event1.getClickCount() == 2) {
+                int selectedUserIndex = listviewAllSpecialTickets.getSelectionModel().getSelectedIndex();
+                try {
+                    SpecialTicketType selectedTicket = getModelsHandler().getSpecialTicketModel().getSpecialTicketTypes().get(selectedUserIndex);
+                    //todo should add special ticket to event in dao
+                    listviewAllSpecialTickets.getItems().removeAll(selectedTicket.getTypeName());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        });
     }
 
     private void getUsersAssignedToEvent() {
@@ -164,9 +204,9 @@ public class EventController extends BaseController implements Initializable {
 
             for (SystemUser user : users) {
                 listviewAllUsers.getItems().add(convertSystemUserToListViewItem(user));
+                addListenerForListAllUsers(users);
             }
 
-            addListenerForListAllUsers(users);
         }
         catch (Exception e) {
             displayError(e);
