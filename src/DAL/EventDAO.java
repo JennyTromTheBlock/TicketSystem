@@ -1,11 +1,8 @@
 package DAL;
 
 import BE.Event;
-import BE.Note;
 import DAL.Connectors.AbstractConnector;
 import DAL.Connectors.SqlConnector;
-import DAL.SystemUsers.ISystemUserDAO;
-import DAL.SystemUsers.SystemUserDAO;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -88,6 +85,24 @@ public class EventDAO implements IEventDAO {
             throw new Exception("Failed to edit the event", e);
         }
         return updatedEvent;
+    }
+
+    @Override
+    public Event deleteEvent(Event event) throws Exception {
+        Event deletedEvent = null;
+        String sql = "DELETE FROM EVENT WHERE Id =?;";
+
+        try (Connection connection = connector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, event.getId());
+            statement.executeUpdate();
+
+            deletedEvent = event;
+        } catch (SQLException e) {
+            throw new Exception("Failed to delete the event", e);
+        }
+        return deletedEvent;
     }
 
 

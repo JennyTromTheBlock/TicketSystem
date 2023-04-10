@@ -8,7 +8,9 @@ import DAL.Connectors.SqlConnector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class UsersOnEventDAO implements IUsersOnEventsDAO {
@@ -71,5 +73,51 @@ public class UsersOnEventDAO implements IUsersOnEventsDAO {
         }
 
         return allUsersAssignedToEvent;
+    }
+
+    @Override
+    public List<Event> getEventsAssignedToUser(SystemUser loggedInUser) throws Exception {
+        String sql = "SELECT * FROM  UsersAssignedToEvent INNER JOIN Event ON Event.ID=UsersAssignedToEvent.EventID WHERE UserEmail = ?;";
+
+        ArrayList<Event> allEventsAssignedToUser = new ArrayList<>();
+        try (Connection connection = connector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, loggedInUser.getEmail());
+            ResultSet rs = statement.executeQuery();
+
+            while(rs.next()) {
+                int id = rs.getInt("ID");
+                String eventName = rs.getString("EventName");
+                String description = rs.getString("EventDescription");
+                String location = rs.getString("EventLocation");
+                Date date = rs.getTimestamp("EventDate");
+                int maxParticipant = rs.getInt("maxParticipant");
+                int price = rs.getInt("Price");
+
+                Event event = new Event(id, eventName, description, location, date, maxParticipant, price);
+                allEventsAssignedToUser.add(event);
+            }
+        } catch (Exception e){
+            throw new Exception("Failed to retrieve all events", e);
+        }
+        return allEventsAssignedToUser;
+    }
+
+    @Override
+    public Event deleteEvent(Event event) throws Exception {
+        Event deletedEvent = null;
+        String sql = "DELETE FROM UsersAssignedToEvent WHERE EventID =?;";
+
+        try (Connection connection = connector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, event.getId());
+            statement.executeUpdate();
+
+            deletedEvent = event;
+        } catch (SQLException e) {
+            throw new Exception("Failed to delete the event", e);
+        }
+        return deletedEvent;
     }
 }

@@ -1,13 +1,11 @@
 package BLL;
 
 import BE.Event;
-import BE.SystemUser;
 import BE.Note;
+import BE.SystemUser;
 import BLL.DALFacades.EventFacade;
 import DAL.EventDAO;
 import DAL.IEventDAO;
-import DAL.UsersOnEvents.IUsersOnEventsDAO;
-import DAL.UsersOnEvents.UsersOnEventDAO;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -38,6 +36,11 @@ public class EventManager implements IEventManager {
     @Override
     public Event updateEvent(Event event) throws Exception {
         return databaseAccess.updateEvent(event);
+    }
+
+    @Override
+    public Event deleteEvent(Event event) throws Exception {
+        return databaseAccess.deleteEvent(event);
     }
 
     //todo should maybe be placed in model instead.
@@ -71,6 +74,11 @@ public class EventManager implements IEventManager {
     }
 
     @Override
+    public Event removeAllUsersFromEvent(Event event) throws Exception {
+        return eventFacade.removeAllUsersAssignedToEvent(event);
+    }
+
+    @Override
     public List<SystemUser> getUsersAssignedToEvent(Event event) throws Exception {
         return eventFacade.getUsersAssignedToEvent(event);
     }
@@ -81,7 +89,16 @@ public class EventManager implements IEventManager {
     }
 
     @Override
+    public Event deleteAllNotesOnEvent(Event event) throws Exception {
+        return eventFacade.deleteNotesFromEvent(event);
+    }
+
+    @Override
     public List<Note> retrieveAllNotesOfEvent(Event event) throws Exception {
         return eventFacade.retrieveAllNotesOfEvent(event);
     }
+    public List<Event> getMyEvents(SystemUser selectedUser) throws Exception {
+        return eventFacade.getMyEvents(selectedUser);
+    }
+
 }

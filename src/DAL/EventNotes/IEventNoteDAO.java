@@ -9,4 +9,7 @@ public interface IEventNoteDAO {
     Note createNote(Note note) throws Exception;
 
     List<Note> getAllNotesFromEvent(Event event) throws Exception;
+
+    Event deleteNotesOnEvent(Event event) throws Exception;
+
 }

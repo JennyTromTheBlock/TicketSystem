@@ -1,6 +1,8 @@
 package GUI.models;
 
+import BE.Event;
 import BE.Ticket;
+import BLL.Util.PDFGenerator;
 import BLL.ITicketManager;
 import BLL.TicketManager;
 
@@ -12,11 +14,14 @@ public class TicketModel {
         this.ticketManager = new TicketManager();
     }
 
-
     public Ticket createTicket(Ticket ticket) throws Exception {
         Ticket newTicket = ticketManager.createTicket(ticket);
 
         return newTicket;
+    }
+
+    public Event deleteEventFrom(Event event) throws Exception {
+        return ticketManager.deleteTicketsConnectedToEvent(event);
     }
 
 }

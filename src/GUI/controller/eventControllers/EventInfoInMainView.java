@@ -1,8 +1,10 @@
 package GUI.controller.eventControllers;
 
 import BE.Event;
+import BE.Role;
 import GUI.controller.BaseController;
 import GUI.controller.CreateTicketController;
+import GUI.util.ConfirmDelete;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -50,43 +52,77 @@ public class EventInfoInMainView extends BaseController implements Initializable
         //sets buttons and symbols visible
         setEventInfoBtnsVisible();
         showSymbolsForEventInSidebar();
+
+        setDeleteBtn(event);
+        }
+
+    private void setDeleteBtn(Event event) {
+            try {
+                if (getModelsHandler().getSystemUserModel().getLoggedInSystemUser().getValue().getRoles().contains(Role.ADMINISTRATOR)) {
+                    eventButtonContainer.getChildren().remove(0);
+
+                    Button deleteEvent = new Button("Delete Event");
+                    deleteEvent.setPrefSize(200, 30);
+                    eventButtonContainer.getChildren().add(0, deleteEvent);
+
+                    handleDeleteBtn(deleteEvent, event);
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+    }
+
+    private void handleDeleteBtn(Button deleteEvent, Event event) {
+        deleteEvent.setOnAction(event1 -> {
+            try {
+                //todo should warn if there are any tickets on event
+                String header = "Are you sure you want to delete this event?";
+                String content = event.getEventName();
+                boolean deleteEventConfirmation = ConfirmDelete.confirm(header, content);
+
+                if(deleteEventConfirmation) {
+                    getModelsHandler().getTicketModel().deleteEventFrom(event);
+                    getModelsHandler().getEventModel().safeDeleteEvent(event);
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     private void showSymbolsForEventInSidebar() {
-        ivEventDate.setImage(new Image("symbols/callender.png"));
-        ivEventPrice.setImage(new Image("symbols/price.png"));
-        ivEventSelected.setImage(new Image("symbols/location.png"));
-        ivEventTickets.setImage(new Image("symbols/ticket.png"));
-    }
+            ivEventDate.setImage(new Image("symbols/callender.png"));
+            ivEventPrice.setImage(new Image("symbols/price.png"));
+            ivEventSelected.setImage(new Image("symbols/location.png"));
+            ivEventTickets.setImage(new Image("symbols/ticket.png"));
+        }
 
-    private void setEventInfoBtnsVisible() {
-        btnEditEvent.setVisible(true);
-        btnViewInfo.setVisible(true);
-        btnSellTicket.setVisible(true);
-        eventButtonContainer.setVisible(true);
-    }
+        private void setEventInfoBtnsVisible() {
+            btnEditEvent.setVisible(true);
+            btnViewInfo.setVisible(true);
+            btnSellTicket.setVisible(true);
+            eventButtonContainer.setVisible(true);
+        }
 
-    public void handleViewInfo(ActionEvent actionEvent) {
-        FXMLLoader loader = openStage("/GUI/view/eventViews/EventView.fxml", "");
-        EventController controller = loader.getController();
-        controller.setContent(event);
-    }
-
-    public void handleEditEvent(ActionEvent actionEvent) {
-        FXMLLoader loader= openStage("/GUI/view/eventViews/UpdateEventView.fxml", "update Event");
-        UpdateEventController updateEventController = loader.getController();
-        updateEventController.setContent(event);
-    }
-
-    public void handleSellTicket(ActionEvent actionEvent) {
-            FXMLLoader loader = openStage("/GUI/view/ticketsViews/CreateTicketView.fxml", "update Ticket");
-            CreateTicketController controller = loader.getController();
+        public void handleViewInfo(ActionEvent actionEvent) {
+            FXMLLoader loader = openStage("/GUI/view/eventViews/EventView.fxml", "");
+            EventController controller = loader.getController();
             controller.setContent(event);
-    }
+        }
 
-    private boolean isSelectedItemInTableView(TableView<?> tableView) {
-        return tableView.getSelectionModel().getSelectedItem() != null;
-    }
-}
+        public void handleEditEvent(ActionEvent actionEvent) {
+            FXMLLoader loader= openStage("/GUI/view/eventViews/UpdateEventView.fxml", "update Event");
+            UpdateEventController updateEventController = loader.getController();
+            updateEventController.setContent(event);
+        }
 
+        public void handleSellTicket(ActionEvent actionEvent) {
+                FXMLLoader loader = openStage("/GUI/view/ticketsViews/CreateTicketView.fxml", "update Ticket");
+                CreateTicketController controller = loader.getController();
+                controller.setContent(event);
+        }
 
+        private boolean isSelectedItemInTableView(TableView<?> tableView) {
+            return tableView.getSelectionModel().getSelectedItem() != null;
+        }
+                }

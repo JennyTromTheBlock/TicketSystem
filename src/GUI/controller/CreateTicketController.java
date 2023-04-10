@@ -2,6 +2,8 @@ package GUI.controller;
 
 import BE.Event;
 import BE.Ticket;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,11 +11,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+
 
 public class CreateTicketController extends BaseController {
-    public Label lblCustomerName;
-    public Label lblAvailableTickets;
-    public Button btnSubtractTicket;
+    @FXML
+    private Label lblCustomerName;
+    @FXML
+    private Label lblAvailableTickets;
+    @FXML
+    private Button btnSubtractTicket;
     @FXML
     private TextField txtfCustomerName, txtfCustomerEmail;
     @FXML
@@ -21,23 +30,20 @@ public class CreateTicketController extends BaseController {
 
     private Event selectedEvent;
 
-    public CreateTicketController() {
-    }
-
 
     public void handleCreateTicket() throws Exception {
-        Ticket newTicket = createTicketFromFields();
-        Ticket ticket = getModelsHandler().getTicketModel().createTicket(newTicket);
+        Ticket ticket = getModelsHandler().getTicketModel().createTicket(createTicketFromFields());
+
+        //TODO Show view with the newly created ticket. There should be an option for printing or sending by Email.
     }
 
     private Ticket createTicketFromFields() {
-
-        int eventId = selectedEvent.getId();
         String customerName = txtfCustomerName.getText();
         String customerEmail = txtfCustomerEmail.getText();
 
         return new Ticket(customerName, customerEmail, selectedEvent);
     }
+
     public void setContent(Event event) {
        selectedEvent = event;
 
@@ -57,4 +63,6 @@ public class CreateTicketController extends BaseController {
        Stage s = (Stage) lblTicketEventDate.getScene().getWindow();
        s.close();
     }
+
+
 }
