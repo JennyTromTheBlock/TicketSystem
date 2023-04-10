@@ -3,7 +3,9 @@ package GUI.models;
 import BE.Event;
 import BE.SystemUser;
 import BLL.IEventManager;
+import BE.Note;
 import BLL.EventManager;
+import GUI.BLLFacades.EventFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -14,9 +16,11 @@ public class EventModel {
 
     private ObservableList<Event> allEvents;
 
+    private EventFacade eventFacade;
     private IEventManager eventManager;
 
     public EventModel() throws Exception {
+        eventFacade = new EventFacade();
         eventManager = new EventManager();
         allEvents = FXCollections.observableList(retrieveAllEvents());
     }
@@ -31,7 +35,7 @@ public class EventModel {
 
         allEvents.add(newEvent);
 
-        eventManager.assignUserToEvent(user, newEvent);//assign user to the created event
+        eventFacade.assignUserToEvent(user, newEvent);//assign user to the created event
         return newEvent;
     }
 
@@ -71,13 +75,20 @@ public class EventModel {
     public ObservableList<Event> getHistoricEvents() throws Exception {
         return FXCollections.observableList(eventManager.getHistoricEvents(allEvents));
     }
-    public void assignUserToEvent(SystemUser user, Event event) throws Exception {
-        eventManager.assignUserToEvent(user, event);
+
+    public Note addNoteToEvent(Note note) throws Exception {
+        return eventFacade.addNoteToEvent(note);
     }
 
-    public ObservableList<SystemUser> usersAssignedToEvent(Event event) throws Exception {
-        ObservableList<SystemUser> users = FXCollections.observableList(eventManager.usersAssignedToEvent(event));
-        return users;
+    public List<Note> addAllNotesToEvent(Event event) throws Exception {
+        return eventFacade.retrieveAllNotesOfEvent(event);
+    }
+    public void assignUserToEvent(SystemUser user, Event event) throws Exception {
+        eventFacade.assignUserToEvent(user, event);
+    }
+
+    public List<SystemUser> getUsersAssignedToEvent(Event event) throws Exception {
+        return FXCollections.observableList(eventManager.getUsersAssignedToEvent(event));
     }
 
     public ObservableList<Event> getMyEvents() throws Exception {

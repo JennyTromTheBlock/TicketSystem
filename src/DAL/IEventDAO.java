@@ -1,6 +1,7 @@
 package DAL;
 
 import BE.Event;
+import BE.Note;
 
 import java.util.List;
 

@@ -2,8 +2,12 @@ package BLL;
 
 import BE.Event;
 import BE.SystemUser;
+import BE.Note;
+import BLL.DALFacades.EventFacade;
 import DAL.EventDAO;
 import DAL.IEventDAO;
+import DAL.UsersOnEvents.IUsersOnEventsDAO;
+import DAL.UsersOnEvents.UsersOnEventDAO;
 import DAL.IUsersOnEventsDAO;
 import DAL.UsersOnEvent;
 import GUI.controller.adminControllers.UserInfoController;
@@ -16,13 +20,12 @@ import java.util.List;
 
 public class EventManager implements IEventManager {
 
+    private EventFacade eventFacade;
     private final IEventDAO databaseAccess;
 
-    private final IUsersOnEventsDAO assignUserDAO;
-
     public EventManager() throws Exception {
+        eventFacade = new EventFacade();
         databaseAccess = new EventDAO();
-        assignUserDAO = new UsersOnEvent();
     }
 
     @Override
@@ -65,15 +68,25 @@ public class EventManager implements IEventManager {
         return historicEvents;
     }
 
+    @Override
     public void assignUserToEvent(SystemUser user, Event event) throws Exception {
-        assignUserDAO.assignUserToEvent(user, event);
+        eventFacade.assignUserToEvent(user, event);
     }
 
     @Override
-    public List<SystemUser> usersAssignedToEvent(Event event) throws Exception {
-        return assignUserDAO.getUsersAssignedToEvent(event);
+    public List<SystemUser> getUsersAssignedToEvent(Event event) throws Exception {
+        return eventFacade.getUsersAssignedToEvent(event);
     }
 
+    @Override
+    public Note addNoteToEvent(Note note) throws Exception {
+        return eventFacade.addNoteToEvent(note);
+    }
+
+    @Override
+    public List<Note> retrieveAllNotesOfEvent(Event event) throws Exception {
+        return eventFacade.retrieveAllNotesOfEvent(event);
+    }
     public List<Event> getMyEvents(SystemUser selectedUser) throws Exception {
         return assignUserDAO.getEventsAssignedToUser(selectedUser);
     }

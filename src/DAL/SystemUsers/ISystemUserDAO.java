@@ -20,4 +20,6 @@ public interface ISystemUserDAO {
 
     SystemUser deleteSystemUser(SystemUser systemUser) throws Exception;
 
+    SystemUser getSystemUserById(String id) throws Exception;
+
 }
