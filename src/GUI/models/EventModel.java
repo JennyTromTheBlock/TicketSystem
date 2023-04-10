@@ -87,7 +87,7 @@ public class EventModel {
         eventFacade.assignUserToEvent(user, event);
     }
 
-    public List<SystemUser> getUsersAssignedToEvent(Event event) throws Exception {
+    public ObservableList<SystemUser> getUsersAssignedToEvent(Event event) throws Exception {
         return FXCollections.observableList(eventManager.getUsersAssignedToEvent(event));
     }
 }
