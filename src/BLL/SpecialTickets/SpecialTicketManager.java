@@ -4,14 +4,18 @@ import BE.Event;
 import BE.SpecialTicket;
 import BE.SpecialTicketType;
 import BLL.DALFacades.SpecialTicketsFacade;
+import BLL.Util.PDFGenerator;
 
 import java.util.List;
 
 public class SpecialTicketManager implements ISpecialTicketManager {
     private SpecialTicketsFacade specialTicketsFacade;
+    private PDFGenerator pdfGenerator;
 
     public SpecialTicketManager() throws Exception {
         specialTicketsFacade = new SpecialTicketsFacade();
+        pdfGenerator = new PDFGenerator();
+
     }
 
     @Override
@@ -31,6 +35,7 @@ public class SpecialTicketManager implements ISpecialTicketManager {
 
     @Override
     public SpecialTicket createSpecialTicket(SpecialTicket specialTicket) throws Exception {
+        pdfGenerator.generateSpecialTicketForEvent(specialTicket.getType());
         return specialTicketsFacade.createSpecialTicket(specialTicket);
     }
 }
