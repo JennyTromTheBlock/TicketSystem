@@ -16,5 +16,6 @@
     <orderEntry type="library" name="itextpdf.layout" level="project" />
     <orderEntry type="library" name="itextpdf.kernel" level="project" />
     <orderEntry type="library" name="itextpdf2" level="project" />
+    <orderEntry type="library" name="itextpdf.maven.itextdoc1" level="project" />
   </component>
 </module>

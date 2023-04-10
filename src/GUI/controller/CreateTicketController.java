@@ -2,23 +2,18 @@ package GUI.controller;
 
 import BE.Event;
 import BE.Ticket;
-import com.itextpdf.io.image.ImageData;
-import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.Document;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.net.MalformedURLException;
+import java.io.IOException;
 
 
 
@@ -84,7 +79,7 @@ public class CreateTicketController extends BaseController {
        s.close();
     }
 
-    public void generatePDF() throws FileNotFoundException, DocumentException, MalformedURLException {
+    public void generatePDF() throws IOException, DocumentException {
 
         Image barcode = new Image("symbols/barcodes.png");
         //created PDF document instance
@@ -110,14 +105,11 @@ public class CreateTicketController extends BaseController {
         doc.add(new Paragraph("Event Description"));
         doc.add(new Paragraph(lblTicketPrice.getText()));
 
-        String imFile = "symbols/barcodes.png";
-        ImageData data = ImageDataFactory.create(imFile);
-
-        // Creating an Image object
-        Image image = new Image(String.valueOf(data));
+        
+        com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance("resourses/symbols/barcodes.png");
 
         // Adding image to the document
-        doc.add((Element) image);
+        doc.add( image);
 
         //addContent(doc);
 
