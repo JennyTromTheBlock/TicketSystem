@@ -253,4 +253,6 @@ public class EventController extends BaseController implements Initializable {
         CreateEventController controller = loader.getController();
         controller.setInfoFromTemplate(event);
     }
+
+
 }
