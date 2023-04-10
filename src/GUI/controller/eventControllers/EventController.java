@@ -257,4 +257,10 @@ public class EventController extends BaseController implements Initializable {
     private String convertSystemUserToListViewItem(SystemUser user) {
         return user.getFirstName() + " " + user.getLastName() + " " + user.getEmail();
     }
+
+    public void handleUseAsTemplate(ActionEvent actionEvent) {
+        FXMLLoader loader =openStage("/GUI/view/eventViews/CreateEvent.fxml", "template");
+        CreateEventController controller = loader.getController();
+        controller.setInfoFromTemplate(event);
+    }
 }

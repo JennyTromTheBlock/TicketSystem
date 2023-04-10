@@ -10,7 +10,7 @@
    <children>
       <ScrollPane layoutX="0.800000011920929" layoutY="0.800000011920929" prefHeight="664.0" prefWidth="657.0" vbarPolicy="ALWAYS">
          <content>
-            <VBox alignment="TOP_CENTER" prefWidth="656.0">
+            <VBox alignment="TOP_CENTER" prefHeight="494.0" prefWidth="642.0">
                <children>
                   <VBox>
                      <children>
@@ -77,9 +77,11 @@
                                     <Insets left="40.0" right="40.0" />
                                  </HBox.margin>
                               </Label>
+                              <Pane prefHeight="50.0" prefWidth="75.0" HBox.hgrow="ALWAYS" />
+                              <Button mnemonicParsing="false" onAction="#handleUseAsTemplate" text="Use as Template" />
                            </children>
                         </HBox>
-                        <Accordion VBox.vgrow="ALWAYS">
+                        <Accordion prefWidth="656.0" VBox.vgrow="ALWAYS">
                           <panes>
                             <TitledPane animated="false" prefWidth="656.0" text="Users Assigned To Event">
                               <content>

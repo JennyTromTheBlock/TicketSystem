@@ -116,4 +116,12 @@ public class CreateEventController extends BaseController {
         lblInputFieldValidation.setText("");
         return true;
     }
+
+    public void setInfoFromTemplate(Event event){
+        txtfEventName.setText(event.getEventName());
+        txtfLocation.setText(event.getLocation());
+        txtfPrice.setText(String.valueOf(event.getPrice()));
+        txtaDescriptionField.setText(event.getDescription());
+        txtfMaxTickets.setText(String.valueOf(event.getPrice()));
+    }
 }
