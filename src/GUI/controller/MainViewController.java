@@ -110,27 +110,71 @@ public class MainViewController extends BaseController implements Initializable 
     private void checkMenuListener() {
         cmiUpcoming.selectedProperty().addListener((obs, o, n) -> {
             if(cmiUpcoming.isSelected()) {
+                    try {
+                        showMyEventsOnly();
+                        getModelsHandler().getEventModel().setFutureEventsSelected(true);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+
                 cmiHistoric.setSelected(false);
                 showUpcomingOnly();
             } else {
                 listViewBtn();//sets the listView With All Events In
+                try {
+                    getModelsHandler().getEventModel().setFutureEventsSelected(true);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
         cmiHistoric.selectedProperty().addListener((obs, o, n) -> {
             if(cmiHistoric.isSelected()) {
+                try {
+                    showMyEventsOnly();
+                    getModelsHandler().getEventModel().setHistoricEventsSelected(true);
+
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 cmiUpcoming.setSelected(false);
                 showHistoricOnly();
             } else {
-                listViewBtn();//sets the listView With All Events In
+                listViewBtn();//sets the listView With All Events I
+                try {
+                    getModelsHandler().getEventModel().setHistoricEventsSelected(false);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
             }
         });
 
         cmiMyEvents.selectedProperty().addListener((obs, o, n) -> {
             if(cmiMyEvents.isSelected()) {
+                try {
+                    getModelsHandler().getEventModel().setMyEventsSelected(true);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 showMyEventsOnly();
             } else {
-                listViewBtn();
+                try {
+                    getModelsHandler().getEventModel().setMyEventsSelected(false);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                if(cmiHistoric.isSelected()){
+                        showHistoricOnly();
+
+                }else if(cmiUpcoming.isSelected()){
+                        showUpcomingOnly();
+
+                }else {
+                    listViewBtn();
+                }
+
             }
         });
     }
@@ -153,6 +197,7 @@ public class MainViewController extends BaseController implements Initializable 
 
     public void showHistoricOnly() {
         try {
+
             loadListView(getModelsHandler().getEventModel().getHistoricEvents());
         } catch (Exception e) {
             throw new RuntimeException(e);

@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 public class UserInfoController extends BaseController implements Initializable {
 
     public ListView listviewAssignedEvents;
+    public Label lblEventSOnUsers;
     @FXML
     private Label lblName;
     @FXML
@@ -48,6 +49,7 @@ public class UserInfoController extends BaseController implements Initializable 
         try {
             for (Event event: getModelsHandler().getEventModel().getEventsAssignedToUser(user)) {
                 listviewAssignedEvents.setVisible(true);
+                lblEventSOnUsers.setVisible(true);
                 listviewAssignedEvents.getItems().add(event.getEventName());
             }
 

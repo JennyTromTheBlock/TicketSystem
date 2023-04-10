@@ -19,15 +19,36 @@ public class EventModel {
 
     private ObservableList<Event> shownEvents;
 
+    private ArrayList<Event> filteredEvents;
+
     private EventFacade eventFacade;
     private IEventManager eventManager;
 
+
+    public void setHistoricEventsSelected(boolean historicEventsSelected) {
+        isHistoricEventsSelected = historicEventsSelected;
+    }
+
+    private boolean isHistoricEventsSelected;
+
+    public void setFutureEventsSelected(boolean futureEventsSelected) {
+        isFutureEventsSelected = futureEventsSelected;
+    }
+
+    private boolean isFutureEventsSelected;
+    public void setMyEventsSelected(boolean myEventsSelected) {
+        isMyEventsSelected = myEventsSelected;
+    }
+
+    private boolean isMyEventsSelected;
     public EventModel() throws Exception {
         eventFacade = new EventFacade();
         eventManager = new EventManager();
         allEvents  = retrieveAllEvents();
         shownEvents = FXCollections.observableList(new ArrayList<>());
         shownEvents.addAll(allEvents);
+        filteredEvents = new ArrayList<>();
+        filteredEvents.addAll(allEvents);
     }
 
     //should be used when getting list in controller
@@ -84,11 +105,28 @@ public class EventModel {
     }
 
     public ObservableList<Event> getUpcomingEvents() throws Exception {
-        return FXCollections.observableList(eventManager.getUpcomingEvents(shownEvents));
+        if(isMyEventsSelected){
+            return FXCollections.observableList(eventManager.getUpcomingEvents(filteredEvents));
+        }
+        return FXCollections.observableList(eventManager.getUpcomingEvents(allEvents));
     }
 
     public ObservableList<Event> getHistoricEvents() throws Exception {
-        return FXCollections.observableList(eventManager.getHistoricEvents(shownEvents));
+        if(isMyEventsSelected){
+            return FXCollections.observableList(eventManager.getHistoricEvents(filteredEvents));
+        }
+        return FXCollections.observableList(eventManager.getHistoricEvents(allEvents));
+    }
+
+    public ObservableList<Event> getMyEvents() throws Exception {
+        filteredEvents = new ArrayList<>();
+        filteredEvents.addAll(eventFacade.getMyEvents(ModelsHandler.getInstance().getSystemUserModel().getLoggedInSystemUser().getValue()));
+        if(isHistoricEventsSelected){
+            return getHistoricEvents();
+        } else if (isFutureEventsSelected) {
+            return getUpcomingEvents();
+        }
+        return FXCollections.observableList(filteredEvents);
     }
 
     public Note addNoteToEvent(Note note) throws Exception {
@@ -104,10 +142,6 @@ public class EventModel {
 
     public ObservableList<SystemUser> getUsersAssignedToEvent(Event event) throws Exception {
         return FXCollections.observableList(eventManager.getUsersAssignedToEvent(event));
-    }
-
-    public ObservableList<Event> getMyEvents() throws Exception {
-        return FXCollections.observableList(eventFacade.getMyEvents(ModelsHandler.getInstance().getSystemUserModel().getLoggedInSystemUser().getValue()));
     }
 
     public Event removeUsersAssignedToEvent(Event event) throws Exception {
