@@ -1,5 +1,6 @@
 package GUI.controller.specialTicketControllers;
 
+import BE.SpecialTicket;
 import BE.SpecialTicketType;
 import GUI.controller.BaseController;
 import javafx.event.ActionEvent;
@@ -57,6 +58,7 @@ public class SellSpecialTicketController extends BaseController implements Initi
     }
 
     public void handleConfirm() {
+        SpecialTicket specialTicket = new SpecialTicket(selectedType, null);
 
     }
 
