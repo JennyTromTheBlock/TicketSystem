@@ -1,7 +1,9 @@
 package GUI.models;
 
 import BE.Event;
+import BE.SpecialTicket;
 import BE.SpecialTicketType;
+import BLL.SpecialTickets.SpecialTicketManager;
 import GUI.BLLFacades.SpecialTicketsFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,9 +13,12 @@ import java.util.List;
 public class SpecialTicketModel {
     private SpecialTicketsFacade specialTicketsFacade;
     private ObservableList<SpecialTicketType> specialTicketTypes;
+    private SpecialTicketManager manager;
 
     public SpecialTicketModel() throws Exception {
         specialTicketsFacade = new SpecialTicketsFacade();
+        manager = new SpecialTicketManager();
+
         specialTicketTypes = FXCollections.observableList(specialTicketsFacade.availableSpecialTicketTypes());
     }
 
@@ -43,5 +48,9 @@ public class SpecialTicketModel {
 
     public ObservableList<SpecialTicketType> getSpecialTicketTypes() {
         return  specialTicketTypes;
+    }
+
+    public SpecialTicket createSpecialTicket(SpecialTicket specialTicket) throws Exception {
+        return manager.createSpecialTicket(specialTicket);
     }
 }

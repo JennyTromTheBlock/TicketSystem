@@ -3,7 +3,6 @@ package GUI.controller.specialTicketControllers;
 import BE.SpecialTicket;
 import BE.SpecialTicketType;
 import GUI.controller.BaseController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -59,6 +58,11 @@ public class SellSpecialTicketController extends BaseController implements Initi
 
     public void handleConfirm() {
         SpecialTicket specialTicket = new SpecialTicket(selectedType, null);
+        try {
+            getModelsHandler().getSpecialTicketModel().createSpecialTicket(specialTicket);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
