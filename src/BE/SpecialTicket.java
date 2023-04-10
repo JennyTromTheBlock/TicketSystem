@@ -14,6 +14,11 @@ public class SpecialTicket {
         this.assignedEvent = assignedEvent;
     }
 
+    public SpecialTicket(SpecialTicketType type, Event assignedEvent) {
+        this.type = type;
+        this.assignedEvent = assignedEvent;
+    }
+
     public int getId() {
         return id;
     }

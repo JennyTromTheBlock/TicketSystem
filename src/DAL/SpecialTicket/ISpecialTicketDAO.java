@@ -6,4 +6,5 @@ import BE.SpecialTicket;
 import java.util.List;
 
 public interface ISpecialTicketDAO {
+    SpecialTicket createSpecialTicket(SpecialTicket specialTicket) throws Exception;
 }
