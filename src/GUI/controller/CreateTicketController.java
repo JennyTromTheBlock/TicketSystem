@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.FileOutputStream;
@@ -100,17 +99,12 @@ public class CreateTicketController extends BaseController {
         doc.add(new Paragraph("Event Description"));
         doc.add(new Paragraph(lblTicketPrice.getText()));
 
-        
+        //creates the image from the itext library.
         com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance("resourses/symbols/barcodes.png");
 
         // Adding image to the document
-<<<<<<< HEAD
         doc.add( image);
-=======
-        doc.add(image);
->>>>>>> 4ea1da716fd9c144cf44f4df748367b258dac95f
-
-        //addContent(doc);
+//addContent(doc);
 
         //close the PDF file
         doc.close();
