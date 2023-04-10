@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.List;
@@ -27,13 +28,27 @@ public class SellSpecialTicketController extends BaseController implements Initi
     }
 
     private void loadTicketTypes() {
-        List<SpecialTicketType> allSpecialTickets;
+        List<SpecialTicketType> allSpecialTickets = null;
+        try {
+            allSpecialTickets = getModelsHandler().getSpecialTicketModel().getSpecialTicketTypes();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        for(SpecialTicketType specialTicketType : allSpecialTickets) {
+            MenuItem type = new MenuItem(specialTicketType.getTypeName());
+            type.setOnAction(event -> {
+                lblTicketType.setText(specialTicketType.getTypeName());
+            });
+            mbTicketType.getItems().add(type);
+        }
     }
 
     public void handleConfirm(ActionEvent actionEvent) {
     }
 
     public void handleCancelTicket(ActionEvent actionEvent) {
+        Stage stage = (Stage) txtfCustomerName.getScene().getWindow();
+        stage.close();
     }
 
     public void handleCreateSpecialTicket(ActionEvent actionEvent) {
