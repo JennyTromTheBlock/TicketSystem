@@ -34,4 +34,8 @@ public class EventFacade {
     public List<Note> retrieveAllNotesOfEvent(Event event) throws Exception {
         return eventNoteDAO.getAllNotesFromEvent(event);
     }
+
+    public List<Event> getMyEvents(SystemUser selectedUser) throws Exception {
+        return usersOnEventsDAO.getEventsAssignedToUser(selectedUser);
+    }
 }

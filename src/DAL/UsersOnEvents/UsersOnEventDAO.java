@@ -76,7 +76,7 @@ public class UsersOnEventDAO implements IUsersOnEventsDAO {
 
     @Override
     public List<Event> getEventsAssignedToUser(SystemUser loggedInUser) throws Exception {
-        String sql = "SELECT * FROM  UsersAssignedToEvent INNER JOIN Event ON Event.ID=UsersAssignedToEvent.EventID WHERE UserID = ?;";
+        String sql = "SELECT * FROM  UsersAssignedToEvent INNER JOIN Event ON Event.ID=UsersAssignedToEvent.EventID WHERE UserEmail = ?;";
 
         ArrayList<Event> allEventsAssignedToUser = new ArrayList<>();
         try (Connection connection = connector.getConnection();

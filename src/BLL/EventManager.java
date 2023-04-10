@@ -1,16 +1,11 @@
 package BLL;
 
 import BE.Event;
-import BE.SystemUser;
 import BE.Note;
+import BE.SystemUser;
 import BLL.DALFacades.EventFacade;
 import DAL.EventDAO;
 import DAL.IEventDAO;
-import DAL.UsersOnEvents.IUsersOnEventsDAO;
-import DAL.UsersOnEvents.UsersOnEventDAO;
-import DAL.IUsersOnEventsDAO;
-import DAL.UsersOnEvent;
-import GUI.controller.adminControllers.UserInfoController;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -88,7 +83,7 @@ public class EventManager implements IEventManager {
         return eventFacade.retrieveAllNotesOfEvent(event);
     }
     public List<Event> getMyEvents(SystemUser selectedUser) throws Exception {
-        return assignUserDAO.getEventsAssignedToUser(selectedUser);
+        return eventFacade.getMyEvents(selectedUser);
     }
 
 }
