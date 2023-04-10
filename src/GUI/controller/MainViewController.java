@@ -4,6 +4,7 @@ import BE.Event;
 import GUI.controller.eventControllers.EventController;
 import GUI.controller.eventControllers.EventListController;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -154,5 +155,9 @@ public class MainViewController extends BaseController implements Initializable 
         }
         background.setRight(root);
         return loader;
+    }
+
+    public void handleSpecialTicket(ActionEvent actionEvent) {
+        openStage("/GUI/view/specialTicketViews/SpecialTicketView.fxml", "");
     }
 }
