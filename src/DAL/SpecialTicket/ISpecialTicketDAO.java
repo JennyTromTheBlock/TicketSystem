@@ -1,5 +1,9 @@
 package DAL.SpecialTicket;
 
-public interface ISpecialTicketDAO {
+import BE.Event;
+import BE.SpecialTicket;
 
+import java.util.List;
+
+public interface ISpecialTicketDAO {
 }

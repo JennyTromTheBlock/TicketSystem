@@ -1,5 +1,6 @@
 package GUI.BLLFacades;
 
+import BE.Event;
 import BE.SpecialTicketType;
 import BLL.SpecialTickets.ISpecialTicketManager;
 import BLL.SpecialTickets.SpecialTicketManager;
@@ -19,5 +20,9 @@ public class SpecialTicketsFacade {
 
     public List<SpecialTicketType> availableSpecialTicketTypes() throws Exception {
         return specialTicketManager.availableSpecialTicketTypes();
+    }
+
+    public List<SpecialTicketType> retrieveSpecialTicketTypesOnEvent(Event event) throws Exception {
+        return specialTicketManager.retrieveSpecialTicketTypesOnEvent(event);
     }
 }

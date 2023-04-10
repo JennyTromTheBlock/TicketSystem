@@ -6,6 +6,7 @@ public class SpecialTicketType {
 
     public SpecialTicketType(String type, int price) {
         this.typeName = type;
+        this.price = price;
     }
 
     public String getTypeName() { return typeName; }
