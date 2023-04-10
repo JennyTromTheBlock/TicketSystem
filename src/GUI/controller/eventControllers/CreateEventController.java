@@ -2,7 +2,6 @@ package GUI.controller.eventControllers;
 
 import BE.Event;
 import GUI.controller.BaseController;
-import GUI.models.EventModel;
 import GUI.util.DateConverter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import java.time.ZoneId;
+
 import java.util.Date;
 
 public class CreateEventController extends BaseController {
@@ -34,7 +33,7 @@ public class CreateEventController extends BaseController {
         if(isInputFieldsFilled()){
             Event eventWithoutId = createEventFromFields();;
             try {
-                getModelsHandler().getEventModel().createEvent(eventWithoutId);
+                getModelsHandler().getEventModel().createEvent(eventWithoutId, getModelsHandler().getSystemUserModel().getLoggedInSystemUser().getValue());
             }
             catch (Exception e) {
                 displayError(e);

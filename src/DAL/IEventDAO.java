@@ -1,6 +1,7 @@
 package DAL;
 
 import BE.Event;
+import BE.Note;
 
 import java.util.List;
 
@@ -11,4 +12,6 @@ public interface IEventDAO {
     List<Event> getAllEvents() throws Exception;
 
     Event updateEvent(Event event) throws Exception;
+
+    Event deleteEvent(Event event) throws Exception;
 }

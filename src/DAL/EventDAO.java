@@ -6,7 +6,6 @@ import DAL.Connectors.SqlConnector;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class EventDAO implements IEventDAO {
@@ -57,7 +56,7 @@ public class EventDAO implements IEventDAO {
                 String eventName = rs.getString("EventName");
                 String description = rs.getString("EventDescription");
                 String location = rs.getString("EventLocation");
-                Date date = rs.getTimestamp("EventDate");
+                Timestamp date = rs.getTimestamp("EventDate");
                 int maxParticipant = rs.getInt("maxParticipant");
                 int price = rs.getInt("Price");
 
@@ -87,6 +86,25 @@ public class EventDAO implements IEventDAO {
         }
         return updatedEvent;
     }
+
+    @Override
+    public Event deleteEvent(Event event) throws Exception {
+        Event deletedEvent = null;
+        String sql = "DELETE FROM EVENT WHERE Id =?;";
+
+        try (Connection connection = connector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, event.getId());
+            statement.executeUpdate();
+
+            deletedEvent = event;
+        } catch (SQLException e) {
+            throw new Exception("Failed to delete the event", e);
+        }
+        return deletedEvent;
+    }
+
 
     private void bindEventInfo(Event event, PreparedStatement statement) throws SQLException {
         statement.setString(1, event.getEventName());

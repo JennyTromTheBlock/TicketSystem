@@ -1,12 +1,12 @@
 package DAL;
 
+import BE.Event;
 import BE.Ticket;
-
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 public interface ITicketDAO {
 
     Ticket createTicket(Ticket ticket) throws Exception;
+
+    Event deleteTicketsConnectedToEvent(Event event) throws Exception;
 
 }

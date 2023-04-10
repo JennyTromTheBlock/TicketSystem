@@ -1,6 +1,9 @@
 package BLL;
 
 import BE.Event;
+import BE.Note;
+import BE.SystemUser;
+import BLL.DALFacades.EventFacade;
 import DAL.EventDAO;
 import DAL.IEventDAO;
 
@@ -12,10 +15,11 @@ import java.util.List;
 
 public class EventManager implements IEventManager {
 
+    private EventFacade eventFacade;
     private final IEventDAO databaseAccess;
 
-
     public EventManager() throws Exception {
+        eventFacade = new EventFacade();
         databaseAccess = new EventDAO();
     }
 
@@ -32,6 +36,11 @@ public class EventManager implements IEventManager {
     @Override
     public Event updateEvent(Event event) throws Exception {
         return databaseAccess.updateEvent(event);
+    }
+
+    @Override
+    public Event deleteEvent(Event event) throws Exception {
+        return databaseAccess.deleteEvent(event);
     }
 
     //todo should maybe be placed in model instead.
@@ -57,6 +66,39 @@ public class EventManager implements IEventManager {
             }
         }
         return historicEvents;
+    }
+
+    @Override
+    public void assignUserToEvent(SystemUser user, Event event) throws Exception {
+        eventFacade.assignUserToEvent(user, event);
+    }
+
+    @Override
+    public Event removeAllUsersFromEvent(Event event) throws Exception {
+        return eventFacade.removeAllUsersAssignedToEvent(event);
+    }
+
+    @Override
+    public List<SystemUser> getUsersAssignedToEvent(Event event) throws Exception {
+        return eventFacade.getUsersAssignedToEvent(event);
+    }
+
+    @Override
+    public Note addNoteToEvent(Note note) throws Exception {
+        return eventFacade.addNoteToEvent(note);
+    }
+
+    @Override
+    public Event deleteAllNotesOnEvent(Event event) throws Exception {
+        return eventFacade.deleteNotesFromEvent(event);
+    }
+
+    @Override
+    public List<Note> retrieveAllNotesOfEvent(Event event) throws Exception {
+        return eventFacade.retrieveAllNotesOfEvent(event);
+    }
+    public List<Event> getMyEvents(SystemUser selectedUser) throws Exception {
+        return eventFacade.getMyEvents(selectedUser);
     }
 
 }

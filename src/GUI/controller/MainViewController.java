@@ -27,7 +27,7 @@ public class MainViewController extends BaseController implements Initializable 
     @FXML
     private MenuButton mbFilter;
     @FXML
-    private CheckMenuItem cmiUpcoming, cmiHistoric;
+    private CheckMenuItem cmiUpcoming, cmiHistoric, cmiMyEvents;
     @FXML
     private HBox topBar, hBoxSearch;
     @FXML
@@ -120,6 +120,22 @@ public class MainViewController extends BaseController implements Initializable 
                 listViewBtn();//sets the listView With All Events In
             }
         });
+
+        cmiMyEvents.selectedProperty().addListener((obs, o, n) -> {
+            if(cmiMyEvents.isSelected()) {
+                showMyEventsOnly();
+            } else {
+                listViewBtn();
+            }
+        });
+    }
+
+    private void showMyEventsOnly() {
+        try {
+            loadListView(getModelsHandler().getEventModel().getMyEvents());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void showUpcomingOnly() {
@@ -141,7 +157,7 @@ public class MainViewController extends BaseController implements Initializable 
     public void setAdminContent(){
         Parent root = loadFXMLFile("/GUI/view/adminView/AdminBarView.fxml");
         contentArea.getChildren().remove(3);
-        contentArea.getChildren().add(2, root);
+        contentArea.getChildren().add(3, root);
     }
 
     public FXMLLoader setNodeInRightBorder(String path){
