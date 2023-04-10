@@ -73,18 +73,18 @@
             </HBox>
             <HBox prefHeight="59.0" prefWidth="537.0">
                <children>
-                  <Label fx:id="lblTicketAmount" text="Amount">
+                  <Label text="Amount">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnAddTicketAmount" mnemonicParsing="false" text="+">
+                  <Button mnemonicParsing="false" onAction="#handleAmountAdd" text="+">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Button>
-                  <TextField prefHeight="25.0" prefWidth="44.0" />
-                  <Button fx:id="btnSubtractTicket" mnemonicParsing="false" text="-" />
+                  <TextField fx:id="txtfAmount" editable="false" prefHeight="25.0" prefWidth="44.0" text="0" />
+                  <Button mnemonicParsing="false" onAction="#handleAmountSubtract" text="-" />
                   <Label fx:id="lblPriceTotal" prefHeight="20.0" prefWidth="40.0" text="Total">
                      <HBox.margin>
                         <Insets left="250.0" />
