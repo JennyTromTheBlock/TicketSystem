@@ -4,7 +4,6 @@ import BE.SpecialTicketType;
 import GUI.BLLFacades.SpecialTicketsFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import java.util.List;
 
 public class SpecialTicketModel {
     private SpecialTicketsFacade specialTicketsFacade;
@@ -33,5 +32,7 @@ public class SpecialTicketModel {
         return false;
     }
 
-    public List<SpecialTicketType> getSpecialTicketTypes() { return specialTicketTypes; }
+    public ObservableList<SpecialTicketType> getSpecialTicketTypes() {
+        return  specialTicketTypes;
+    }
 }

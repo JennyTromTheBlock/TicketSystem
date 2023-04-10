@@ -123,9 +123,15 @@
                                     </AnchorPane>
                               </content>
                             </TitledPane>
-                            <TitledPane animated="false" text="untitled 3">
+                            <TitledPane animated="false" text="Add Special Tickets To Event">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="654.0">
+                                       <children>
+                                          <Label layoutX="22.0" layoutY="5.0" prefHeight="18.0" prefWidth="113.0" text="Selected options " />
+                                          <ListView fx:id="listviewAllSpecialTickets" layoutX="12.0" layoutY="194.0" prefHeight="200.0" prefWidth="629.0" />
+                                          <ListView fx:id="listviewSelectedSpecialTickets" layoutX="10.0" layoutY="29.0" prefHeight="127.0" prefWidth="632.0" />
+                                          <Label layoutX="22.0" layoutY="167.0" prefHeight="18.0" prefWidth="273.0" text="Want To Add More  Click on options below" />
+                                       </children></AnchorPane>
                               </content>
                             </TitledPane>
                           </panes>

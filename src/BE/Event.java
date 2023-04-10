@@ -1,6 +1,5 @@
 package BE;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +11,16 @@ public class Event {
     private Date date;
     private int maxParticipant;
     private int price;
+
+    public List<SpecialTicketType> getSpecialTickets() {
+        return specialTickets;
+    }
+
+    public void setSpecialTickets(List<SpecialTicketType> specialTicketTypes) {
+        this.specialTickets = specialTicketTypes;
+    }
+
+    private List<SpecialTicketType> specialTickets;
 
     public Event(String eventName, String description, String location, Date date, int maxParticipant, int price){
         setEventFields(eventName, description, location, date, maxParticipant, price);
