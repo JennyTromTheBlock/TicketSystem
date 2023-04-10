@@ -7,9 +7,7 @@ import GUI.controller.BaseController;
 import GUI.controller.MessageController;
 import GUI.util.SymbolPaths;
 import GUI.util.ViewPaths;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,7 +18,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -36,6 +33,8 @@ public class EventController extends BaseController implements Initializable {
     public ListView<String> listviewAllUsers;
     public Button btnDoneAssigningUsers;
     public VBox vBoxDialogPane;
+    public ListView listviewAllSpecialTickets;
+    public ListView listviewSelectedSpecialTickets;
 
     @FXML
     private TextArea textfMessageInput;
@@ -67,8 +66,16 @@ public class EventController extends BaseController implements Initializable {
         lblEventTickets.setText("? / " + event.getMaxParticipant());
 
         getEventNotes();
-
         getUsersAssignedToEvent();
+        getAllSpecialTicketTypes();
+    }
+
+    private void getAllSpecialTicketTypes() {
+        try {
+            listviewAllSpecialTickets.setItems(getModelsHandler().getSpecialTicketModel().getSpecialTicketTypes());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void getUsersAssignedToEvent() {
