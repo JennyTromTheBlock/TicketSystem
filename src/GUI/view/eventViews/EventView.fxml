@@ -81,7 +81,7 @@
                               <Button mnemonicParsing="false" onAction="#handleUseAsTemplate" text="Use as Template" />
                            </children>
                         </HBox>
-                        <Accordion prefWidth="656.0" VBox.vgrow="ALWAYS">
+                        <Accordion VBox.vgrow="ALWAYS">
                           <panes>
                             <TitledPane animated="false" prefWidth="656.0" text="Users Assigned To Event">
                               <content>

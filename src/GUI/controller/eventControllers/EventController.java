@@ -204,7 +204,7 @@ public class EventController extends BaseController implements Initializable {
         btnDoneAssigningUsers.setVisible(false);
     }
 
-    public void handleAddUsersBtn(ActionEvent actionEvent) {
+    public void handleAddUsersBtn() {
         try {
             btnDoneAssigningUsers.setVisible(true);
             //todo should not include the coordinators already assigned to event
@@ -239,17 +239,7 @@ public class EventController extends BaseController implements Initializable {
     private void addListenerForListAllUsers(ObservableList<SystemUser> users) {
         listviewAllUsers.setOnMouseClicked(event1 -> {
             if (event1.getClickCount() == 2) {
-                int selectedUserIndex = listviewAllUsers.getSelectionModel().getSelectedIndex();
-                SystemUser user = users.get(selectedUserIndex);
-
-                try {
-                    getModelsHandler().getEventModel().assignUserToEvent(user, event);
-                } catch (Exception e) {
-                    displayError(e);
-                }
-
-                listviewAllUsers.getItems().remove(selectedUserIndex);
-                listviewUsersOnEvent.getItems().add(convertSystemUserToListViewItem(user));
+               handleAddUsersBtn();
             }
         });
     }
