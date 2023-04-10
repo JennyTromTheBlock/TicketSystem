@@ -1,11 +1,12 @@
 package BE;
 
+import com.itextpdf.text.Document;
+
 public class Ticket {
 
     private int id;
     private String customerName;
     private String customerEmail;
-
     private Event event;
 
     public Event getEvent() {
@@ -24,7 +25,6 @@ public class Ticket {
     }
 
     public Ticket(String customerName, String customerEmail, Event event) {
-
         this.customerName = customerName;
         this.customerEmail = customerEmail;
         this.event = event;
@@ -54,5 +54,4 @@ public class Ticket {
     public void setCustomerEmail(String customerEmail) {
         this.customerEmail = customerEmail;
     }
-
 }

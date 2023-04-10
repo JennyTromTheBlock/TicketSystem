@@ -11,11 +11,11 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="microsoft.sqlserver.mssql.jdbc" level="project" />
     <orderEntry type="library" name="junit.jupiter" level="project" />
-    <orderEntry type="library" name="itextpdf" level="project" />
     <orderEntry type="library" name="itextpdf.barcodes" level="project" />
     <orderEntry type="library" name="itextpdf.layout" level="project" />
     <orderEntry type="library" name="itextpdf.kernel" level="project" />
     <orderEntry type="library" name="itextpdf2" level="project" />
     <orderEntry type="library" name="itextpdf.maven.itextdoc1" level="project" />
+    <orderEntry type="library" name="itextpdf" level="project" />
   </component>
 </module>

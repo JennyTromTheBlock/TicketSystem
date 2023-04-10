@@ -17,9 +17,12 @@ import java.io.IOException;
 
 
 public class CreateTicketController extends BaseController {
-    public Label lblCustomerName;
-    public Label lblAvailableTickets;
-    public Button btnSubtractTicket;
+    @FXML
+    private Label lblCustomerName;
+    @FXML
+    private Label lblAvailableTickets;
+    @FXML
+    private Button btnSubtractTicket;
     @FXML
     private TextField txtfCustomerName, txtfCustomerEmail;
     @FXML
@@ -27,25 +30,14 @@ public class CreateTicketController extends BaseController {
 
     private Event selectedEvent;
 
-    private static String FILE = "resourses/PDFs/temp.pdf";
-
-
-    private static final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
-
-
-    public CreateTicketController() {
-
-    }
 
     public void handleCreateTicket() throws Exception {
-        generatePDF();
-        Ticket newTicket = createTicketFromFields();
-        Ticket ticket = getModelsHandler().getTicketModel().createTicket(newTicket);
+        Ticket ticket = getModelsHandler().getTicketModel().createTicket(createTicketFromFields());
+
+        //TODO Show view with the newly created ticket. There should be an option for printing or sending by Email.
     }
 
     private Ticket createTicketFromFields() {
-
-        int eventId = selectedEvent.getId();
         String customerName = txtfCustomerName.getText();
         String customerEmail = txtfCustomerEmail.getText();
 
@@ -72,56 +64,4 @@ public class CreateTicketController extends BaseController {
        Stage s = (Stage) lblTicketEventDate.getScene().getWindow();
        s.close();
     }
-
-    public void generatePDF() throws IOException, DocumentException {
-
-
-        //created PDF document instance
-        Document doc = new Document();
-
-        //generate a PDF at the specified location
-        PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(FILE));
-        System.out.println("PDF created.");
-        //opens the PDF
-        doc.open();
-
-        Paragraph titleParagraph = new Paragraph("Ticket " + lblTicketEventName.getText(), catFont);
-        titleParagraph.setAlignment(Element.ALIGN_CENTER);
-
-        doc.add(titleParagraph);
-        doc.add(Chunk.NEWLINE);
-        doc.add(new Paragraph("Name: " + txtfCustomerName.getText()));
-        doc.add(new Paragraph("Email: " + txtfCustomerEmail.getText()));
-        doc.add(Chunk.NEWLINE);
-        doc.add(new Paragraph(lblTicketEventName.getText()));
-        doc.add(new Paragraph(lblTcketEventLocation.getText()));
-        doc.add(new Paragraph(lblTicketEventDate.getText()));
-        doc.add(new Paragraph("Event Description"));
-        doc.add(new Paragraph(lblTicketPrice.getText()));
-
-        //creates the image from the itext library.
-        com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance("resourses/symbols/barcodes.png");
-
-        // Adding image to the document
-        doc.add( image);
-//addContent(doc);
-
-        //close the PDF file
-        doc.close();
-        //closes the writer
-        writer.close();
-
-            // Creating an ImageData object
-            //ImageData data = ImageDataFactory.create(imgBarcode);
-            //Image img = new Image(data);
-            //doc.add((Element) img);
-    }
-
-
-    /*
-    private void addContent(Document doc) {
-
-    }
-    */
-
 }
