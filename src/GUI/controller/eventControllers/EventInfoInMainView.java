@@ -61,7 +61,7 @@ public class EventInfoInMainView extends BaseController implements Initializable
                 if (getModelsHandler().getSystemUserModel().getLoggedInSystemUser().getValue().getRoles().contains(Role.ADMINISTRATOR)) {
                     eventButtonContainer.getChildren().remove(0);
 
-                    Button deleteEvent = new Button("deleteEvent");
+                    Button deleteEvent = new Button("Delete Event");
                     deleteEvent.setPrefSize(200, 30);
                     eventButtonContainer.getChildren().add(0, deleteEvent);
 
