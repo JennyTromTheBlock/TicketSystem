@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -78,15 +79,26 @@ public class EventController extends BaseController implements Initializable {
         listviewSelectedSpecialTickets.setOnMouseClicked(event1 -> {
             if (event1.getClickCount() == 2) {
                 int selectedUserIndex = listviewSelectedSpecialTickets.getSelectionModel().getSelectedIndex();
-                //todo should remove special ticket from event and list
+                //todo should remove special ticket from event
+                try {
+                    listviewSelectedSpecialTickets.getItems().remove(listviewSelectedSpecialTickets.getSelectionModel().getSelectedIndex());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
     }
 
     private void loadSelectedSpecialTickets() {
-        //todo should load all selected tickets from model.
-       // listviewSelectedSpecialTickets.setItems(getModelsHandler().getSpecialTicketModel()
+        try {
+            ObservableList<SpecialTicketType> specialTickets = getModelsHandler().getSpecialTicketModel().typesOnEvent(event);
+            for (SpecialTicketType tickets: specialTickets) {
+                listviewSelectedSpecialTickets.getItems().add(tickets.getTypeName());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         selectedSpecialTicketHandler();
     }
 
@@ -107,9 +119,8 @@ public class EventController extends BaseController implements Initializable {
             if (event1.getClickCount() == 2) {
                 int selectedUserIndex = listviewAllSpecialTickets.getSelectionModel().getSelectedIndex();
                 try {
-                    SpecialTicketType selectedTicket = getModelsHandler().getSpecialTicketModel().getSpecialTicketTypes().get(selectedUserIndex);
                     //todo should add special ticket to event in dao
-                    listviewAllSpecialTickets.getItems().removeAll(selectedTicket.getTypeName());
+                    listviewAllSpecialTickets.getItems().remove(selectedUserIndex);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -200,11 +211,23 @@ public class EventController extends BaseController implements Initializable {
             listviewAllUsers.setPrefHeight(150);
             listviewAllUsers.getItems().clear();
 
-            List<SystemUser> users =  getModelsHandler().getSystemUserModel().getAllUsers();
+            ArrayList<SystemUser> users =  new ArrayList<>(getModelsHandler().getSystemUserModel().getAllUsers());
+            ObservableList<SystemUser> finalUsers =  getModelsHandler().getSystemUserModel().getAllUsers();
 
             for (SystemUser user : users) {
+                System.out.println("user");
+                for (SystemUser assignedUser : getModelsHandler().getEventModel().getUsersAssignedToEvent(event)) {
+                    if (assignedUser.getEmail().equals(user.getEmail())) {
+                        finalUsers.removeAll(user);
+                    }
+                }
+            }
+
+
+            for (SystemUser user : finalUsers) {
+                System.out.println(user);
                 listviewAllUsers.getItems().add(convertSystemUserToListViewItem(user));
-                addListenerForListAllUsers(users);
+                addListenerForListAllUsers(finalUsers);
             }
 
         }
@@ -213,11 +236,10 @@ public class EventController extends BaseController implements Initializable {
         }
     }
 
-    private void addListenerForListAllUsers(List<SystemUser> users) {
+    private void addListenerForListAllUsers(ObservableList<SystemUser> users) {
         listviewAllUsers.setOnMouseClicked(event1 -> {
             if (event1.getClickCount() == 2) {
                 int selectedUserIndex = listviewAllUsers.getSelectionModel().getSelectedIndex();
-
                 SystemUser user = users.get(selectedUserIndex);
 
                 try {

@@ -35,8 +35,10 @@ public class SpecialTicketModel {
         return false;
     }
 
-    public List<SpecialTicketType> typesOnEvent(Event event) throws Exception {
-        return specialTicketsFacade.retrieveSpecialTicketTypesOnEvent(event);
+    public ObservableList<SpecialTicketType> typesOnEvent(Event event) throws Exception {
+        List<SpecialTicketType> ticketTypes = specialTicketsFacade.retrieveSpecialTicketTypesOnEvent(event);
+        ObservableList<SpecialTicketType> specialTicketTypes = FXCollections.observableList(ticketTypes);
+        return specialTicketTypes;
     }
 
     public ObservableList<SpecialTicketType> getSpecialTicketTypes() {
