@@ -1,9 +1,12 @@
 package GUI.models;
 
+import BE.Event;
 import BE.SpecialTicketType;
 import GUI.BLLFacades.SpecialTicketsFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.List;
 
 public class SpecialTicketModel {
     private SpecialTicketsFacade specialTicketsFacade;
@@ -30,6 +33,10 @@ public class SpecialTicketModel {
         }
 
         return false;
+    }
+
+    public List<SpecialTicketType> typesOnEvent(Event event) throws Exception {
+        return specialTicketsFacade.retrieveSpecialTicketTypesOnEvent(event);
     }
 
     public ObservableList<SpecialTicketType> getSpecialTicketTypes() {
