@@ -18,6 +18,12 @@ public abstract class BaseController {
         controller.setContent(throwable);
     }
 
+    public void displayLocalError(String error){
+        FXMLLoader loader = openStage(ViewPaths.ERROR_DISPLAYER, "");
+        ErrorDisplay controller = loader.getController();
+        controller.setMessage(error);
+    }
+
     public ModelsHandler getModelsHandler() throws Exception {
         return ModelsHandler.getInstance();
     }

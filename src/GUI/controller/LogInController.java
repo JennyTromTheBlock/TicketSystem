@@ -50,7 +50,6 @@ public class LogInController extends BaseController implements Initializable {
             throw new RuntimeException(e);
         }
 
-
         if (isLoggedIn) {
             try {
                 loadMainViewHandler();
@@ -65,6 +64,7 @@ public class LogInController extends BaseController implements Initializable {
         }
         else {
             enableLoginBtn();
+            displayLocalError("maybe try a real password U..");
 
             //TODO Display incorrect Email or Password message.
         }
