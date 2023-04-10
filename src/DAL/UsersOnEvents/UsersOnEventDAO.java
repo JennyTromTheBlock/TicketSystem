@@ -8,6 +8,7 @@ import DAL.Connectors.SqlConnector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,5 +72,23 @@ public class UsersOnEventDAO implements IUsersOnEventsDAO {
         }
 
         return allUsersAssignedToEvent;
+    }
+
+    @Override
+    public Event deleteEvent(Event event) throws Exception {
+        Event deletedEvent = null;
+        String sql = "DELETE FROM UsersAssignedToEvent WHERE EventID =?;";
+
+        try (Connection connection = connector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, event.getId());
+            statement.executeUpdate();
+
+            deletedEvent = event;
+        } catch (SQLException e) {
+            throw new Exception("Failed to delete the event", e);
+        }
+        return deletedEvent;
     }
 }

@@ -92,4 +92,22 @@ public class EventNoteDAO implements IEventNoteDAO {
 
         return allNotesFromEvent;
     }
+
+    @Override
+    public Event deleteNotesOnEvent(Event event) throws Exception {
+        Event deletedEvent = null;
+        String sql = "DELETE FROM Notes WHERE EventID =?;";
+
+        try (Connection connection = connector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, event.getId());
+            statement.executeUpdate();
+
+            deletedEvent = event;
+        } catch (SQLException e) {
+            throw new Exception("Failed to delete the event", e);
+        }
+        return deletedEvent;
+    }
 }

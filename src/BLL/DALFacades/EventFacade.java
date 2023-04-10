@@ -31,7 +31,15 @@ public class EventFacade {
         return eventNoteDAO.createNote(note);
     }
 
+    public Event deleteNotesFromEvent(Event event) throws Exception {
+        return eventNoteDAO.deleteNotesOnEvent(event);
+    }
+
     public List<Note> retrieveAllNotesOfEvent(Event event) throws Exception {
         return eventNoteDAO.getAllNotesFromEvent(event);
+    }
+
+    public Event removeAllUsersAssignedToEvent(Event event) throws Exception {
+        return usersOnEventsDAO.deleteEvent(event);
     }
 }

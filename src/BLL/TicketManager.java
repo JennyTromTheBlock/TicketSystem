@@ -1,5 +1,6 @@
 package BLL;
 
+import BE.Event;
 import BE.Ticket;
 import DAL.ITicketDAO;
 import DAL.TicketDAO;
@@ -15,6 +16,11 @@ public class TicketManager implements ITicketManager {
     @Override
     public Ticket createTicket(Ticket ticket) throws Exception {
         return databaseAccess.createTicket(ticket);
+    }
+
+    @Override
+    public Event deleteTicketsConnectedToEvent(Event event) throws Exception {
+        return databaseAccess.deleteTicketsConnectedToEvent(event);
     }
 
 }

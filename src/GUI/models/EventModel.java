@@ -99,4 +99,19 @@ public class EventModel {
     public List<SystemUser> getUsersAssignedToEvent(Event event) throws Exception {
         return FXCollections.observableList(eventManager.getUsersAssignedToEvent(event));
     }
+
+    public Event removeUsersAssignedToEvent(Event event) throws Exception {
+        eventManager.removeAllUsersFromEvent(event);
+        return null;
+    }
+
+    public Event removeNotesFromEvent(Event event) throws Exception {
+        return eventManager.deleteAllNotesOnEvent(event);
+    }
+
+    public Event safeDeleteEvent(Event event) throws Exception {
+        removeNotesFromEvent(event);
+        removeUsersAssignedToEvent(event);
+        return deleteEvent(event);
+    }
 }

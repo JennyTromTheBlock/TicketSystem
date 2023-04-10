@@ -57,4 +57,6 @@ public class CreateTicketController extends BaseController {
        Stage s = (Stage) lblTicketEventDate.getScene().getWindow();
        s.close();
     }
+
+
 }

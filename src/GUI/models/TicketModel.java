@@ -1,5 +1,6 @@
 package GUI.models;
 
+import BE.Event;
 import BE.Ticket;
 import BLL.ITicketManager;
 import BLL.TicketManager;
@@ -17,6 +18,10 @@ public class TicketModel {
         Ticket newTicket = ticketManager.createTicket(ticket);
 
         return newTicket;
+    }
+
+    public Event deleteEventFrom(Event event) throws Exception {
+        return ticketManager.deleteTicketsConnectedToEvent(event);
     }
 
 }

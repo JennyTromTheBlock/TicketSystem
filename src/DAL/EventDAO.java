@@ -1,11 +1,8 @@
 package DAL;
 
 import BE.Event;
-import BE.Note;
 import DAL.Connectors.AbstractConnector;
 import DAL.Connectors.SqlConnector;
-import DAL.SystemUsers.ISystemUserDAO;
-import DAL.SystemUsers.SystemUserDAO;
 
 import java.sql.*;
 import java.util.ArrayList;
