@@ -1,10 +1,13 @@
 package BLL;
 
 import BE.Event;
+import BE.SystemUser;
 import BE.Note;
 import BLL.DALFacades.EventFacade;
 import DAL.EventDAO;
 import DAL.IEventDAO;
+import DAL.UsersOnEvents.IUsersOnEventsDAO;
+import DAL.UsersOnEvents.UsersOnEventDAO;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -16,7 +19,6 @@ public class EventManager implements IEventManager {
 
     private EventFacade eventFacade;
     private final IEventDAO databaseAccess;
-
 
     public EventManager() throws Exception {
         eventFacade = new EventFacade();
@@ -66,6 +68,16 @@ public class EventManager implements IEventManager {
             }
         }
         return historicEvents;
+    }
+
+    @Override
+    public void assignUserToEvent(SystemUser user, Event event) throws Exception {
+        eventFacade.assignUserToEvent(user, event);
+    }
+
+    @Override
+    public List<SystemUser> getUsersAssignedToEvent(Event event) throws Exception {
+        return eventFacade.getUsersAssignedToEvent(event);
     }
 
     @Override

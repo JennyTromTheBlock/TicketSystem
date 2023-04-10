@@ -7,15 +7,20 @@ import GUI.controller.BaseController;
 import GUI.controller.MessageController;
 import GUI.util.SymbolPaths;
 import GUI.util.ViewPaths;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -25,10 +30,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class EventController extends BaseController implements Initializable {
+    public Button handleAddUserBtn;
+
+    public ListView<String> listviewUsersOnEvent;
+    public ListView<String> listviewAllUsers;
+    public Button btnDoneAssigningUsers;
+    public VBox vBoxDialogPane;
+
     @FXML
     private TextArea textfMessageInput;
-    @FXML
-    private VBox vBoxDialogPane;
     @FXML
     private Label lblEventName, lblEventDate, lblEventLocation, lblDescription, lblEventPrice, lblEventAttending, lblEventTickets;
     @FXML
@@ -57,6 +67,21 @@ public class EventController extends BaseController implements Initializable {
         lblEventTickets.setText("? / " + event.getMaxParticipant());
 
         getEventNotes();
+
+        getUsersAssignedToEvent();
+    }
+
+    private void getUsersAssignedToEvent() {
+        try {
+            List<SystemUser> usersAssignedToEvent = getModelsHandler().getEventModel().getUsersAssignedToEvent(event);
+
+            for (SystemUser user: usersAssignedToEvent) {
+                listviewUsersOnEvent.getItems().add(convertSystemUserToListViewItem(user));
+            }
+        }
+        catch (Exception e) {
+            displayError(e);
+        }
     }
 
     private void getEventNotes() {
@@ -85,7 +110,6 @@ public class EventController extends BaseController implements Initializable {
             e.printStackTrace();
             displayError(e);
         }
-
     }
 
     public void handleClose() {
@@ -114,5 +138,54 @@ public class EventController extends BaseController implements Initializable {
             displayError(e);
         }
 
+    }
+
+    public void handleDoneAssigningUsers(ActionEvent actionEvent) {
+        listviewAllUsers.getItems().clear();
+        listviewAllUsers.setPrefHeight(0);
+        btnDoneAssigningUsers.setVisible(false);
+    }
+
+    public void handleAddUsersBtn(ActionEvent actionEvent) {
+        try {
+            btnDoneAssigningUsers.setVisible(true);
+            //todo should not include the coordinators already assigned to event
+            listviewAllUsers.setPrefHeight(150);
+            listviewAllUsers.getItems().clear();
+
+            List<SystemUser> users =  getModelsHandler().getSystemUserModel().getAllUsers();
+
+            for (SystemUser user : users) {
+                listviewAllUsers.getItems().add(convertSystemUserToListViewItem(user));
+            }
+
+            addListenerForListAllUsers(users);
+        }
+        catch (Exception e) {
+            displayError(e);
+        }
+    }
+
+    private void addListenerForListAllUsers(List<SystemUser> users) {
+        listviewAllUsers.setOnMouseClicked(event1 -> {
+            if (event1.getClickCount() == 2) {
+                int selectedUserIndex = listviewAllUsers.getSelectionModel().getSelectedIndex();
+
+                SystemUser user = users.get(selectedUserIndex);
+
+                try {
+                    getModelsHandler().getEventModel().assignUserToEvent(user, event);
+                } catch (Exception e) {
+                    displayError(e);
+                }
+
+                listviewAllUsers.getItems().remove(selectedUserIndex);
+                listviewUsersOnEvent.getItems().add(convertSystemUserToListViewItem(user));
+            }
+        });
+    }
+
+    private String convertSystemUserToListViewItem(SystemUser user) {
+        return user.getFirstName() + " " + user.getLastName() + " " + user.getEmail();
     }
 }
