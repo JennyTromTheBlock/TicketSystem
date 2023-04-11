@@ -101,4 +101,21 @@ public class EventManager implements IEventManager {
         return eventFacade.getMyEvents(selectedUser);
     }
 
+    public List<Event> search(List<Event> searchBase, String query) {
+        List<Event> searchResult = new ArrayList<>();
+        for (Event event: searchBase) {
+            //can add more filters in search here if wanted
+            if(compareToTitle(query, event))
+            {
+                searchResult.add(event);
+            }
+        }
+
+        return searchResult;
+    }
+
+    private boolean compareToTitle(String query, Event event) {
+        return event.getEventName().toLowerCase().contains(query.toLowerCase());
+    }
+
 }

@@ -115,4 +115,6 @@ public class EventDAO implements IEventDAO {
         statement.setInt(5, event.getMaxParticipant());
         statement.setInt(6, event.getPrice());
     }
+
+
 }
