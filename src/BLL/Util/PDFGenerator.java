@@ -47,6 +47,16 @@ public class PDFGenerator {
         return barcode39.createImageWithBarcode(contentByte, null, null);
     }
 
+    private Image generateSpecialTicketBarCode(SpecialTicketType specialTicketType, PdfContentByte contentByte) {
+        Barcode39 barcode39 = new Barcode39();
+
+        barcode39.setCode(specialTicketType.getTypeName());
+
+        return barcode39.createImageWithBarcode(contentByte, null, null);
+    }
+
+
+
     public Document generateTicketForEvent(Ticket ticket) throws Exception {
         final String pdfFileName = ticket.getEvent().getEventName() + "-" + ticket.getId() + ".pdf";
         final String pdfPath = ResourcePaths.PDF_FOLDER + pdfFileName;
@@ -124,7 +134,7 @@ public class PDFGenerator {
             doc.add(new Paragraph("Price: " + specialTicketType.getPrice()));
 
             // Adding bar code to the document
-            //doc.add(generateBarCode(specialTicketType, writer.getDirectContent()));
+            doc.add(generateSpecialTicketBarCode(specialTicketType, writer.getDirectContent()));
 
             // Adding qr code to the document
             doc.add(generateSpecialTicketQRCode((specialTicketType), 100, 100));
