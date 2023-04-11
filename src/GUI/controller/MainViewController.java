@@ -122,7 +122,7 @@ public class MainViewController extends BaseController implements Initializable 
             } else {
                 listViewBtn();//sets the listView With All Events In
                 try {
-                    getModelsHandler().getEventModel().setFutureEventsSelected(true);
+                    getModelsHandler().getEventModel().setFutureEventsSelected(false);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -235,14 +235,11 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     private void searchListener() {
-        txtSearch.setOnKeyTyped(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                try {
-                        getModelsHandler().getEventModel().search(txtSearch.getText());
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+        txtSearch.setOnKeyTyped(event -> {
+            try {
+                getModelsHandler().getEventModel().search(txtSearch.getText());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         });
     }

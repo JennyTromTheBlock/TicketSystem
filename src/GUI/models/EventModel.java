@@ -23,24 +23,20 @@ public class EventModel {
 
     private EventFacade eventFacade;
     private IEventManager eventManager;
-
+    private boolean isHistoricEventsSelected, isFutureEventsSelected, isMyEventsSelected;
 
     public void setHistoricEventsSelected(boolean historicEventsSelected) {
         isHistoricEventsSelected = historicEventsSelected;
     }
 
-    private boolean isHistoricEventsSelected;
-
     public void setFutureEventsSelected(boolean futureEventsSelected) {
         isFutureEventsSelected = futureEventsSelected;
     }
 
-    private boolean isFutureEventsSelected;
     public void setMyEventsSelected(boolean myEventsSelected) {
         isMyEventsSelected = myEventsSelected;
     }
-
-    private boolean isMyEventsSelected;
+    
     public EventModel() throws Exception {
         eventFacade = new EventFacade();
         eventManager = new EventManager();
