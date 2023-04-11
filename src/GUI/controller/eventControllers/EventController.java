@@ -237,8 +237,11 @@ public class EventController extends BaseController implements Initializable {
         listviewAllUsers.setOnMouseClicked(event1 -> {
             if (event1.getClickCount() == 2) {
                 try {
-                    getModelsHandler().getEventModel().assignUserToEvent(users.get(listviewAllUsers.getSelectionModel().getSelectedIndex()), event);
-                    listviewUsersOnEvent.getItems().add(convertSystemUserToListViewItem(users.get(listviewAllUsers.getSelectionModel().getSelectedIndex())));
+                    SystemUser selectedUser = users.get(listviewAllUsers.getSelectionModel().getSelectedIndex());
+
+                    getModelsHandler().getEventModel().assignUserToEvent(selectedUser, event);
+                    listviewUsersOnEvent.getItems().add(convertSystemUserToListViewItem(selectedUser));
+
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
