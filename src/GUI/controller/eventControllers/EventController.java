@@ -207,7 +207,6 @@ public class EventController extends BaseController implements Initializable {
     public void handleAddUsersBtn() {
         try {
             btnDoneAssigningUsers.setVisible(true);
-            //todo should not include the coordinators already assigned to event
             listviewAllUsers.setPrefHeight(150);
             listviewAllUsers.getItems().clear();
 
@@ -215,7 +214,6 @@ public class EventController extends BaseController implements Initializable {
             ObservableList<SystemUser> finalUsers =  getModelsHandler().getSystemUserModel().getAllUsers();
 
             for (SystemUser user : users) {
-                System.out.println("user");
                 for (SystemUser assignedUser : getModelsHandler().getEventModel().getUsersAssignedToEvent(event)) {
                     if (assignedUser.getEmail().equals(user.getEmail())) {
                         finalUsers.removeAll(user);
@@ -225,7 +223,6 @@ public class EventController extends BaseController implements Initializable {
 
 
             for (SystemUser user : finalUsers) {
-                System.out.println(user);
                 listviewAllUsers.getItems().add(convertSystemUserToListViewItem(user));
                 addListenerForListAllUsers(finalUsers);
             }
@@ -239,7 +236,13 @@ public class EventController extends BaseController implements Initializable {
     private void addListenerForListAllUsers(ObservableList<SystemUser> users) {
         listviewAllUsers.setOnMouseClicked(event1 -> {
             if (event1.getClickCount() == 2) {
-               handleAddUsersBtn();
+                try {
+                    getModelsHandler().getEventModel().assignUserToEvent(users.get(listviewAllUsers.getSelectionModel().getSelectedIndex()), event);
+                    listviewUsersOnEvent.getItems().add(convertSystemUserToListViewItem(users.get(listviewAllUsers.getSelectionModel().getSelectedIndex())));
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                handleAddUsersBtn();
             }
         });
     }
