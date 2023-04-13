@@ -12,16 +12,55 @@
     -fx-border-color: #D7D7D7;
 }
 
-#btnCreateEvent, #btnSpecialTicket{
+#mainBtn, #btnCreateEvent, #btnSpecialTicket, #btnSellTicket {
     -fx-border-radius: 50;
-    -fx-border-color: #D7D7D7;
     -fx-background-radius: 50;
+    -fx-background-color: rgba(0, 158, 227);
+    -fx-effect: innershadow(three-pass-box, rgb(0, 64, 94), 10, 0, 0, 0);
+}
+
+#mainBtn:hover, #btnCreateEvent:hover, #btnSpecialTicket:hover, #btnSellTicket:hover {
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+    -fx-background-color: rgba(0, 158, 227);
+    -fx-effect: innershadow(three-pass-box, rgb(0, 64, 94), 10, 0.7, 0, 0);
+}
+
+#mainBtn:pressed, #btnCreateEvent:pressed, #btnSpecialTicket:pressed, #btnSellTicket:pressed {
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+    -fx-background-color: rgba(0, 158, 227);
+    -fx-effect: innershadow(three-pass-box, rgb(0, 64, 94), 10, 0.7, 0, 0);
+    -fx-translate-y: 2px;
+}
+
+.button {
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+    -fx-background-color: rgba(251, 187, 44);
+    -fx-effect: innershadow(three-pass-box, rgb(138, 91, 36), 10, 0, 0, 0);
+}
+
+.button:hover {
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+    -fx-background-color: rgba(251, 187, 44);
+    -fx-effect: innershadow(three-pass-box, rgb(138, 91, 36), 10, 0.7, 0, 0);
+}
+
+.button:pressed {
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+    -fx-background-color: rgba(251, 187, 44);
+    -fx-effect: innershadow(three-pass-box, rgb(138, 91, 36), 10, 0.7, 0, 0);
+    -fx-translate-y: 2px;
 }
 
 #sidebar{
-    -fx-border-radius: 20;
-    -fx-border-color: #D7D7D7;
-    -fx-border-width: 2;
+    -fx-border-color: rgba(192, 13, 13);
+    -fx-padding: 10px;
+    -fx-border-insets: 10px;
+    -fx-background-insets: 10px;
 }
 
 #lblInputFieldValidation, #lblLocationFieldValidation, #lblDateFieldValidation, #lblFirstNameValidation, #lblLastNameValidation, #lblEmailValidation, #lblPasswordValidation {

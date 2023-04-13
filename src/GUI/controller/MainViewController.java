@@ -81,8 +81,8 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     public void setNodeInMainView(Parent root) {
-        contentArea.getChildren().remove(1);
-        contentArea.getChildren().add(1, root);
+        contentArea.getChildren().remove(0);
+        contentArea.getChildren().add(0, root);
     }
 
     public void listViewBtn() {
@@ -206,8 +206,8 @@ public class MainViewController extends BaseController implements Initializable 
 
     public void setAdminContent(){
         Parent root = loadFXMLFile("/GUI/view/adminView/AdminBarView.fxml");
-        contentArea.getChildren().remove(3);
-        contentArea.getChildren().add(3, root);
+        contentArea.getChildren().remove(1);
+        contentArea.getChildren().add(1, root);
     }
 
     public FXMLLoader setNodeInRightBorder(String path){
