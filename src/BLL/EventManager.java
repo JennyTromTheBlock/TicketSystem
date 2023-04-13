@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class EventManager implements IEventManager {
 
@@ -117,7 +120,14 @@ public class EventManager implements IEventManager {
 
     @Override
     public List<SpecialTicketType> getAvailableSpecialTicketTypesOnEvent(int eventID) throws Exception {
-        return eventFacade.getAllAvailableSpecialTicketTypesOnEvent(eventID);
+        try (ExecutorService executorService = Executors.newSingleThreadExecutor()) {
+
+            Future<List<SpecialTicketType>> future = executorService.submit(() -> {
+                return eventFacade.getAllAvailableSpecialTicketTypesOnEvent(eventID);
+            });
+
+            return future.get();
+        }
     }
 
     private boolean compareToTitle(String query, Event event) {
