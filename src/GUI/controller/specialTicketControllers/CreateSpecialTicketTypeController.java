@@ -3,7 +3,6 @@ package GUI.controller.specialTicketControllers;
 import BE.SpecialTicketType;
 import GUI.controller.BaseController;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,8 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.ResourceBundle;
 
 public class CreateSpecialTicketTypeController extends BaseController implements Initializable {
@@ -39,6 +36,7 @@ public class CreateSpecialTicketTypeController extends BaseController implements
 
             SpecialTicketType newType = new SpecialTicketType(typeName, price);
 
+
             try {
                 if (!getModelsHandler().getSpecialTicketModel().typeExistsAlready(newType)) {
 
@@ -61,18 +59,19 @@ public class CreateSpecialTicketTypeController extends BaseController implements
     }
 
     private boolean isTypeNameValid() {
-        return !txtfTypeName.getText().isEmpty();
+        return !txtfTypeName.getText().isEmpty() &&
+                !txtfTypeName.getText().isBlank();
     }
 
     private boolean isPriceValid() {
+        int price;
         try {
-            int price = Integer.parseInt(txtfPrice.getText());
+            price = Integer.parseInt(txtfPrice.getText());
         }
         catch (NumberFormatException e) {
             return false;
         }
-
-        return true;
+        return price >= 0;
     }
 
     private void disableAdd() {
