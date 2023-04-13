@@ -32,7 +32,7 @@ public class CalendarField extends BaseController {
         for(int i = 0; events.size() > i; i++ ){
             Event event = events.get(i);
             if(i == 0){
-
+                lblFirstEvent.setVisible(true);
                 lblFirstEvent.setText(createEventString(event));
                 lblFirstEvent.setOnMouseClicked(mouseEvent -> {
                     String path = "/GUI/view/eventViews/EventInfoInMainView.fxml";
@@ -44,7 +44,7 @@ public class CalendarField extends BaseController {
                     }
                 });
             } else if (i == 1) {
-
+                lblSecondEvent.setVisible(true);
                 lblSecondEvent.setText(createEventString(event));
                 lblSecondEvent.setOnMouseClicked(mouseEvent -> {
                     String path = "/GUI/view/eventViews/EventInfoInMainView.fxml";

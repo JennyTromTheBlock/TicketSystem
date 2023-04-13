@@ -1,13 +1,82 @@
 
-#sideField, #sidebar{
-    -fx-background-color: rgba(147, 225, 249, 0.27);
+/*for saving variables we use more than once*/
+* {
+    -fx-color-red: rgba(238, 57, 57, 1);
 }
-#topBar{
-    -fx-background-color: rgba(238, 57, 57, 1)
-}
-#background{
+
+
+/*sets the main background in views*/
+#background {
     -fx-background-color: rgba(211, 211, 211, 0.72);
 }
+#sidebar{
+    -fx-background-color: rgba(147, 225, 249, 0.27);
+    -fx-border-color: rgb(72, 73, 75);
+    -fx-padding: 10px;
+    -fx-background-radius: 20;
+    -fx-border-insets: 10px;
+    -fx-border-width: 5;
+    -fx-border-radius: 20;
+    -fx-background-insets: 10px;
+}
+
+#lblInputFieldValidation, #lblLocationFieldValidation, #lblDateFieldValidation, #lblFirstNameValidation, #lblLastNameValidation, #lblEmailValidation, #lblPasswordValidation {
+    -fx-text-fill: red;
+}
+
+/*
+--------------------------------------------------------------------------------------------------------------------------------------------
+                                               header Styling
+--------------------------------------------------------------------------------------------------------------------------------------------
+ */
+#topBar{
+    -fx-background-color: -fx-color-red;
+}
+
+
+#txtSearch{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+#hBoxSearch {
+    -fx-border-radius: 50;
+    -fx-border-color: #D7D7D7;
+}
+
+
+/*
+--------------------------------------------------------------------------------------------------------------------------------------------
+                                               Calendar Styling
+--------------------------------------------------------------------------------------------------------------------------------------------
+ */
+
+
+#calendarField{
+    -fx-background-color: rgba(147, 176, 249, 0.27);
+    -fx-background-insets: 3;
+}
+
+#lblFirstEvent, #lblSecondEvent, #lblMoreEvents{
+    -fx-background-radius: 20;
+    -fx-background-color: rgba(249, 244, 147, 0.27);
+}
+#calendarBackground{
+    -fx-background-radius: 20;
+    -fx-background-color: rgba(147, 225, 249, 0.27);
+}
+
+#header{
+    -fx-background-color: #93B0F944;
+    -fx-background-radius: 10, 10, 0, 0;
+}
+
+/*
+--------------------------------------------------------------------------------------------------------------------------------------------
+                                               tableView Styling
+--------------------------------------------------------------------------------------------------------------------------------------------
+ */
+
+
 .table-view {
     -fx-background-color: transparent;
 }
@@ -35,7 +104,7 @@
 
 .table-row-cell: hover {
     -fx-background-color: rgba(147, 203, 249, 0.07);
-    -fx-text-background-color: red;
+    -fx-text-background-color: -fx-color-red;
 }
 .table-row-cell: odd{
     -fx-background-color: rgba(147, 222, 249, 0.07);
@@ -69,23 +138,12 @@
     -fx-background-color:  linear-gradient(to right, rgba(29, 141, 221, 0.27), rgba(147, 210, 249, 0.27));
 }
 
+/*
+--------------------------------------------------------------------------------------------------------------------------------------------
+                                               Button Styling
+--------------------------------------------------------------------------------------------------------------------------------------------
+*/
 
-
-
-
-
-
-
-
-
-#txtSearch{
-    -fx-background-color: rgba(0,0,0,0);
-}
-
-#hBoxSearch {
-    -fx-border-radius: 50;
-    -fx-border-color: #D7D7D7;
-}
 
 #mainBtn, #btnCreateEvent, #btnSpecialTicket, #btnSellTicket {
     -fx-border-radius: 50;
@@ -131,17 +189,12 @@
     -fx-translate-y: 2px;
 }
 
-#sidebar{
-    -fx-border-color: rgb(72, 73, 75);
-    -fx-padding: 10px;
-    -fx-background-radius: 20;
-    -fx-border-insets: 10px;
-    -fx-border-width: 5;
-    -fx-border-radius: 20;
-    -fx-background-insets: 10px;
-}
+/*
+--------------------------------------------------------------------------------------------------------------------------------------------
+                                               login Styling
+--------------------------------------------------------------------------------------------------------------------------------------------
+*/
 
-#lblInputFieldValidation, #lblLocationFieldValidation, #lblDateFieldValidation, #lblFirstNameValidation, #lblLastNameValidation, #lblEmailValidation, #lblPasswordValidation {
-    -fx-text-fill: red;
+#sideField{
+    -fx-background-color: rgba(147, 225, 249, 0.27);
 }
-
