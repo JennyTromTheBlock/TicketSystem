@@ -2,6 +2,7 @@ package DAL;
 
 import BE.Event;
 import BE.SpecialTicketOnEvent;
+import BE.SpecialTicketType;
 import DAL.Connectors.AbstractConnector;
 import DAL.Connectors.SqlConnector;
 
@@ -121,6 +122,40 @@ public class EventDAO implements IEventDAO {
         catch (SQLException e) {
             e.printStackTrace();
             throw new Exception("Failed to add special ticket type to event");
+        }
+    }
+
+    @Override
+    public List<SpecialTicketType> getAllSpecialTicketTypesOnEvent(int eventID) throws Exception {
+        List<SpecialTicketType> specialTicketTypesOnEvent = new ArrayList<>();
+
+        String sql = "SELECT SpecialTicketTypes.[Type], SpecialTicketTypes.Price " +
+                "FROM SpecialTicketTypes " +
+                "WHERE SpecialTicketTypes.[Type] IN " +
+                "(SELECT SpecialTicketTypesOnEvents.SpecialTicketType " +
+                "FROM SpecialTicketTypesOnEvents WHERE SpecialTicketTypesOnEvents.EventID = ?);";
+
+        try (Connection conn = connector.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql)) {
+
+            statement.setInt(1, eventID);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                String type = resultSet.getString("Type");
+                int price = resultSet.getInt("Price");
+
+                SpecialTicketType specialTicketType = new SpecialTicketType(type, price);
+
+                specialTicketTypesOnEvent.add(specialTicketType);
+            }
+
+            return specialTicketTypesOnEvent;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Failed to retrieve special ticket types on event", e);
         }
     }
 

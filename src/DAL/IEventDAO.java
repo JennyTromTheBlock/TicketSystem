@@ -3,6 +3,7 @@ package DAL;
 import BE.Event;
 import BE.Note;
 import BE.SpecialTicketOnEvent;
+import BE.SpecialTicketType;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface IEventDAO {
     Event deleteEvent(Event event) throws Exception;
 
     void createSpecialTicketTypeOnEvent(SpecialTicketOnEvent specialTicketOnEvent) throws Exception;
+
+    List<SpecialTicketType> getAllSpecialTicketTypesOnEvent(int eventID) throws Exception;
 }
