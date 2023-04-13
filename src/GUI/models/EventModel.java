@@ -2,6 +2,7 @@ package GUI.models;
 
 import BE.Event;
 import BE.Note;
+import BE.SpecialTicketType;
 import BE.SystemUser;
 import BLL.EventManager;
 import BLL.IEventManager;
@@ -98,6 +99,18 @@ public class EventModel {
         }
 
         return -1;
+    }
+
+    public List<SpecialTicketType> getAvailableSpecialTicketTypesOnEvent(int eventID) throws Exception {
+        Event event = allEvents.get(indexOfEventId(eventID));
+        List<SpecialTicketType> availableSpecialTicketTypes = event.getAvailableSpecialTicketTypes();
+
+
+        if (availableSpecialTicketTypes.isEmpty()) {
+            availableSpecialTicketTypes.addAll(eventManager.getAvailableSpecialTicketTypesOnEvent(eventID));
+        }
+
+        return availableSpecialTicketTypes;
     }
 
     public ObservableList<Event> getUpcomingEvents() throws Exception {

@@ -37,7 +37,7 @@ public class EventController extends BaseController implements Initializable {
     public Button btnDoneAssigningUsers;
     public VBox vBoxDialogPane;
     public ListView listviewAllSpecialTickets;
-    public ListView listviewSelectedSpecialTickets;
+    public ListView<String> listviewSelectedSpecialTickets;
 
     @FXML
     private TextArea textfMessageInput;
@@ -92,12 +92,15 @@ public class EventController extends BaseController implements Initializable {
 
     private void loadSelectedSpecialTickets() {
         try {
-            ObservableList<SpecialTicketType> specialTickets = getModelsHandler().getSpecialTicketModel().typesOnEvent(event);
-            for (SpecialTicketType tickets: specialTickets) {
-                listviewSelectedSpecialTickets.getItems().add(tickets.getTypeName());
+            List<SpecialTicketType> availableSpecialTicketTypes = getModelsHandler()
+                    .getEventModel()
+                    .getAvailableSpecialTicketTypesOnEvent(event.getId());
+
+            for (SpecialTicketType type : availableSpecialTicketTypes) {
+                listviewSelectedSpecialTickets.getItems().add(type.getTypeName());
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            displayError(e);
         }
         selectedSpecialTicketHandler();
     }
