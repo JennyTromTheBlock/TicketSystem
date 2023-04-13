@@ -1,6 +1,7 @@
 package DAL;
 
 import BE.Event;
+import BE.SpecialTicketOnEvent;
 import DAL.Connectors.AbstractConnector;
 import DAL.Connectors.SqlConnector;
 
@@ -103,6 +104,24 @@ public class EventDAO implements IEventDAO {
             throw new Exception("Failed to delete the event", e);
         }
         return deletedEvent;
+    }
+
+    @Override
+    public void createSpecialTicketTypeOnEvent(SpecialTicketOnEvent specialTicketOnEvent) throws Exception {
+        String sql = "INSERT INTO SpecialTicketTypesOnEvents (EventID, SpecialTicketType) VALUES (?, ?)";
+
+        try (Connection conn = connector.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql)) {
+
+            statement.setInt(1, specialTicketOnEvent.getEventID());
+            statement.setString(2, specialTicketOnEvent.getSpecialTicketType());
+
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Failed to add special ticket type to event");
+        }
     }
 
 
