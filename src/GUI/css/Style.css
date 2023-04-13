@@ -12,21 +12,21 @@
     -fx-border-color: #D7D7D7;
 }
 
-#mainBtn, #btnCreateEvent, #btnSpecialTicket, #btnSellTicket {
+#mainBtn, #btnCreateEvent, #btnSpecialTicket, #btnSellTicket, #btnSettings, #btnCreateUser, #btnSeeEvents, #btnSeeUsers {
     -fx-border-radius: 50;
     -fx-background-radius: 50;
     -fx-background-color: rgba(0, 158, 227);
     -fx-effect: innershadow(three-pass-box, rgb(0, 64, 94), 10, 0, 0, 0);
 }
 
-#mainBtn:hover, #btnCreateEvent:hover, #btnSpecialTicket:hover, #btnSellTicket:hover {
+#mainBtn:hover, #btnCreateEvent:hover, #btnSpecialTicket:hover, #btnSellTicket:hover, #btnSettings:hover, #btnCreateUser:hover, #btnSeeEvents:hover, #btnSeeUsers:hover {
     -fx-border-radius: 50;
     -fx-background-radius: 50;
     -fx-background-color: rgba(0, 158, 227);
     -fx-effect: innershadow(three-pass-box, rgb(0, 64, 94), 10, 0.7, 0, 0);
 }
 
-#mainBtn:pressed, #btnCreateEvent:pressed, #btnSpecialTicket:pressed, #btnSellTicket:pressed {
+#mainBtn:pressed, #btnCreateEvent:pressed, #btnSpecialTicket:pressed, #btnSellTicket:pressed, #btnSettings:pressed, #btnCreateUser:pressed, #btnSeeEvents:pressed, #btnSeeUsers:pressed {
     -fx-border-radius: 50;
     -fx-background-radius: 50;
     -fx-background-color: rgba(0, 158, 227);
@@ -38,21 +38,30 @@
     -fx-border-radius: 50;
     -fx-background-radius: 50;
     -fx-background-color: rgba(251, 187, 44);
-    -fx-effect: innershadow(three-pass-box, rgb(138, 91, 36), 10, 0, 0, 0);
+    -fx-effect: innershadow(three-pass-box, rgb(255, 139, 0), 10, 0, 0, 0);
 }
 
 .button:hover {
     -fx-border-radius: 50;
     -fx-background-radius: 50;
     -fx-background-color: rgba(251, 187, 44);
-    -fx-effect: innershadow(three-pass-box, rgb(138, 91, 36), 10, 0.7, 0, 0);
+    -fx-effect: innershadow(three-pass-box, rgb(255, 139, 0), 10, 0.7, 0, 0);
 }
 
 .button:pressed {
     -fx-border-radius: 50;
     -fx-background-radius: 50;
     -fx-background-color: rgba(251, 187, 44);
-    -fx-effect: innershadow(three-pass-box, rgb(138, 91, 36), 10, 0.7, 0, 0);
+    -fx-effect: innershadow(three-pass-box, rgb(255, 139, 0), 10, 0.7, 0, 0);
+    -fx-translate-y: 2px;
+}
+
+#ivCalendar:hover, #ivList:hover {
+    -fx-effect: innershadow(three-pass-box, rgb(0, 64, 94), 10, 0.7, 0, 0);
+}
+
+#ivCalendar:pressed, #ivList:pressed {
+    -fx-effect: innershadow(three-pass-box, rgb(0, 64, 94), 10, 0.7, 0, 0);
     -fx-translate-y: 2px;
 }
 
@@ -63,7 +72,79 @@
     -fx-background-insets: 10px;
 }
 
+#tvEvents {
+    -fx-border-color: rgba(0, 158, 227);
+    -fx-padding: 10px;
+    -fx-border-insets: 10px;
+    -fx-background-insets: 10px;
+}
+
 #lblInputFieldValidation, #lblLocationFieldValidation, #lblDateFieldValidation, #lblFirstNameValidation, #lblLastNameValidation, #lblEmailValidation, #lblPasswordValidation {
     -fx-text-fill: red;
 }
 
+/*
+ * TableView stuff...
+ */
+.table-view, .list-view {
+    -fx-border-color: rgba(0, 158, 227);
+}
+
+.table-view:focused, .table-view:selected {
+    -fx-border-color: transparent;
+}
+
+.table-view .column-header-background .filler, .list-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+
+.table-view .corner, .list-view .corner {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background, .list-view .column-header-background {
+    -fx-padding: 0 0 5px 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: rgba(0, 158, 227);
+    -fx-text-background-color: black;
+}
+
+.table-view .table-cell, .list-view .table-cell {
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+}
+.table-row-cell:hover, .list-cell:hover {
+}
+
+.table-row-cell:selected, .list-cell:selected {
+    -fx-background-color: rgba(0, 158, 227);
+    -fx-text-background-color: black;
+}
+
+.table-row-cell:odd, .list-cell:odd {
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-row-cell:even, .list-cell:even {
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical, .list-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track, .list-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background, .list-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal, .list-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track, .list-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background, .list-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button,
+.list-view .virtual-flow .scroll-bar .increment-button,
+.list-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}

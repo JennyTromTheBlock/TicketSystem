@@ -10,10 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -27,6 +24,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainViewController extends BaseController implements Initializable {
+    @FXML
+    private Label lblLoggedInUser;
     @FXML
     private MenuButton mbFilter;
     @FXML
@@ -62,6 +61,11 @@ public class MainViewController extends BaseController implements Initializable 
         ivCalendar.setImage(new Image("symbols/callender.png"));
         ivList.setImage(new Image("symbols/listView.png"));
         ivLogo.setImage(new Image("symbols/EASYDVEST.png"));
+        try {
+            lblLoggedInUser.setText(getModelsHandler().getSystemUserModel().getLoggedInSystemUser().getValue().getEmail());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void handleCreateEvent() {

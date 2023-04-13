@@ -5,6 +5,7 @@
 <?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -41,20 +42,23 @@
                   <Insets right="20.0" />
                </HBox.margin>
             </HBox>
-            <Pane prefHeight="60.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
             <HBox fx:id="hBoxSearch" alignment="CENTER" maxHeight="-Infinity" prefHeight="35.0" prefWidth="290.0" spacing="5.0">
                <children>
                   <TextField fx:id="txtSearch" prefHeight="26.0" prefWidth="239.0" promptText="search" />
                   <ImageView fx:id="ivSearchBtn" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#handleSearch" pickOnBounds="true" preserveRatio="true" />
                </children>
             </HBox>
+            <Pane prefHeight="60.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
             <HBox alignment="CENTER" prefHeight="60.0" prefWidth="235.0" spacing="5.0">
                <children>
-                  <Label alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="129.0" text="User Name">
+                  <Label fx:id="lblLoggedInUser" alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="129.0">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin></Label>
-                  <MenuButton mnemonicParsing="false" prefHeight="27.0" prefWidth="86.0" text="Settings" />
+                  <MenuButton fx:id="btnSettings" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="⚙" wrapText="true">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Log out" />
+                     </items></MenuButton>
                </children>
                <HBox.margin>
                   <Insets left="20.0" right="20.0" />
