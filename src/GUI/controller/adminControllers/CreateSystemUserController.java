@@ -21,8 +21,10 @@ public class CreateSystemUserController extends BaseController {
     public void handleCreateUser() {
         if(isInputFieldsFilled()) {
             SystemUser user = createSystemUserFromFields();
+
             try {
-                ModelsHandler.getInstance().getSystemUserModel().createSystemUser(user);
+                user = ModelsHandler.getInstance().getSystemUserModel().createSystemUser(user);
+                getModelsHandler().getSystemUserModel().getAllUsers().add(user);
             } catch (Exception e) {
                 displayError(e);
             }
