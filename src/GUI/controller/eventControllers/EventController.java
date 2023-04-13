@@ -183,19 +183,25 @@ public class EventController extends BaseController implements Initializable {
 
 
     public void handleSendMessage(ActionEvent actionEvent) {
-        try {
-            SystemUser user = getModelsHandler().getSystemUserModel().getLoggedInSystemUser().getValue();
 
-            Note note = new Note(user, event, textfMessageInput.getText(), new Timestamp(System.currentTimeMillis()));
+        if(noteInputIsValid()){
+            try {
+                SystemUser user = getModelsHandler().getSystemUserModel().getLoggedInSystemUser().getValue();
+                Note note = new Note(user, event, textfMessageInput.getText(), new Timestamp(System.currentTimeMillis()));
+                getModelsHandler().getEventModel().addNoteToEvent(note);
 
-            getModelsHandler().getEventModel().addNoteToEvent(note);
-
-            addNoteToList(note);
+                addNoteToList(note);
+            }
+            catch (Exception e) {
+                displayError(e);
+            }
         }
-        catch (Exception e) {
-            displayError(e);
-        }
+        displayLocalError("the note is empty");
+    }
 
+    private boolean noteInputIsValid() {
+        return !textfMessageInput.getText().isEmpty() &&
+                !textfMessageInput.getText().isBlank();
     }
 
     public void handleDoneAssigningUsers(ActionEvent actionEvent) {

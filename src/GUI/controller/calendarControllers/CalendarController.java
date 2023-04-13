@@ -36,8 +36,8 @@ public class CalendarController extends BaseController implements Initializable 
         try {
             drawCalendar();
         } catch (Exception e) {
+            displayError(e);
             throw new RuntimeException(e);
-            //todo error message
         }
     }
 
