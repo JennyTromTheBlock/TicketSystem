@@ -1,7 +1,82 @@
 
-#topBar, #sideField{
-    -fx-background-color: #fff;
+#sideField, #sidebar{
+    -fx-background-color: rgba(147, 225, 249, 0.27);
 }
+#topBar{
+    -fx-background-color: rgba(238, 57, 57, 1)
+}
+#background{
+    -fx-background-color: rgba(211, 211, 211, 0.72);
+}
+.table-view {
+    -fx-background-color: transparent;
+}
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(to bottom, rgba(29, 154, 221, 0.27), rgba(147, 222, 249, 0.27));
+    -fx-background-radius: 7px 7px 0px 0px;
+    -fx-background-insets: 0 11px 0 0;
+    -fx-padding: 0 0 5px 0;
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+.table-view .table-cell{
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+}
+
+.table-row-cell: hover {
+    -fx-background-color: rgba(147, 203, 249, 0.07);
+    -fx-text-background-color: red;
+}
+.table-row-cell: odd{
+    -fx-background-color: rgba(147, 222, 249, 0.07);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-row-cell: even{
+    -fx-background-color: rgba(29, 135, 221, 0.07);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color:  linear-gradient(to bottom, rgba(29, 154, 221, 0.27), rgba(147, 213, 249, 0.27));
+}
+.table-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color:  linear-gradient(to right, rgba(29, 141, 221, 0.27), rgba(147, 210, 249, 0.27));
+}
+
+
+
+
+
+
+
+
+
 
 #txtSearch{
     -fx-background-color: rgba(0,0,0,0);
@@ -57,9 +132,12 @@
 }
 
 #sidebar{
-    -fx-border-color: rgba(192, 13, 13);
+    -fx-border-color: rgb(72, 73, 75);
     -fx-padding: 10px;
+    -fx-background-radius: 20;
     -fx-border-insets: 10px;
+    -fx-border-width: 5;
+    -fx-border-radius: 20;
     -fx-background-insets: 10px;
 }
 
