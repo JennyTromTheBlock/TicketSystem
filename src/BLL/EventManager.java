@@ -2,6 +2,7 @@ package BLL;
 
 import BE.Event;
 import BE.Note;
+import BE.SpecialTicketType;
 import BE.SystemUser;
 import BLL.DALFacades.EventFacade;
 import DAL.EventDAO;
@@ -112,6 +113,11 @@ public class EventManager implements IEventManager {
         }
 
         return searchResult;
+    }
+
+    @Override
+    public List<SpecialTicketType> getAvailableSpecialTicketTypesOnEvent(int eventID) throws Exception {
+        return eventFacade.getAllAvailableSpecialTicketTypesOnEvent(eventID);
     }
 
     private boolean compareToTitle(String query, Event event) {

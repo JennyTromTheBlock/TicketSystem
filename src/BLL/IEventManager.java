@@ -1,6 +1,7 @@
 package BLL;
 
 import BE.Event;
+import BE.SpecialTicketType;
 import BE.SystemUser;
 import BE.Note;
 
@@ -34,4 +35,6 @@ public interface IEventManager {
     List<Event> getMyEvents(SystemUser user) throws Exception;
 
     List<Event> search(List<Event> searchBase, String query);
+
+    List<SpecialTicketType> getAvailableSpecialTicketTypesOnEvent(int eventID) throws Exception;
 }
