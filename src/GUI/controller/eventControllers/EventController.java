@@ -176,26 +176,33 @@ public class EventController extends BaseController implements Initializable {
     }
 
     public void handleEditEvent() {
-        FXMLLoader loader = openStage(ViewPaths.UPDATE_EVENT_VIEW, "Edit event");
-        UpdateEventController controller = loader.getController();
-        controller.setContent(event);
+        if(isUserAssignedToEvent()){
+            FXMLLoader loader = openStage(ViewPaths.UPDATE_EVENT_VIEW, "Edit event");
+            UpdateEventController controller = loader.getController();
+            controller.setContent(event);
+        }
     }
 
 
     public void handleSendMessage(ActionEvent actionEvent) {
-        try {
-            SystemUser user = getModelsHandler().getSystemUserModel().getLoggedInSystemUser().getValue();
+        if(noteInputIsValid()){
+            try {
+                SystemUser user = getModelsHandler().getSystemUserModel().getLoggedInSystemUser().getValue();
+                Note note = new Note(user, event, textfMessageInput.getText(), new Timestamp(System.currentTimeMillis()));
+                getModelsHandler().getEventModel().addNoteToEvent(note);
 
-            Note note = new Note(user, event, textfMessageInput.getText(), new Timestamp(System.currentTimeMillis()));
-
-            getModelsHandler().getEventModel().addNoteToEvent(note);
-
-            addNoteToList(note);
+                addNoteToList(note);
+            }
+            catch (Exception e) {
+                displayError(e);
+            }
         }
-        catch (Exception e) {
-            displayError(e);
-        }
+        displayLocalError("the note is empty");
+    }
 
+    private boolean noteInputIsValid() {
+        return !textfMessageInput.getText().isEmpty() &&
+                !textfMessageInput.getText().isBlank();
     }
 
     public void handleDoneAssigningUsers(ActionEvent actionEvent) {
@@ -235,19 +242,38 @@ public class EventController extends BaseController implements Initializable {
 
     private void addListenerForListAllUsers(ObservableList<SystemUser> users) {
         listviewAllUsers.setOnMouseClicked(event1 -> {
-            if (event1.getClickCount() == 2) {
-                try {
-                    SystemUser selectedUser = users.get(listviewAllUsers.getSelectionModel().getSelectedIndex());
 
-                    getModelsHandler().getEventModel().assignUserToEvent(selectedUser, event);
-                    listviewUsersOnEvent.getItems().add(convertSystemUserToListViewItem(selectedUser));
+            try {
+               if (event1.getClickCount() == 2 && isUserAssignedToEvent()) {
+                            try {
+                                SystemUser selectedUser = users.get(listviewAllUsers.getSelectionModel().getSelectedIndex());
+                                getModelsHandler().getEventModel().assignUserToEvent(selectedUser, event);
+                                listviewUsersOnEvent.getItems().add(convertSystemUserToListViewItem(selectedUser));
 
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
                 }
-                handleAddUsersBtn();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
+
         });
+    }
+    private boolean isUserAssignedToEvent(){
+
+        try {
+            for (SystemUser assignedUsers: getModelsHandler().getEventModel().getUsersAssignedToEvent(event)){
+                if(assignedUsers.getEmail().contains(getModelsHandler().getSystemUserModel().getLoggedInSystemUser().getValue().getEmail())) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        displayLocalError("you must be assigned to event");
+        return false;
     }
 
     private String convertSystemUserToListViewItem(SystemUser user) {
