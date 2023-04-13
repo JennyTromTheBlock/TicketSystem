@@ -6,6 +6,9 @@ import BLL.Util.PDFGenerator;
 import DAL.ITicketDAO;
 import DAL.TicketDAO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TicketManager implements ITicketManager {
 
     private final ITicketDAO databaseAccess;
@@ -17,9 +20,18 @@ public class TicketManager implements ITicketManager {
     }
 
     @Override
-    public Ticket createTicket(Ticket ticket) throws Exception {
-        pdfGenerator.generateTicketForEvent(ticket);
-        return databaseAccess.createTicket(ticket);
+    public List<Ticket> createTicket(Ticket ticket, int amount) throws Exception {
+        List<Ticket> newTickets = new ArrayList<>();
+
+        for (int i = 0; i < amount; i++) {
+            Ticket newTicket = databaseAccess.createTicket(ticket);
+
+            newTickets.add(newTicket);
+
+            pdfGenerator.generateTicketForEvent(newTicket);
+        }
+
+        return newTickets;
     }
 
     @Override

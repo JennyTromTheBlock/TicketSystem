@@ -2,6 +2,7 @@ package BE;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class SystemUser {
     private String email;
@@ -33,8 +34,14 @@ public class SystemUser {
     }
 
     public static boolean isEmailValid(String email) {
-        //TODO implement this method.
-        return true;
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pattern = Pattern.compile(emailRegex);
+
+        return pattern.matcher(email).matches();
     }
 
     public static boolean isPasswordValid(String password) {

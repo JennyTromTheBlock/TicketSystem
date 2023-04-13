@@ -6,6 +6,8 @@ import BLL.Util.PDFGenerator;
 import BLL.ITicketManager;
 import BLL.TicketManager;
 
+import java.util.List;
+
 public class TicketModel {
 
     private ITicketManager ticketManager;
@@ -14,10 +16,8 @@ public class TicketModel {
         this.ticketManager = new TicketManager();
     }
 
-    public Ticket createTicket(Ticket ticket) throws Exception {
-        Ticket newTicket = ticketManager.createTicket(ticket);
-
-        return newTicket;
+    public List<Ticket> createTicket(Ticket ticket, int amount) throws Exception {
+        return ticketManager.createTicket(ticket, amount);
     }
 
     public Event deleteEventFrom(Event event) throws Exception {

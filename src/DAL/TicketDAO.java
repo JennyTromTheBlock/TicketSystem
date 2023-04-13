@@ -6,6 +6,8 @@ import DAL.Connectors.AbstractConnector;
 import DAL.Connectors.SqlConnector;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TicketDAO implements ITicketDAO {
 
@@ -37,7 +39,7 @@ public class TicketDAO implements ITicketDAO {
 
             ResultSet resultSet = statement.getGeneratedKeys();
 
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 int id = resultSet.getInt(1);
                 newTicket = new Ticket(id, customerName, customerEmail, ticket.getEvent());
             }
