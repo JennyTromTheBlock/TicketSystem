@@ -1,9 +1,6 @@
 package BLL;
 
-import BE.Event;
-import BE.SpecialTicketType;
-import BE.SystemUser;
-import BE.Note;
+import BE.*;
 
 import java.util.List;
 
@@ -37,4 +34,6 @@ public interface IEventManager {
     List<Event> search(List<Event> searchBase, String query);
 
     List<SpecialTicketType> getAvailableSpecialTicketTypesOnEvent(int eventID) throws Exception;
+    void createSpecialTicketTypeOnEvent(SpecialTicketOnEvent specialTicketOnEvent) throws Exception;
+    void removeSpecialTicketFromEvent(SpecialTicketOnEvent specialTicketOnEvent) throws Exception;
 }

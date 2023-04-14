@@ -1,9 +1,6 @@
 package GUI.controller.eventControllers;
 
-import BE.Event;
-import BE.Note;
-import BE.SpecialTicketType;
-import BE.SystemUser;
+import BE.*;
 import GUI.controller.BaseController;
 import GUI.controller.MessageController;
 import GUI.util.SymbolPaths;
@@ -78,10 +75,14 @@ public class EventController extends BaseController implements Initializable {
 
         listviewSelectedSpecialTickets.setOnMouseClicked(event1 -> {
             if (event1.getClickCount() == 2) {
-                int selectedUserIndex = listviewSelectedSpecialTickets.getSelectionModel().getSelectedIndex();
+                int selectedSpecialTicketIndex = listviewSelectedSpecialTickets.getSelectionModel().getSelectedIndex();
+                String selectedSpecialTicketName = listviewSelectedSpecialTickets.getSelectionModel().getSelectedItem().toString();
                 //todo should remove special ticket from event
                 try {
-                    listviewSelectedSpecialTickets.getItems().remove(listviewSelectedSpecialTickets.getSelectionModel().getSelectedIndex());
+                    SpecialTicketOnEvent specialTicketOnEvent = new SpecialTicketOnEvent(event.getId(), selectedSpecialTicketName);
+                    getModelsHandler().getEventModel().removeSpecialTicketFromEvent(specialTicketOnEvent);
+                    listviewAllSpecialTickets.getItems().add(selectedSpecialTicketName);
+                    listviewSelectedSpecialTickets.getItems().remove(selectedSpecialTicketIndex);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -120,10 +121,16 @@ public class EventController extends BaseController implements Initializable {
     private void allSpecialTicketsHandler() {
         listviewAllSpecialTickets.setOnMouseClicked(event1 -> {
             if (event1.getClickCount() == 2) {
-                int selectedUserIndex = listviewAllSpecialTickets.getSelectionModel().getSelectedIndex();
+                int selectedSpecialTicketIndex = listviewAllSpecialTickets.getSelectionModel().getSelectedIndex();
+                String selectedSpecialTicketName = listviewAllSpecialTickets.getSelectionModel().getSelectedItem().toString();
+
                 try {
                     //todo should add special ticket to event in dao
-                    listviewAllSpecialTickets.getItems().remove(selectedUserIndex);
+                    SpecialTicketOnEvent specialTicketOnEvent = new SpecialTicketOnEvent(event.getId(), selectedSpecialTicketName);
+                    getModelsHandler().getEventModel().createSpecialTicketTypeOnEvent(specialTicketOnEvent);
+
+                    listviewSelectedSpecialTickets.getItems().add(selectedSpecialTicketName);
+                    listviewAllSpecialTickets.getItems().remove(selectedSpecialTicketIndex);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }

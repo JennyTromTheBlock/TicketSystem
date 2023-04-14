@@ -1,9 +1,6 @@
 package BLL.DALFacades;
 
-import BE.Event;
-import BE.Note;
-import BE.SpecialTicketType;
-import BE.SystemUser;
+import BE.*;
 import DAL.EventDAO;
 import DAL.EventNotes.EventNoteDAO;
 import DAL.EventNotes.IEventNoteDAO;
@@ -23,6 +20,15 @@ public class EventFacade {
         usersOnEventsDAO = new UsersOnEventDAO();
         eventDAO = new EventDAO();
     }
+
+    public void createSpecialTicketTypeOnEvent(SpecialTicketOnEvent specialTicketOnEvent) throws Exception {
+        eventDAO.createSpecialTicketTypeOnEvent(specialTicketOnEvent);
+    }
+
+    public void removeSpecialTicketFromEvent(SpecialTicketOnEvent specialTicketOnEvent) throws Exception {
+        eventDAO.removeSpecialTicketFromEvent(specialTicketOnEvent);
+    }
+
 
     public List<SpecialTicketType> getAllAvailableSpecialTicketTypesOnEvent(int eventID) throws Exception {
         return eventDAO.getAllSpecialTicketTypesOnEvent(eventID);

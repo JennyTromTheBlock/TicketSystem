@@ -1,9 +1,6 @@
 package BLL;
 
-import BE.Event;
-import BE.Note;
-import BE.SpecialTicketType;
-import BE.SystemUser;
+import BE.*;
 import BLL.DALFacades.EventFacade;
 import DAL.EventDAO;
 import DAL.IEventDAO;
@@ -129,6 +126,17 @@ public class EventManager implements IEventManager {
             return future.get();
         }
     }
+
+    @Override
+    public void createSpecialTicketTypeOnEvent(SpecialTicketOnEvent specialTicketOnEvent) throws Exception {
+        eventFacade.createSpecialTicketTypeOnEvent(specialTicketOnEvent);
+    }
+
+    @Override
+    public void removeSpecialTicketFromEvent(SpecialTicketOnEvent specialTicketOnEvent) throws Exception {
+        eventFacade.removeSpecialTicketFromEvent(specialTicketOnEvent);
+    }
+
 
     private boolean compareToTitle(String query, Event event) {
         return event.getEventName().toLowerCase().contains(query.toLowerCase());

@@ -19,5 +19,7 @@ public interface IEventDAO {
 
     void createSpecialTicketTypeOnEvent(SpecialTicketOnEvent specialTicketOnEvent) throws Exception;
 
+    void removeSpecialTicketFromEvent(SpecialTicketOnEvent specialTicketOnEvent) throws Exception;
+
     List<SpecialTicketType> getAllSpecialTicketTypesOnEvent(int eventID) throws Exception;
 }

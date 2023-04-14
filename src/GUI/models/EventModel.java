@@ -1,9 +1,6 @@
 package GUI.models;
 
-import BE.Event;
-import BE.Note;
-import BE.SpecialTicketType;
-import BE.SystemUser;
+import BE.*;
 import BLL.EventManager;
 import BLL.IEventManager;
 import GUI.BLLFacades.EventFacade;
@@ -112,6 +109,15 @@ public class EventModel {
 
         return availableSpecialTicketTypes;
     }
+
+    public void createSpecialTicketTypeOnEvent(SpecialTicketOnEvent specialTicketOnEvent) throws Exception {
+        eventManager.createSpecialTicketTypeOnEvent(specialTicketOnEvent);
+    }
+
+    public void removeSpecialTicketFromEvent(SpecialTicketOnEvent specialTicketOnEvent) throws Exception {
+        eventManager.removeSpecialTicketFromEvent(specialTicketOnEvent);
+    }
+
 
     public ObservableList<Event> getUpcomingEvents() throws Exception {
         if(isMyEventsSelected){

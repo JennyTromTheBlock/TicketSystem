@@ -126,6 +126,23 @@ public class EventDAO implements IEventDAO {
     }
 
     @Override
+    public void removeSpecialTicketFromEvent(SpecialTicketOnEvent specialTicketOnEvent) throws Exception {
+        String sql = "DELETE FROM SpecialTicketTypesOnEvents WHERE SpecialTicketType =? AND EventID = ?;";
+
+        try (Connection conn = connector.getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setString(1, specialTicketOnEvent.getSpecialTicketType());
+            statement.setInt(2, specialTicketOnEvent.getEventID());
+
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Failed to remove special ticket type from event");
+        }
+    }
+
+    @Override
     public List<SpecialTicketType> getAllSpecialTicketTypesOnEvent(int eventID) throws Exception {
         List<SpecialTicketType> specialTicketTypesOnEvent = new ArrayList<>();
 
