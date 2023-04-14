@@ -100,7 +100,7 @@
 }
 .table-view .column-header .label{
     -fx-alignment:CENTER_LEFT;
-    -fx-padding: 0 0 5px 0;
+    -fx-padding: 5px 0 5px 0;
 }
 .table-view .table-cell, .list-view .table-cell {
     -fx-border-color: transparent;
