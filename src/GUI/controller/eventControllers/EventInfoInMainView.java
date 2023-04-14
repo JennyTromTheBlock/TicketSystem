@@ -5,6 +5,7 @@ import BE.Role;
 import GUI.controller.BaseController;
 import GUI.controller.CreateTicketController;
 import GUI.util.ConfirmDelete;
+import GUI.util.ViewPaths;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -117,7 +118,7 @@ public class EventInfoInMainView extends BaseController implements Initializable
         }
 
         public void handleSellTicket(ActionEvent actionEvent) {
-                FXMLLoader loader = openStage("/GUI/view/ticketsViews/CreateTicketView.fxml", "update Ticket");
+                FXMLLoader loader = openStage(ViewPaths.CREATE_TICKET_VIEW, "Sell Ticket");
                 CreateTicketController controller = loader.getController();
                 controller.setContent(event);
         }

@@ -53,6 +53,11 @@
                   <TextField fx:id="txtfCustomerName" prefHeight="25.0" prefWidth="268.0" />
                </children>
             </HBox>
+            <HBox>
+               <children>
+                  <Label fx:id="lblCustomerNameValidation" textFill="RED" />
+               </children>
+            </HBox>
             <HBox prefHeight="50.0" prefWidth="517.0">
                <children>
                   <Label fx:id="lblEmail" text="Email">
@@ -67,6 +72,11 @@
                   </TextField>
                </children>
             </HBox>
+            <HBox>
+               <children>
+                  <Label fx:id="lblCustomerEmailValidation" textFill="RED" />
+               </children>
+            </HBox>
             <HBox prefHeight="59.0" prefWidth="537.0">
                <children>
                   <Label fx:id="lblTicketAmount" text="Amount">
@@ -79,7 +89,7 @@
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Button>
-                  <TextField prefHeight="25.0" prefWidth="44.0" />
+                  <TextField fx:id="txtfAmount" prefHeight="25.0" prefWidth="44.0" />
                   <Button fx:id="btnSubtractTicket" mnemonicParsing="false" text="-" />
                   <Label fx:id="lblPriceTotal" prefHeight="20.0" prefWidth="40.0" text="Total">
                      <HBox.margin>
@@ -97,6 +107,11 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label fx:id="lblAmountValidation" textFill="RED" />
                </children>
             </HBox>
             <HBox prefHeight="74.0" prefWidth="537.0">
@@ -120,7 +135,7 @@
                         <Insets left="70.0" right="50.0" />
                      </HBox.margin>
                   </Button>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCancleTicket" text="Cancle">
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCancelTicket" text="Cancel">
                      <HBox.margin>
                         <Insets left="100.0" right="50.0" />
                      </HBox.margin>
