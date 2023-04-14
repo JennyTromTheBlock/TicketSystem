@@ -3,23 +3,21 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="sidebar" prefHeight="600.0" prefWidth="394.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.eventControllers.EventInfoInMainView">
+<VBox fx:id="sidebar" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="624.0" prefWidth="394.0" spacing="10.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.eventControllers.EventInfoInMainView">
     <children>
-        <Separator prefWidth="200.0" visible="false">
-            <VBox.margin>
-                <Insets bottom="20.0" />
-            </VBox.margin></Separator>
-        <Label fx:id="lblTitle" alignment="CENTER" prefHeight="113.0" prefWidth="394.0">
+        <Label fx:id="lblTitle" alignment="CENTER" prefHeight="85.0" prefWidth="394.0">
             <font>
                 <Font name="Berlin Sans FB" size="20.0" />
             </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
         </Label>
         <HBox spacing="20.0">
             <VBox.margin>
@@ -73,7 +71,7 @@
                 <Insets left="20.0" right="20.0" />
             </padding>
         </HBox>
-        <Pane prefHeight="63.0" prefWidth="250.0" VBox.vgrow="ALWAYS" />
+      <Pane prefHeight="50.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
         <VBox fx:id="eventButtonContainer" alignment="CENTER" spacing="10.0" visible="false">
             <children>
                 <Button fx:id="btnSellTicket" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSellTicket" prefHeight="60.0" prefWidth="200.0" text="Sell ticket">

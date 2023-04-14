@@ -79,7 +79,7 @@
                   <TableColumn fx:id="tcDate" prefWidth="201.0" text="Date" />
               </columns>
             </TableView>
-            <HBox alignment="CENTER_LEFT" prefHeight="110.0" prefWidth="890.0" spacing="30.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="110.0" prefWidth="890.0" spacing="10.0">
                <children>
                   <Button fx:id="btnCreateEvent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleCreateEvent" prefHeight="60.0" prefWidth="200.0" text="Create event">
                      <font>
@@ -103,7 +103,7 @@
       </VBox>
    </center>
    <right>
-      <VBox fx:id="sidebar" alignment="CENTER" prefHeight="730.0" prefWidth="394.0" spacing="50.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="sidebar" alignment="CENTER" prefHeight="730.0" prefWidth="394.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <Separator prefWidth="200.0" visible="false">
                <VBox.margin>

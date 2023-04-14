@@ -2,6 +2,7 @@
 /*for saving variables we use more than once*/
 * {
     -fx-color-red: rgba(238, 57, 57, 1);
+    -fx-color-blue: rgba(0, 158, 227);
 }
 
 
@@ -11,12 +12,12 @@
 }
 #sidebar{
     -fx-background-color: rgba(147, 225, 249, 0.27);
-    -fx-border-color: rgb(72, 73, 75);
+    -fx-border-color: -fx-color-blue;
     -fx-padding: 10px;
-    -fx-background-radius: 20;
+    -fx-background-radius: 7px;
     -fx-border-insets: 10px;
-    -fx-border-width: 5;
-    -fx-border-radius: 20;
+    -fx-border-width: 3;
+    -fx-border-radius: 7px;
     -fx-background-insets: 10px;
 }
 
@@ -79,15 +80,16 @@
 
 .table-view {
     -fx-background-color: transparent;
+    -fx-border-color: -fx-color-blue;
+    -fx-border-radius: 7px;
+    -fx-border-width: 3;
 }
 .table-view .column-header-background .filler {
     -fx-background-color: transparent;
 }
-
 .table-view .corner {
     -fx-background-color: transparent;
 }
-
 .table-view .column-header-background{
     -fx-background-color: linear-gradient(to bottom, rgba(29, 154, 221, 0.27), rgba(147, 222, 249, 0.27));
     -fx-background-radius: 7px 7px 0px 0px;
@@ -96,25 +98,28 @@
 }
 .table-view .column-header {
     -fx-background-color: transparent;
+    -fx-text-alignment: left;
 }
 .table-view .table-cell{
     -fx-border-color: transparent;
     -fx-padding: 2 0 2 10px;
 }
-
-.table-row-cell: hover {
-    -fx-background-color: rgba(147, 203, 249, 0.07);
-    -fx-text-background-color: -fx-color-red;
-}
-.table-row-cell: odd{
+.table-row-cell:odd{
     -fx-background-color: rgba(147, 222, 249, 0.07);
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
-.table-row-cell: even{
+.table-row-cell:even{
     -fx-background-color: rgba(29, 135, 221, 0.07);
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
+}
+.table-row-cell:hover {
+    -fx-background-color: rgba(147, 203, 249, 0.07);
+}
+.table-row-cell:selected, .list-cell:selected {
+    -fx-background-color: rgba(0, 158, 227);
+    -fx-text-background-color: black;
 }
 .table-view .virtual-flow .scroll-bar:vertical,
 .table-view .virtual-flow .scroll-bar:vertical .track,
@@ -145,21 +150,21 @@
 */
 
 
-#mainBtn, #btnCreateEvent, #btnSpecialTicket, #btnSellTicket {
+#btnCreateEvent, #btnSpecialTicket, #btnSellTicket, #btnSettings, #btnCreateUser, #btnSeeEvents, #btnSeeUsers {
     -fx-border-radius: 50;
     -fx-background-radius: 50;
     -fx-background-color: rgba(0, 158, 227);
     -fx-effect: innershadow(three-pass-box, rgb(0, 64, 94), 10, 0, 0, 0);
 }
 
-#mainBtn:hover, #btnCreateEvent:hover, #btnSpecialTicket:hover, #btnSellTicket:hover {
+#btnCreateEvent:hover, #btnSpecialTicket:hover, #btnSellTicket:hover, #btnSettings:hover, #btnCreateUser:hover, #btnSeeEvents:hover, #btnSeeUsers:hover {
     -fx-border-radius: 50;
     -fx-background-radius: 50;
     -fx-background-color: rgba(0, 158, 227);
     -fx-effect: innershadow(three-pass-box, rgb(0, 64, 94), 10, 0.7, 0, 0);
 }
 
-#mainBtn:pressed, #btnCreateEvent:pressed, #btnSpecialTicket:pressed, #btnSellTicket:pressed {
+#btnCreateEvent:pressed, #btnSpecialTicket:pressed, #btnSellTicket:pressed, #btnSettings:pressed, #btnCreateUser:pressed, #btnSeeEvents:pressed, #btnSeeUsers:pressed {
     -fx-border-radius: 50;
     -fx-background-radius: 50;
     -fx-background-color: rgba(0, 158, 227);
