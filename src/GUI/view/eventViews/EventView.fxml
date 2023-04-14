@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.eventControllers.EventController">
+<AnchorPane fx:id="infoView" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.eventControllers.EventController">
    <children>
-      <ScrollPane layoutX="0.800000011920929" layoutY="0.800000011920929" prefHeight="664.0" prefWidth="657.0" vbarPolicy="ALWAYS">
+      <ScrollPane fx:id="background" layoutX="0.800000011920929" layoutY="0.800000011920929" prefHeight="664.0" prefWidth="657.0" vbarPolicy="ALWAYS">
          <content>
-            <VBox alignment="TOP_CENTER" prefWidth="656.0">
+            <VBox fx:id="infoView" alignment="TOP_CENTER" prefWidth="656.0">
                <children>
                   <VBox>
                      <children>
