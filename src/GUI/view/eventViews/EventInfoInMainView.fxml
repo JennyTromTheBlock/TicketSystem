@@ -35,7 +35,7 @@
         <HBox prefHeight="43.0" prefWidth="381.0" spacing="20.0">
             <children>
                 <ImageView fx:id="ivEventSelected" fitHeight="43.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                <Label fx:id="lblLocation" prefHeight="62.0" prefWidth="318.0" text="     Select Event For More Info          " wrapText="true">
+                <Label fx:id="lblLocation" prefHeight="62.0" prefWidth="318.0" text="     Select an event for more info          " wrapText="true">
                     <font>
                         <Font name="Berlin Sans FB" size="16.0" />
                     </font>
