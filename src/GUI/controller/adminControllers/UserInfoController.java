@@ -9,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,6 +25,8 @@ public class UserInfoController extends BaseController implements Initializable 
     private Label lblEmail;
     @FXML
     private Button btnDeleteUser;
+    @FXML
+    private ImageView imgBtnDeleteUser;
 
     private SystemUser selectedUser;
 
@@ -43,6 +47,7 @@ public class UserInfoController extends BaseController implements Initializable 
     public void setUser(SystemUser user){
         lblName.setText(user.getFirstName() + " " + user.getLastName());
         lblEmail.setText(user.getEmail());
+        imgBtnDeleteUser.setImage(new Image("symbols/icon_trash-can.png"));
         setBtnDeleteUserVisible(true);
         selectedUser = user;
 

@@ -37,7 +37,7 @@ public class MainViewController extends BaseController implements Initializable 
     @FXML
     private BorderPane background;
     @FXML
-    private ImageView ivList, ivCalendar, ivSearchBtn, ivLogo;
+    private ImageView ivList, ivCalendar, ivSearchBtn, ivLogo, ivBtnCreateEvent, ivBtnSpecialTicket;
     @FXML
     private VBox contentArea, eventButtonContainer;
     @FXML
@@ -66,6 +66,8 @@ public class MainViewController extends BaseController implements Initializable 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        ivBtnCreateEvent.setImage(new Image("symbols/icon_plus.png"));
+        ivBtnSpecialTicket.setImage(new Image("symbols/icon_special-ticket.png"));
     }
 
     public void handleCreateEvent() {

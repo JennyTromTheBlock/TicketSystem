@@ -83,13 +83,19 @@
                <children>
                   <Button fx:id="btnCreateEvent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleCreateEvent" prefHeight="60.0" prefWidth="200.0" text="Create event">
                      <font>
-                        <Font name="Berlin Sans FB" size="24.0" />
+                        <Font name="Berlin Sans FB" size="20.0" />
                      </font>
+                     <graphic>
+                        <ImageView fx:id="ivBtnCreateEvent" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
                   </Button>
                   <Button fx:id="btnSpecialTicket" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSpecialTicket" prefHeight="60.0" prefWidth="200.0" text="Special ticket">
                      <font>
-                        <Font name="Berlin Sans FB" size="24.0" />
+                        <Font name="Berlin Sans FB" size="20.0" />
                      </font>
+                     <graphic>
+                        <ImageView fx:id="ivBtnSpecialTicket" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
                   </Button>
                </children>
                <VBox.margin>

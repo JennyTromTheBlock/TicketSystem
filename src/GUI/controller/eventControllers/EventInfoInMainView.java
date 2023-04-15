@@ -7,6 +7,7 @@ import GUI.controller.CreateTicketController;
 import GUI.util.ConfirmDelete;
 import GUI.util.ViewPaths;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -19,27 +20,18 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EventInfoInMainView extends BaseController implements Initializable {
-    public Label lblTitle;
-    public ImageView ivEventDate;
-    public Label lblDate;
-    public ImageView ivEventSelected;
-    public Label lblLocation;
-    public ImageView ivEventPrice;
-    public Label lblPrice;
-    public ImageView ivEventTickets;
-    public Label lblTicketsLeft;
-    public VBox eventButtonContainer;
-    public Button btnSellTicket;
-    public Button btnViewInfo;
-    public Button btnEditEvent;
+public class EventInfoInMainView extends BaseController {
+    @FXML
+    private Label lblTitle, lblDate, lblLocation, lblPrice, lblTicketsLeft;
+    @FXML
+    private ImageView ivEventDate, ivEventSelected, ivEventPrice, ivEventTickets ;
+    @FXML
+    private VBox eventButtonContainer;
+    @FXML
+    private Button btnSellTicket, btnViewInfo, btnEditEvent;
+
 
     private Event event;
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
 
     public void setEvent(Event event) {
         //sets all text fields
@@ -55,22 +47,24 @@ public class EventInfoInMainView extends BaseController implements Initializable
         showSymbolsForEventInSidebar();
 
         setDeleteBtn(event);
-        }
+    }
 
     private void setDeleteBtn(Event event) {
-            try {
-                if (getModelsHandler().getSystemUserModel().getLoggedInSystemUser().getValue().getRoles().contains(Role.ADMINISTRATOR)) {
-                    eventButtonContainer.getChildren().remove(0);
+        try {
+            if (getModelsHandler().getSystemUserModel().getLoggedInSystemUser().getValue().getRoles().contains(Role.ADMINISTRATOR)) {
+                eventButtonContainer.getChildren().remove(0);
 
-                    Button deleteEvent = new Button("Delete Event");
-                    deleteEvent.setPrefSize(200, 30);
-                    eventButtonContainer.getChildren().add(0, deleteEvent);
+                Button deleteEvent = new Button("Delete Event");
+                deleteEvent.setId("btnDeleteEvent");
+                deleteEvent.setGraphic(new ImageView(new Image("symbols/icon_trash-can.png")));
+                deleteEvent.setPrefSize(200, 60);
+                eventButtonContainer.getChildren().add(0, deleteEvent);
 
-                    handleDeleteBtn(deleteEvent, event);
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+                handleDeleteBtn(deleteEvent, event);
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void handleDeleteBtn(Button deleteEvent, Event event) {
@@ -92,38 +86,38 @@ public class EventInfoInMainView extends BaseController implements Initializable
     }
 
     private void showSymbolsForEventInSidebar() {
-            ivEventDate.setImage(new Image("symbols/callender.png"));
-            ivEventPrice.setImage(new Image("symbols/price.png"));
-            ivEventSelected.setImage(new Image("symbols/location.png"));
-            ivEventTickets.setImage(new Image("symbols/ticket.png"));
-        }
+        ivEventDate.setImage(new Image("symbols/callender.png"));
+        ivEventPrice.setImage(new Image("symbols/price.png"));
+        ivEventSelected.setImage(new Image("symbols/location.png"));
+        ivEventTickets.setImage(new Image("symbols/ticket.png"));
+    }
 
-        private void setEventInfoBtnsVisible() {
-            btnEditEvent.setVisible(true);
-            btnViewInfo.setVisible(true);
-            btnSellTicket.setVisible(true);
-            eventButtonContainer.setVisible(true);
-        }
+    private void setEventInfoBtnsVisible() {
+        btnEditEvent.setVisible(true);
+        btnViewInfo.setVisible(true);
+        btnSellTicket.setVisible(true);
+        eventButtonContainer.setVisible(true);
+    }
 
-        public void handleViewInfo(ActionEvent actionEvent) {
-            FXMLLoader loader = openStage("/GUI/view/eventViews/EventView.fxml", "");
-            EventController controller = loader.getController();
-            controller.setContent(event);
-        }
+    public void handleViewInfo(ActionEvent actionEvent) {
+        FXMLLoader loader = openStage("/GUI/view/eventViews/EventView.fxml", "");
+        EventController controller = loader.getController();
+        controller.setContent(event);
+    }
 
-        public void handleEditEvent(ActionEvent actionEvent) {
-            FXMLLoader loader= openStage("/GUI/view/eventViews/UpdateEventView.fxml", "update Event");
-            UpdateEventController updateEventController = loader.getController();
-            updateEventController.setContent(event);
-        }
+    public void handleEditEvent(ActionEvent actionEvent) {
+        FXMLLoader loader= openStage("/GUI/view/eventViews/UpdateEventView.fxml", "update Event");
+        UpdateEventController updateEventController = loader.getController();
+        updateEventController.setContent(event);
+    }
 
-        public void handleSellTicket(ActionEvent actionEvent) {
-                FXMLLoader loader = openStage(ViewPaths.CREATE_TICKET_VIEW, "Sell Ticket");
-                CreateTicketController controller = loader.getController();
-                controller.setContent(event);
-        }
+    public void handleSellTicket(ActionEvent actionEvent) {
+        FXMLLoader loader = openStage(ViewPaths.CREATE_TICKET_VIEW, "Sell Ticket");
+        CreateTicketController controller = loader.getController();
+        controller.setContent(event);
+    }
 
-        private boolean isSelectedItemInTableView(TableView<?> tableView) {
-            return tableView.getSelectionModel().getSelectedItem() != null;
-        }
-                }
+    private boolean isSelectedItemInTableView(TableView<?> tableView) {
+        return tableView.getSelectionModel().getSelectedItem() != null;
+    }
+}

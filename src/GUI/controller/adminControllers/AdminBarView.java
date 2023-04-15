@@ -2,10 +2,21 @@ package GUI.controller.adminControllers;
 
 import GUI.controller.BaseController;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-public class AdminBarView extends BaseController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AdminBarView extends BaseController implements Initializable {
+    @FXML
+    private Button btnCreateUser, btnSeeEvents, btnSeeUsers;
+
     public void handleCreateUser(ActionEvent actionEvent) {
         openStage("/GUI/view/adminView/CreateSystemUserView.fxml", "");
     }
@@ -26,7 +37,16 @@ public class AdminBarView extends BaseController {
         } catch (Exception e) {
             displayError(e);
         }
+    }
 
-
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Image iconEvents = new Image("symbols/listView.png");
+        ImageView ivBtnSeeEvents = new ImageView(iconEvents);
+        ivBtnSeeEvents.setFitHeight(42);
+        ivBtnSeeEvents.setFitWidth(42);
+        btnSeeEvents.setGraphic(ivBtnSeeEvents);
+        btnCreateUser.setGraphic(new ImageView(new Image("symbols/icon_plus.png")));
+        btnSeeUsers.setGraphic(new ImageView(new Image("symbols/icon_users.png")));
     }
 }

@@ -76,7 +76,7 @@
             <children>
                 <Button fx:id="btnSellTicket" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSellTicket" prefHeight="60.0" prefWidth="200.0" text="Sell ticket">
                     <font>
-                        <Font name="Berlin Sans FB" size="36.0" />
+                        <Font name="Berlin Sans FB" size="20.0" />
                     </font>
                 </Button>
                 <HBox alignment="CENTER" prefHeight="65.0" prefWidth="394.0" spacing="40.0">

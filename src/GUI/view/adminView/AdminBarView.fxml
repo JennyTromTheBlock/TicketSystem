@@ -7,17 +7,17 @@
 <HBox spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.adminControllers.AdminBarView">
     <Button fx:id="btnCreateUser" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleCreateUser" prefHeight="60.0" prefWidth="200.0" text="Create User">
         <font>
-            <Font name="Berlin Sans FB" size="24.0" />
+            <Font name="Berlin Sans FB" size="20.0" />
         </font>
     </Button>
     <Button fx:id="btnSeeEvents" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSeeEvents" prefHeight="60.0" prefWidth="200.0" text="View Events">
         <font>
-            <Font name="Berlin Sans FB" size="24.0" />
+            <Font name="Berlin Sans FB" size="20.0" />
         </font>
     </Button>
     <Button fx:id="btnSeeUsers" layoutX="311.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSeeUsers" prefHeight="60.0" prefWidth="200.0" text="View Users">
         <font>
-            <Font name="Berlin Sans FB" size="24.0" />
+            <Font name="Berlin Sans FB" size="20.0" />
         </font>
     </Button>
 </HBox>

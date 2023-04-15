@@ -153,25 +153,44 @@
 */
 
 
-#btnCreateEvent, #btnSpecialTicket, #btnSellTicket, #btnSettings, #btnCreateUser, #btnSeeEvents, #btnSeeUsers, #btnDeleteUser {
+#btnCreateEvent, #btnSpecialTicket, #btnSellTicket, #btnSettings, #btnCreateUser, #btnSeeEvents, #btnSeeUsers {
     -fx-border-radius: 50;
     -fx-background-radius: 50;
     -fx-background-color: rgba(0, 158, 227);
     -fx-effect: innershadow(three-pass-box, rgb(0, 64, 94), 10, 0, 0, 0);
 }
 
-#btnCreateEvent:hover, #btnSpecialTicket:hover, #btnSellTicket:hover, #btnSettings:hover, #btnCreateUser:hover, #btnSeeEvents:hover, #btnSeeUsers:hover, #btnDeleteUser:hover {
+#btnCreateEvent:hover, #btnSpecialTicket:hover, #btnSellTicket:hover, #btnSettings:hover, #btnCreateUser:hover, #btnSeeEvents:hover, #btnSeeUsers:hover {
     -fx-border-radius: 50;
     -fx-background-radius: 50;
     -fx-background-color: rgba(0, 158, 227);
     -fx-effect: innershadow(three-pass-box, rgb(0, 64, 94), 10, 0.7, 0, 0);
 }
 
-#btnCreateEvent:pressed, #btnSpecialTicket:pressed, #btnSellTicket:pressed, #btnSettings:pressed, #btnCreateUser:pressed, #btnSeeEvents:pressed, #btnSeeUsers:pressed, #btnDeleteUser:pressed {
+#btnCreateEvent:pressed, #btnSpecialTicket:pressed, #btnSellTicket:pressed, #btnSettings:pressed, #btnCreateUser:pressed, #btnSeeEvents:pressed, #btnSeeUsers:pressed {
     -fx-border-radius: 50;
     -fx-background-radius: 50;
     -fx-background-color: rgba(0, 158, 227);
     -fx-effect: innershadow(three-pass-box, rgb(0, 64, 94), 10, 0.7, 0, 0);
+    -fx-translate-y: 2px;
+}
+
+#btnDeleteUser, #btnDeleteEvent {
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+    -fx-background-color: -fx-color-red;
+}
+#btnDeleteUser:hover, #btnDeleteEvent:hover {
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+    -fx-background-color: -fx-color-red;
+    -fx-effect: innershadow(three-pass-box, rgb(204, 44, 44), 10, 0.7, 0, 0);
+}
+#btnDeleteUser:pressed, #btnDeleteEvent:pressed {
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+    -fx-background-color: -fx-color-red;
+    -fx-effect: innershadow(three-pass-box, rgb(204, 44, 44), 10, 0.7, 0, 0);
     -fx-translate-y: 2px;
 }
 
