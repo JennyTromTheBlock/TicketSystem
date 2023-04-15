@@ -253,6 +253,7 @@ public class EventController extends BaseController implements Initializable {
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }
+                            handleAddUsersBtn();
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e);

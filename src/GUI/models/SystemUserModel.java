@@ -47,7 +47,8 @@ public class SystemUserModel {
         return systemUserManager.getAllSystemUsers();
     }
 
-    public ObservableList<SystemUser> getAllUsers() {
+    public ObservableList<SystemUser> getAllUsers() throws Exception {
+        retrieveAllUsers();
         return allSystemUsers;
     }
 
