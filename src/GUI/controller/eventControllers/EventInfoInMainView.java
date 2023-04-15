@@ -24,7 +24,7 @@ public class EventInfoInMainView extends BaseController {
     @FXML
     private Label lblTitle, lblDate, lblLocation, lblPrice, lblTicketsLeft;
     @FXML
-    private ImageView ivEventDate, ivEventSelected, ivEventPrice, ivEventTickets ;
+    private ImageView ivEventDate, ivEventSelected, ivEventPrice, ivEventTickets, ivBtnSellTicket;
     @FXML
     private VBox eventButtonContainer;
     @FXML
@@ -90,6 +90,7 @@ public class EventInfoInMainView extends BaseController {
         ivEventPrice.setImage(new Image("symbols/price.png"));
         ivEventSelected.setImage(new Image("symbols/location.png"));
         ivEventTickets.setImage(new Image("symbols/ticket.png"));
+        ivBtnSellTicket.setImage(new Image(("symbols/icon_add-ticket.png")));
     }
 
     private void setEventInfoBtnsVisible() {

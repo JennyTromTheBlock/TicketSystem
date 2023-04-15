@@ -78,6 +78,9 @@
                     <font>
                         <Font name="Berlin Sans FB" size="20.0" />
                     </font>
+               <graphic>
+                  <ImageView fx:id="ivBtnSellTicket" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
                 </Button>
                 <HBox alignment="CENTER" prefHeight="65.0" prefWidth="394.0" spacing="40.0">
                     <VBox.margin>
