@@ -198,7 +198,6 @@
     -fx-border-radius: 50;
     -fx-background-radius: 50;
     -fx-background-color: rgba(251, 187, 44);
-    -fx-effect: innershadow(three-pass-box, rgb(138, 91, 36), 10, 0, 0, 0);
 }
 
 .button:hover {
