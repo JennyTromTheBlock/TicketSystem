@@ -5,6 +5,7 @@ import BE.Role;
 import GUI.controller.BaseController;
 import GUI.controller.CreateTicketController;
 import GUI.util.ConfirmDelete;
+import GUI.util.SymbolPaths;
 import GUI.util.ViewPaths;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,7 +56,7 @@ public class EventInfoInMainView extends BaseController {
                 eventButtonContainer.getChildren().remove(0);
 
                 Button deleteEvent = new Button("Delete Event");
-                Image imgDeleteEvent = new Image("symbols/icon_trash-can.png");
+                Image imgDeleteEvent = new Image(SymbolPaths.DELETE);
                 ImageView ivBtnDeleteEvent = new ImageView(imgDeleteEvent);
                 ivBtnDeleteEvent.setFitHeight(30);
                 ivBtnDeleteEvent.setFitWidth(30);
@@ -91,13 +92,13 @@ public class EventInfoInMainView extends BaseController {
     }
 
     private void showSymbolsForEventInSidebar() {
-        ivEventDate.setImage(new Image("symbols/callender.png"));
-        ivEventPrice.setImage(new Image("symbols/price.png"));
-        ivEventSelected.setImage(new Image("symbols/location.png"));
-        ivEventTickets.setImage(new Image("symbols/ticket.png"));
-        ivBtnSellTicket.setImage(new Image(("symbols/icon_add-ticket.png")));
-        ivBtnViewInfo.setImage(new Image("symbols/info.png"));
-        ivBtnEditEvent.setImage(new Image("symbols/icon_edit.png"));
+        ivEventDate.setImage(new Image(SymbolPaths.CALENDAR));
+        ivEventPrice.setImage(new Image(SymbolPaths.PRICE));
+        ivEventSelected.setImage(new Image(SymbolPaths.LOCATION));
+        ivEventTickets.setImage(new Image(SymbolPaths.TICKET));
+        ivBtnSellTicket.setImage(new Image(SymbolPaths.ADD_TICKET));
+        ivBtnViewInfo.setImage(new Image(SymbolPaths.INFO));
+        ivBtnEditEvent.setImage(new Image(SymbolPaths.EDIT));
     }
 
     private void setEventInfoBtnsVisible() {

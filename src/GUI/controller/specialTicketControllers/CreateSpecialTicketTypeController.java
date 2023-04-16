@@ -2,6 +2,7 @@ package GUI.controller.specialTicketControllers;
 
 import BE.SpecialTicketType;
 import GUI.controller.BaseController;
+import GUI.util.SymbolPaths;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,7 +28,7 @@ public class CreateSpecialTicketTypeController extends BaseController implements
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ivBtnAdd.setImage(new Image("symbols/icon_plus.png"));
+        ivBtnAdd.setImage(new Image(SymbolPaths.PLUS));
         disableAdd();
 
         setInputChangeValidListener();

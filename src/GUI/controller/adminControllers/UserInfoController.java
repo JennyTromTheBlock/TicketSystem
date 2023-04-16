@@ -3,6 +3,7 @@ package GUI.controller.adminControllers;
 import BE.Event;
 import BE.SystemUser;
 import GUI.controller.BaseController;
+import GUI.util.SymbolPaths;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -47,7 +48,7 @@ public class UserInfoController extends BaseController implements Initializable 
     public void setUser(SystemUser user){
         lblName.setText(user.getFirstName() + " " + user.getLastName());
         lblEmail.setText(user.getEmail());
-        imgBtnDeleteUser.setImage(new Image("symbols/icon_trash-can.png"));
+        imgBtnDeleteUser.setImage(new Image(SymbolPaths.DELETE));
         setBtnDeleteUserVisible(true);
         selectedUser = user;
 

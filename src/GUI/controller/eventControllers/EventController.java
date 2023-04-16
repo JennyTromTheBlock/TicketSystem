@@ -57,8 +57,8 @@ public class EventController extends BaseController implements Initializable {
         ivLocation.setImage(new Image(SymbolPaths.LOCATION));
         ivPrice.setImage(new Image(SymbolPaths.PRICE));
         ivTicket.setImage(new Image(SymbolPaths.TICKET));
-        ivBtnEdit.setImage(new Image("symbols/icon_edit.png"));
-        ivBtnTemplate.setImage(new Image("symbols/icon_template.png"));
+        ivBtnEdit.setImage(new Image(SymbolPaths.EDIT));
+        ivBtnTemplate.setImage(new Image(SymbolPaths.TEMPLATE));
     }
 
     public void setContent(Event event) {

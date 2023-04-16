@@ -3,6 +3,7 @@ package GUI.controller;
 import BE.Event;
 import GUI.controller.eventControllers.EventController;
 import GUI.controller.eventControllers.EventListController;
+import GUI.util.SymbolPaths;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -57,19 +58,19 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     private void loadImages() {
-        ivSearchBtn.setImage(new Image("symbols/searchSymbol.png"));
-        ivCalendar.setImage(new Image("symbols/callender.png"));
-        ivList.setImage(new Image("symbols/listView.png"));
-        ivLogo.setImage(new Image("symbols/EASYDVEST.png"));
+        ivSearchBtn.setImage(new Image(SymbolPaths.SEARCH));
+        ivCalendar.setImage(new Image(SymbolPaths.CALENDAR));
+        ivList.setImage(new Image(SymbolPaths.LIST));
+        ivLogo.setImage(new Image(SymbolPaths.EASYDVEST_LOGO));
         try {
             lblLoggedInUser.setText(getModelsHandler().getSystemUserModel().getLoggedInSystemUser().getValue().getEmail());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        ivBtnCreateEvent.setImage(new Image("symbols/icon_plus.png"));
-        ivBtnSpecialTicket.setImage(new Image("symbols/icon_special-ticket.png"));
-        ivBtnFilter.setImage(new Image("symbols/icon_filter.png"));
-        ivBtnSettings.setImage(new Image("symbols/icon_logout.png"));
+        ivBtnCreateEvent.setImage(new Image(SymbolPaths.PLUS));
+        ivBtnSpecialTicket.setImage(new Image(SymbolPaths.SPECIAL_TICKET));
+        ivBtnFilter.setImage(new Image(SymbolPaths.FILTER));
+        ivBtnSettings.setImage(new Image(SymbolPaths.LOGOUT));
     }
 
     public void handleCreateEvent() {

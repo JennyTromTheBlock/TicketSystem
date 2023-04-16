@@ -1,6 +1,7 @@
 package GUI.controller.adminControllers;
 
 import GUI.controller.BaseController;
+import GUI.util.SymbolPaths;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,8 +44,8 @@ public class AdminBarView extends BaseController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ivBtnCreateUser.setImage(new Image("symbols/icon_plus.png"));
-        ivBtnSeeEvents.setImage(new Image("symbols/listView.png"));
-        ivBtnSeeUsers.setImage(new Image("symbols/icon_users.png"));
+        ivBtnCreateUser.setImage(new Image(SymbolPaths.PLUS));
+        ivBtnSeeEvents.setImage(new Image(SymbolPaths.LIST));
+        ivBtnSeeUsers.setImage(new Image(SymbolPaths.USER));
     }
 }
