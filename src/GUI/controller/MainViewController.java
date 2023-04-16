@@ -254,7 +254,7 @@ public class MainViewController extends BaseController implements Initializable 
     }
 
     public void handleLogOut(ActionEvent actionEvent) {
-        Stage s = (Stage) btnCreateEvent.getScene().getWindow();
+        Stage s = (Stage) ivLogo.getScene().getWindow();
         s.close();
     }
 }

@@ -34,7 +34,7 @@
          <children>
             <Button fx:id="btnDeleteUser" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDeleteUser" prefHeight="60.0" prefWidth="200.0" text="Delete User" visible="false">
                <graphic>
-                  <ImageView fx:id="imgBtnDeleteUser" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imgBtnDeleteUser" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                </graphic></Button>
          </children>
       </HBox>
