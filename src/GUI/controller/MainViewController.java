@@ -68,7 +68,7 @@ public class MainViewController extends BaseController implements Initializable 
             throw new RuntimeException(e);
         }
         ivBtnCreateEvent.setImage(new Image(SymbolPaths.PLUS));
-        ivBtnSpecialTicket.setImage(new Image(SymbolPaths.SPECIAL_TICKET));
+        ivBtnSpecialTicket.setImage(new Image(SymbolPaths.ADD_TICKET));
         ivBtnFilter.setImage(new Image(SymbolPaths.FILTER));
         ivBtnSettings.setImage(new Image(SymbolPaths.LOGOUT));
     }
