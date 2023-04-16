@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -20,9 +22,12 @@ public class CreateSpecialTicketTypeController extends BaseController implements
     private TextField txtfPrice;
     @FXML
     private Button btnAdd;
+    @FXML
+    private ImageView ivBtnAdd;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ivBtnAdd.setImage(new Image("symbols/icon_plus.png"));
         disableAdd();
 
         setInputChangeValidListener();
