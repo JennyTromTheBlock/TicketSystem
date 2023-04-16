@@ -153,21 +153,21 @@
 */
 
 
-#btnCreateEvent, #btnSpecialTicket, #btnSellTicket, #btnSettings, #btnCreateUser, #btnSeeEvents, #btnSeeUsers {
+#btnCreateEvent, #btnSpecialTicket, #btnSellTicket, #btnSettings, #btnCreateUser, #btnSeeEvents, #btnSeeUsers, #mbFilter {
     -fx-border-radius: 50;
     -fx-background-radius: 50;
     -fx-background-color: rgba(0, 158, 227);
     -fx-effect: innershadow(three-pass-box, rgb(0, 64, 94), 10, 0, 0, 0);
 }
 
-#btnCreateEvent:hover, #btnSpecialTicket:hover, #btnSellTicket:hover, #btnSettings:hover, #btnCreateUser:hover, #btnSeeEvents:hover, #btnSeeUsers:hover {
+#btnCreateEvent:hover, #btnSpecialTicket:hover, #btnSellTicket:hover, #btnSettings:hover, #btnCreateUser:hover, #btnSeeEvents:hover, #btnSeeUsers:hover, #mbFilter:hover {
     -fx-border-radius: 50;
     -fx-background-radius: 50;
     -fx-background-color: rgba(0, 158, 227);
     -fx-effect: innershadow(three-pass-box, rgb(0, 64, 94), 10, 0.7, 0, 0);
 }
 
-#btnCreateEvent:pressed, #btnSpecialTicket:pressed, #btnSellTicket:pressed, #btnSettings:pressed, #btnCreateUser:pressed, #btnSeeEvents:pressed, #btnSeeUsers:pressed {
+#btnCreateEvent:pressed, #btnSpecialTicket:pressed, #btnSellTicket:pressed, #btnSettings:pressed, #btnCreateUser:pressed, #btnSeeEvents:pressed, #btnSeeUsers:pressed, #mbFilter:pressed {
     -fx-border-radius: 50;
     -fx-background-radius: 50;
     -fx-background-color: rgba(0, 158, 227);
@@ -213,6 +213,14 @@
     -fx-background-color: rgba(251, 187, 44);
     -fx-effect: innershadow(three-pass-box, rgb(138, 91, 36), 10, 0.7, 0, 0);
     -fx-translate-y: 2px;
+}
+
+.menu-button > .arrow-button {
+    -fx-padding: 0;
+}
+
+.menu-button > .arrow-button > .arrow {
+    -fx-padding: 0;
 }
 
 /*

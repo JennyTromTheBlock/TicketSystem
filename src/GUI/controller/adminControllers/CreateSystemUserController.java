@@ -4,18 +4,26 @@ import BE.SystemUser;
 import GUI.controller.BaseController;
 import GUI.models.ModelsHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CreateSystemUserController extends BaseController {
+public class CreateSystemUserController extends BaseController implements Initializable {
     @FXML
     private TextField txtfFirstName, txtfLastName, txtfEmail;
     @FXML
     private Label lblFirstNameValidation, lblLastNameValidation, lblEmailValidation, lblPasswordValidation;
+    @FXML
+    private ImageView ivBtnCreateUser;
     public PasswordField pwfPassword;
 
     public void handleCreateUser() {
@@ -95,5 +103,10 @@ public class CreateSystemUserController extends BaseController {
     public void handleCancel() {
         Stage stage = (Stage) txtfFirstName.getScene().getWindow();
         stage.close();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        ivBtnCreateUser.setImage(new Image("symbols/icon_plus.png"));
     }
 }

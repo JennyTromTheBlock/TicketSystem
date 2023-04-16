@@ -27,12 +27,15 @@
                </HBox.margin>
             </ImageView>
             <Separator maxHeight="-Infinity" orientation="VERTICAL" prefHeight="36.0" />
-            <MenuButton fx:id="mbFilter" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="139.0" text="Filter">
+            <MenuButton fx:id="mbFilter" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0">
                <items>
                   <CheckMenuItem fx:id="cmiUpcoming" mnemonicParsing="false" text="Show upcoming events only" />
                   <CheckMenuItem fx:id="cmiHistoric" mnemonicParsing="false" text="Show historic events only" />
                   <CheckMenuItem fx:id="cmiMyEvents" mnemonicParsing="false" text="Show my events only" />
-               </items></MenuButton>
+               </items>
+               <graphic>
+                  <ImageView fx:id="ivBtnFilter" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic></MenuButton>
             <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="50.0" spacing="15.0">
                <children>
                   <ImageView fx:id="ivCalendar" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#calendarViewBtn" pickOnBounds="true" preserveRatio="true" />
@@ -55,10 +58,13 @@
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin></Label>
-                  <MenuButton fx:id="btnSettings" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="⚙" wrapText="true">
+                  <MenuButton fx:id="btnSettings" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" wrapText="true">
                      <items>
                         <MenuItem mnemonicParsing="false" text="Log out" />
-                     </items></MenuButton>
+                     </items>
+                     <graphic>
+                        <ImageView fx:id="ivBtnSettings" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic></MenuButton>
                </children>
                <HBox.margin>
                   <Insets left="20.0" right="20.0" />
@@ -86,7 +92,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                      <graphic>
-                        <ImageView fx:id="ivBtnCreateEvent" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="ivBtnCreateEvent" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
                   <Button fx:id="btnSpecialTicket" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSpecialTicket" prefHeight="60.0" prefWidth="200.0" text="Special ticket">
@@ -94,7 +100,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                      <graphic>
-                        <ImageView fx:id="ivBtnSpecialTicket" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="ivBtnSpecialTicket" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
                </children>

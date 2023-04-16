@@ -16,6 +16,8 @@ import java.util.ResourceBundle;
 public class AdminBarView extends BaseController implements Initializable {
     @FXML
     private Button btnCreateUser, btnSeeEvents, btnSeeUsers;
+    @FXML
+    private ImageView ivBtnCreateUser, ivBtnSeeEvents, ivBtnSeeUsers;
 
     public void handleCreateUser(ActionEvent actionEvent) {
         openStage("/GUI/view/adminView/CreateSystemUserView.fxml", "");
@@ -41,12 +43,8 @@ public class AdminBarView extends BaseController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Image iconEvents = new Image("symbols/listView.png");
-        ImageView ivBtnSeeEvents = new ImageView(iconEvents);
-        ivBtnSeeEvents.setFitHeight(42);
-        ivBtnSeeEvents.setFitWidth(42);
-        btnSeeEvents.setGraphic(ivBtnSeeEvents);
-        btnCreateUser.setGraphic(new ImageView(new Image("symbols/icon_plus.png")));
-        btnSeeUsers.setGraphic(new ImageView(new Image("symbols/icon_users.png")));
+        ivBtnCreateUser.setImage(new Image("symbols/icon_plus.png"));
+        ivBtnSeeEvents.setImage(new Image("symbols/listView.png"));
+        ivBtnSeeUsers.setImage(new Image("symbols/icon_users.png"));
     }
 }

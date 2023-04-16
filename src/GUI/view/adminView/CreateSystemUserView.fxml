@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -79,6 +80,9 @@
                      <HBox.margin>
                         <Insets left="70.0" right="50.0" />
                      </HBox.margin>
+                     <graphic>
+                        <ImageView fx:id="ivBtnCreateUser" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
                   </Button>
                   <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel">
                      <HBox.margin>

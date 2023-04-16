@@ -24,7 +24,7 @@ public class EventInfoInMainView extends BaseController {
     @FXML
     private Label lblTitle, lblDate, lblLocation, lblPrice, lblTicketsLeft;
     @FXML
-    private ImageView ivEventDate, ivEventSelected, ivEventPrice, ivEventTickets, ivBtnSellTicket;
+    private ImageView ivEventDate, ivEventSelected, ivEventPrice, ivEventTickets, ivBtnSellTicket, ivBtnViewInfo, ivBtnEditEvent;
     @FXML
     private VBox eventButtonContainer;
     @FXML
@@ -55,8 +55,13 @@ public class EventInfoInMainView extends BaseController {
                 eventButtonContainer.getChildren().remove(0);
 
                 Button deleteEvent = new Button("Delete Event");
+                Image imgDeleteEvent = new Image("symbols/icon_trash-can.png");
+                ImageView ivBtnDeleteEvent = new ImageView(imgDeleteEvent);
+                ivBtnDeleteEvent.setFitHeight(30);
+                ivBtnDeleteEvent.setFitWidth(30);
+
                 deleteEvent.setId("btnDeleteEvent");
-                deleteEvent.setGraphic(new ImageView(new Image("symbols/icon_trash-can.png")));
+                deleteEvent.setGraphic(ivBtnDeleteEvent);
                 deleteEvent.setPrefSize(200, 60);
                 eventButtonContainer.getChildren().add(0, deleteEvent);
 
@@ -91,6 +96,8 @@ public class EventInfoInMainView extends BaseController {
         ivEventSelected.setImage(new Image("symbols/location.png"));
         ivEventTickets.setImage(new Image("symbols/ticket.png"));
         ivBtnSellTicket.setImage(new Image(("symbols/icon_add-ticket.png")));
+        ivBtnViewInfo.setImage(new Image("symbols/info.png"));
+        ivBtnEditEvent.setImage(new Image("symbols/icon_edit.png"));
     }
 
     private void setEventInfoBtnsVisible() {

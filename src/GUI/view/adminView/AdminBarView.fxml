@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
@@ -9,15 +10,24 @@
         <font>
             <Font name="Berlin Sans FB" size="20.0" />
         </font>
+      <graphic>
+         <ImageView fx:id="ivBtnCreateUser" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+      </graphic>
     </Button>
     <Button fx:id="btnSeeEvents" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSeeEvents" prefHeight="60.0" prefWidth="200.0" text="View Events">
         <font>
             <Font name="Berlin Sans FB" size="20.0" />
         </font>
+      <graphic>
+         <ImageView fx:id="ivBtnSeeEvents" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+      </graphic>
     </Button>
     <Button fx:id="btnSeeUsers" layoutX="311.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSeeUsers" prefHeight="60.0" prefWidth="200.0" text="View Users">
         <font>
             <Font name="Berlin Sans FB" size="20.0" />
         </font>
+      <graphic>
+         <ImageView fx:id="ivBtnSeeUsers" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+      </graphic>
     </Button>
 </HBox>

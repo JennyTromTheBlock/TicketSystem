@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="infoView" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.eventControllers.EventController">
+<AnchorPane fx:id="infoView" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.eventControllers.EventController">
    <children>
       <ScrollPane fx:id="background" layoutX="0.800000011920929" layoutY="0.800000011920929" prefHeight="664.0" prefWidth="657.0" vbarPolicy="ALWAYS">
          <content>
@@ -51,7 +60,7 @@
                         </Label>
                         <HBox>
                            <children>
-                              <Label fx:id="lblEventLocation" prefHeight="50.0" prefWidth="161.0" text="Location">
+                              <Label fx:id="lblEventLocation" prefHeight="50.0" prefWidth="577.0" text="Location">
                                  <graphic>
                                     <ImageView fx:id="ivLocation" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                                  </graphic>
@@ -78,7 +87,10 @@
                                  </HBox.margin>
                               </Label>
                               <Pane prefHeight="50.0" prefWidth="251.0" />
-                              <Button mnemonicParsing="false" onAction="#handleUseAsTemplate" text="Use As Template" />
+                              <Button mnemonicParsing="false" onAction="#handleUseAsTemplate" text="Use As Template">
+                                 <graphic>
+                                    <ImageView fx:id="ivBtnTemplate" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                 </graphic></Button>
                            </children>
                         </HBox>
                         <Accordion VBox.vgrow="ALWAYS">
@@ -98,6 +110,11 @@
                                                    <VBox.margin>
                                                       <Insets left="20.0" />
                                                    </VBox.margin></Button>
+                                                <Label text="Double click on an option below to add more...">
+                                                   <VBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </VBox.margin>
+                                                </Label>
                                                 <ListView fx:id="listviewAllUsers" prefHeight="0.0" prefWidth="400.0" />
                                                 <Button fx:id="btnDoneAssigningUsers" mnemonicParsing="false" onAction="#handleDoneAssigningUsers" text="Done" visible="false" />
                                              </children>
@@ -132,7 +149,7 @@
                                           <Label layoutX="22.0" layoutY="5.0" prefHeight="18.0" prefWidth="113.0" text="Selected options " />
                                           <ListView fx:id="listviewAllSpecialTickets" layoutX="12.0" layoutY="194.0" prefHeight="200.0" prefWidth="629.0" />
                                           <ListView fx:id="listviewSelectedSpecialTickets" layoutX="10.0" layoutY="29.0" prefHeight="127.0" prefWidth="632.0" />
-                                          <Label layoutX="22.0" layoutY="167.0" prefHeight="18.0" prefWidth="273.0" text="Want To Add More  Click on options below" />
+                                          <Label layoutX="22.0" layoutY="167.0" prefHeight="18.0" prefWidth="273.0" text="Double click on an option below to add more..." />
                                        </children></AnchorPane>
                                  </content>
                               </TitledPane>
@@ -140,12 +157,15 @@
                         </Accordion>
                         <HBox alignment="CENTER" prefHeight="69.0" prefWidth="431.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#handleEditEvent" text="Edit">
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEditEvent" prefHeight="30.0" prefWidth="65.0" text="Edit">
                                  <HBox.margin>
                                     <Insets left="70.0" right="50.0" />
                                  </HBox.margin>
+                                 <graphic>
+                                    <ImageView fx:id="ivBtnEdit" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                 </graphic>
                               </Button>
-                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClose" text="Close">
+                              <Button layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleClose" prefHeight="30.0" prefWidth="65.0" text="Close">
                                  <HBox.margin>
                                     <Insets left="100.0" right="50.0" />
                                  </HBox.margin>

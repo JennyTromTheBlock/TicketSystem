@@ -79,7 +79,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                     </font>
                <graphic>
-                  <ImageView fx:id="ivBtnSellTicket" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="ivBtnSellTicket" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
                 </Button>
                 <HBox alignment="CENTER" prefHeight="65.0" prefWidth="394.0" spacing="40.0">
@@ -87,8 +87,14 @@
                         <Insets bottom="15.0" />
                     </VBox.margin>
                     <children>
-                        <Button fx:id="btnViewInfo" mnemonicParsing="false" onAction="#handleViewInfo" text="View Info" />
-                        <Button fx:id="btnEditEvent" mnemonicParsing="false" onAction="#handleEditEvent" text="Edit Event" />
+                        <Button fx:id="btnViewInfo" mnemonicParsing="false" onAction="#handleViewInfo" text="View Info">
+                     <graphic>
+                        <ImageView fx:id="ivBtnViewInfo" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic></Button>
+                        <Button fx:id="btnEditEvent" mnemonicParsing="false" onAction="#handleEditEvent" text="Edit Event">
+                     <graphic>
+                        <ImageView fx:id="ivBtnEditEvent" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic></Button>
                     </children>
                 </HBox>
             </children>

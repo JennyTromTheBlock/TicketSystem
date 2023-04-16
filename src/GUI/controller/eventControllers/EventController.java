@@ -44,7 +44,7 @@ public class EventController extends BaseController implements Initializable {
     @FXML
     private Label lblEventName, lblEventDate, lblEventLocation, lblDescription, lblEventPrice, lblEventAttending, lblEventTickets;
     @FXML
-    private ImageView ivDate, ivLocation, ivPrice, ivTicket;
+    private ImageView ivDate, ivLocation, ivPrice, ivTicket, ivBtnTemplate, ivBtnEdit;
     private Event event;
 
     @Override
@@ -57,6 +57,8 @@ public class EventController extends BaseController implements Initializable {
         ivLocation.setImage(new Image(SymbolPaths.LOCATION));
         ivPrice.setImage(new Image(SymbolPaths.PRICE));
         ivTicket.setImage(new Image(SymbolPaths.TICKET));
+        ivBtnEdit.setImage(new Image("symbols/icon_edit.png"));
+        ivBtnTemplate.setImage(new Image("symbols/icon_template.png"));
     }
 
     public void setContent(Event event) {
@@ -66,7 +68,7 @@ public class EventController extends BaseController implements Initializable {
         lblEventDate.setText(String.valueOf(event.getDate()));
         lblEventLocation.setText(event.getLocation());
         lblEventPrice.setText(event.getPrice() + " DKK");
-        lblEventTickets.setText("? / " + event.getMaxParticipant());
+        lblEventTickets.setText(""+event.getMaxParticipant());
 
         getEventNotes();
         getUsersAssignedToEvent();
