@@ -51,6 +51,19 @@ public class Event {
         this.availableSpecialTicketTypes = new ArrayList<>();
     }
 
+    public SpecialTicketType getTypeFromName(String typeName) {
+
+        for (SpecialTicketType type : availableSpecialTicketTypes) {
+
+            if (type.getTypeName().equalsIgnoreCase(typeName)) {
+
+                return type;
+            }
+        }
+
+        return null;
+    }
+
     public List<SpecialTicketType> getAvailableSpecialTicketTypes() {
         return availableSpecialTicketTypes;
     }

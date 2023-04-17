@@ -1,16 +1,24 @@
 package GUI.controller;
 
+import BE.*;
 import BE.Event;
-import BE.SystemUser;
-import BE.Ticket;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 
 public class CreateTicketController extends BaseController {
@@ -24,6 +32,8 @@ public class CreateTicketController extends BaseController {
     private TextField txtfCustomerName, txtfCustomerEmail, txtfAmount;
     @FXML
     private Label lblTicketAmount, lblPriceTotal, lblPriceAmount, lblTicketEventName, lblTicketEventDate, lblTcketEventLocation, lblTicketPrice, lblCustomerNameValidation, lblCustomerEmailValidation, lblAmountValidation;
+    @FXML
+    private ListView<String> listviewSelectedSpecialTickets, listviewAvailableSpecialTickets;
 
     private Event selectedEvent;
 
@@ -31,12 +41,47 @@ public class CreateTicketController extends BaseController {
     public void handleCreateTicket() {
         if (areInputFieldsValid()) {
             try {
-                List<Ticket> newTickets = getModelsHandler().getTicketModel().createTicket(createTicketFromFields(), Integer.parseInt(txtfAmount.getText()));
 
-                //TODO Show view with the newly created ticket. There should be an option for printing or sending by Email.
+                Ticket ticket = createTicketFromFields();
+                List<SpecialTicket> selectedSpecialTickets = createSpecialTicketsFromField();
+                int amount = Integer.parseInt(txtfAmount.getText());
+
+                List<Ticket> newTickets = new ArrayList<>();
+
+                if (selectedSpecialTickets.isEmpty()) {
+
+                    newTickets = getModelsHandler().getTicketModel().createTicket(ticket, amount);
+                }
+                else {
+
+                    newTickets = getModelsHandler().getTicketModel().createTicket(ticket, amount, selectedSpecialTickets);
+                }
+
+                openPdfTickets(newTickets);
             }
             catch (Exception e) {
                 displayError(e);
+            }
+        }
+    }
+
+    private void openPdfTickets(List<Ticket> tickets) {
+        if (!Desktop.isDesktopSupported()) return;
+
+        for (Ticket ticket : tickets) {
+
+            try {
+
+                if (!ticket.getPdfTicketPath().isEmpty()) {
+
+                    File newTicketPdfFile = new File(ticket.getPdfTicketPath());
+
+                    Desktop.getDesktop().open(newTicketPdfFile);
+                }
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+                displayError(new Exception("Failed to open the newly created ticket", e));
             }
         }
     }
@@ -46,6 +91,25 @@ public class CreateTicketController extends BaseController {
         String customerEmail = txtfCustomerEmail.getText();
 
         return new Ticket(customerName, customerEmail, selectedEvent);
+    }
+
+    private List<SpecialTicket> createSpecialTicketsFromField() {
+
+        List<SpecialTicket> selectedSpecialTickets = new ArrayList<>();
+
+        listviewSelectedSpecialTickets.getItems().forEach(typeName -> {
+
+            SpecialTicketType specialTicketType = selectedEvent.getTypeFromName(typeName);
+
+            if (specialTicketType != null) {
+
+                SpecialTicket specialTicket = new SpecialTicket(specialTicketType, selectedEvent);
+
+                selectedSpecialTickets.add(specialTicket);
+            }
+        });
+
+        return selectedSpecialTickets;
     }
 
     private boolean areInputFieldsValid() {
@@ -92,7 +156,40 @@ public class CreateTicketController extends BaseController {
        selectedEvent = event;
 
        setEventInfoLabels();
+       initializeAvailableSpecialTicketTypes();
+    }
 
+    private void initializeAvailableSpecialTicketTypes() {
+        try {
+            List<String> availableTypes = getModelsHandler()
+                    .getEventModel()
+                    .getAvailableSpecialTicketTypesOnEvent(selectedEvent.getId())
+                    .stream()
+                    .map(SpecialTicketType::getTypeName)
+                    .toList();
+
+            listviewAvailableSpecialTickets.setItems(FXCollections.observableArrayList(availableTypes));
+
+            setAvailableSpecialTicketTypesListener();
+        }
+        catch (Exception e) {
+            displayError(e);
+        }
+    }
+
+    private void setAvailableSpecialTicketTypesListener() {
+        listviewAvailableSpecialTickets.setOnMouseClicked(event -> {
+
+            if (event.getClickCount() == 2) {
+
+                String typeName = listviewAvailableSpecialTickets.getSelectionModel().getSelectedItem();
+
+                if (typeName != null) {
+                    listviewAvailableSpecialTickets.getItems().remove(typeName);
+                    listviewSelectedSpecialTickets.getItems().add(typeName);
+                }
+            }
+        });
     }
 
     private void setEventInfoLabels() {

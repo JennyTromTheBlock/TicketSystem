@@ -8,6 +8,7 @@ public class Ticket {
     private String customerName;
     private String customerEmail;
     private Event event;
+    private String pdfTicketPath;
 
     public Event getEvent() {
         return event;
@@ -53,5 +54,13 @@ public class Ticket {
 
     public void setCustomerEmail(String customerEmail) {
         this.customerEmail = customerEmail;
+    }
+
+    public String getPdfTicketPath() {
+        return pdfTicketPath;
+    }
+
+    public void setPdfTicketPath(String pdfTicketPath) {
+        this.pdfTicketPath = pdfTicketPath;
     }
 }
