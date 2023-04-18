@@ -1,9 +1,6 @@
 package GUI.controller.eventControllers;
 
-import BE.Event;
-import BE.Note;
-import BE.SpecialTicketType;
-import BE.SystemUser;
+import BE.*;
 import GUI.controller.BaseController;
 import GUI.controller.MessageController;
 import GUI.util.SymbolPaths;
@@ -37,7 +34,7 @@ public class EventController extends BaseController implements Initializable {
     public Button btnDoneAssigningUsers;
     public VBox vBoxDialogPane;
     public ListView listviewAllSpecialTickets;
-    public ListView listviewSelectedSpecialTickets;
+    public ListView<String> listviewSelectedSpecialTickets;
 
     @FXML
     private TextArea textfMessageInput;
@@ -80,10 +77,14 @@ public class EventController extends BaseController implements Initializable {
 
         listviewSelectedSpecialTickets.setOnMouseClicked(event1 -> {
             if (event1.getClickCount() == 2) {
-                int selectedUserIndex = listviewSelectedSpecialTickets.getSelectionModel().getSelectedIndex();
+                int selectedSpecialTicketIndex = listviewSelectedSpecialTickets.getSelectionModel().getSelectedIndex();
+                String selectedSpecialTicketName = listviewSelectedSpecialTickets.getSelectionModel().getSelectedItem().toString();
                 //todo should remove special ticket from event
                 try {
-                    listviewSelectedSpecialTickets.getItems().remove(listviewSelectedSpecialTickets.getSelectionModel().getSelectedIndex());
+                    SpecialTicketOnEvent specialTicketOnEvent = new SpecialTicketOnEvent(event.getId(), selectedSpecialTicketName);
+                    getModelsHandler().getEventModel().removeSpecialTicketFromEvent(specialTicketOnEvent);
+                    listviewAllSpecialTickets.getItems().add(selectedSpecialTicketName);
+                    listviewSelectedSpecialTickets.getItems().remove(selectedSpecialTicketIndex);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -94,12 +95,15 @@ public class EventController extends BaseController implements Initializable {
 
     private void loadSelectedSpecialTickets() {
         try {
-            ObservableList<SpecialTicketType> specialTickets = getModelsHandler().getSpecialTicketModel().typesOnEvent(event);
-            for (SpecialTicketType tickets: specialTickets) {
-                listviewSelectedSpecialTickets.getItems().add(tickets.getTypeName());
+            List<SpecialTicketType> availableSpecialTicketTypes = getModelsHandler()
+                    .getEventModel()
+                    .getAvailableSpecialTicketTypesOnEvent(event.getId());
+
+            for (SpecialTicketType type : availableSpecialTicketTypes) {
+                listviewSelectedSpecialTickets.getItems().add(type.getTypeName());
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            displayError(e);
         }
         selectedSpecialTicketHandler();
     }
@@ -119,10 +123,16 @@ public class EventController extends BaseController implements Initializable {
     private void allSpecialTicketsHandler() {
         listviewAllSpecialTickets.setOnMouseClicked(event1 -> {
             if (event1.getClickCount() == 2) {
-                int selectedUserIndex = listviewAllSpecialTickets.getSelectionModel().getSelectedIndex();
+                int selectedSpecialTicketIndex = listviewAllSpecialTickets.getSelectionModel().getSelectedIndex();
+                String selectedSpecialTicketName = listviewAllSpecialTickets.getSelectionModel().getSelectedItem().toString();
+
                 try {
                     //todo should add special ticket to event in dao
-                    listviewAllSpecialTickets.getItems().remove(selectedUserIndex);
+                    SpecialTicketOnEvent specialTicketOnEvent = new SpecialTicketOnEvent(event.getId(), selectedSpecialTicketName);
+                    getModelsHandler().getEventModel().createSpecialTicketTypeOnEvent(specialTicketOnEvent);
+
+                    listviewSelectedSpecialTickets.getItems().add(selectedSpecialTicketName);
+                    listviewAllSpecialTickets.getItems().remove(selectedSpecialTicketIndex);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }

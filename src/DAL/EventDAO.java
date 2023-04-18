@@ -1,6 +1,8 @@
 package DAL;
 
 import BE.Event;
+import BE.SpecialTicketOnEvent;
+import BE.SpecialTicketType;
 import DAL.Connectors.AbstractConnector;
 import DAL.Connectors.SqlConnector;
 
@@ -103,6 +105,75 @@ public class EventDAO implements IEventDAO {
             throw new Exception("Failed to delete the event", e);
         }
         return deletedEvent;
+    }
+
+    @Override
+    public void createSpecialTicketTypeOnEvent(SpecialTicketOnEvent specialTicketOnEvent) throws Exception {
+        String sql = "INSERT INTO SpecialTicketTypesOnEvents (EventID, SpecialTicketType) VALUES (?, ?)";
+
+        try (Connection conn = connector.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql)) {
+
+            statement.setInt(1, specialTicketOnEvent.getEventID());
+            statement.setString(2, specialTicketOnEvent.getSpecialTicketType());
+
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Failed to add special ticket type to event");
+        }
+    }
+
+    @Override
+    public void removeSpecialTicketFromEvent(SpecialTicketOnEvent specialTicketOnEvent) throws Exception {
+        String sql = "DELETE FROM SpecialTicketTypesOnEvents WHERE SpecialTicketType =? AND EventID = ?;";
+
+        try (Connection conn = connector.getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setString(1, specialTicketOnEvent.getSpecialTicketType());
+            statement.setInt(2, specialTicketOnEvent.getEventID());
+
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Failed to remove special ticket type from event");
+        }
+    }
+
+    @Override
+    public List<SpecialTicketType> getAllSpecialTicketTypesOnEvent(int eventID) throws Exception {
+        List<SpecialTicketType> specialTicketTypesOnEvent = new ArrayList<>();
+
+        String sql = "SELECT SpecialTicketTypes.[Type], SpecialTicketTypes.Price " +
+                "FROM SpecialTicketTypes " +
+                "WHERE SpecialTicketTypes.[Type] IN " +
+                "(SELECT SpecialTicketTypesOnEvents.SpecialTicketType " +
+                "FROM SpecialTicketTypesOnEvents WHERE SpecialTicketTypesOnEvents.EventID = ?);";
+
+        try (Connection conn = connector.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql)) {
+
+            statement.setInt(1, eventID);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                String type = resultSet.getString("Type");
+                int price = resultSet.getInt("Price");
+
+                SpecialTicketType specialTicketType = new SpecialTicketType(type, price);
+
+                specialTicketTypesOnEvent.add(specialTicketType);
+            }
+
+            return specialTicketTypesOnEvent;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Failed to retrieve special ticket types on event", e);
+        }
     }
 
 

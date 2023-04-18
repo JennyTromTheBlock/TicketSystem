@@ -1,8 +1,6 @@
 package BLL;
 
-import BE.Event;
-import BE.Note;
-import BE.SystemUser;
+import BE.*;
 import BLL.DALFacades.EventFacade;
 import DAL.EventDAO;
 import DAL.IEventDAO;
@@ -12,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class EventManager implements IEventManager {
 
@@ -113,6 +114,29 @@ public class EventManager implements IEventManager {
 
         return searchResult;
     }
+
+    @Override
+    public List<SpecialTicketType> getAvailableSpecialTicketTypesOnEvent(int eventID) throws Exception {
+        try (ExecutorService executorService = Executors.newSingleThreadExecutor()) {
+
+            Future<List<SpecialTicketType>> future = executorService.submit(() -> {
+                return eventFacade.getAllAvailableSpecialTicketTypesOnEvent(eventID);
+            });
+
+            return future.get();
+        }
+    }
+
+    @Override
+    public void createSpecialTicketTypeOnEvent(SpecialTicketOnEvent specialTicketOnEvent) throws Exception {
+        eventFacade.createSpecialTicketTypeOnEvent(specialTicketOnEvent);
+    }
+
+    @Override
+    public void removeSpecialTicketFromEvent(SpecialTicketOnEvent specialTicketOnEvent) throws Exception {
+        eventFacade.removeSpecialTicketFromEvent(specialTicketOnEvent);
+    }
+
 
     private boolean compareToTitle(String query, Event event) {
         return event.getEventName().toLowerCase().contains(query.toLowerCase());

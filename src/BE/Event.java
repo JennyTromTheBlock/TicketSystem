@@ -1,6 +1,8 @@
 package BE;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Event {
     private int id;
@@ -10,6 +12,7 @@ public class Event {
     private Date date;
     private int maxParticipant;
     private int price;
+    private List<SpecialTicketType> availableSpecialTicketTypes;
 
 
     public Event(String eventName, String description, String location, Date date, int maxParticipant, int price){
@@ -45,6 +48,24 @@ public class Event {
         this.date = date;
         this.maxParticipant = maxParticipant;
         this.price = price;
+        this.availableSpecialTicketTypes = new ArrayList<>();
+    }
+
+    public SpecialTicketType getTypeFromName(String typeName) {
+
+        for (SpecialTicketType type : availableSpecialTicketTypes) {
+
+            if (type.getTypeName().equalsIgnoreCase(typeName)) {
+
+                return type;
+            }
+        }
+
+        return null;
+    }
+
+    public List<SpecialTicketType> getAvailableSpecialTicketTypes() {
+        return availableSpecialTicketTypes;
     }
 
     public String getEventName() {
