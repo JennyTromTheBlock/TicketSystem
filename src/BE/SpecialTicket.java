@@ -7,6 +7,7 @@ public class SpecialTicket {
     // Specifies what event this ticket is assigned.
     // If it isn't assigned to any, then this value is null.
     private Event assignedEvent;
+    private String pdfSpecialTicketPath;
 
     public SpecialTicket(int id, SpecialTicketType type, Event assignedEvent) {
         this.id = id;
@@ -29,5 +30,13 @@ public class SpecialTicket {
 
     public Event getAssignedEvent() {
         return assignedEvent;
+    }
+
+    public String getPdfSpecialTicketPath() {
+        return pdfSpecialTicketPath;
+    }
+
+    public void setPdfSpecialTicketPath(String pdfSpecialTicketPath) {
+        this.pdfSpecialTicketPath = pdfSpecialTicketPath;
     }
 }

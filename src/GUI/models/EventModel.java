@@ -99,7 +99,7 @@ public class EventModel {
     }
 
     public List<SpecialTicketType> getAvailableSpecialTicketTypesOnEvent(int eventID) throws Exception {
-        Event event = allEvents.get(indexOfEventId(eventID));
+        Event event = shownEvents.get(indexOfEventId(eventID));
         List<SpecialTicketType> availableSpecialTicketTypes = event.getAvailableSpecialTicketTypes();
 
 

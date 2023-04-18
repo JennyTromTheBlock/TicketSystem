@@ -47,7 +47,7 @@ public class SpecialTicketModel {
     }
 
     public ObservableList<SpecialTicketType> getSpecialTicketTypes() {
-        return  specialTicketTypes;
+        return specialTicketTypes;
     }
 
     public SpecialTicket createSpecialTicket(SpecialTicket specialTicket) throws Exception {

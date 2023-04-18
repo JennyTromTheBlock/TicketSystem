@@ -116,7 +116,7 @@ public class EventListController extends BaseController implements Initializable
                 try {
                     loadMainViewHandler().getController().handleViewEvent(tvEvent.getSelectionModel().getSelectedItem());
                 } catch (Exception e) {
-                    throw new RuntimeException(e);
+                    displayError(e);
                 }
             }
         });

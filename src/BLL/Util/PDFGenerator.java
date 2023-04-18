@@ -8,10 +8,7 @@ import BE.SpecialTicketType;
 import BE.Ticket;
 import GUI.util.ResourcePaths;
 import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.Barcode39;
-import com.itextpdf.text.pdf.BarcodeQRCode;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.*;
 
 
 public class PDFGenerator {
@@ -30,11 +27,11 @@ public class PDFGenerator {
     }
 
     private Image generateBarCode(String code, PdfContentByte contentByte) {
-        Barcode39 barcode39 = new Barcode39();
+        Barcode128 barcode128 = new Barcode128();
 
-        barcode39.setCode(code);
+        barcode128.setCode(code);
 
-        return barcode39.createImageWithBarcode(contentByte, null, null);
+        return barcode128.createImageWithBarcode(contentByte, null, null);
     }
 
     public String generateTicketForEvent(Ticket ticket, List<SpecialTicket> specialTicketsToAppend) throws Exception {

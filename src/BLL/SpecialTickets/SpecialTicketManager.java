@@ -35,7 +35,10 @@ public class SpecialTicketManager implements ISpecialTicketManager {
 
     @Override
     public SpecialTicket createSpecialTicket(SpecialTicket specialTicket) throws Exception {
-        pdfGenerator.generateSpecialTicketForEvent(specialTicket.getType());
-        return specialTicketsFacade.createSpecialTicket(specialTicket);
+        SpecialTicket newSpecialTicket = specialTicketsFacade.createSpecialTicket(specialTicket);
+
+        newSpecialTicket.setPdfSpecialTicketPath(pdfGenerator.generateSpecialTicketForEvent(specialTicket.getType()));
+
+        return newSpecialTicket;
     }
 }
