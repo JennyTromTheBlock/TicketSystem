@@ -24,21 +24,20 @@ public class SystemUserDAO implements ISystemUserDAO {
     public SystemUser systemUserValidLogin(SystemUser user) throws Exception {
         SystemUser systemUser = null;
 
-        String sql = "SELECT * FROM SystemUsers WHERE Email = ? AND Password = ?";
+        String sql = "SELECT * FROM SystemUsers WHERE Email = ?";
 
         try (Connection conn = connector.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
 
             statement.setString(1, user.getEmail());
-            statement.setString(2, user.getPassword());
 
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
                 String firstName = resultSet.getString("FirstName");
                 String lastName = resultSet.getString("LastName");
-
-                systemUser = new SystemUser(user.getEmail(), firstName, lastName, user.getPassword());
+                String password = resultSet.getString("Password");
+                systemUser = new SystemUser(user.getEmail(), firstName, lastName, password);
 
                 List<Role> systemUsersRoles = retrieveRolesForSystemUser(conn, systemUser);
 
