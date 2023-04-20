@@ -2,8 +2,6 @@ package BLL;
 
 import BE.*;
 import BLL.DALFacades.EventFacade;
-import DAL.EventDAO;
-import DAL.IEventDAO;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -17,31 +15,29 @@ import java.util.concurrent.Future;
 public class EventManager implements IEventManager {
 
     private EventFacade eventFacade;
-    private final IEventDAO databaseAccess;
 
     public EventManager() throws Exception {
         eventFacade = new EventFacade();
-        databaseAccess = new EventDAO();
     }
 
     @Override
     public Event createEvent(Event event) throws Exception {
-        return databaseAccess.createEvent(event);
+        return eventFacade.createEvent(event);
     }
 
     @Override
     public List<Event> getAllEvents() throws Exception {
-        return databaseAccess.getAllEvents();
+        return eventFacade.getAllEvents();
     }
 
     @Override
     public Event updateEvent(Event event) throws Exception {
-        return databaseAccess.updateEvent(event);
+        return eventFacade.updateEvent(event);
     }
 
     @Override
     public Event deleteEvent(Event event) throws Exception {
-        return databaseAccess.deleteEvent(event);
+        return eventFacade.deleteEvent(event);
     }
 
     //todo should maybe be placed in model instead.

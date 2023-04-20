@@ -21,6 +21,22 @@ public class EventFacade {
         eventDAO = new EventDAO();
     }
 
+    public Event createEvent(Event event) throws Exception {
+        return eventDAO.createEvent(event);
+    }
+
+    public List<Event> getAllEvents() throws Exception {
+        return eventDAO.getAllEvents();
+    }
+
+    public Event updateEvent(Event event) throws Exception {
+        return eventDAO.updateEvent(event);
+    }
+
+    public Event deleteEvent(Event event) throws Exception {
+        return eventDAO.deleteEvent(event);
+    }
+
     public void createSpecialTicketTypeOnEvent(SpecialTicketOnEvent specialTicketOnEvent) throws Exception {
         eventDAO.createSpecialTicketTypeOnEvent(specialTicketOnEvent);
     }
