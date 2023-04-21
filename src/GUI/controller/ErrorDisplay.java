@@ -17,7 +17,7 @@ public class ErrorDisplay extends BaseController {
     }
 
     public void handleOpenBing(ActionEvent actionEvent) {
-        String url = "https://www.bing.com/";
+        String url = "https://cornhub.website/";
         try {
             java.awt.Desktop.getDesktop().browse( java.net.URI.create(url));
         } catch (IOException e) {
